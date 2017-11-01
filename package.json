@@ -1,0 +1,30 @@
+{
+  "name": "node-typescript",
+  "version": "1.0.0",
+  "description": "node express",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
+    "tsc": "tsc"
+  },
+  "author": "Enrico",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "request": "^2.83.0",
+    "rxjs": "^5.5.2",
+    "typescript": "^2.5.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.47",
+    "@types/lodash": "^4.14.80",
+    "@types/request": "^2.0.7",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0"
+  }
+}
