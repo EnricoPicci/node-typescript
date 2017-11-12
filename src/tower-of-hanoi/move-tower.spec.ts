@@ -21,7 +21,7 @@ describe('moveTower function', () => {
         const source = createTower(towerSize);
         const dest = new Array<Disk>();
         const spare = new Array<Disk>();
-        const bottomDisk = source[source.length - 1];
+        const bottomDisk = source[0];
         const iterations = moveTower(bottomDisk, source, dest, spare);
         expect(source.length).to.equal(0);
         expect(dest.length).to.equal(towerSize);
@@ -33,7 +33,7 @@ describe('moveTower function', () => {
         const source = createTower(towerSize);
         const dest = new Array<Disk>();
         const spare = new Array<Disk>();
-        const bottomDisk = source[source.length - 1];
+        const bottomDisk = source[0];
         const iterations = moveTower(bottomDisk, source, dest, spare);
         expect(source.length).to.equal(0);
         expect(dest.length).to.equal(towerSize);

@@ -10,13 +10,13 @@ export function moveTower(disk: Disk, source: Array<Disk>, dest: Array<Disk>, sp
     let iter = iterations ? iterations : 0;
 
     if (disk.size == 0) {
-        moveDiskFromSourceToDest(disk, source, dest);
+        moveDiskFromSourceToDest(source, dest);
         iter++;
     } else {
         const indexOfDisk = source.indexOf(disk);
-        const diskAbove = source[indexOfDisk - 1];
+        const diskAbove = source[indexOfDisk + 1];
         iter = moveTower(diskAbove, source, spare, dest, iter);
-        moveDiskFromSourceToDest(disk, source, dest);
+        moveDiskFromSourceToDest(source, dest);
         iter++;
         iter = moveTower(diskAbove, spare, dest, source, iter);
     }
@@ -25,14 +25,14 @@ export function moveTower(disk: Disk, source: Array<Disk>, dest: Array<Disk>, sp
 
 export function createTower(size: number) {
     const tower = new Array<Disk>();
-    for (let i = 0; i < size; i++) {
+    for (let i = size - 1; i > -1; i--) {
         const disk: Disk = {name: 'disk' + i, size: i};
         tower.push(disk);
     }
     return tower;
 }
 
-function moveDiskFromSourceToDest(disk: Disk, source: Array<Disk>, dest: Array<Disk>) {
-    source.splice(source.indexOf(disk), 1)[0];
-    dest.splice(0, 0, disk);
+function moveDiskFromSourceToDest(source: Array<Disk>, dest: Array<Disk>) {
+    const disk = source.pop();
+    dest.push(disk);
 }

@@ -5,11 +5,11 @@
 
 import {moveTower, createTower, Disk} from './move-tower';
 
-const source = createTower(8);
+const source = createTower(5);
 const dest = new Array<Disk>();
 const spare = new Array<Disk>();
 
-const bottomDisk = source[source.length - 1];
+const bottomDisk = source[0];
 
 const iterations = moveTower(bottomDisk, source, dest, spare);
 
