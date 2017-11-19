@@ -1,0 +1,871 @@
+      * 09.348 18:56        IKP  0000 US01101                                   
+      * -------------------------------                                         
+      * 09.348 18:54        IKP  0000 US01101                                   
+      * -------------------------------------                                   
+      * 09.348 18:48        IKP  0000 US01101                                   
+      * ---------------------------------                                       
+      * 09.191 13:52        IKP  0000 US01437                                   
+      * .............................................                           
+      * 09.191 13:45        IKP  0000 US01437                                   
+      * ....................................                                    
+      * 09.191 13:33        IKP  0000 US01437                                   
+      * ..........................................                              
+      * 09.191 12:32        IKP  0000 US01437                                   
+      * ............................                                            
+      * 09.191 12:29        IKP  0000 US01437                                   
+      * AGGIUNTO SSELECT07.                                                     
+      * RICOMPILAZIONE                                                          
+      * 07.239 09:57        IKP  0000                                           
+      * CF7236 - INSERITE FUNZIONI SELECT04 E SELECT05                          
+      * 06.338 16:43        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 06.108 12:03        IKP  0000                                           
+      * COMPILAZIONE                                                            
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02IES.                                                    
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE ................... OPERAZIONI INQUIRY SU TABELLA IKPREBS *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... GENNAIO 2004 *        
+      * DA PARTE DI ..................................... A. ALDEGHERI *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                             PIC  X(08) VALUE 'IKP02IES'.         
+       77  SAVE-SQLCODE                    PIC S9(09) COMP.                     
+       77  HV-CONTATORE                    PIC S9(09) COMP-3.                   
+       77  MESSAGGIO                       PIC  X(80) VALUE SPACE.              
+       77  IND-XXX                         PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-BYP                     PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-MAX                     PIC  9(05) COMP-3 VALUE 19.          
+       01  FILLER                          PIC  9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR01-CHIUSO                       VALUE ZERO.               
+               88  CUR01-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR02-CHIUSO                       VALUE ZERO.               
+               88  CUR02-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR03-CHIUSO                       VALUE ZERO.               
+               88  CUR03-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                PIC  X(16).                          
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR             PIC  X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+       01  IKP0RDBG                        PIC  X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+       01  SISBRCR2                        PIC  X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAES                                                
+           END-EXEC.                                                            
+                                                                                
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+           IF  NOT-ERRORE                                                       
+               EVALUATE 2DBIN-SQL-FUNZIONE                                      
+                   WHEN 'OPEN01  '                                              
+                       PERFORM FUNZIONE-OPEN01                                  
+                   WHEN 'FETCH01 '                                              
+                       PERFORM FUNZIONE-FETCH01                                 
+                   WHEN 'CLOSE01 '                                              
+                       PERFORM FUNZIONE-CLOSE01                                 
+                   WHEN 'SELECT01'                                              
+                       PERFORM FUNZIONE-SELECT01                                
+                   WHEN 'SELECT02'                                              
+                       PERFORM FUNZIONE-SELECT02                                
+FM6094            WHEN 'SELECT03'                                               
+FM6094                 PERFORM FUNZIONE-SELECT03                                
+CF7236            WHEN 'SELECT04'                                               
+CF7236                 PERFORM FUNZIONE-SELECT04                                
+CF7236            WHEN 'SELECT05'                                               
+CF7236                 PERFORM FUNZIONE-SELECT05                                
+TS9096             WHEN 'SELECT06'                                              
+TS9096                 PERFORM FUNZIONE-SELECT06                                
+CA9710             WHEN 'SELECT07'                                              
+CA9710                 PERFORM FUNZIONE-SELECT07                                
+                   WHEN 'COUNT01 '                                              
+                       PERFORM FUNZIONE-COUNT01                                 
+                   WHEN 'COUNT02 '                                              
+                       PERFORM FUNZIONE-COUNT02                                 
+                   WHEN OTHER                                                   
+                       SET ERRORE-GENERICO TO TRUE                              
+               END-EVALUATE                                                     
+           END-IF.                                                              
+           PERFORM OPERAZIONI-FINALI.                                           
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE                  TO TRUE.                             
+           INITIALIZE 2DBRC.                                                    
+           MOVE 2DBIN-RIGA                 TO IKP0TABES.                        
+           MOVE 'IKPREBS'                  TO 2DBRC-TABLE.                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-OPEN01 SECTION.                                                 
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CUR01 CURSOR FOR                                        
+                   SELECT IKPES_BANCA                                           
+                   ,      IKPES_REB                                             
+                   ,      IKPES_REB_TIPO                                        
+                   ,      IKPES_REB_DIP                                         
+                   ,      IKPES_FT                                              
+                   ,      IKPES_CANALE                                          
+                   ,      IKPES_ABI                                             
+                   ,      IKPES_DESCRIZIONE                                     
+                   ,      IKPES_STATO                                           
+                   ,      IKPES_DATA_INS                                        
+                   ,      IKPES_MATR_INS                                        
+                   ,      IKPES_DATA_VAR                                        
+                   ,      IKPES_MATR_VAR                                        
+                   ,      IKPES_DATA_REV                                        
+                   ,      IKPES_MATR_REV                                        
+                   ,      IKPES_TORRE                                           
+                   ,      IKPES_TIMESTAMP                                       
+                   FROM   IKPREBS                                               
+                   WHERE  IKPES_REB      = :IKPES-REB                           
+                     AND  IKPES_REB_TIPO = :IKPES-REB-TIPO                      
+                     AND  IKPES_BANCA    = :IKPES-BANCA                         
+                   ORDER  BY IKPES_TIMESTAMP DESC                               
+                   WITH UR                                                      
+           END-EXEC                                                             
+           EXEC SQL OPEN CUR01 END-EXEC.                                        
+           IF  SQLCODE = ZERO                                                   
+               SET CUR01-APERTO TO TRUE                                         
+           ELSE                                                                 
+               SET ERRORE-SQL TO TRUE                                           
+               MOVE SQLCODE   TO 2DBRC-SQLCODE                                  
+               MOVE SQLERRMC  TO 2DBRC-SQLERRMC                                 
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-FETCH01 SECTION.                                                
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CUR01                                                     
+                   INTO  :IKPES-BANCA                                           
+                   ,     :IKPES-REB                                             
+                   ,     :IKPES-REB-TIPO                                        
+                   ,     :IKPES-REB-DIP                                         
+                   ,     :IKPES-FT                                              
+                   ,     :IKPES-CANALE                                          
+                   ,     :IKPES-ABI                                             
+                   ,     :IKPES-DESCRIZIONE                                     
+                   ,     :IKPES-STATO                                           
+                   ,     :IKPES-DATA-INS                                        
+                   ,     :IKPES-MATR-INS                                        
+                   ,     :IKPES-DATA-VAR                                        
+                   ,     :IKPES-MATR-VAR                                        
+                   ,     :IKPES-DATA-REV                                        
+                   ,     :IKPES-MATR-REV                                        
+                   ,     :IKPES-TORRE                                           
+                   ,     :IKPES-TIMESTAMP                                       
+           END-EXEC                                                             
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABES          TO 2DBOU-RIGA                        
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-CLOSE01 SECTION.                                                
+      *----------------------------------------------------------------*        
+           IF  CUR01-APERTO                                                     
+               SET CUR01-CHIUSO TO TRUE                                         
+               EXEC SQL                                                         
+                    CLOSE CUR01                                                 
+               END-EXEC                                                         
+               IF  SQLCODE NOT = ZERO                                           
+                   SET ERRORE-SQL TO TRUE                                       
+                   MOVE SQLCODE  TO 2DBRC-SQLCODE                               
+                   MOVE SQLERRMC TO 2DBRC-SQLERRMC                              
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPES_BANCA                                               
+               ,      IKPES_REB                                                 
+               ,      IKPES_REB_TIPO                                            
+               ,      IKPES_REB_DIP                                             
+               ,      IKPES_FT                                                  
+               ,      IKPES_CANALE                                              
+               ,      IKPES_ABI                                                 
+               ,      IKPES_DESCRIZIONE                                         
+               ,      IKPES_STATO                                               
+               ,      IKPES_DATA_INS                                            
+               ,      IKPES_MATR_INS                                            
+               ,      IKPES_DATA_VAR                                            
+               ,      IKPES_MATR_VAR                                            
+               ,      IKPES_DATA_REV                                            
+               ,      IKPES_MATR_REV                                            
+               ,      IKPES_TORRE                                               
+               INTO  :IKPES-BANCA                                               
+               ,     :IKPES-REB                                                 
+               ,     :IKPES-REB-TIPO                                            
+               ,     :IKPES-REB-DIP                                             
+               ,     :IKPES-FT                                                  
+               ,     :IKPES-CANALE                                              
+               ,     :IKPES-ABI                                                 
+               ,     :IKPES-DESCRIZIONE                                         
+               ,     :IKPES-STATO                                               
+               ,     :IKPES-DATA-INS                                            
+               ,     :IKPES-MATR-INS                                            
+               ,     :IKPES-DATA-VAR                                            
+               ,     :IKPES-MATR-VAR                                            
+               ,     :IKPES-DATA-REV                                            
+               ,     :IKPES-MATR-REV                                            
+               ,     :IKPES-TORRE                                               
+               FROM   IKPREBS                                                   
+               WHERE  IKPES_REB      = :IKPES-REB                               
+                 AND  IKPES_REB_TIPO = :IKPES-REB-TIPO                          
+                 AND  IKPES_BANCA    = :IKPES-BANCA                             
+               WITH UR                                                          
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABES          TO 2DBOU-RIGA                        
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT02 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPES_BANCA                                               
+               ,      IKPES_REB                                                 
+               ,      IKPES_REB_TIPO                                            
+               ,      IKPES_REB_DIP                                             
+               ,      IKPES_FT                                                  
+               ,      IKPES_CANALE                                              
+               ,      IKPES_ABI                                                 
+               ,      IKPES_DESCRIZIONE                                         
+               ,      IKPES_STATO                                               
+               ,      IKPES_DATA_INS                                            
+               ,      IKPES_MATR_INS                                            
+               ,      IKPES_DATA_VAR                                            
+               ,      IKPES_MATR_VAR                                            
+               ,      IKPES_DATA_REV                                            
+               ,      IKPES_MATR_REV                                            
+               ,      IKPES_TORRE                                               
+               INTO  :IKPES-BANCA                                               
+               ,     :IKPES-REB                                                 
+               ,     :IKPES-REB-TIPO                                            
+               ,     :IKPES-REB-DIP                                             
+               ,     :IKPES-FT                                                  
+               ,     :IKPES-CANALE                                              
+               ,     :IKPES-ABI                                                 
+               ,     :IKPES-DESCRIZIONE                                         
+               ,     :IKPES-STATO                                               
+               ,     :IKPES-DATA-INS                                            
+               ,     :IKPES-MATR-INS                                            
+               ,     :IKPES-DATA-VAR                                            
+               ,     :IKPES-MATR-VAR                                            
+               ,     :IKPES-DATA-REV                                            
+               ,     :IKPES-MATR-REV                                            
+               ,     :IKPES-TORRE                                               
+               FROM   IKPREBS                                                   
+               WHERE  IKPES_REB      = :IKPES-REB                               
+                 AND  IKPES_REB_TIPO = :IKPES-REB-TIPO                          
+                 AND  IKPES_BANCA    = :IKPES-BANCA                             
+                 AND  IKPES_FT       = :IKPES-FT                                
+               WITH UR                                                          
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABES          TO 2DBOU-RIGA                        
+               WHEN SQLCODE = 100                                               
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+FM6094 FUNZIONE-SELECT03 SECTION.                                               
+FM6094*----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPES_BANCA                                               
+               ,      IKPES_REB                                                 
+               ,      IKPES_REB_TIPO                                            
+               ,      IKPES_REB_DIP                                             
+               ,      IKPES_FT                                                  
+               ,      IKPES_CANALE                                              
+               ,      IKPES_ABI                                                 
+               ,      IKPES_DESCRIZIONE                                         
+               ,      IKPES_STATO                                               
+               ,      IKPES_DATA_INS                                            
+               ,      IKPES_MATR_INS                                            
+               ,      IKPES_DATA_VAR                                            
+               ,      IKPES_MATR_VAR                                            
+               ,      IKPES_DATA_REV                                            
+               ,      IKPES_MATR_REV                                            
+               ,      IKPES_TORRE                                               
+               INTO  :IKPES-BANCA                                               
+               ,     :IKPES-REB                                                 
+               ,     :IKPES-REB-TIPO                                            
+               ,     :IKPES-REB-DIP                                             
+               ,     :IKPES-FT                                                  
+               ,     :IKPES-CANALE                                              
+               ,     :IKPES-ABI                                                 
+               ,     :IKPES-DESCRIZIONE                                         
+               ,     :IKPES-STATO                                               
+               ,     :IKPES-DATA-INS                                            
+               ,     :IKPES-MATR-INS                                            
+               ,     :IKPES-DATA-VAR                                            
+               ,     :IKPES-MATR-VAR                                            
+               ,     :IKPES-DATA-REV                                            
+               ,     :IKPES-MATR-REV                                            
+               ,     :IKPES-TORRE                                               
+               FROM   IKPREBS  A                                                
+               WHERE  A.IKPES_REB        = :IKPES-REB                           
+                 AND  A.IKPES_REB_TIPO   = :IKPES-REB-TIPO                      
+                 AND  A.IKPES_BANCA      = :IKPES-BANCA                         
+                 AND  A.IKPES_DATA_INS   < :IKPES-DATA-INS                      
+                 AND  A.IKPES_DATA_VAR   < :IKPES-DATA-VAR                      
+                 AND  A.IKPES_TIMESTAMP IN (                                    
+                       SELECT MAX( B.IKPES_TIMESTAMP )                          
+                       FROM IKPREBS  B                                          
+                       WHERE  B.IKPES_REB        = :IKPES-REB                   
+                         AND  B.IKPES_REB_TIPO   = :IKPES-REB-TIPO              
+                         AND  B.IKPES_BANCA      = :IKPES-BANCA                 
+                         AND  B.IKPES_DATA_INS   < :IKPES-DATA-INS              
+                         AND  B.IKPES_DATA_VAR   < :IKPES-DATA-VAR)             
+FM6108*                  AND  B.IKPES_TIMESTAMP  < :IKPES-TIMESTAMP)            
+               WITH UR                                                          
+           END-EXEC.                                                            
+                                                                                
+           IF SQLCODE = -180                                                    
+              MOVE  +100                 TO SQLCODE                             
+           END-IF.                                                              
+                                                                                
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABES        TO 2DBOU-RIGA                          
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING    TO TRUE                                
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL        TO TRUE                                
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+TS9096*----------------------------------------------------------------*        
+TS9096 FUNZIONE-SELECT06 SECTION.                                               
+TS9096*----------------------------------------------------------------*        
+TS9096     EXEC SQL                                                             
+TS9096         SELECT IKPES_BANCA                                               
+TS9096         ,      IKPES_REB                                                 
+TS9096         ,      IKPES_REB_TIPO                                            
+TS9096         ,      IKPES_REB_DIP                                             
+TS9096         ,      IKPES_FT                                                  
+TS9096         ,      IKPES_CANALE                                              
+TS9096         ,      IKPES_ABI                                                 
+TS9096         ,      IKPES_DESCRIZIONE                                         
+TS9096         ,      IKPES_STATO                                               
+TS9096         ,      IKPES_DATA_INS                                            
+TS9096         ,      IKPES_MATR_INS                                            
+TS9096         ,      IKPES_DATA_VAR                                            
+TS9096         ,      IKPES_MATR_VAR                                            
+TS9096         ,      IKPES_DATA_REV                                            
+TS9096         ,      IKPES_MATR_REV                                            
+TS9096         ,      IKPES_TORRE                                               
+TS9096         INTO  :IKPES-BANCA                                               
+TS9096         ,     :IKPES-REB                                                 
+TS9096         ,     :IKPES-REB-TIPO                                            
+TS9096         ,     :IKPES-REB-DIP                                             
+TS9096         ,     :IKPES-FT                                                  
+TS9096         ,     :IKPES-CANALE                                              
+TS9096         ,     :IKPES-ABI                                                 
+TS9096         ,     :IKPES-DESCRIZIONE                                         
+TS9096         ,     :IKPES-STATO                                               
+TS9096         ,     :IKPES-DATA-INS                                            
+TS9096         ,     :IKPES-MATR-INS                                            
+TS9096         ,     :IKPES-DATA-VAR                                            
+TS9096         ,     :IKPES-MATR-VAR                                            
+TS9096         ,     :IKPES-DATA-REV                                            
+TS9096         ,     :IKPES-MATR-REV                                            
+TS9096         ,     :IKPES-TORRE                                               
+TS9096         FROM   IKPREBS                                                   
+TS9096         WHERE  IKPES_REB        = :IKPES-REB                             
+TS9096           AND  IKPES_REB_TIPO   = :IKPES-REB-TIPO                        
+TS9096           AND  IKPES_BANCA      = :IKPES-BANCA                           
+TS9096           AND  IKPES_DATA_REV   = :IKPES-DATA-REV                        
+TS9096         WITH UR                                                          
+TS9096     END-EXEC.                                                            
+TS9096                                                                          
+TS9096     IF SQLCODE = -180                                                    
+TS9096        MOVE  +100                 TO SQLCODE                             
+TS9096     END-IF.                                                              
+TS9096                                                                          
+TS9096     EVALUATE TRUE                                                        
+TS9096         WHEN SQLCODE = ZERO                                              
+TS9096             MOVE IKP0TABES        TO 2DBOU-RIGA                          
+TS9096         WHEN SQLCODE = 100                                               
+TS9096             SET ERRORE-WARNING    TO TRUE                                
+TS9096         WHEN OTHER                                                       
+TS9096             SET ERRORE-SQL        TO TRUE                                
+TS9096     END-EVALUATE.                                                        
+TS9096     EXIT.                                                                
+                                                                                
+CF7236*----------------------------------------------------------------*        
+CF7236 FUNZIONE-SELECT04 SECTION.                                               
+CF7236*----------------------------------------------------------------*        
+CF7236     EXEC SQL                                                             
+CF7236         SELECT IKPES_BANCA                                               
+CF7236              , IKPES_REB                                                 
+CF7236              , IKPES_REB_TIPO                                            
+CF7236              , IKPES_REB_DIP                                             
+CF7236              , IKPES_FT                                                  
+CF7236              , IKPES_CANALE                                              
+CF7236              , IKPES_ABI                                                 
+CF7236              , IKPES_DESCRIZIONE                                         
+CF7236              , IKPES_STATO                                               
+CF7236              , IKPES_DATA_INS                                            
+CF7236              , IKPES_MATR_INS                                            
+CF7236              , IKPES_DATA_VAR                                            
+CF7236              , IKPES_MATR_VAR                                            
+CF7236              , IKPES_DATA_REV                                            
+CF7236              , IKPES_MATR_REV                                            
+CF7236              , IKPES_TORRE                                               
+CF7236        INTO    :IKPES-BANCA                                              
+CF7236              , :IKPES-REB                                                
+CF7236              , :IKPES-REB-TIPO                                           
+CF7236              , :IKPES-REB-DIP                                            
+CF7236              , :IKPES-FT                                                 
+CF7236              , :IKPES-CANALE                                             
+CF7236              , :IKPES-ABI                                                
+CF7236              , :IKPES-DESCRIZIONE                                        
+CF7236              , :IKPES-STATO                                              
+CF7236              , :IKPES-DATA-INS                                           
+CF7236              , :IKPES-MATR-INS                                           
+CF7236              , :IKPES-DATA-VAR                                           
+CF7236              , :IKPES-MATR-VAR                                           
+CF7236              , :IKPES-DATA-REV                                           
+CF7236              , :IKPES-MATR-REV                                           
+CF7236              , :IKPES-TORRE                                              
+CF7236            FROM IKPREBS A                                                
+CF7236*          WHERE :IKPES-FT        IN (' ' ,A.IKPES_FT)                    
+CF7236           WHERE A.IKPES_REB       = :IKPES-REB                           
+CF7236             AND A.IKPES_REB_TIPO  = :IKPES-REB-TIPO                      
+CF7236             AND A.IKPES_REB_DIP   = :IKPES-REB-DIP                       
+CF7236             AND A.IKPES_TIMESTAMP IN (                                   
+CF7236                   SELECT MIN(B.IKPES_TIMESTAMP)                          
+CF7236                     FROM IKPREBS B                                       
+CF7236                    WHERE :IKPES-FT         IN (' ' ,B.IKPES_FT)          
+CF7236                      AND B.IKPES_REB        = :IKPES-REB                 
+CF7236                      AND B.IKPES_REB_TIPO   = :IKPES-REB-TIPO            
+CF7236                      AND B.IKPES_REB_DIP    = :IKPES-REB-DIP             
+CF7236                      AND B.IKPES_TIMESTAMP >= :IKPES-TIMESTAMP)          
+CF7236            WITH UR                                                       
+CF7236     END-EXEC                                                             
+CF7236     IF  SQLCODE = -180                                                   
+CF7236         MOVE  +100                  TO SQLCODE                           
+CF7236     END-IF.                                                              
+CF7236                                                                          
+CF7236     EVALUATE TRUE                                                        
+CF7236         WHEN SQLCODE = ZERO                                              
+CF7236             MOVE IKP0TABES          TO 2DBOU-RIGA                        
+CF7236         WHEN SQLCODE = 100                                               
+CF7236             PERFORM SELECT04-BIS                                         
+CF7236         WHEN OTHER                                                       
+CF7236             SET ERRORE-SQL          TO TRUE                              
+CF7236     END-EVALUATE.                                                        
+CF7236     EXIT.                                                                
+CF7236                                                                          
+CF7236*----------------------------------------------------------------*        
+CF7236 SELECT04-BIS SECTION.                                                    
+CF7236*----------------------------------------------------------------*        
+CF7236     EXEC SQL                                                             
+CF7236         SELECT IKPES_BANCA                                               
+CF7236              , IKPES_REB                                                 
+CF7236              , IKPES_REB_TIPO                                            
+CF7236              , IKPES_REB_DIP                                             
+CF7236              , IKPES_FT                                                  
+CF7236              , IKPES_CANALE                                              
+CF7236              , IKPES_ABI                                                 
+CF7236              , IKPES_DESCRIZIONE                                         
+CF7236              , IKPES_STATO                                               
+CF7236              , IKPES_DATA_INS                                            
+CF7236              , IKPES_MATR_INS                                            
+CF7236              , IKPES_DATA_VAR                                            
+CF7236              , IKPES_MATR_VAR                                            
+CF7236              , IKPES_DATA_REV                                            
+CF7236              , IKPES_MATR_REV                                            
+CF7236              , IKPES_TORRE                                               
+CF7236        INTO    :IKPES-BANCA                                              
+CF7236              , :IKPES-REB                                                
+CF7236              , :IKPES-REB-TIPO                                           
+CF7236              , :IKPES-REB-DIP                                            
+CF7236              , :IKPES-FT                                                 
+CF7236              , :IKPES-CANALE                                             
+CF7236              , :IKPES-ABI                                                
+CF7236              , :IKPES-DESCRIZIONE                                        
+CF7236              , :IKPES-STATO                                              
+CF7236              , :IKPES-DATA-INS                                           
+CF7236              , :IKPES-MATR-INS                                           
+CF7236              , :IKPES-DATA-VAR                                           
+CF7236              , :IKPES-MATR-VAR                                           
+CF7236              , :IKPES-DATA-REV                                           
+CF7236              , :IKPES-MATR-REV                                           
+CF7236              , :IKPES-TORRE                                              
+CF7236            FROM IKPREBS A                                                
+CF7236*          WHERE :IKPES-FT        IN (' ' ,A.IKPES_FT)                    
+CF7236           WHERE A.IKPES_REB       = :IKPES-REB                           
+CF7236             AND A.IKPES_REB_TIPO  = :IKPES-REB-TIPO                      
+CF7236             AND A.IKPES_TIMESTAMP IN (                                   
+CF7236                   SELECT MIN(B.IKPES_TIMESTAMP)                          
+CF7236                     FROM IKPREBS B                                       
+CF7236                    WHERE :IKPES-FT         IN (' ' ,B.IKPES_FT)          
+CF7236                      AND B.IKPES_REB        = :IKPES-REB                 
+CF7236                      AND B.IKPES_REB_TIPO   = :IKPES-REB-TIPO            
+CF7236                      AND B.IKPES_TIMESTAMP >= :IKPES-TIMESTAMP)          
+CF7236            WITH UR                                                       
+CF7236     END-EXEC                                                             
+CF7236     IF  SQLCODE = -180                                                   
+CF7236         MOVE  +100                  TO SQLCODE                           
+CF7236     END-IF.                                                              
+CF7236                                                                          
+CF7236     EVALUATE TRUE                                                        
+CF7236         WHEN SQLCODE = ZERO                                              
+CF7236             MOVE IKP0TABES          TO 2DBOU-RIGA                        
+CF7236         WHEN SQLCODE = 100                                               
+CF7236             SET ERRORE-WARNING      TO TRUE                              
+CF7236         WHEN OTHER                                                       
+CF7236             SET ERRORE-SQL          TO TRUE                              
+CF7236     END-EVALUATE.                                                        
+CF7236     EXIT.                                                                
+CF7236                                                                          
+CF7236*----------------------------------------------------------------*        
+CF7236 FUNZIONE-SELECT05 SECTION.                                               
+CF7236*----------------------------------------------------------------*        
+CF7236     EXEC SQL                                                             
+CF7236         SELECT IKPES_BANCA                                               
+CF7236              , IKPES_REB                                                 
+CF7236              , IKPES_REB_TIPO                                            
+CF7236              , IKPES_REB_DIP                                             
+CF7236              , IKPES_FT                                                  
+CF7236              , IKPES_CANALE                                              
+CF7236              , IKPES_ABI                                                 
+CF7236              , IKPES_DESCRIZIONE                                         
+CF7236              , IKPES_STATO                                               
+CF7236              , IKPES_DATA_INS                                            
+CF7236              , IKPES_MATR_INS                                            
+CF7236              , IKPES_DATA_VAR                                            
+CF7236              , IKPES_MATR_VAR                                            
+CF7236              , IKPES_DATA_REV                                            
+CF7236              , IKPES_MATR_REV                                            
+CF7236              , IKPES_TORRE                                               
+CF7236        INTO    :IKPES-BANCA                                              
+CF7236              , :IKPES-REB                                                
+CF7236              , :IKPES-REB-TIPO                                           
+CF7236              , :IKPES-REB-DIP                                            
+CF7236              , :IKPES-FT                                                 
+CF7236              , :IKPES-CANALE                                             
+CF7236              , :IKPES-ABI                                                
+CF7236              , :IKPES-DESCRIZIONE                                        
+CF7236              , :IKPES-STATO                                              
+CF7236              , :IKPES-DATA-INS                                           
+CF7236              , :IKPES-MATR-INS                                           
+CF7236              , :IKPES-DATA-VAR                                           
+CF7236              , :IKPES-MATR-VAR                                           
+CF7236              , :IKPES-DATA-REV                                           
+CF7236              , :IKPES-MATR-REV                                           
+CF7236              , :IKPES-TORRE                                              
+CF7236            FROM IKPREBS A                                                
+CF7236           WHERE A.IKPES_REB       = :IKPES-REB                           
+CF7236             AND A.IKPES_REB_TIPO  = :IKPES-REB-TIPO                      
+CF7236             AND A.IKPES_REB_DIP   = :IKPES-REB-DIP                       
+CF7236             AND A.IKPES_TIMESTAMP IN (                                   
+CF7236                   SELECT MIN(B.IKPES_TIMESTAMP)                          
+CF7236                     FROM IKPREBS B                                       
+CF7236                    WHERE B.IKPES_REB        = :IKPES-REB                 
+CF7236                      AND B.IKPES_REB_TIPO   = :IKPES-REB-TIPO            
+CF7236                      AND B.IKPES_REB_DIP    = :IKPES-REB-DIP             
+CF7236                      AND B.IKPES_TIMESTAMP >= :IKPES-TIMESTAMP)          
+CF7236            WITH UR                                                       
+CF7236     END-EXEC                                                             
+CF7236     IF  SQLCODE = -180                                                   
+CF7236         MOVE  +100                  TO SQLCODE                           
+CF7236     END-IF.                                                              
+CF7236                                                                          
+CF7236     EVALUATE TRUE                                                        
+CF7236         WHEN SQLCODE = ZERO                                              
+CF7236             MOVE IKP0TABES          TO 2DBOU-RIGA                        
+CF7236         WHEN SQLCODE = 100                                               
+CF7236             PERFORM SELECT05-BIS                                         
+CF7236         WHEN OTHER                                                       
+CF7236             SET ERRORE-SQL          TO TRUE                              
+CF7236     END-EVALUATE.                                                        
+CF7236     EXIT.                                                                
+CF7236                                                                          
+CF7236*----------------------------------------------------------------*        
+CF7236 SELECT05-BIS SECTION.                                                    
+CF7236*----------------------------------------------------------------*        
+CF7236     EXEC SQL                                                             
+CF7236         SELECT IKPES_BANCA                                               
+CF7236              , IKPES_REB                                                 
+CF7236              , IKPES_REB_TIPO                                            
+CF7236              , IKPES_REB_DIP                                             
+CF7236              , IKPES_FT                                                  
+CF7236              , IKPES_CANALE                                              
+CF7236              , IKPES_ABI                                                 
+CF7236              , IKPES_DESCRIZIONE                                         
+CF7236              , IKPES_STATO                                               
+CF7236              , IKPES_DATA_INS                                            
+CF7236              , IKPES_MATR_INS                                            
+CF7236              , IKPES_DATA_VAR                                            
+CF7236              , IKPES_MATR_VAR                                            
+CF7236              , IKPES_DATA_REV                                            
+CF7236              , IKPES_MATR_REV                                            
+CF7236              , IKPES_TORRE                                               
+CF7236        INTO    :IKPES-BANCA                                              
+CF7236              , :IKPES-REB                                                
+CF7236              , :IKPES-REB-TIPO                                           
+CF7236              , :IKPES-REB-DIP                                            
+CF7236              , :IKPES-FT                                                 
+CF7236              , :IKPES-CANALE                                             
+CF7236              , :IKPES-ABI                                                
+CF7236              , :IKPES-DESCRIZIONE                                        
+CF7236              , :IKPES-STATO                                              
+CF7236              , :IKPES-DATA-INS                                           
+CF7236              , :IKPES-MATR-INS                                           
+CF7236              , :IKPES-DATA-VAR                                           
+CF7236              , :IKPES-MATR-VAR                                           
+CF7236              , :IKPES-DATA-REV                                           
+CF7236              , :IKPES-MATR-REV                                           
+CF7236              , :IKPES-TORRE                                              
+CF7236            FROM IKPREBS A                                                
+CF7236           WHERE A.IKPES_REB       = :IKPES-REB                           
+CF7236             AND A.IKPES_REB_TIPO  = :IKPES-REB-TIPO                      
+CF7236             AND A.IKPES_TIMESTAMP IN (                                   
+CF7236                   SELECT MIN(B.IKPES_TIMESTAMP)                          
+CF7236                     FROM IKPREBS B                                       
+CF7236                    WHERE B.IKPES_REB        = :IKPES-REB                 
+CF7236                      AND B.IKPES_REB_TIPO   = :IKPES-REB-TIPO            
+CF7236                      AND B.IKPES_TIMESTAMP >= :IKPES-TIMESTAMP)          
+CF7236            WITH UR                                                       
+CF7236     END-EXEC                                                             
+CF7236     IF  SQLCODE = -180                                                   
+CF7236         MOVE  +100                  TO SQLCODE                           
+CF7236     END-IF.                                                              
+CF7236                                                                          
+CF7236     EVALUATE TRUE                                                        
+CF7236         WHEN SQLCODE = ZERO                                              
+CF7236             MOVE IKP0TABES          TO 2DBOU-RIGA                        
+CF7236         WHEN SQLCODE = 100                                               
+CF7236             SET ERRORE-WARNING      TO TRUE                              
+CF7236         WHEN OTHER                                                       
+CF7236             SET ERRORE-SQL          TO TRUE                              
+CF7236     END-EVALUATE.                                                        
+CF7236     EXIT.                                                                
+CF7236                                                                          
+      *----------------------------------------------------------------*        
+CA9710 FUNZIONE-SELECT07 SECTION.                                               
+CA9710*----------------------------------------------------------------*        
+CA9710     EXEC SQL                                                             
+CA9710         SELECT IKPES_BANCA                                               
+CA9710         ,      IKPES_REB                                                 
+CA9710         ,      IKPES_REB_TIPO                                            
+CA9710         ,      IKPES_FT                                                  
+               ,      MAX(IKPES_TIMESTAMP )                                     
+CA9710         INTO  :IKPES-BANCA                                               
+CA9710         ,     :IKPES-REB                                                 
+CA9710         ,     :IKPES-REB-TIPO                                            
+CA9710         ,     :IKPES-FT                                                  
+CA9710         ,     :IKPES-TIMESTAMP                                           
+CA9710         FROM   IKPREBS A                                                 
+CA9710         WHERE  A.IKPES_REB        = :IKPES-REB                           
+CA9710           AND  A.IKPES_REB_TIPO   = :IKPES-REB-TIPO                      
+CA9710           AND  A.IKPES_BANCA      = :IKPES-BANCA                         
+                 AND  A.IKPES_TIMESTAMP IN (                                    
+                       SELECT MAX( B.IKPES_TIMESTAMP )                          
+                       FROM IKPREBS  B                                          
+                       WHERE  B.IKPES_REB        = :IKPES-REB                   
+                         AND  B.IKPES_REB_TIPO   = :IKPES-REB-TIPO              
+                         AND  B.IKPES_BANCA      = :IKPES-BANCA )               
+CA9710         GROUP BY IKPES_BANCA                                             
+CA9710           ,      IKPES_REB                                               
+CA9710           ,      IKPES_REB_TIPO                                          
+CA9710           ,      IKPES_FT                                                
+CA9710         WITH UR                                                          
+CA9710     END-EXEC.                                                            
+CA9710                                                                          
+CA9710     EVALUATE TRUE                                                        
+CA9710         WHEN SQLCODE = ZERO                                              
+CA9710             MOVE IKP0TABES        TO 2DBOU-RIGA                          
+CA9710         WHEN SQLCODE = 100                                               
+CA9710             SET ERRORE-WARNING    TO TRUE                                
+CA9710         WHEN OTHER                                                       
+CA9710             SET ERRORE-SQL        TO TRUE                                
+CA9710     END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-COUNT01 SECTION.                                                
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                SELECT  COUNT(*)                                                
+                  INTO :HV-CONTATORE                                            
+                  FROM IKPREBS                                                  
+                 WHERE IKPES_STATO = 'A'                                        
+                   AND IKPES_REB  >= 10000000                                   
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   CONTINUE                                                     
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           MOVE HV-CONTATORE               TO 2DBOU-COUNT                       
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-COUNT02 SECTION.                                                
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                SELECT  COUNT(*)                                                
+                  INTO :HV-CONTATORE                                            
+                  FROM IKPREBS                                                  
+                 WHERE IKPES_STATO = 'A'                                        
+                   AND IKPES_REB  ^= 9999                                       
+                   AND IKPES_REB   < 10000000                                   
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   CONTINUE                                                     
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           MOVE HV-CONTATORE               TO 2DBOU-COUNT                       
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+      *    IF  NOT ERRORE-SQL                                                   
+      *        PERFORM FUNZIONE-RESET                                           
+      *    END-IF                                                               
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11                 TO 2DBRC-CODICE                      
+                   MOVE 999             TO 2DBRC-SQLCODE                        
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET RC-BLOCCANTE        TO TRUE                              
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET RC-WARNING          TO TRUE                              
+                   MOVE 03                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE       TO TRUE                              
+                   MOVE 99                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE                TO SAVE-SQLCODE                      
+               SET CONNESSIONE-CHIUSA      TO TRUE                              
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE       TO SQLCODE                           
+               ELSE                                                             
+                   SET ERRORE-SQL          TO TRUE                              
+                   MOVE SQLCODE            TO 2DBRC-CNT-SQLCODE                 
+                   MOVE SQLERRMC           TO 2DBRC-CNT-SQLERRMC                
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :'         DELIMITED BY SIZE                          
+                  2DBRC-TABLE        DELIMITED BY SPACE                         
+                  '-'                DELIMITED BY SIZE                          
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE                    TO 2DBRC-SQLCODE.                    
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

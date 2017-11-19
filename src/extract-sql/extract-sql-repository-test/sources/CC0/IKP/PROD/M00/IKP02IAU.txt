@@ -1,0 +1,438 @@
+      * 08.014 16:55        IKP  0000                                           
+      * BF8011 AGGIORNAMENTO INDIRIZZI                                          
+      * 07.060 15:47        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.057 14:44        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.043 10:35        IKP  0000                                           
+      * ricompilazione                                                          
+      * 07.043 10:24        IKP  0000                                           
+      * promozione                                                              
+      * 07.043 10:22        IKP  0000                                           
+      * promozione                                                              
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02IAU.                                                    
+       AUTHOR. ADD-VALUE S.P.A. / FABIO CANETTI.                                
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .......... OPERAZIONI INQUIRY   SU TABELLA IKPANAG_UNICODE*        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... GENNAIO 2007 *        
+      * DA PARTE DI ................................ ADD-VALUE CANETTI *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                              PIC X(08) VALUE 'IKP02IAU'.         
+       77  SAVE-SQLCODE                     PIC S9(09) COMP.                    
+       77  HV-CONTATORE                     PIC S9(9) COMP-3 VALUE ZERO.        
+       77  HV-CONTATORE-1                   PIC S9(9) COMP-3 VALUE ZERO.        
+       77  CONTA-RIGHE                      PIC S9(9) COMP-3 VALUE ZERO.        
+       77  MESSAGGIO                        PIC X(80) VALUE SPACE.              
+       77  MONOBANCA                        PIC X(01) VALUE SPACE.              
+       77  COMO-FAM                         PIC X(01) VALUE SPACE.              
+       77  SIADESC                          PIC X(60) VALUE SPACE.              
+       77  IND-XXX                          PIC 9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-BYP                      PIC 9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-MAX                      PIC 9(05) COMP-3 VALUE 19.          
+       77  COMO-REB-DA                      PIC S9(8) COMP-3 VALUE ZERO.        
+       77  COMO-REB-A                       PIC S9(8) COMP-3 VALUE ZERO.        
+       77  COMO-REB                         PIC  9(8) VALUE ZEROES.             
+       77  9DI2                             PIC  9(2) VALUE ZEROES.             
+       77  COMO-KEYA                        PIC X(20) VALUE SPACES.             
+       77  HV-TIPO                          PIC  X(1) VALUE SPACES.             
+       77  COMO-REB-DIP-DA                  PIC S9(5) COMP-3 VALUE ZERO.        
+       77  COMO-REB-DIP-A                   PIC S9(5) COMP-3 VALUE ZERO.        
+       77  COMO-REB-DIP                     PIC 9(05) VALUE ZEROES.             
+       77  COMO-NUMRAP                      PIC 9(14) VALUE ZEROES.             
+       01  MAIUSCOLO         PIC IS X(26)                                       
+                             VALUE IS 'ABCDEFGHIJKLMNOPQRSTUVWYXZ'.             
+      *-----------------------------------------------------------------        
+       01  MINUSCOLO         PIC IS X(26)                                       
+                             value is 'abcdefghijklmnopqrstuvwyxz'.             
+       77  WRK-DATO                         PIC X(20) VALUE SPACES.             
+       01  FILLER                           PIC 9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                       PIC 9(01) VALUE ZERO.               
+               88  CUR01-CHIUSO                       VALUE ZERO.               
+               88  CUR01-APERTO                       VALUE 1.                  
+           05  FILLER                       PIC 9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-ENCODING                  PIC X(05) VALUE SPACES.             
+       01  WS-DATI-1144.                                                        
+           05 IKPAU-COGNOME-1-1144          PIC X(30) VALUE SPACES.             
+           05 IKPAU-COGNOME-2-1144          PIC X(30) VALUE SPACES.             
+           05 IKPAU-COGNOME-PRE-1144        PIC X(30) VALUE SPACES.             
+           05 IKPAU-NOME-1-1144             PIC X(30) VALUE SPACES.             
+           05 IKPAU-NOME-2-1144             PIC X(30) VALUE SPACES.             
+           05 IKPAU-TITOLO-ACC-1144         PIC X(30) VALUE SPACES.             
+BF8011*    05 IKPAU-IND1-1144               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND2-1144               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND3-1144               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND4-1144               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND5-1144               PIC X(44) VALUE SPACES.             
+BF8011     05 IKPAU-IND1-1144               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND2-1144               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND3-1144               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND4-1144               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND5-1144               PIC X(60) VALUE SPACES.             
+       01  WS-DATI-1141.                                                        
+           05 IKPAU-COGNOME-1-1141          PIC X(30) VALUE SPACES.             
+           05 IKPAU-COGNOME-2-1141          PIC X(30) VALUE SPACES.             
+           05 IKPAU-COGNOME-PRE-1141        PIC X(30) VALUE SPACES.             
+           05 IKPAU-NOME-1-1141             PIC X(30) VALUE SPACES.             
+           05 IKPAU-NOME-2-1141             PIC X(30) VALUE SPACES.             
+           05 IKPAU-TITOLO-ACC-1141         PIC X(30) VALUE SPACES.             
+BF8011*    05 IKPAU-IND1-1141               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND2-1141               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND3-1141               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND4-1141               PIC X(44) VALUE SPACES.             
+BF8011*    05 IKPAU-IND5-1141               PIC X(44) VALUE SPACES.             
+BF8011     05 IKPAU-IND1-1141               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND2-1141               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND3-1141               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND4-1141               PIC X(60) VALUE SPACES.             
+BF8011     05 IKPAU-IND5-1141               PIC X(60) VALUE SPACES.             
+                                                                                
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR              PIC X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+                                                                                
+       01  IKP0RDBG                         PIC X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+       77  IKP0RABL                         PIC X(08) VALUE 'IKP0RABL'.         
+           COPY IKP0CABL.                                                       
+       01  IKP0RSIA                         PIC X(08) VALUE 'IKP0RSIA'.         
+           COPY IKP0CSIA.                                                       
+       01  SISBRCR2                         PIC X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+       01  IKP0RENC                         PIC X(08) VALUE 'IKP0RENC'.         
+           COPY IKP0CENC.                                                       
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAAU                                                
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+       LINKAGE SECTION.                                                         
+           EXEC SQL INCLUDE IKP0C2DB END-EXEC.                                  
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI                                          
+           IF  NOT-ERRORE                                                       
+               EVALUATE 2DBIN-SQL-FUNZIONE                                      
+                   WHEN 'SELECT01'                                              
+                       PERFORM FUNZIONE-SELECT01                                
+                   WHEN OTHER                                                   
+                       SET ERRORE-GENERICO TO TRUE                              
+               END-EVALUATE                                                     
+           END-IF                                                               
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE           TO TRUE                                     
+           INITIALIZE 2DBRC 2DBOU                                               
+           MOVE 2DBIN-RIGA          TO IKP0TABAU.                               
+           MOVE 'IKPANAG_UNICODE'   TO 2DBRC-TABLE                              
+      *--> CHIAMATA ALLA ROUTINE IKP0RENC PER OTTENERE IL CODICE                
+      *    ENCODING IN BASE ALLA LINGUA.                                        
+           PERFORM TRASCODIFICA-ENC                                             
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       TRASCODIFICA-ENC SECTION.                                                
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0ENC.                                                  
+           SET ENCIN-LINENC                TO TRUE.                             
+           MOVE ' '                        TO ENCIN-DEBUG.                      
+           MOVE 'BATCH'                    TO ENCIN-AMBIENTE.                   
+           MOVE ' '                        TO ENCIN-ENCODING.                   
+           MOVE '0804PROF'                 TO ENCIN-MATRICOLA.                  
+           MOVE ' '                        TO ENCIN-CODOPER.                    
+           MOVE IKPAU-LINGUA               TO ENCIN-LINGUA.                     
+           CALL IKP0RENC USING IKP0ENC.                                         
+                                                                                
+           IF  ENCRC-RC = SPACES                                                
+               MOVE ENCOU-ENCODING         TO HV-ENCODING                       
+           ELSE                                                                 
+               SET ERRORE-SQL              TO TRUE                              
+               MOVE ENCRC-SQLCODE          TO 2DBRC-SQLCODE                     
+               MOVE ENCRC-CODICE           TO 2DBRC-CODICE                      
+               MOVE ENCRC-SQLERRMC         TO 2DBRC-SQLERRMC                    
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       IMPOSTA-CCSID-1141 SECTION.                                              
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DECLARE :IKPAU-COGNOME-1-1141                                    
+                      ,:IKPAU-COGNOME-2-1141                                    
+                      ,:IKPAU-COGNOME-PRE-1141                                  
+                      ,:IKPAU-NOME-1-1141                                       
+                      ,:IKPAU-NOME-2-1141                                       
+                      ,:IKPAU-TITOLO-ACC-1141                                   
+                      ,:IKPAU-IND1-1141                                         
+                      ,:IKPAU-IND2-1141                                         
+                      ,:IKPAU-IND3-1141                                         
+                      ,:IKPAU-IND4-1141                                         
+                      ,:IKPAU-IND5-1141                                         
+               VARIABLE CCSID 1141                                              
+           END-EXEC.                                                            
+           IF  SQLCODE = ZERO                                                   
+               CONTINUE                                                         
+           ELSE                                                                 
+               SET ERRORE-SQL              TO TRUE                              
+               MOVE SQLCODE                TO 2DBRC-CNT-SQLCODE                 
+               MOVE SQLERRMC               TO 2DBRC-CNT-SQLERRMC                
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       IMPOSTA-CCSID-1144 SECTION.                                              
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DECLARE :IKPAU-COGNOME-1-1144                                    
+                      ,:IKPAU-COGNOME-2-1144                                    
+                      ,:IKPAU-COGNOME-PRE-1144                                  
+                      ,:IKPAU-NOME-1-1144                                       
+                      ,:IKPAU-NOME-2-1144                                       
+                      ,:IKPAU-TITOLO-ACC-1144                                   
+                      ,:IKPAU-IND1-1144                                         
+                      ,:IKPAU-IND2-1144                                         
+                      ,:IKPAU-IND3-1144                                         
+                      ,:IKPAU-IND4-1144                                         
+                      ,:IKPAU-IND5-1144                                         
+               VARIABLE CCSID 1144                                              
+           END-EXEC.                                                            
+           IF  SQLCODE = ZERO                                                   
+               CONTINUE                                                         
+           ELSE                                                                 
+               SET ERRORE-SQL              TO TRUE                              
+               MOVE SQLCODE                TO 2DBRC-CNT-SQLCODE                 
+               MOVE SQLERRMC               TO 2DBRC-CNT-SQLERRMC                
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+      *--> IMPOSTA IL CCSID DELLE HOST VARIABLES.                               
+           EVALUATE HV-ENCODING                                                 
+           WHEN '01141'                                                         
+               PERFORM SELECT01-1141                                            
+               PERFORM IMPOSTA-CCSID-1141                                       
+               MOVE IKPAU-COGNOME-1-1141   TO IKPAU-COGNOME-1                   
+               MOVE IKPAU-COGNOME-2-1141   TO IKPAU-COGNOME-2                   
+               MOVE IKPAU-COGNOME-PRE-1141 TO IKPAU-COGNOME-PRE                 
+               MOVE IKPAU-NOME-1-1141      TO IKPAU-NOME-1                      
+               MOVE IKPAU-NOME-2-1141      TO IKPAU-NOME-2                      
+               MOVE IKPAU-TITOLO-ACC-1141  TO IKPAU-TITOLO-ACC                  
+               MOVE IKPAU-IND1-1141        TO IKPAU-IND1                        
+               MOVE IKPAU-IND2-1141        TO IKPAU-IND2                        
+               MOVE IKPAU-IND3-1141        TO IKPAU-IND3                        
+               MOVE IKPAU-IND4-1141        TO IKPAU-IND4                        
+               MOVE IKPAU-IND5-1141        TO IKPAU-IND5                        
+           WHEN '01144'                                                         
+               PERFORM SELECT01-1144                                            
+               PERFORM IMPOSTA-CCSID-1144                                       
+               MOVE IKPAU-COGNOME-1-1144   TO IKPAU-COGNOME-1                   
+               MOVE IKPAU-COGNOME-2-1144   TO IKPAU-COGNOME-2                   
+               MOVE IKPAU-COGNOME-PRE-1144 TO IKPAU-COGNOME-PRE                 
+               MOVE IKPAU-NOME-1-1144      TO IKPAU-NOME-1                      
+               MOVE IKPAU-NOME-2-1144      TO IKPAU-NOME-2                      
+               MOVE IKPAU-TITOLO-ACC-1144  TO IKPAU-TITOLO-ACC                  
+               MOVE IKPAU-IND1-1144        TO IKPAU-IND1                        
+               MOVE IKPAU-IND2-1144        TO IKPAU-IND2                        
+               MOVE IKPAU-IND3-1144        TO IKPAU-IND3                        
+               MOVE IKPAU-IND4-1144        TO IKPAU-IND4                        
+               MOVE IKPAU-IND5-1144        TO IKPAU-IND5                        
+           WHEN  OTHER                                                          
+               SET ERRORE-GENERICO         TO TRUE                              
+           END-EVALUATE                                                         
+           MOVE IKP0TABAU                  TO 2DBOU-RIGA                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       SELECT01-1141 SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                SELECT  IKPAU_COGNOME_1                                         
+                     ,  IKPAU_COGNOME_2                                         
+                     ,  IKPAU_COGNOME_PRE                                       
+                     ,  IKPAU_NOME_1                                            
+                     ,  IKPAU_NOME_2                                            
+                     ,  IKPAU_TITOLO_ACC                                        
+                     ,  IKPAU_IND1                                              
+                     ,  IKPAU_IND2                                              
+                     ,  IKPAU_IND3                                              
+                     ,  IKPAU_IND4                                              
+                     ,  IKPAU_IND5                                              
+                  INTO :IKPAU-COGNOME-1-1141                                    
+                     , :IKPAU-COGNOME-2-1141                                    
+                     , :IKPAU-COGNOME-PRE-1141                                  
+                     , :IKPAU-NOME-1-1141                                       
+                     , :IKPAU-NOME-2-1141                                       
+                     , :IKPAU-TITOLO-ACC-1141                                   
+                     , :IKPAU-IND1-1141                                         
+                     , :IKPAU-IND2-1141                                         
+                     , :IKPAU-IND3-1141                                         
+                     , :IKPAU-IND4-1141                                         
+                     , :IKPAU-IND5-1141                                         
+                  FROM  IKPANAG_UNICODE                                         
+                 WHERE  IKPAU_BANCA    = :IKPAU-BANCA                           
+                   AND  IKPAU_NDG      = :IKPAU-NDG                             
+                  WITH UR                                                       
+           END-EXEC                                                             
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   continue                                                     
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING TO TRUE                                   
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL TO TRUE                                       
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       SELECT01-1144 SECTION.                                                   
+      *----------------------------------------------------------------*  
+      * EXEC SQL      
+           EXEC SQL                                                             
+                SELECT  IKPAU_COGNOME_1                                         
+                     ,  IKPAU_COGNOME_2                                         
+                     ,  IKPAU_COGNOME_PRE                                       
+                     ,  IKPAU_NOME_1                                            
+                     ,  IKPAU_NOME_2                                            
+                     ,  IKPAU_TITOLO_ACC                                        
+                     ,  IKPAU_IND1                                              
+                     ,  IKPAU_IND2                                              
+                     ,  IKPAU_IND3                                              
+                     ,  IKPAU_IND4                                              
+                     ,  IKPAU_IND5                                              
+                  INTO :IKPAU-COGNOME-1-1144                                    
+                     , :IKPAU-COGNOME-2-1144                                    
+                     , :IKPAU-COGNOME-PRE-1144                                  
+                     , :IKPAU-NOME-1-1144                                       
+                     , :IKPAU-NOME-2-1144                                       
+                     , :IKPAU-TITOLO-ACC-1144                                   
+                     , :IKPAU-IND1-1144                                         
+                     , :IKPAU-IND2-1144                                         
+                     , :IKPAU-IND3-1144                                         
+                     , :IKPAU-IND4-1144                                         
+                     , :IKPAU-IND5-1144                                         
+                  FROM  IKPANAG_UNICODE                                         
+                 WHERE  IKPAU_BANCA    = :IKPAU-BANCA                           
+                   AND  IKPAU_NDG      = :IKPAU-NDG                             
+                  WITH UR                                                       
+           END-EXEC                                                             
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   continue                                                     
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING TO TRUE                                   
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL TO TRUE                                       
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE TO SAVE-SQLCODE                                     
+               SET CONNESSIONE-CHIUSA TO TRUE                                   
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE TO SQLCODE                                 
+               ELSE                                                             
+                   SET ERRORE-SQL TO TRUE                                       
+                   MOVE SQLCODE TO 2DBRC-CNT-SQLCODE                            
+                   MOVE SQLERRMC TO 2DBRC-CNT-SQLERRMC                          
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :' DELIMITED BY SIZE                                  
+                  2DBRC-TABLE DELIMITED BY SPACE                                
+                  '-' DELIMITED BY SIZE                                         
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE TO 2DBRC-SQLCODE                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+      *    IF  NOT ERRORE-SQL                                                   
+      *        PERFORM FUNZIONE-RESET                                           
+      *    END-IF                                                               
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11  TO 2DBRC-CODICE                                     
+                   MOVE 999 TO 2DBRC-SQLCODE                                    
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET  RC-BLOCCANTE OF IKP02DB TO TRUE                         
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET RC-WARNING OF IKP02DB TO TRUE                            
+                   MOVE 03 TO 2DBRC-CODICE                                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE OF IKP02DB TO TRUE                         
+                   MOVE 99 TO 2DBRC-CODICE                                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

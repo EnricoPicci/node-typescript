@@ -1,0 +1,2100 @@
+      * 15.075 16:04 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * GM1265 - CA5075 - AGGIUNTO CANALE 74.                                   
+      * 15.047 12:11 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * AGGIUNTO SICUREZZA = 1 MOVE 2                                           
+      * 14.167 14:51 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM146G - ANCHE COLONNA IKPAB_ABIL2                                      
+      * 13.345 13:06 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ......................                                                  
+      * 13.331 15:48 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM13A8 - -----------------                                              
+      * 13.312 17:02 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM13A8 - RESTITUISCE ANCHE PORTLET PER IL PORTALE                       
+      * 13.066 10:44 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM1328 - ESCLUSI CANALI CHIOSCO IN VALIDAZIONE PER ABIL                 
+      * 12.142 15:04 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * --------------------------                                              
+      * 12.097 13:24 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM1244 - -----------------                                              
+      * 12.095 14:51 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM1244 - AMBIENTE "P" RESTITUISCE FUNZ. ANCHE LIVELLO 1                 
+      * 12.053 14:23 IKP  US01651 - Maldonado Pelaez Ger (USUPD090)             
+      * COPIA IKP0SALR                                                          
+      * 12.039 17:48 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * PORTAL - NESSUN MENU FISSO PER IL PORTAL SU TORRE BA                    
+      * 12.034 09:58 IKP   EE14154 - Dal Santo Debora (USUPD000)                
+      * ..................................                                      
+      * 12.032 09:12 IKP   EE14154 - Dal Santo Debora (USUPD000)                
+      * ..............................                                          
+      * 12.031 18:27 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * MENU PORTAL SU TORRE BA                                                 
+      * 11.362 12:31 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM11CS - DATO TEMPLATE PER PORTALE                                      
+      * 11.306 14:20 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM11AV - -----------------                                              
+      * 11.304 17:49 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM11AV - ALTRO IDNODO IN VALIDAZIONE                                    
+      * 11.262 14:48 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ---------------------------                                             
+      * 11.244 17:38 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM1191 - PER PORTALE CONSIDERA SOLO I NODI VALORIZZATI                  
+      * 11.168 17:53 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -------------------------------------                                   
+      * 11.164 16:08 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM116A - VERSIONE 3                                                     
+      * 11.148 11:08 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -------------------------------------------                             
+      * 11.119 14:26 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM114R - -----------------                                              
+      * 11.117 10:28 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM114R - REPERIRE DATI NUOVE COLONNE GEB SU IKPFUNZIONI                 
+      * <AO><MO><20110427><0001>                                                
+      * 11.096 09:45 IKP   USEME20 - Ut. Emerg. Vr - Upp (X0KEYEME)             
+      * TMPBVI - RIGHE COMMENTATE PER 83PUP                                     
+      * 11.088 10:44 IKP   USEME21 - Ut. Emerg. Mi - Upp (X0KEYEME)             
+      * TMPBVI - NUOVO MENU PER 83PUP                                           
+      * 11.066 16:39 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------------                                
+      * 11.021 15:51 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM10BB - SISTEMAZIONE CODICE SUL MENU FISSO                             
+      * 10.326 10:13 IKP   USEME10 - Ut. Emerg. Mi - Upp (X0KEYEME)             
+      * APERTURA MOBILE                                                         
+      * 10.315 13:02  IKP  0000 USEME35                                         
+      * GM10BB - NEI MENU FISSI CONSIDERA FT ORIGINALE                          
+      * 10.305 14:39        IKP  0000 US01101                                   
+      * -----------------------------                                           
+      * 10.304 10:34        IKP  0000 US01651                                   
+      * DESCRIZIONE/HELP                                                        
+      * 10.294 17:25        IKP  0000 US01651                                   
+      * GM10AK - VOCI MENU FISSO IMPRENDO PROFESSIONAL                          
+      * 10.291 19:55        IKP  0000 US01651                                   
+      * GM10AI - REPERISCE VECCHIE FORME TECNICHE                               
+      * 10.291 19:47        IKP  0000 US01651                                   
+      * GM10AF - CONSIDERA UTILIZZATORI COME TOKEN                              
+      * 10.287 08:40        IKP  0000 US01651                                   
+      * TMPBVI - RIGHE COMMENTATE                                               
+      * 10.283 17:43        IKP  0000 US01651                                   
+      * GM10AA - AGGIUNGE MENU FISSO                                            
+      * 10.282 19:17        IKP  0000 US01651                                   
+      * GM10A9 - PROGRESSIVO > 200                                              
+      * 10.277 17:44        IKP  0000 US01651                                   
+      * TMPBVI - FORZATURA MENU NUOVO BANCA VIA INTERNET                        
+      * 10.228 15:02        IKP  0000 US01651                                   
+      * COLONNA DESCRIZIONE 255                                                 
+      * 10.158 15:05        IKP  0000 US01651                                   
+      * REINSERITO KEYA COME PARAMETRO DI INPUT                                 
+      * 10.155 17:45        IKP  0000 US01651                                   
+      * TOLTA CHIAMATA MODULO IKP02ALB, SOLO CURSORI                            
+      * 10.154 15:13        IKP  0000 US01651                                   
+      * RECUPERA DESCRIZIONE DA TABELLA                                         
+      * 10.152 17:58        IKP  0000 US01651                                   
+      * SERVIZIO IKPALBERO CON CHIAMATA SICUREZZA NUMERICO                      
+      *----------------------------------------------------------------*        
+       IDENTIFICATION DIVISION.                                                 
+      *----------------------------------------------------------------*        
+       PROGRAM-ID. IKP1SALR.                                                    
+       AUTHOR.                                                                  
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. SERVIZIO ALBERO IKP                        *        
+      * CODOPER ........... IKPALBERO                                  *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ................................ GIUGNO 2010 *        
+      * DA PARTE DI ............................................. UGIS *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       ENVIRONMENT DIVISION.                                                    
+      *----------------------------------------------------------------*        
+       CONFIGURATION SECTION.                                                   
+DBG-->*SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+DBG--> SOURCE-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+      *----------------------------------------------------------------*        
+       DATA DIVISION.                                                           
+      *----------------------------------------------------------------*        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------*                                                 
+       77  PGM                          PIC  X(08) VALUE 'IKP1SALR'.            
+       01  CURSORE PIC X(1).                                                    
+           88 FINE-CURSORE                         VALUE '1'.                   
+       01  WS-REB-X                     PIC  X(08).                             
+       01  WS-REB-9  REDEFINES WS-REB-X PIC  9(09).                             
+       01  WS-PROFILO                   PIC  X(08).                             
+       01  WS-NUM                       PIC  9(18).                             
+       01  WS-NUM-CHR REDEFINES WS-NUM.                                         
+           03 FILLER                    PIC  X(09).                             
+           03 WS-NUM09-CHR.                                                     
+              05 FILLER                 PIC  X(04).                             
+              05 WS-NUM05-CHR           PIC  X(05).                             
+           03 WS-NUMXX-CHR REDEFINES WS-NUM09-CHR.                              
+              05 FILLER                 PIC  X(02).                             
+              05 WS-NUM07-2-CHR         PIC  X(07).                             
+       01  WS-NUM-CHR-1 REDEFINES WS-NUM.                                       
+           03 FILLER                    PIC  X(06).                             
+           03 WS-NUM12-CHR              PIC  X(12).                             
+       01  WS-NUM18-CHR REDEFINES WS-NUM.                                       
+           03 FILLER                    PIC  X(09).                             
+           03 WS-NUM07-CHR.                                                     
+               05 FILLER                PIC  X(07).                             
+               05 WS-NUM02-CHR          PIC  X(02).                             
+       01  WS-RCDESC.                                                           
+           03 WS-DESC-ERR               PIC  X(32) VALUE SPACES.                
+           03 FILLER                    PIC  X(05) VALUE ' SQL '.               
+           03 WS-SQLCODE                PIC  -999.                              
+           03 FILLER                    PIC  X(01) VALUE SPACES.                
+           03 WS-SQLERRM                PIC  X(18) VALUE SPACES.                
+       01  WC-NUMINS                    PIC  9(05).                             
+GM10A9 01  WS-PRG-CODICE                PIC S9(03) COMP-3 VALUE ZEROES.         
+LM     01  WS-OLD-VERSIONE              PIC  9(03).                             
+GM10AA 01  WS-I                         PIC  9(03) VALUE ZEROES.                
+GM10BB 01  WS-SAVE-FT                   PIC  X(05) VALUE SPACES.                
+       01  SW-TIPO                      PIC  X(01) VALUE SPACE.                 
+           88 TANTI-GRUPPI                         VALUE 'G'.                   
+           88 SINGOLO                              VALUE SPACE.                 
+GM11AV 01  WS-IDNODO                    PIC  9(05) VALUE ZEROES.                
+                                                                                
+      *----------------------------------------------------------------*        
+      *  Aree di interfaccia con altri moduli                                   
+      *----------------------------------------------------------------*        
+                                                                                
+      *--> Mod. SISBRCR2 acquisizione dati della Banca(01 CODICI-CASSA)         
+       77  SISBRCR2                     PIC  X(08) VALUE 'SISBRCR2'.            
+           COPY SISBRCR2.                                                       
+                                                                                
+GM10AA*--> Mod. IKP0RMFI menu fissi                                             
+GM10AA 77  IKP0RMFI                     PIC  X(08) VALUE 'IKP0RMFI'.            
+GM10AA     COPY IKP0CMFI.                                                       
+GM10AA                                                                          
+GM10AI*--> Mod. Ricerca forma tecnica e parametri relativi                      
+GM10AI 77  IKP0RFT0                     PIC  X(08) VALUE 'IKP0RFT0'.            
+GM10AI     COPY IKP0CFT0.                                                       
+GM10AI                                                                          
+      *----------------------------------------------------------------*        
+      *  Aree per i database DB2                                                
+      *----------------------------------------------------------------*        
+                                                                                
+      *- Variabili HOST della Global Temporary                                  
+       01  TT-SERVIZIO                  PIC S9(03) COMP-3.                      
+       01  TT-IDPADRE                   PIC S9(03) COMP-3.                      
+       01  TT-ID                        PIC S9(03) COMP-3.                      
+       01  TT-CODICE                    PIC  X(13).                             
+       01  TT-ORDINALE                  PIC S9(03) COMP-3.                      
+       01  TT-LIVELLO                   PIC S9(03) COMP-3.                      
+       01  TT-DESCRIZIONE               PIC X(255).                             
+       01  TT-URL                       PIC  X(120).                            
+       01  TT-CONTENITORE               PIC  X(01).                             
+       01  TT-UTILIZZATORE              PIC  X(01).                             
+       01  TT-CONTO                     PIC  X(02).                             
+GM11AV 01  TT-IDGEB                     PIC S9(05) COMP-3.                      
+GM11AV 01  TT-PARENT-IDGEB              PIC S9(05) COMP-3.                      
+GM11AV 01  TT-ORDER-TYPE                PIC  X(35).                             
+GM11AV 01  TT-TYPE                      PIC  X(05).                             
+GM11AV 01  TT-SIGN-TYPE                 PIC  X(01).                             
+GM11AV 01  TT-IDNODO                    PIC S9(05) COMP-3.                      
+GM11CS 01  TT-TEMPLATE                  PIC  X(01).                             
+GM13A8 01  TT-PORTLET                   PIC S9(05) COMP-3.                      
+                                                                                
+           EXEC SQL INCLUDE SQLCA    END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TAFH END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TAM2 END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TADC END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TADR END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TARP END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TAAB END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TAFU END-EXEC.                                  
+                                                                                
+           EXEC SQL INCLUDE IKP0TAGG END-EXEC.                                  
+                                                                                
+      *---------------*                                                         
+       LINKAGE SECTION.                                                         
+      *---------------*                                                         
+       01  CODOPER                      PIC  X(32).                             
+       01  VERSIONE                     PIC S9(03) COMP-3.                      
+       01  AMBIENTE-IBG                 PIC  X(01).                             
+       01  REBDIP                       PIC S9(05) COMP-3.                      
+       01  REBNUM                       PIC S9(08) COMP-3.                      
+       01  REBTYPE                      PIC  X(02).                             
+       01  UID                          PIC  X(20).                             
+       01  KEYA                         PIC  X(16).                             
+       01  LINGUA                       PIC  X(02).                             
+       01  FT                           PIC  X(05).                             
+       01  SICUREZZA                    PIC S9(05) COMP-3.                      
+       01  CANALE                       PIC  X(02).                             
+       01  PROFILO                      PIC  X(08).                             
+       01  RC                           PIC  X(12).                             
+       01  RCDESC                       PIC  X(64).                             
+       01  RCFLAG                       PIC  X(01).                             
+                                                                                
+      *================================================================*        
+       PROCEDURE DIVISION USING CODOPER                                         
+                                VERSIONE                                        
+                                AMBIENTE-IBG                                    
+                                REBDIP                                          
+                                REBNUM                                          
+                                REBTYPE                                         
+                                UID                                             
+                                KEYA                                            
+                                LINGUA                                          
+                                FT                                              
+                                SICUREZZA                                       
+                                CANALE                                          
+                                PROFILO                                         
+                                RC                                              
+                                RCDESC                                          
+                                RCFLAG.                                         
+      *================================================================*        
+      *                                                                         
+DBG-->*DECLARATIVES.                                                            
+DBG-->*TRACE-PROGRAM SECTION.                                                   
+DBG-->*    USE FOR DEBUGGING ALL PROCEDURES.                                    
+DBG-->*SHOW-TRACE.                                                              
+DBG-->*                                                                         
+DBG-->*    DISPLAY PGM ' ' DEBUG-NAME ' ' DEBUG-CONTENTS.                       
+DBG-->*                                                                         
+DBG-->*END DECLARATIVES.                                                        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       INIZIO SECTION.                                                          
+      *----------------------------------------------------------------*        
+      *--> Acquisizione dati della Banca                                        
+           CALL SISBRCR2 USING CODICI-CASSA                                     
+      *                                                                         
+TMPBVI*    IF  FT(1:3) = '832'                                                  
+TMPBVI*    AND AMBIENTE-IBG = 'V'                                               
+TMPBVI*        MOVE '532UR'        TO FT                                        
+TMPBVI*        MOVE 'P'            TO AMBIENTE-IBG                              
+TMPBVI*    END-IF                                                               
+TMPBVI*    IF  FT = '83PUP'                                                     
+TMPBVI*    AND AMBIENTE-IBG = 'V'                                               
+TMPBVI*        MOVE '88PUP'        TO FT                                        
+TMPBVI*        MOVE 'P'            TO AMBIENTE-IBG                              
+TMPBVI*    END-IF                                                               
+           IF  CODICE-AMBITO = 'ZC'                                             
+GM1265     OR  CANALE        = '74'                                             
+           OR  CANALE        = '40'                                             
+           OR  CANALE        = '41'                                             
+               MOVE 'P' TO AMBIENTE-IBG                                         
+           END-IF                                                               
+           PERFORM OPERAZIONI-INIZIALI                                          
+           SET SINGOLO TO TRUE                                                  
+           IF  PROFILO = 'AMMI'                                                 
+               MOVE REBNUM TO IKPGG-REB                                         
+               MOVE UID TO IKPGG-UID                                            
+               MOVE REBTYPE TO IKPGG-REB-TIPO                                   
+               EXEC SQL SELECT IKPGG_ID_IKP                                     
+                     INTO :UID                                                  
+                     FROM IKPGRUPPI_USER                                        
+                      WHERE IKPGG_UID = :IKPGG-UID                              
+                      AND   IKPGG_REB = :IKPGG-REB                              
+                      AND   IKPGG_REB_TIPO = :IKPGG-REB-TIPO                    
+                      WITH UR                                                   
+               END-EXEC                                                         
+               EVALUATE SQLCODE                                                 
+               WHEN 000                                                         
+                  DISPLAY 'SOSTITUISCO UID IN INPUT CON ' UID                   
+               WHEN -811                                                        
+                  SET TANTI-GRUPPI TO TRUE                                      
+               WHEN 100                                                         
+                  CONTINUE                                                      
+               WHEN OTHER                                                       
+                  MOVE 'CXRÙIKP00099'   TO RC                                   
+                  MOVE 'E'              TO RCFLAG                               
+                  MOVE 'PROBLEMI CON I GRUPPI '                                 
+                                        TO RCDESC                               
+               END-EVALUATE                                                     
+           END-IF                                                               
+           IF RC = SPACES                                                       
+              PERFORM LETTURA-PROFILO                                           
+           END-IF                                                               
+           IF RC = SPACES                                                       
+              PERFORM LETTURA-MENUPERSONALE                                     
+           END-IF                                                               
+           IF RC = SPACES                                                       
+              PERFORM CONDIZIONE-PROFILO                                        
+           END-IF                                                               
+           IF RC = SPACES                                                       
+              PERFORM APERTURA-CURSORE                                          
+              PERFORM UNTIL FINE-CURSORE OR RC NOT = SPACE                      
+                 PERFORM LETTURA-CURSORE                                        
+                 IF NOT FINE-CURSORE AND RC = SPACE                             
+                    PERFORM VALORIZZA-AREE-RISPOSTA                             
+                 END-IF                                                         
+              END-PERFORM                                                       
+              IF RC = SPACE                                                     
+                 PERFORM CHIUSURA-CURSORE                                       
+              END-IF                                                            
+           END-IF                                                               
+           IF RC = SPACES                                                       
+           AND TORRE = 'UI'                                                     
+              MOVE SPACES TO CURSORE                                            
+              PERFORM APERTURA-INT                                              
+              PERFORM UNTIL FINE-CURSORE OR RC NOT = SPACE                      
+                 PERFORM LETTURA-INT                                            
+                 IF NOT FINE-CURSORE AND RC = SPACE                             
+                    PERFORM VALORIZZA-AREE-RISPOSTA                             
+                 END-IF                                                         
+              END-PERFORM                                                       
+              IF RC = SPACE                                                     
+                 PERFORM CHIUSURA-INT                                           
+              END-IF                                                            
+           END-IF                                                               
+           IF RC = SPACES                                                       
+           AND TORRE = 'UI'                                                     
+              MOVE SPACES TO CURSORE                                            
+              PERFORM APERTURA-GRUPPI                                           
+              PERFORM UNTIL FINE-CURSORE OR RC NOT = SPACE                      
+                 PERFORM LETTURA-GRUPPI                                         
+                 IF NOT FINE-CURSORE AND RC = SPACE                             
+                    PERFORM VALORIZZA-AREE-RISPOSTA                             
+                 END-IF                                                         
+              END-PERFORM                                                       
+              IF RC = SPACE                                                     
+                 PERFORM CHIUSURA-GRUPPI                                        
+              END-IF                                                            
+           END-IF                                                               
+           IF RC = SPACES                                                       
+              PERFORM FA-RISPOSTA                                               
+           END-IF                                                               
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+                                                                                
+       EX-INIZIO.                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE RC RCDESC WC-NUMINS.                                      
+      *    DISPLAY PGM '> IKPALBERO: ' REBNUM ' ' REBTYPE  ' ' UID              
+      *                     ' ' FT ' ' LINGUA ' ' CANALE SICUREZZA              
+           IF PROFILO EQUAL LOW-VALUE                                           
+              MOVE SPACES               TO PROFILO                              
+           END-IF                                                               
+LM3093     IF SICUREZZA EQUAL 1                                                 
+LM3093        MOVE 2 TO SICUREZZA                                               
+LM3093     END-IF                                                               
+      *    DISPLAY PGM ' DEBORA MENU'                                           
+      *    DISPLAY PGM '  CODOPER     : ' CODOPER                               
+      *    DISPLAY PGM '  VERSIONE    : ' VERSIONE                              
+      *    DISPLAY PGM '  AMBIENTE-IBG: ' AMBIENTE-IBG                          
+      *    DISPLAY PGM '  REBDIP      : ' REBDIP                                
+      *    DISPLAY PGM '  REBNUM      : ' REBNUM                                
+      *    DISPLAY PGM '  REBTYPE     : ' REBTYPE                               
+      *    DISPLAY PGM '  UID         : ' UID                                   
+      *    DISPLAY PGM '  KEYA        : ' KEYA                                  
+      *    DISPLAY PGM '  LINGUA      : ' LINGUA                                
+      *    DISPLAY PGM '  FT          : ' FT                                    
+      *    DISPLAY PGM '  SICUREZZA   : ' SICUREZZA                             
+      *    DISPLAY PGM '  CANALE      : ' CANALE                                
+      *    DISPLAY PGM '  PROFILO     : ' PROFILO                               
+      *    DISPLAY PGM '  RC          : ' RC                                    
+      *    DISPLAY PGM '  RCDESC      : ' RCDESC                                
+      *    DISPLAY PGM '  RCFLAG      : ' RCFLAG                                
+           .                                                                    
+       EX-OPERAZIONI-INIZIALI.                                                  
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CONDIZIONE-PROFILO SECTION.                                              
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+            WHEN FT           = '83999'                                         
+             AND WS-PROFILO   = 'CLVP003F'                                      
+            WHEN AMBIENTE-IBG = 'V'                                             
+             AND FT           = '83991'                                         
+             AND WS-PROFILO   = 'CLVP003F'                                      
+              MOVE 'PB00003F'           TO WS-PROFILO                           
+           END-EVALUATE                                                         
+           .                                                                    
+       EX-CONDIZIONI-PROFILO.                                                   
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-AREE-RISPOSTA SECTION.                                         
+      *----------------------------------------------------------------*        
+           PERFORM FA-RIGA                                                      
+           IF AMBIENTE-IBG = 'P'                                                
+GM10A9        IF IKPFU-PRG-CODICE <= 200                                        
+                 IF (IKPFU-PRG-PADRE > ZEROES AND                               
+                     IKPFH-ABIL(IKPFU-PRG-CODICE : 1) NOT = '0')                
+GM1244           OR (VERSIONE = 3                                               
+GM1244           AND IKPFU-LIVELLO = 1                                          
+GM1244           AND IKPFH-ABIL(IKPFU-PRG-CODICE : 1) NOT = '0')                
+GM13A8           OR (VERSIONE = 4                                               
+GM13A8           AND IKPFU-LIVELLO = 1                                          
+GM13A8           AND IKPFH-ABIL(IKPFU-PRG-CODICE : 1) NOT = '0')                
+                    PERFORM CARICA-RISPOSTA                                     
+                 END-IF                                                         
+GM10A9        ELSE                                                              
+GM146G          IF IKPFU-PRG-CODICE <= 400                                      
+GM10A9           SUBTRACT 200 FROM IKPFU-PRG-CODICE GIVING WS-PRG-CODICE        
+GM146G          ELSE                                                            
+GM146G           SUBTRACT 400 FROM IKPFU-PRG-CODICE GIVING WS-PRG-CODICE        
+GM146G          END-IF                                                          
+GM10A9           IF (IKPFU-PRG-PADRE > ZEROES AND                               
+GM10A9               IKPFH-ABIL1(WS-PRG-CODICE : 1) NOT = '0')                  
+GM1244           OR (VERSIONE = 3                                               
+GM1244           AND IKPFU-LIVELLO = 1                                          
+GM1244           AND IKPFH-ABIL1(WS-PRG-CODICE : 1) NOT = '0')                  
+GM13A8           OR (VERSIONE = 4                                               
+GM13A8           AND IKPFU-LIVELLO = 1                                          
+GM13A8           AND IKPFH-ABIL1(WS-PRG-CODICE : 1) NOT = '0')                  
+GM10A9              PERFORM CARICA-RISPOSTA                                     
+GM10A9           END-IF                                                         
+GM10A9        END-IF                                                            
+           ELSE                                                                 
+              IF IKPFU-PRG-PADRE > ZEROES OR                                    
+                 IKPFU-LIVELLO = 1                                              
+                 PERFORM CARICA-RISPOSTA                                        
+              END-IF                                                            
+           END-IF                                                               
+           IF IKPFU-PRG-CODICE <= 200                    AND                    
+              IKPM2-ABIL(IKPFU-PRG-CODICE : 1)     = '1' AND                    
+              IKPFH-ABIL(IKPFU-PRG-CODICE : 1) NOT = '0' AND                    
+             (CANALE NOT = '30' AND '31' AND '37' AND '38' AND '39')            
+              MOVE 69                   TO IKPFU-PRG-PADRE                      
+              PERFORM FA-RIGA-MAG                                               
+              PERFORM CARICA-RISPOSTA                                           
+           END-IF                                                               
+GM10AA     PERFORM AGGIUNGI-PRODOTTO-FISSI                                      
+           .                                                                    
+       EX-VALORIZZA-AREE-RISPOSTA.                                              
+           EXIT.                                                                
+                                                                                
+GM10AA*----------------------------------------------------------------*        
+GM10AA AGGIUNGI-PRODOTTO-FISSI SECTION.                                         
+GM10AA*----------------------------------------------------------------*        
+TMPBVI*---                                                                      
+TMPBVI*    IF  IKPFU-FT(1 : 2)  = '88'                                          
+TMPBVI*        MOVE '83'                TO IKPFU-FT(1 : 2)                      
+TMPBVI*    END-IF                                                               
+TMPBVI*---                                                                      
+GM10BB     MOVE IKPFU-FT TO WS-SAVE-FT                                          
+GM10AI     PERFORM CHIAMATA-IKP0RFT0                                            
+GM10AA     IF (IKPFU-FT         = 'EB001'                                       
+GM10AA     OR  IKPFU-FT         = 'EB002'                                       
+GM10AA     OR  IKPFU-FT         = 'EB0X1'                                       
+GM10AA     OR  IKPFU-FT         = 'EB0X2')                                      
+GM10AA     AND IKPFU-SERVIZIO   = 54                                            
+GM10AA         PERFORM FA-RIGHE-FISSE                                           
+GM10AA     END-IF                                                               
+GM10AA     IF (IKPFU-FT         = '83BSN'                                       
+GM10AA     OR  IKPFU-FT         = '83BS1'                                       
+GM10AA     OR  IKPFU-FT         = '83BS2')                                      
+GM10AA     AND IKPFU-PRG-CODICE = 199                                           
+GM10AA         PERFORM FA-RIGHE-FISSE                                           
+GM10AA     END-IF                                                               
+GM10AA     IF (IKPFU-FT         = '83BSN'                                       
+GM10AA     OR  IKPFU-FT         = '83BS1'                                       
+GM10AA     OR  IKPFU-FT         = '83BS2')                                      
+GM10AA     AND IKPFU-PRG-CODICE = 196                                           
+GM10AA         PERFORM FA-RIGHE-FISSE                                           
+GM10AA     END-IF                                                               
+GM10AK     IF (IKPFU-FT         = '83BSN'                                       
+GM10AK     OR  IKPFU-FT         = '83BS1'                                       
+GM10AK     OR  IKPFU-FT         = '83BS2')                                      
+GM10AK     AND IKPFU-PRG-CODICE = 249                                           
+GM10AK         PERFORM FA-RIGHE-FISSE                                           
+GM10AK     END-IF                                                               
+GM10AA*    IF  IKPFU-FT        = '83999'                                        
+GM10AA*    AND IKPFU-SERVIZIO  = 87                                             
+GM10AA*        PERFORM AGGIUNGI-PRODOTTO-MENU                                   
+GM10AA*    END-IF                                                               
+GM10AA     IF (IKPFU-FT        = 'EB002'                                        
+GM10AA     OR  IKPFU-FT        = 'EB0X2')                                       
+GM10AA     AND IKPFU-PRG-CODICE = 23                                            
+GM10AA         MOVE   2 TO IKPFU-SERVIZIO IKPFU-PRG-PADRE                       
+GM10AA         MOVE 987 TO IKPFU-ORDINALE                                       
+GM10BB         MOVE WS-SAVE-FT  TO IKPFU-FT                                     
+GM10AA         PERFORM FA-RIGA                                                  
+GM10AA         PERFORM CARICA-RISPOSTA                                          
+GM10AA     END-IF                                                               
+GM10AA     IF (IKPFU-FT        = 'EB002'                                        
+GM10AA     OR  IKPFU-FT        = 'EB0X2')                                       
+GM10AA     AND IKPFU-PRG-PADRE = 23                                             
+GM10AA     AND IKPFU-PRG-CODICE NOT = 173                                       
+GM10AA         MOVE 2 TO IKPFU-SERVIZIO                                         
+GM10BB         MOVE WS-SAVE-FT  TO IKPFU-FT                                     
+GM10AA         PERFORM FA-RIGA                                                  
+GM10AA         PERFORM CARICA-RISPOSTA                                          
+GM10AA     END-IF                                                               
+GM10AA     .                                                                    
+GM10AA EX-AGGIUNGI-PRODOTTO-FISSI.                                              
+GM10AA     EXIT.                                                                
+GM10AA                                                                          
+      *----------------------------------------------------------------*        
+       FA-RIGA SECTION.                                                         
+      *----------------------------------------------------------------*        
+           MOVE SPACES                  TO TT-UTILIZZATORE                      
+           MOVE SPACES                  TO TT-CONTO                             
+           IF CODICE-ABI-NUM-5 = 02008                                          
+           OR CODICE-ABI-NUM-5 = 05437                                          
+           OR CODICE-ABI-NUM-5 = 03002                                          
+           OR CODICE-ABI-NUM-5 = 01020                                          
+              IF IKPFU-PRG-CODICE = 88 AND                                      
+                (IKPFU-FT         = '83999' OR '83991')                         
+                 IF WS-PROFILO(1 : 4) = 'PB00' OR 'DP00'                        
+                    CONTINUE                                                    
+                 ELSE                                                           
+                    MOVE 'ANALINVE'     TO IKPFU-CODICE                         
+                    MOVE 'Analisi Investimenti'                                 
+                                        TO IKPFU-DESCRIZIONE                    
+                 END-IF                                                         
+              END-IF                                                            
+           END-IF                                                               
+           IF IKPFU-FT = '83BSN' OR '83BS1'                                     
+              IF IKPFU-PRG-CODICE = 68                                          
+              OR IKPFU-PRG-CODICE = 70                                          
+              OR IKPFU-PRG-CODICE = 71                                          
+              OR IKPFU-PRG-CODICE = 72                                          
+              OR IKPFU-PRG-CODICE = 73                                          
+              OR IKPFU-PRG-CODICE = 74                                          
+              OR IKPFU-PRG-CODICE = 87                                          
+              OR IKPFU-PRG-CODICE = 47                                          
+              OR IKPFU-PRG-CODICE = 75                                          
+              OR IKPFU-PRG-CODICE = 78                                          
+              OR IKPFU-PRG-CODICE = 59                                          
+              OR IKPFU-PRG-CODICE = 86                                          
+      ***   PADRI                                                               
+              OR IKPFU-PRG-CODICE = 18                                          
+              OR IKPFU-PRG-CODICE = 26                                          
+              OR IKPFU-PRG-CODICE = 33                                          
+              OR IKPFU-PRG-CODICE = 41                                          
+      ***++ PADRE INCASSI                                                       
+      *       OR IKPFU-CONTENITORE = 'S'                                        
+                 MOVE 'S'        TO TT-UTILIZZATORE                             
+                 MOVE 'CC'       TO TT-CONTO                                    
+              ELSE                                                              
+                 MOVE 'N'        TO TT-UTILIZZATORE                             
+                 MOVE '  '       TO TT-CONTO                                    
+              END-IF                                                            
+           END-IF                                                               
+           MOVE IKPFU-SERVIZIO          TO TT-SERVIZIO                          
+           MOVE IKPFU-PRG-PADRE         TO TT-IDPADRE                           
+           MOVE IKPFU-PRG-CODICE        TO TT-ID                                
+           IF IKPFU-FT = '83UTL'                                                
+              MOVE '83BSN'              TO IKPFU-FT                             
+           END-IF                                                               
+           STRING IKPFU-FT            DELIMITED BY SIZE                         
+                  IKPFU-CODICE        DELIMITED BY SIZE                         
+                                      INTO TT-CODICE                            
+           MOVE IKPFU-ORDINALE          TO TT-ORDINALE                          
+           MOVE IKPFU-LIVELLO           TO TT-LIVELLO                           
+           MOVE IKPFU-DESCRIZIONE       TO TT-DESCRIZIONE                       
+           MOVE IKPFU-URL               TO TT-URL                               
+           MOVE IKPFU-CONTENITORE       TO TT-CONTENITORE                       
+GM11AV     MOVE IKPFU-IDGEB             TO TT-IDGEB                             
+GM11AV     MOVE IKPFU-PARENT-IDGEB      TO TT-PARENT-IDGEB                      
+GM11AV     MOVE IKPFU-ORDER-TYPE        TO TT-ORDER-TYPE                        
+GM11AV     MOVE IKPFU-TYPE              TO TT-TYPE                              
+GM11AV     MOVE IKPFU-SIGN-TYPE         TO TT-SIGN-TYPE                         
+GM11AV     MOVE IKPFU-IDNODO            TO TT-IDNODO                            
+GM11CS     MOVE IKPFU-TEMPLATE          TO TT-TEMPLATE                          
+GM13A8     IF IKPFU-URL = '/ibx/web/online/payments/rechargeTel.faces'          
+GM13A8*       MOVE 0304                 TO TT-PORTLET                           
+GM13A8        MOVE 1                    TO TT-PORTLET                           
+GM13A8     ELSE                                                                 
+GM13A8        MOVE ZEROS                TO TT-PORTLET                           
+GM13A8     END-IF                                                               
+           .                                                                    
+       EX-FA-RIGA.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FA-RIGA-MAG SECTION.                                                     
+      *----------------------------------------------------------------*        
+           MOVE SPACES                  TO TT-UTILIZZATORE                      
+           MOVE SPACES                  TO TT-CONTO                             
+           IF IKPFU-PRG-CODICE = 88 AND                                         
+             (IKPFU-FT         = '83999' OR '83991')                            
+              IF WS-PROFILO(1 : 4) = 'PB00' OR 'DP00'                           
+                 CONTINUE                                                       
+              ELSE                                                              
+                 MOVE 'ANALINVE'        TO IKPFU-CODICE                         
+                    MOVE 'Analisi Investimenti'                                 
+                                        TO IKPFU-DESCRIZIONE                    
+              END-IF                                                            
+           END-IF                                                               
+           MOVE IKPFU-SERVIZIO          TO TT-SERVIZIO                          
+           MOVE IKPFU-PRG-PADRE         TO TT-IDPADRE                           
+           MOVE IKPFU-PRG-CODICE        TO TT-ID                                
+           STRING IKPFU-FT       DELIMITED BY SIZE                              
+                  IKPFU-CODICE   DELIMITED BY SIZE                              
+                                      INTO TT-CODICE                            
+           MOVE IKPFU-ORDINALE          TO TT-ORDINALE                          
+           MOVE IKPFU-LIVELLO           TO TT-LIVELLO                           
+           MOVE IKPFU-DESCRIZIONE       TO TT-DESCRIZIONE                       
+GM11AV     MOVE IKPFU-IDGEB             TO TT-IDGEB                             
+GM11AV     MOVE IKPFU-PARENT-IDGEB      TO TT-PARENT-IDGEB                      
+GM11AV     MOVE IKPFU-ORDER-TYPE        TO TT-ORDER-TYPE                        
+GM11AV     MOVE IKPFU-TYPE              TO TT-TYPE                              
+GM11AV     MOVE IKPFU-SIGN-TYPE         TO TT-SIGN-TYPE                         
+GM11AV     MOVE IKPFU-IDNODO            TO TT-IDNODO                            
+GM11CS     MOVE IKPFU-TEMPLATE          TO TT-TEMPLATE                          
+           .                                                                    
+       EX-FA-RIGA-MAG.                                                          
+           EXIT.                                                                
+                                                                                
+GM10AA*-----------------------------------------------------------------        
+GM10AA FA-RIGHE-FISSE SECTION.                                                  
+GM10AA*-----------------------------------------------------------------        
+GM10AA     IF  IKPFU-FT         = 'EB0X1'                                       
+GM10AA     OR  IKPFU-FT         = 'EB0X2'                                       
+GM10AA         MOVE '0'                 TO IKPFU-FT(4 : 1)                      
+GM10AA     END-IF                                                               
+GM10AA     IF (IKPFU-FT         = '83999'                                       
+GM10AA     OR  IKPFU-FT         = '83BS1'                                       
+GM10AA     OR  IKPFU-FT         = '83BS2')                                      
+GM10AA     AND IKPFU-PRG-CODICE = 199                                           
+GM10AA         MOVE '83BSN'             TO IKPFU-FT                             
+GM10AA     END-IF                                                               
+GM10AA     IF (IKPFU-FT         = '83999'                                       
+GM10AA     OR  IKPFU-FT         = '83BS1'                                       
+GM10AA     OR  IKPFU-FT         = '83BS2')                                      
+GM10AA     AND IKPFU-PRG-CODICE = 196                                           
+GM10AA         MOVE '83BSN'             TO IKPFU-FT                             
+GM10AA     END-IF                                                               
+GM10AK     IF (IKPFU-FT         = '83999'                                       
+GM10AK     OR  IKPFU-FT         = '83BS1'                                       
+GM10AK     OR  IKPFU-FT         = '83BS2')                                      
+GM10AK     AND IKPFU-PRG-CODICE = 249                                           
+GM10AK         MOVE '83BSN'             TO IKPFU-FT                             
+GM10AK     END-IF                                                               
+GM10AA                                                                          
+GM10AA     INITIALIZE IKP0MFI                                                   
+GM10AA     MOVE IKPFU-FT                TO MFIIN-FT                             
+GM10AA     MOVE IKPFU-PRG-CODICE        TO MFIIN-PRG                            
+GM10AA                                                                          
+GM10AA     CALL IKP0RMFI USING IKP0MFI                                          
+GM10AA                                                                          
+GM10AA     PERFORM VARYING WS-I FROM 1 BY 1 UNTIL WS-I > MFIOU-CONTATORE        
+GM10AA         MOVE SPACES              TO TT-UTILIZZATORE                      
+GM10AA         MOVE SPACES              TO TT-CONTO                             
+GM10AA         MOVE IKPFU-SERVIZIO      TO TT-SERVIZIO                          
+GM10AA         MOVE MFIOU-PADRE(WS-I)   TO TT-IDPADRE                           
+GM10AA         MOVE MFIOU-PRG-CODICE(WS-I) TO TT-ID                             
+GM10AA         MOVE MFIOU-CODICE(WS-I)  TO TT-CODICE                            
+GM10BB*GM10AA  STRING IKPFU-FT   DELIMITED BY SIZE                              
+GM10BB*GM10AA         TT-CODICE  DELIMITED BY SIZE                              
+GM10BB         STRING WS-SAVE-FT           DELIMITED BY SIZE                    
+GM10BB                MFIOU-CODICE(WS-I)   DELIMITED BY SIZE                    
+GM10AA                                INTO TT-CODICE                            
+GM10AA         MOVE MFIOU-ORD(WS-I)     TO TT-ORDINALE                          
+GM10AA         MOVE MFIOU-LIV(WS-I)     TO TT-LIVELLO                           
+GM10AA         MOVE MFIOU-DESC(WS-I)    TO TT-DESCRIZIONE                       
+GM10AA         IF  MFIOU-URL(WS-I) = SPACE                                      
+GM10AA             MOVE 'S'             TO TT-CONTENITORE                       
+GM10AA         ELSE                                                             
+GM10AA             MOVE 'N'             TO TT-CONTENITORE                       
+GM10AA         END-IF                                                           
+GM10AA         MOVE MFIOU-URL(WS-I)     TO TT-URL                               
+GM10AA*                                                                         
+      *        DISPLAY PGM ' Fisso: ' IKPFU-FT                                  
+      *                           '+' TT-SERVIZIO                               
+      *                           '+' TT-ID                                     
+      *                           '+' TT-CODICE                                 
+      *                           '+' TT-ORDINALE                               
+      *                           '+' TT-LIVELLO                                
+      *                           '+' TT-IDPADRE                                
+      *                           '+' TT-CONTENITORE                            
+      *                           '+' TT-DESCRIZIONE                            
+      *                           '+' TT-URL                                    
+GM10AA         PERFORM CARICA-RISPOSTA                                          
+GM10AA     END-PERFORM                                                          
+GM10AA     .                                                                    
+GM10AA EX-FA-RIGHE-FISSE.                                                       
+GM10AA     EXIT.                                                                
+GM10AA                                                                          
+      *----------------------------------------------------------------*        
+       CARICA-RISPOSTA SECTION.                                                 
+      *----------------------------------------------------------------*        
+LM    *    IF  IKPFU-PRG-CODICE = 217                                           
+LM    *        IF WS-PROFILO(1 : 4) = 'DP00'                                    
+LM    *           CONTINUE                                                      
+LM    *        ELSE                                                             
+LM    *           MOVE VERSIONE TO WS-OLD-VERSIONE                              
+LM    *           MOVE 99 TO VERSIONE                                           
+LM    *        END-IF                                                           
+LM    *    END-IF                                                               
+      *    DISPLAY PGM ' ' TT-SERVIZIO                                          
+      *                '-' TT-IDPADRE                                           
+      *                '-' TT-ID                                                
+      *                '-' TT-CODICE                                            
+      *                '-' TT-ORDINALE                                          
+      *                '-' TT-LIVELLO                                           
+      *                '-' TT-DESCRIZIONE(1 : 30)                               
+      *                '-' TT-URL                                               
+      *    DISPLAY PGM ' ' TT-CONTENITORE                                       
+      *                '-' TT-UTILIZZATORE                                      
+      *                '-' TT-CONTO                                             
+      *                '-' TT-IDGEB                                             
+      *                '-' TT-PARENT-IDGEB                                      
+      *                '-' TT-ORDER-TYPE                                        
+      *                '-' TT-TYPE                                              
+      *                '-' TT-SIGN-TYPE                                         
+      *                '-' TT-IDNODO                                            
+      *                '-' TT-TEMPLATE                                          
+                                                                                
+           EVALUATE VERSIONE                                                    
+            WHEN 1                                                              
+              ADD  1                    TO WC-NUMINS                            
+GM11AV        EXEC SQL INSERT INTO IKPALBERO_1                                  
+GM11AV                             ( SERVIZIO                                   
+GM11AV                             , IDPADRE                                    
+GM11AV                             , ID                                         
+GM11AV                             , CODICE                                     
+GM11AV                             , ORDINALE                                   
+GM11AV                             , LIVELLO                                    
+GM11AV                             , DESCRIZIONE                                
+GM11AV                             , URL                                        
+GM11AV                             , CONTENITORE                                
+GM11AV                             , UTILIZZATORE                               
+GM11AV                             , CONTO                                      
+GM11AV                             )                                            
+GM11AV                      VALUES (:TT-SERVIZIO                                
+GM11AV                            , :TT-IDPADRE                                 
+GM11AV                            , :TT-ID                                      
+GM11AV                            , :TT-CODICE                                  
+GM11AV                            , :TT-ORDINALE                                
+GM11AV                            , :TT-LIVELLO                                 
+GM11AV                            , :TT-DESCRIZIONE                             
+GM11AV                            , :TT-URL                                     
+GM11AV                            , :TT-CONTENITORE                             
+GM11AV                            , :TT-UTILIZZATORE                            
+GM11AV                            , :TT-CONTO                                   
+GM11AV                             )                                            
+GM11AV        END-EXEC                                                          
+            WHEN 2                                                              
+GM116A      WHEN 3                                                              
+              ADD  1                    TO WC-NUMINS                            
+GM11AV*       EXEC SQL INSERT INTO IKPALBERO_1                                  
+GM11AV        EXEC SQL INSERT INTO IKPALBERO_2                                  
+                                   ( SERVIZIO                                   
+                                   , IDPADRE                                    
+                                   , ID                                         
+                                   , CODICE                                     
+                                   , ORDINALE                                   
+                                   , LIVELLO                                    
+                                   , DESCRIZIONE                                
+                                   , URL                                        
+                                   , CONTENITORE                                
+                                   , UTILIZZATORE                               
+                                   , CONTO                                      
+GM11AV                             , IDGEB                                      
+GM11AV                             , PARENT_IDGEB                               
+GM11AV                             , ORDER_TYPE                                 
+GM11AV                             , TYPE                                       
+GM11AV                             , SIGN_TYPE                                  
+GM11AV                             , IDNODO                                     
+GM11CS                             , TEMPLATE                                   
+                                   )                                            
+                            VALUES (:TT-SERVIZIO                                
+                                  , :TT-IDPADRE                                 
+                                  , :TT-ID                                      
+                                  , :TT-CODICE                                  
+                                  , :TT-ORDINALE                                
+                                  , :TT-LIVELLO                                 
+                                  , :TT-DESCRIZIONE                             
+                                  , :TT-URL                                     
+                                  , :TT-CONTENITORE                             
+                                  , :TT-UTILIZZATORE                            
+                                  , :TT-CONTO                                   
+GM11AV                            , :TT-IDGEB                                   
+GM11AV                            , :TT-PARENT-IDGEB                            
+GM11AV                            , :TT-ORDER-TYPE                              
+GM11AV                            , :TT-TYPE                                    
+GM11AV                            , :TT-SIGN-TYPE                               
+GM11AV                            , :TT-IDNODO                                  
+GM11CS                            , :TT-TEMPLATE                                
+                                   )                                            
+              END-EXEC                                                          
+GM13A8      WHEN 4                                                              
+GM13A8        ADD  1                    TO WC-NUMINS                            
+GM13A8        EXEC SQL INSERT INTO IKPALBERO_3                                  
+GM13A8                             ( SERVIZIO                                   
+GM13A8                             , IDPADRE                                    
+GM13A8                             , ID                                         
+GM13A8                             , CODICE                                     
+GM13A8                             , ORDINALE                                   
+GM13A8                             , LIVELLO                                    
+GM13A8                             , DESCRIZIONE                                
+GM13A8                             , URL                                        
+GM13A8                             , CONTENITORE                                
+GM13A8                             , UTILIZZATORE                               
+GM13A8                             , CONTO                                      
+GM13A8                             , IDGEB                                      
+GM13A8                             , PARENT_IDGEB                               
+GM13A8                             , ORDER_TYPE                                 
+GM13A8                             , TYPE                                       
+GM13A8                             , SIGN_TYPE                                  
+GM13A8                             , IDNODO                                     
+GM13A8                             , TEMPLATE                                   
+GM13A8                             , PORTLET                                    
+GM13A8                             )                                            
+GM13A8                      VALUES (:TT-SERVIZIO                                
+GM13A8                            , :TT-IDPADRE                                 
+GM13A8                            , :TT-ID                                      
+GM13A8                            , :TT-CODICE                                  
+GM13A8                            , :TT-ORDINALE                                
+GM13A8                            , :TT-LIVELLO                                 
+GM13A8                            , :TT-DESCRIZIONE                             
+GM13A8                            , :TT-URL                                     
+GM13A8                            , :TT-CONTENITORE                             
+GM13A8                            , :TT-UTILIZZATORE                            
+GM13A8                            , :TT-CONTO                                   
+GM13A8                            , :TT-IDGEB                                   
+GM13A8                            , :TT-PARENT-IDGEB                            
+GM13A8                            , :TT-ORDER-TYPE                              
+GM13A8                            , :TT-TYPE                                    
+GM13A8                            , :TT-SIGN-TYPE                               
+GM13A8                            , :TT-IDNODO                                  
+GM13A8                            , :TT-TEMPLATE                                
+GM13A8                            , :TT-PORTLET                                 
+GM13A8                             )                                            
+GM13A8        END-EXEC                                                          
+              IF SQLCODE NOT EQUAL ZEROS                                        
+                 MOVE 'CXRÙIKP00099'    TO RC                                   
+                 MOVE 'E'               TO RCFLAG                               
+                 MOVE 'ERRORE INSERT TEMPORARY TABLE IKPALBERO'                 
+                                        TO WS-DESC-ERR                          
+                 MOVE SQLCODE           TO WS-SQLCODE                           
+                 MOVE SQLERRMC(1 : SQLERRML)                                    
+                                        TO WS-SQLERRM                           
+                 MOVE WS-RCDESC         TO RCDESC                               
+              END-IF                                                            
+            WHEN 99                                                             
+LM            MOVE WS-OLD-VERSIONE      TO VERSIONE                             
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'       TO RC                                   
+              MOVE 'E'                  TO RCFLAG                               
+              MOVE 'VERSIONE NON CONOSCIUTA'                                    
+                                        TO RCDESC                               
+           END-EVALUATE                                                         
+           .                                                                    
+       EX-CARICA-RISPOSTA.                                                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-PROFILO SECTION.                                                 
+      *----------------------------------------------------------------*        
+           IF  PROFILO EQUAL  SPACE                                             
+           AND FT      EQUAL '83999'                                            
+              INITIALIZE IKP0TABDR                                              
+                                                                                
+              MOVE UID(13 : 8)          TO WS-REB-X                             
+              MOVE CODICE-BANCA         TO IKPDR-BANCA                          
+              MOVE WS-REB-9             TO IKPDR-REB                            
+              MOVE '83'                 TO IKPDR-REB-TIPO                       
+                                                                                
+              EXEC SQL                                                          
+                  SELECT IKPDR_VALORE                                           
+                   INTO :IKPDR-VALORE                                           
+                   FROM  IKPDATIREB                                             
+                   WHERE IKPDR_BANCA IN (' ',:IKPDR-BANCA)                      
+                   AND   IKPDR_REB         = :IKPDR-REB                         
+                   AND   IKPDR_REB_TIPO    = :IKPDR-REB-TIPO                    
+                   AND   IKPDR_DATO        = 'PROFILO'                          
+                   ORDER BY IKPDR_BANCA DESC                                    
+                   FETCH FIRST 1 ROW ONLY                                       
+                   WITH  UR                                                     
+              END-EXEC                                                          
+                                                                                
+              EVALUATE SQLCODE                                                  
+               WHEN ZERO                                                        
+                MOVE IKPDR-VALORE(1 : 8)   TO WS-PROFILO                        
+               WHEN +100                                                        
+                CONTINUE                                                        
+               WHEN OTHER                                                       
+                MOVE 'CXRÙIKP00099'     TO RC                                   
+                MOVE 'E'                TO RCFLAG                               
+                MOVE 'ERRORE SELECT IKPDATIREB '                                
+                                        TO WS-DESC-ERR                          
+                MOVE SQLCODE            TO WS-SQLCODE                           
+                MOVE SQLERRMC(1 : SQLERRML)                                     
+                                        TO WS-SQLERRM                           
+                MOVE WS-RCDESC          TO RCDESC                               
+              END-EVALUATE                                                      
+           ELSE                                                                 
+              MOVE PROFILO              TO WS-PROFILO                           
+           END-IF                                                               
+           .                                                                    
+       EX-LETTURA-PROFILO.                                                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-MENUPERSONALE SECTION.                                           
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0TABM2                                                 
+                                                                                
+           MOVE UID                     TO IKPM2-UID                            
+           MOVE REBNUM                  TO IKPM2-REB                            
+                                                                                
+           EXEC SQL                                                             
+               SELECT IKPM2_ABIL                                                
+                   ,  IKPM2_ABIL1                                               
+                   ,  IKPM2_ABIL2                                               
+                INTO :IKPM2-ABIL                                                
+                   , :IKPM2-ABIL1                                               
+                   , :IKPM2-ABIL2                                               
+                FROM  IKPMAGGIO_X_REB                                           
+                WHERE IKPM2_UID     = :IKPM2-UID                                
+                  AND IKPM2_REB     = :IKPM2-REB                                
+                WITH  UR                                                        
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+             CONTINUE                                                           
+            WHEN +100                                                           
+             MOVE ALL '0'               TO IKPM2-ABIL                           
+             MOVE ALL '0'               TO IKPM2-ABIL1                          
+             MOVE ALL '0'               TO IKPM2-ABIL2                          
+            WHEN OTHER                                                          
+             MOVE 'CXRÙIKP00099'        TO RC                                   
+             MOVE 'E'                   TO RCFLAG                               
+             MOVE 'ERRORE SELECT IKPMAGGIO_X_REB'                               
+                                        TO WS-DESC-ERR                          
+             MOVE SQLCODE               TO WS-SQLCODE                           
+             MOVE SQLERRMC(1 : SQLERRML)                                        
+                                        TO WS-SQLERRM                           
+             MOVE WS-RCDESC             TO RCDESC                               
+           END-EVALUATE.                                                        
+                                                                                
+           INITIALIZE IKP0TABFH                                                 
+                                                                                
+           MOVE CODICE-BANCA            TO IKPFH-BANCA                          
+           MOVE FT                      TO IKPFH-FT                             
+           MOVE CANALE                  TO IKPFH-CANALE                         
+           MOVE SICUREZZA               TO IKPFH-SICUREZZA                      
+GM10AF*    CONSIDERA TIPO SICUREZZA 'TOKEN' PER GLI UTILIZZATORI BMC            
+GM10AF     IF  UID(1 : 4) = 'UTL-'                                              
+GM10AF         MOVE 0002                TO IKPFH-SICUREZZA                      
+GM10AF     END-IF                                                               
+           MOVE WS-PROFILO              TO IKPFH-PROFILO                        
+                                                                                
+           EXEC SQL                                                             
+                SELECT IKPFH_ABIL                                               
+                    ,  IKPFH_ABIL1                                              
+                    ,  IKPFH_ABIL2                                              
+                 INTO :IKPFH-ABIL                                               
+                    , :IKPFH-ABIL1                                              
+                    , :IKPFH-ABIL2                                              
+                 FROM  IKPFUNZIONICANALI                                        
+                WHERE  IKPFH_BANCA     = :IKPFH-BANCA                           
+                  AND  IKPFH_FT        = :IKPFH-FT                              
+                  AND  IKPFH_CANALE    = :IKPFH-CANALE                          
+                  AND  IKPFH_SICUREZZA = :IKPFH-SICUREZZA                       
+                  AND  IKPFH_PROFILO  IN (' ',:IKPFH-PROFILO)                   
+                ORDER  BY IKPFH_PROFILO DESC                                    
+                FETCH  FIRST 1 ROW ONLY                                         
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+             IF AMBIENTE-IBG  = 'V'                                             
+GM1328      AND CANALE   NOT  = '77'                                            
+GM1328      AND CANALE   NOT  = '78'                                            
+                MOVE ALL '1'            TO IKPFH-ABIL                           
+                                           IKPFH-ABIL1                          
+                                           IKPFH-ABIL2                          
+             END-IF                                                             
+            WHEN +100                                                           
+             IF IKPFH-SICUREZZA NOT = 3                                         
+                DISPLAY PGM ' NON TROVATO SU FUNZIONI CANALI ' IKPFH-FT         
+                            '-' IKPFH-CANALE '-' IKPFH-SICUREZZA                
+             END-IF                                                             
+             MOVE ALL '1'               TO IKPFH-ABIL                           
+                                           IKPFH-ABIL1                          
+                                           IKPFH-ABIL2                          
+            WHEN -811                                                           
+             DISPLAY PGM ' TROVATE PIU'' RIGHE SU IKPFUNZIONICANALI'            
+                         ' FT>' IKPFH-FT '< CANALE >' IKPFH-CANALE '<'          
+                         ' SICUREZZA >'   IKPFH-SICUREZZA '<'                   
+             MOVE ALL '1'               TO IKPFH-ABIL                           
+                                           IKPFH-ABIL1                          
+                                           IKPFH-ABIL2                          
+            WHEN OTHER                                                          
+             MOVE 'CXRÙIKP00099'        TO RC                                   
+             MOVE 'E'                   TO RCFLAG                               
+             MOVE 'ERRORE SELECT IKPFUNZIONICANALI'                             
+                                        TO WS-DESC-ERR                          
+             MOVE SQLCODE               TO WS-SQLCODE                           
+             MOVE SQLERRMC(1 : SQLERRML)                                        
+                                        TO WS-SQLERRM                           
+             MOVE WS-RCDESC             TO RCDESC                               
+      D      DISPLAY PGM ' SQLERRM=' SQLERRMC(1 : SQLERRML)                     
+           END-EVALUATE.                                                        
+                                                                                
+       EX-LETTURA-MENUPERSONALE.                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       APERTURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+             AND KEYA   > SPACES                                                
+              PERFORM OPEN-CURKEYA                                              
+            WHEN AMBIENTE-IBG = 'V'                                             
+             AND REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM OPEN-CURVALI                                              
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM OPEN-CURPROD                                              
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'RICHIESTA NON VALIDA'  TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-APERTURA-CURSORE.                                                     
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CURKEYA SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CURKEYA CURSOR FOR                                      
+                 SELECT DISTINCT                                                
+                        IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+                      , IKPFU_HELP                                              
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPABILITAZIONI                                         
+                      , IKPFUNZIONI                                             
+                      , IKPRAPPORTI                                             
+                  WHERE IKPFU_BANCA  IN (' ',IKPAB_BANCA)                       
+                    AND IKPAB_REB     = :IKPAB-REB                              
+                    AND IKPAB_UID     = :IKPAB-UID                              
+                    AND IKPFU_FT      = :IKPFU-FT                               
+                    AND IKPRP_KEYR    =  IKPAB_KEYR                             
+                    AND IKPRP_KEYA    = :IKPRP-KEYA                             
+GM146G*             AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),                  
+GM146G              AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 || IKPAB_ABIL2,        
+                               INTEGER(IKPFU_PRG_CODICE),1) <> '0'              
+                    AND IKPFU_STATO  <> 'R'                                     
+                    AND IKPFU_STATO  <> 'N'                                     
+                    AND IKPFU_STATO  <> 'D'                                     
+                   WITH UR                                                      
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+                                                                                
+           INITIALIZE IKP0TABFU                                                 
+                      IKP0TABAB                                                 
+                      IKP0TABRP                                                 
+           MOVE REBNUM                  TO IKPAB-REB                            
+           MOVE REBTYPE                 TO IKPAB-REB-TIPO                       
+           MOVE UID                     TO IKPAB-UID                            
+           MOVE FT                      TO IKPFU-FT                             
+           MOVE KEYA                    TO IKPRP-KEYA                           
+PORTAL*    IF  TORRE = 'BA'                                                     
+PORTAL*    AND FT(1 : 3) = 'EB7'                                                
+PORTAL*    AND VERSIONE = 3                                                     
+PORTAL*        MOVE 'GEB21'             TO IKPFU-FT                             
+PORTAL*    END-IF                                                               
+                                                                                
+           EXEC SQL OPEN CURKEYA  END-EXEC                                      
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE OPEN CURSORE '  TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-OPEN-CURKEYA.                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CURVALI SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CURVALI CURSOR FOR                                      
+                 SELECT IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+                      , IKPFU_HELP                                              
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPFUNZIONI                                             
+                  WHERE IKPFU_FT     = :IKPFU-FT                                
+GM1244              AND IKPFU_STATO <> 'N'                                      
+                    AND IKPFU_STATO <> 'D'                                      
+                    AND EXISTS                                                  
+                       (SELECT 1 FROM IKPABILITAZIONI                           
+                         WHERE IKPFU_BANCA IN (' ',IKPAB_BANCA)                 
+                           AND IKPAB_REB    = :IKPAB-REB                        
+                           AND IKPAB_UID    = :IKPAB-UID                        
+GM146G*                    AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),           
+GM146G                     AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 ||              
+GM146G                                              IKPAB_ABIL2,                
+                                   INTEGER(IKPFU_PRG_CODICE),1) <> '0')         
+                   WITH UR                                                      
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+                                                                                
+           INITIALIZE IKP0TABFU                                                 
+                      IKP0TABAB                                                 
+           MOVE REBNUM                  TO IKPAB-REB                            
+           MOVE REBTYPE                 TO IKPAB-REB-TIPO                       
+           IF IKPAB-REB-TIPO = ' '                                              
+              MOVE '83'                 TO IKPAB-REB-TIPO                       
+           END-IF                                                               
+           MOVE UID                     TO IKPAB-UID                            
+           MOVE FT                      TO IKPFU-FT                             
+PORTAL*    IF  TORRE = 'BA'                                                     
+PORTAL*    AND FT(1 : 3) = 'EB7'                                                
+PORTAL*    AND VERSIONE = 3                                                     
+PORTAL*        MOVE 'GEB21'             TO IKPFU-FT                             
+PORTAL*    END-IF                                                               
+                                                                                
+           EXEC SQL OPEN CURVALI  END-EXEC                                      
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE OPEN CURSORE '  TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-OPEN-CURVALI.                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CURPROD SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CURPROD CURSOR FOR                                      
+                 SELECT IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPFUNZIONI                                             
+                  WHERE IKPFU_FT     = :IKPFU-FT                                
+                    AND IKPFU_STATO <> 'R'                                      
+                    AND IKPFU_STATO <> 'N'                                      
+                    AND IKPFU_STATO <> 'D'                                      
+                    AND EXISTS                                                  
+                       (SELECT 1 FROM IKPABILITAZIONI                           
+                         WHERE IKPFU_BANCA IN (' ',IKPAB_BANCA)                 
+                           AND IKPAB_REB    = :IKPAB-REB                        
+                           AND IKPAB_UID    = :IKPAB-UID                        
+GM146G*                    AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),           
+GM146G                     AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 ||              
+GM146G                                              IKPAB_ABIL2,                
+                                   INTEGER(IKPFU_PRG_CODICE),1) <> '0')         
+                   WITH UR                                                      
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+                                                                                
+           INITIALIZE IKP0TABFU                                                 
+                      IKP0TABAB                                                 
+           MOVE REBNUM                  TO IKPAB-REB                            
+           MOVE REBTYPE                 TO IKPAB-REB-TIPO                       
+           MOVE UID                     TO IKPAB-UID                            
+           MOVE FT                      TO IKPFU-FT                             
+PORTAL*    IF  TORRE = 'BA'                                                     
+PORTAL*    AND FT(1 : 3) = 'EB7'                                                
+PORTAL*    AND VERSIONE = 3                                                     
+PORTAL*        MOVE 'GEB21'             TO IKPFU-FT                             
+PORTAL*    END-IF                                                               
+                                                                                
+           EXEC SQL OPEN CURPROD  END-EXEC                                      
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE OPEN CURSORE '  TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-OPEN-CURPROD.                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       APERTURA-INT SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CURPRODINT CURSOR FOR                                   
+                 SELECT IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPFUNZIONI                                             
+                  WHERE IKPFU_FT     = :IKPFU-FT                                
+                    AND IKPFU_STATO <> 'R'                                      
+                    AND IKPFU_STATO <> 'N'                                      
+                    AND IKPFU_STATO <> 'D'                                      
+                    AND EXISTS                                                  
+                       (SELECT 1 FROM IKPABILITAZIONI                           
+                               ,      IKPGEB_SLAVEMASTER                        
+*****************        WHERE IKPFU_BANCA IN (' ',IKPAB_BANCA)                 
+                         WHERE IKPSM_M_REB    = :IKPAB-REB                      
+                           AND IKPSM_M_REB_TIPO = :IKPAB-REB-TIPO               
+                           AND IKPAB_UID    = :IKPAB-UID                        
+                           AND IKPSM_S_REB    = IKPAB_REB                       
+                           AND IKPSM_S_REB_TIPO = IKPAB_REB_TIPO                
+GM146G*                    AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),           
+GM146G                     AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 ||              
+GM146G                                              IKPAB_ABIL2,                
+                                   INTEGER(IKPFU_PRG_CODICE),1) <> '0')         
+                   WITH UR                                                      
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+                                                                                
+           INITIALIZE IKP0TABFU                                                 
+                      IKP0TABAB                                                 
+           MOVE REBNUM                  TO IKPAB-REB                            
+           MOVE REBTYPE                 TO IKPAB-REB-TIPO                       
+           MOVE UID                     TO IKPAB-UID                            
+           MOVE FT                      TO IKPFU-FT                             
+PORTAL*    IF  TORRE = 'BA'                                                     
+PORTAL*    AND FT(1 : 3) = 'EB7'                                                
+PORTAL*    AND VERSIONE = 3                                                     
+PORTAL*        MOVE 'GEB21'             TO IKPFU-FT                             
+PORTAL*    END-IF                                                               
+                                                                                
+           EXEC SQL OPEN CURPRODINT END-EXEC                                    
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE OPEN CURSORE '  TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-OPEN-CURPROD.                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       APERTURA-GRUPPI SECTION.                                                 
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CURPRODINTGRUPPI CURSOR FOR                             
+                 SELECT IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPFUNZIONI                                             
+                  WHERE IKPFU_FT     = :IKPFU-FT                                
+                    AND IKPFU_STATO <> 'R'                                      
+                    AND IKPFU_STATO <> 'N'                                      
+                    AND IKPFU_STATO <> 'D'                                      
+                    AND EXISTS                                                  
+                       (SELECT 1 FROM IKPABILITAZIONI                           
+                               ,      IKPGEB_SLAVEMASTER                        
+                               ,      IKPGRUPPI_USER                            
+                         WHERE IKPSM_M_REB    = :IKPAB-REB                      
+                           AND IKPSM_M_REB_TIPO = :IKPAB-REB-TIPO               
+                           AND IKPGG_UID    = :UID                              
+                           AND IKPAB_UID    = IKPGG_ID_IKP                      
+                           AND IKPSM_S_REB    = IKPAB_REB                       
+                           AND IKPSM_S_REB_TIPO = IKPAB_REB_TIPO                
+GM146G*                    AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),           
+GM146G                     AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 ||              
+GM146G                                              IKPAB_ABIL2,                
+                                   INTEGER(IKPFU_PRG_CODICE),1) <> '0')         
+                UNION ALL                                                       
+                 SELECT IKPFU_SERVIZIO                                          
+                      , IKPFU_PRG_CODICE                                        
+                      , IKPFU_CODICE                                            
+                      , IKPFU_ORDINALE                                          
+                      , IKPFU_LIVELLO                                           
+                      , IKPFU_PRG_PADRE                                         
+                      , IKPFU_URL                                               
+                      , IKPFU_CONTENITORE                                       
+                      , IKPFU_FT                                                
+                      , IKPFU_DESCRIZIONE                                       
+GM11AV                , IKPFU_IDGEB                                             
+GM11AV                , IKPFU_PARENT_IDGEB                                      
+GM11AV                , IKPFU_ORDER_TYPE                                        
+GM11AV                , IKPFU_TYPE                                              
+GM11AV                , IKPFU_SIGN_TYPE                                         
+GM11AV                , IKPFU_IDNODO                                            
+GM11CS                , IKPFU_TEMPLATE                                          
+                   FROM IKPFUNZIONI                                             
+                  WHERE IKPFU_FT     = :IKPFU-FT                                
+                    AND IKPFU_STATO <> 'R'                                      
+                    AND IKPFU_STATO <> 'N'                                      
+                    AND IKPFU_STATO <> 'D'                                      
+                    AND EXISTS                                                  
+                       (SELECT 1 FROM IKPABILITAZIONI                           
+                               ,      IKPGRUPPI_USER                            
+                         WHERE IKPAB_REB    = :IKPAB-REB                        
+                           AND IKPAB_REB_TIPO = :IKPAB-REB-TIPO                 
+                           AND IKPGG_UID    = :UID                              
+                           AND IKPAB_UID    = IKPGG_ID_IKP                      
+GM146G*                    AND SUBSTR(CONCAT(IKPAB_ABIL,IKPAB_ABIL1),           
+GM146G                     AND SUBSTR(IKPAB_ABIL || IKPAB_ABIL1 ||              
+GM146G                                              IKPAB_ABIL2,                
+                                   INTEGER(IKPFU_PRG_CODICE),1) <> '0')         
+                   WITH UR                                                      
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+                                                                                
+           INITIALIZE IKP0TABFU                                                 
+                      IKP0TABAB                                                 
+           MOVE REBNUM                  TO IKPAB-REB                            
+           MOVE REBTYPE                 TO IKPAB-REB-TIPO                       
+           MOVE UID                     TO IKPAB-UID                            
+           MOVE FT                      TO IKPFU-FT                             
+PORTAL*    IF  TORRE = 'BA'                                                     
+PORTAL*    AND FT(1 : 3) = 'EB7'                                                
+PORTAL*    AND VERSIONE = 3                                                     
+PORTAL*        MOVE 'GEB21'             TO IKPFU-FT                             
+PORTAL*    END-IF                                                               
+                                                                                
+           EXEC SQL OPEN CURPRODINTGRUPPI END-EXEC                              
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE OPEN CURSORE '  TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-OPEN-CURPROD.                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-CURSORE SECTION.                                                 
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+             AND KEYA   > SPACES                                                
+              PERFORM FETCH-CURKEYA                                             
+            WHEN AMBIENTE-IBG = 'V'                                             
+             AND REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM FETCH-CURVALI                                             
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM FETCH-CURPROD                                             
+           END-EVALUATE.                                                        
+                                                                                
+       EX-LETTURA-CURSORE.                                                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CURKEYA SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CURKEYA                                                   
+                 INTO :IKPFU-SERVIZIO                                           
+                    , :IKPFU-PRG-CODICE                                         
+                    , :IKPFU-CODICE                                             
+                    , :IKPFU-ORDINALE                                           
+                    , :IKPFU-LIVELLO                                            
+                    , :IKPFU-PRG-PADRE                                          
+                    , :IKPFU-URL                                                
+                    , :IKPFU-CONTENITORE                                        
+                    , :IKPFU-FT                                                 
+                    , :IKPFU-DESCRIZIONE                                        
+                    , :IKPFU-HELP                                               
+GM11AV              , :IKPFU-IDGEB                                              
+GM11AV              , :IKPFU-PARENT-IDGEB                                       
+GM11AV              , :IKPFU-ORDER-TYPE                                         
+GM11AV              , :IKPFU-TYPE                                               
+GM11AV              , :IKPFU-SIGN-TYPE                                          
+GM11AV              , :IKPFU-IDNODO                                             
+GM11CS              , :IKPFU-TEMPLATE                                           
+           END-EXEC                                                             
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+              CONTINUE                                                          
+            WHEN +100                                                           
+              SET  FINE-CURSORE         TO TRUE                                 
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE FETCH CURSORE1' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-FETCH-CURKEYA.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CURVALI SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CURVALI                                                   
+                 INTO :IKPFU-SERVIZIO                                           
+                    , :IKPFU-PRG-CODICE                                         
+                    , :IKPFU-CODICE                                             
+                    , :IKPFU-ORDINALE                                           
+                    , :IKPFU-LIVELLO                                            
+                    , :IKPFU-PRG-PADRE                                          
+                    , :IKPFU-URL                                                
+                    , :IKPFU-CONTENITORE                                        
+                    , :IKPFU-FT                                                 
+                    , :IKPFU-DESCRIZIONE                                        
+                    , :IKPFU-HELP                                               
+GM11AV              , :IKPFU-IDGEB                                              
+GM11AV              , :IKPFU-PARENT-IDGEB                                       
+GM11AV              , :IKPFU-ORDER-TYPE                                         
+GM11AV              , :IKPFU-TYPE                                               
+GM11AV              , :IKPFU-SIGN-TYPE                                          
+GM11AV              , :IKPFU-IDNODO                                             
+GM11CS              , :IKPFU-TEMPLATE                                           
+           END-EXEC                                                             
+GM11CS*    In Validazione:                                                      
+GM11CS*       ----+----1----+----2----+----3                                    
+GM11CS*    1: URL:«ibx«...                                                      
+GM11CS*    2: IDN:01234                                                         
+GM11CS*    3: IDN:01234 URL:«ibx«...                                            
+GM11CS*    4: TMP:T                                                             
+GM11CS*    5: TMP:T IDN:01234                                                   
+GM11CS*    6: TMP:T IDN:01234 URL:«ibx«...                                      
+GM11CS*    7: TMP:T URL:«ibx«...                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+              IF IKPFU-HELP(1 : 4) = 'URL:'                                     
+                 MOVE IKPFU-HELP(5 : )  TO IKPFU-URL                            
+GM11AV        ELSE                                                              
+GM11AV           IF IKPFU-HELP(1 : 4) = 'IDN:'                                  
+GM11AV              MOVE IKPFU-HELP(5 : 5) TO WS-IDNODO                         
+GM11AV              IF WS-IDNODO IS NUMERIC                                     
+GM11AV                 MOVE WS-IDNODO   TO IKPFU-IDNODO                         
+GM11AV              END-IF                                                      
+GM11AV              IF IKPFU-HELP(11 : 4) = 'URL:'                              
+GM11AV                 MOVE IKPFU-HELP(15 : ) TO IKPFU-URL                      
+GM11AV              END-IF                                                      
+GM11CS           ELSE                                                           
+GM11CS              IF IKPFU-HELP(1 : 4) = 'TMP:'                               
+GM11CS                 MOVE IKPFU-HELP(5 : 1) TO IKPFU-TEMPLATE                 
+GM11CS                 IF IKPFU-HELP(7 : 4) = 'IDN:'                            
+GM11CS                    MOVE IKPFU-HELP(11 : 5) TO WS-IDNODO                  
+GM11CS                    IF WS-IDNODO IS NUMERIC                               
+GM11CS                       MOVE WS-IDNODO   TO IKPFU-IDNODO                   
+GM11CS                    END-IF                                                
+GM11CS                    IF IKPFU-HELP(17 : 4) = 'URL:'                        
+GM11CS                       MOVE IKPFU-HELP(21 : ) TO IKPFU-URL                
+GM11CS                    END-IF                                                
+GM11CS                 ELSE                                                     
+GM11CS                    IF IKPFU-HELP(7 : 4) = 'URL:'                         
+GM11CS                       MOVE IKPFU-HELP(11 : ) TO IKPFU-URL                
+GM11CS                    END-IF                                                
+GM11CS                 END-IF                                                   
+GM11CS              END-IF                                                      
+GM11AV           END-IF                                                         
+              END-IF                                                            
+            WHEN +100                                                           
+              SET  FINE-CURSORE         TO TRUE                                 
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE FETCH CURSORE2' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-FETCH-CURVALI.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CURPROD SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CURPROD                                                   
+                 INTO :IKPFU-SERVIZIO                                           
+                    , :IKPFU-PRG-CODICE                                         
+                    , :IKPFU-CODICE                                             
+                    , :IKPFU-ORDINALE                                           
+                    , :IKPFU-LIVELLO                                            
+                    , :IKPFU-PRG-PADRE                                          
+                    , :IKPFU-URL                                                
+                    , :IKPFU-CONTENITORE                                        
+                    , :IKPFU-FT                                                 
+                    , :IKPFU-DESCRIZIONE                                        
+GM11AV              , :IKPFU-IDGEB                                              
+GM11AV              , :IKPFU-PARENT-IDGEB                                       
+GM11AV              , :IKPFU-ORDER-TYPE                                         
+GM11AV              , :IKPFU-TYPE                                               
+GM11AV              , :IKPFU-SIGN-TYPE                                          
+GM11AV              , :IKPFU-IDNODO                                             
+GM11CS              , :IKPFU-TEMPLATE                                           
+           END-EXEC                                                             
+      *    DISPLAY PGM ' ' IKPFU-SERVIZIO                                       
+      *                '-' IKPFU-PRG-CODICE                                     
+      *                '-' IKPFU-CODICE                                         
+      *                '-' IKPFU-ORDINALE                                       
+      *                '-' IKPFU-LIVELLO                                        
+      *                '-' IKPFU-PRG-PADRE                                      
+      *                '-' IKPFU-CONTENITORE                                    
+      *                '-' IKPFU-FT                                             
+      *                '-' IKPFU-DESCRIZIONE                                    
+      *                '-' IKPFU-URL                                            
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+              CONTINUE                                                          
+            WHEN +100                                                           
+              SET  FINE-CURSORE         TO TRUE                                 
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE FETCH CURSORE3' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-FETCH-CURPROD.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-INT SECTION.                                                     
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CURPRODINT                                                
+                 INTO :IKPFU-SERVIZIO                                           
+                    , :IKPFU-PRG-CODICE                                         
+                    , :IKPFU-CODICE                                             
+                    , :IKPFU-ORDINALE                                           
+                    , :IKPFU-LIVELLO                                            
+                    , :IKPFU-PRG-PADRE                                          
+                    , :IKPFU-URL                                                
+                    , :IKPFU-CONTENITORE                                        
+                    , :IKPFU-FT                                                 
+                    , :IKPFU-DESCRIZIONE                                        
+GM11AV              , :IKPFU-IDGEB                                              
+GM11AV              , :IKPFU-PARENT-IDGEB                                       
+GM11AV              , :IKPFU-ORDER-TYPE                                         
+GM11AV              , :IKPFU-TYPE                                               
+GM11AV              , :IKPFU-SIGN-TYPE                                          
+GM11AV              , :IKPFU-IDNODO                                             
+GM11CS              , :IKPFU-TEMPLATE                                           
+           END-EXEC                                                             
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+              CONTINUE                                                          
+            WHEN +100                                                           
+              SET  FINE-CURSORE         TO TRUE                                 
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE FETCH CURSORE3' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-GRUPPI SECTION.                                                  
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CURPRODINTGRUPPI                                          
+                 INTO :IKPFU-SERVIZIO                                           
+                    , :IKPFU-PRG-CODICE                                         
+                    , :IKPFU-CODICE                                             
+                    , :IKPFU-ORDINALE                                           
+                    , :IKPFU-LIVELLO                                            
+                    , :IKPFU-PRG-PADRE                                          
+                    , :IKPFU-URL                                                
+                    , :IKPFU-CONTENITORE                                        
+                    , :IKPFU-FT                                                 
+                    , :IKPFU-DESCRIZIONE                                        
+GM11AV              , :IKPFU-IDGEB                                              
+GM11AV              , :IKPFU-PARENT-IDGEB                                       
+GM11AV              , :IKPFU-ORDER-TYPE                                         
+GM11AV              , :IKPFU-TYPE                                               
+GM11AV              , :IKPFU-SIGN-TYPE                                          
+GM11AV              , :IKPFU-IDNODO                                             
+GM11CS              , :IKPFU-TEMPLATE                                           
+           END-EXEC                                                             
+           EVALUATE SQLCODE                                                     
+            WHEN ZERO                                                           
+              CONTINUE                                                          
+            WHEN +100                                                           
+              SET  FINE-CURSORE         TO TRUE                                 
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE FETCH CURSORE3' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIUSURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+             AND KEYA   > SPACES                                                
+              PERFORM CLOSE-CURKEYA                                             
+            WHEN AMBIENTE-IBG = 'V'                                             
+             AND REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM CLOSE-CURVALI                                             
+            WHEN REBNUM > ZEROES                                                
+             AND UID    > SPACES                                                
+              PERFORM CLOSE-CURPROD                                             
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CHIUSURA-CURSORE.                                                     
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CURKEYA SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CURKEYA                                                   
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE CLOSE CURSORE ' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CLOSE-CURKEYA.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CURVALI SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CURVALI                                                   
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE CLOSE CURSORE ' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CLOSE-CURVALI.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CURPROD SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CURPROD                                                   
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE CLOSE CURSORE ' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CLOSE-CURPROD.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIUSURA-INT  SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CURPRODINT                                                
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE CLOSE CURSORE ' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CLOSE-CURPROD.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIUSURA-GRUPPI  SECTION.                                                
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CURPRODINTGRUPPI                                          
+           END-EXEC                                                             
+                                                                                
+           EVALUATE SQLCODE                                                     
+            WHEN ZEROS                                                          
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'          TO RC                                
+              MOVE 'E'                     TO RCFLAG                            
+              MOVE 'ERRORE CLOSE CURSORE ' TO WS-DESC-ERR                       
+              MOVE SQLCODE                 TO WS-SQLCODE                        
+              MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                        
+              MOVE WS-RCDESC               TO RCDESC                            
+           END-EVALUATE.                                                        
+                                                                                
+       EX-CLOSE-CURPROD.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FA-RISPOSTA SECTION.                                                     
+      *----------------------------------------------------------------*        
+           IF WC-NUMINS = ZEROS                                                 
+              MOVE 'CXRÙIKP06969'       TO RC                                   
+              MOVE 'E'                  TO RCFLAG                               
+              MOVE 'NESSUN''ABILITAZIONE'                                       
+                                        TO RCDESC                               
+           ELSE                                                                 
+              EVALUATE VERSIONE                                                 
+               WHEN 1                                                           
+                 INITIALIZE IKP0TABDC                                           
+                 MOVE CODICE-BANCA      TO IKPDC-BANCA                          
+                 MOVE LINGUA            TO IKPDC-LINGUA                         
+                                                                                
+                 EXEC SQL                                                       
+                      DECLARE WEB_IKPALBERO CURSOR WITH RETURN FOR              
+                      SELECT SERVIZIO                                           
+                           , IDPADRE                                            
+                           , ID                                                 
+                           , CODICE                                             
+                           , ORDINALE                                           
+                           , LIVELLO                                            
+                           , VALUE(IKPDC_DESCRIZIONE,DESCRIZIONE)               
+                             AS DESCRIZIONE                                     
+                           , URL                                                
+                           , CONTENITORE                                        
+                           , UTILIZZATORE                                       
+                           , CONTO                                              
+                        FROM IKPALBERO_1                                        
+                        LEFT OUTER                                              
+                        JOIN IKPDESCRIZIONI                                     
+                          ON IKPDC_BANCA      IN (' ',:IKPDC-BANCA)             
+                         AND IKPDC_LINGUA           = :IKPDC-LINGUA             
+                         AND CONCAT(IKPDC_FT,IKPDC_CODICE) = CODICE             
+                         AND IKPDC_PRG_CODICE              = ID                 
+                 END-EXEC                                                       
+                                                                                
+                 EXEC SQL                                                       
+                      OPEN WEB_IKPALBERO                                        
+                 END-EXEC                                                       
+               WHEN 2                                                           
+GM114R*          EXEC SQL                                                       
+GM114R*               DECLARE WEB_IKPALBERO2 CURSOR WITH RETURN FOR             
+GM114R*                    SELECT                                               
+GM114R*                      ID            AS IDIKP                             
+GM114R*                    , A.FUNCTION_ID AS FUNCTION_ID                       
+GM114R*                    , A.GROUP_ID    AS GROUP_ID                          
+GM114R*                    , A.ORDER_TYPE  AS ORDERTYPE                         
+GM114R*                    , A.SIGN_TYPE   AS SIGNTYPE                          
+GM114R*                    , A.URL         AS URL                               
+GM114R*                    , B.ORDER_ID    AS ORDERID                           
+GM114R*                    , B.PARENT_ID   AS PARENTID                          
+GM114R*                    , B.TYPE        AS TYPE                              
+GM114R*                 FROM IKPALBERO_1                                        
+GM114R*                 LEFT OUTER                                              
+GM114R*                 JOIN IBC_MD_MPFUNCTION                                  
+GM114R*                   ON :FT = IBC_FT                                       
+GM114R*                   AND ID = IBC_PRG_CODICE                               
+GM114R*                   AND IBC_TIPO_OPE = 'F1'                               
+GM114R*                 LEFT OUTER JOIN DB2C.IBC_FUNCTIONS AS A                 
+GM114R*                 ON IBC_FUNCTION_ID = A.FUNCTION_ID                      
+GM114R*                 LEFT OUTER JOIN DB2C.IBC_PRODUCT_FUNCTIONS B            
+GM114R*                 ON B.FUNCTION_ID = IBC_FUNCTION_ID                      
+GM114R*          END-EXEC                                                       
+GM11AV*GM114R    EXEC SQL                                                       
+GM11AV*GM114R         DECLARE WEB_IKPALBERO2 CURSOR WITH RETURN FOR             
+GM11AV*GM114R              SELECT DISTINCT                                      
+GM11AV*GM114R                ID                          AS IDIKP               
+GM11AV*GM114R              , INTEGER(IKPFU_IDGEB)        AS FUNCTION_ID         
+GM11AV*GM114R              , IKPFU_DESCRIZIONE           AS GROUP_ID            
+GM11AV*GM114R              , IKPFU_ORDER_TYPE            AS ORDERTYPE           
+GM11AV*GM114R              , IKPFU_SIGN_TYPE             AS SIGNTYPE            
+GM11AV*GM114R              , IKPFU_URL                   AS URL                 
+GM11AV*GM114R              , INTEGER(IKPFU_ORDINALE)     AS ORDERID             
+GM11AV*GM114R              , INTEGER(IKPFU_PARENT_IDGEB) AS PARENTID            
+GM11AV*GM114R              , IKPFU_TYPE                  AS TYPE                
+GM11AV*GM114R           FROM IKPALBERO_1                                        
+GM11AV*GM114R           JOIN IKPFUNZIONI                                        
+GM11AV*GM114R             ON IKPFU_FT           = :FT                           
+GM11AV*GM114R            AND IKPFU_PRG_CODICE   =  ID                           
+GM11AV*GM114R    END-EXEC                                                       
+GM11AV           EXEC SQL                                                       
+GM11AV                DECLARE WEB_IKPALBERO2 CURSOR WITH RETURN FOR             
+GM11AV                SELECT *                                                  
+GM11AV                  FROM                                                    
+GM11AV                (                                                         
+GM11AV                SELECT ID                       AS IDIKP                  
+GM11AV                     , INTEGER(IDGEB)           AS FUNCTION_ID            
+GM11AV                     , DESCRIZIONE              AS GROUP_ID               
+GM11AV                     , ORDER_TYPE               AS ORDERTYPE              
+GM11AV                     , SIGN_TYPE                AS SIGNTYPE               
+GM11AV                     , URL                      AS URL                    
+GM11AV                     , INTEGER(ORDINALE)        AS ORDERID                
+GM11AV                     , INTEGER(PARENT_IDGEB)    AS PARENTID               
+GM11AV                     , TYPE                     AS TYPE                   
+GM11CS                     , TEMPLATE                 AS TEMPLATE               
+GM11AV                  FROM IKPALBERO_2                                        
+GM11AV                 ORDER BY ID                                              
+GM11AV                )   AS IKPALBERO_1                                        
+GM11AV           END-EXEC                                                       
+                                                                                
+                 EXEC SQL                                                       
+                      OPEN WEB_IKPALBERO2                                       
+                 END-EXEC                                                       
+GM116A                                                                          
+GM116A         WHEN 3                                                           
+GM116A           INITIALIZE IKP0TABDC                                           
+GM116A           MOVE CODICE-BANCA      TO IKPDC-BANCA                          
+GM116A           MOVE LINGUA            TO IKPDC-LINGUA                         
+GM116A                                                                          
+GM116A           EXEC SQL                                                       
+GM116A                DECLARE WEB_IKPALBERO3 CURSOR WITH RETURN FOR             
+GM116A                SELECT SERVIZIO                                           
+GM116A                     , IDPADRE                                            
+GM116A                     , ID                                                 
+GM116A                     , CODICE                                             
+GM116A                     , ORDINALE                                           
+GM116A                     , LIVELLO                                            
+GM116A                     , VALUE(IKPDC_DESCRIZIONE,DESCRIZIONE)               
+GM116A                                            AS DESCRIZIONE                
+GM116A                     , URL                                                
+GM116A                     , CONTENITORE                                        
+GM116A                     , UTILIZZATORE                                       
+GM116A                     , CONTO                                              
+GM11AV                     , IDGEB                AS FUNCTION_ID                
+GM11AV                     , ORDER_TYPE           AS ORDERTYPE                  
+GM11AV                     , SIGN_TYPE            AS SIGNTYPE                   
+GM11AV                     , PARENT_IDGEB         AS PARENTID                   
+GM11AV                     , TYPE                 AS TYPE                       
+GM11AV                     , IDNODO               AS NODO                       
+GM11CS                     , TEMPLATE             AS TEMPLATE                   
+GM11AV                  FROM IKPALBERO_2          AS IKPALBERO_1                
+GM11AV*GM116A              , IKPFU_IDGEB          AS FUNCTION_ID                
+GM11AV*GM116A              , IKPFU_ORDER_TYPE     AS ORDERTYPE                  
+GM11AV*GM116A              , IKPFU_SIGN_TYPE      AS SIGNTYPE                   
+GM11AV*GM116A              , IKPFU_PARENT_IDGEB   AS PARENTID                   
+GM11AV*GM116A              , IKPFU_TYPE           AS TYPE                       
+GM11AV*GM116A              , IKPFU_IDNODO         AS NODO                       
+GM11AV*GM116A           FROM IKPALBERO_1                                        
+GM11AV*GM116A           JOIN IKPFUNZIONI                                        
+GM11AV*GM116A             ON IKPFU_FT          = :FT                            
+GM11AV*GM116A            AND IKPFU_PRG_CODICE  =  ID                            
+GM116A                  LEFT OUTER                                              
+GM116A                  JOIN IKPDESCRIZIONI                                     
+GM116A                    ON IKPDC_BANCA      IN (' ',:IKPDC-BANCA)             
+GM116A                   AND IKPDC_LINGUA           = :IKPDC-LINGUA             
+GM116A                   AND CONCAT(IKPDC_FT,IKPDC_CODICE) = CODICE             
+GM116A                   AND IKPDC_PRG_CODICE              = ID                 
+GM11AV                 WHERE IDNODO            > 0                              
+GM11AV*GM1191          WHERE IKPFU_IDNODO      > 0                              
+GM116A           END-EXEC                                                       
+GM116A                                                                          
+GM116A           EXEC SQL                                                       
+GM116A                OPEN WEB_IKPALBERO3                                       
+GM116A           END-EXEC                                                       
+GM116A                                                                          
+GM13A8         WHEN 4                                                           
+GM13A8           INITIALIZE IKP0TABDC                                           
+GM13A8           MOVE CODICE-BANCA      TO IKPDC-BANCA                          
+GM13A8           MOVE LINGUA            TO IKPDC-LINGUA                         
+GM13A8                                                                          
+GM13A8           EXEC SQL                                                       
+GM13A8                DECLARE WEB_IKPALBERO4 CURSOR WITH RETURN FOR             
+GM13A8                SELECT SERVIZIO                                           
+GM13A8                     , IDPADRE                                            
+GM13A8                     , ID                                                 
+GM13A8                     , CODICE                                             
+GM13A8                     , ORDINALE                                           
+GM13A8                     , LIVELLO                                            
+GM13A8                     , VALUE(IKPDC_DESCRIZIONE,DESCRIZIONE)               
+GM13A8                                            AS DESCRIZIONE                
+GM13A8                     , URL                                                
+GM13A8                     , CONTENITORE                                        
+GM13A8                     , UTILIZZATORE                                       
+GM13A8                     , CONTO                                              
+GM13A8                     , IDGEB                AS FUNCTION_ID                
+GM13A8                     , ORDER_TYPE           AS ORDERTYPE                  
+GM13A8                     , SIGN_TYPE            AS SIGNTYPE                   
+GM13A8                     , PARENT_IDGEB         AS PARENTID                   
+GM13A8                     , TYPE                 AS TYPE                       
+GM13A8                     , IDNODO               AS NODO                       
+GM13A8                     , TEMPLATE             AS TEMPLATE                   
+GM13A8                     , PORTLET                                            
+GM13A8                  FROM IKPALBERO_3          AS IKPALBERO_1                
+GM13A8                  LEFT OUTER                                              
+GM13A8                  JOIN IKPDESCRIZIONI                                     
+GM13A8                    ON IKPDC_BANCA      IN (' ',:IKPDC-BANCA)             
+GM13A8                   AND IKPDC_LINGUA           = :IKPDC-LINGUA             
+GM13A8                   AND CONCAT(IKPDC_FT,IKPDC_CODICE) = CODICE             
+GM13A8                   AND IKPDC_PRG_CODICE              = ID                 
+GM13A8                 WHERE IDNODO            > 0                              
+GM13A8           END-EXEC                                                       
+GM13A8                                                                          
+GM13A8           EXEC SQL                                                       
+GM13A8                OPEN WEB_IKPALBERO4                                       
+GM13A8           END-EXEC                                                       
+GM13A8                                                                          
+               WHEN OTHER                                                       
+                 MOVE 'CXRÙIKP00099'    TO RC                                   
+                 MOVE 'VERSIONE NON CONOSCIUTA '                                
+                                        TO RCDESC                               
+              END-EVALUATE                                                      
+           END-IF.                                                              
+                                                                                
+           EXIT.                                                                
+                                                                                
+GM10AI*----------------------------------------------------------------*        
+GM10AI CHIAMATA-IKP0RFT0 SECTION.                                               
+GM10AI*----------------------------------------------------------------*        
+GM10AI     INITIALIZE IKP0FT0                                                   
+GM10AI                                                                          
+GM10AI     MOVE IKPFU-FT                TO FT0IN-FT                             
+GM10AI                                                                          
+GM10AI     CALL IKP0RFT0 USING IKP0FT0.                                         
+GM10AI                                                                          
+GM10AI*    Nel campo FT0IN-FT e' restituito la FT (pre-ONE4C)                   
+GM10AI     IF RC-OK OF FT0RC                                                    
+GM10AI        MOVE FT0IN-FT             TO IKPFU-FT                             
+GM10AI     END-IF.                                                              
+GM10AI     EXIT.                                                                
+GM10AI                                                                          
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           IF RC NOT = SPACE                                                    
+              DISPLAY PGM ' UID: ' UID       ' FT: ' FT                         
+                         ' SICU: ' SICUREZZA ' CL: ' CANALE                     
+                         ' PROF: ' PROFILO                                      
+              DISPLAY PGM  ' RC: ' RC      ' DESC: ' RCDESC                     
+           END-IF.                                                              
+                                                                                
+           EXIT.                                                                
+                                                                                
+      ******************************************************************        
+      *    FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *        
+      ******************************************************************        

@@ -1,0 +1,1456 @@
+      * NEYES2- VISUALIZZA ANCHE RAPPORTI VA CANCELLATI DA NEYES                
+      *         MA IN PACCHETTO ANCORA DA APPROVARE                             
+      * ------------------------------                                          
+      * NEYES - ESCLUDE TIPRAP = AM DA LISTE (SOLO IN C0)                       
+      * ------------------------------                                          
+      * 14.297 10:26 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * ------------------------------                                          
+      * 14.295 16:40 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * GC-295 - NON VENGONO PASSATI I RAPPORTI CHE NON HANNO                   
+      * ABILITAZIONI                                                            
+      * 14.295 10:17 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * ................................                                        
+      * 14.295 10:13 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * .................................                                       
+      * 14.295 10:00 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * .....................................                                   
+      * 14.295 09:53 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * ..................................                                      
+      * 14.295 09:46 IKP   EE31395 - Cuccu Giuseppe (USUPD010)                  
+      * ............................                                            
+      * 14.135 13:53 IKP   EE14154 - Dal Santo Debora (USUPD010)                
+      * ...........................                                             
+      * 14.135 13:48 IKP   EE14154 - Dal Santo Debora (USUPD010)                
+      * .................................                                       
+      * 12.150 16:20 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * .................................                                       
+      * 12.150 16:09 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * ..................................                                      
+      * 12.145 10:26 IKP   EE14154 - Dal Santo Debora (USUPD000)                
+      * .....................................                                   
+      * 11.348 15:15 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ..............                                                          
+      * 11.348 12:02 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * .............                                                           
+      * 11.347 17:24 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ............                                                            
+      * 11.347 14:41 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * .................                                                       
+      * 11.347 14:21 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ................                                                        
+      * 11.347 13:50 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ................                                                        
+      * 11.347 13:44 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ........................                                                
+      * 11.283 14:28 IKP   EE21112 - Donatiello Nicola (Y9US0000)               
+      * AGGIUNTI TEST SU VIRTUAL ACCOUNT VB,VV                                  
+      * 11.272 16:23 IKP   EE14154 - Dal Santo Debora (Y9US0000)                
+      * ............................                                            
+      * 11.263 17:53 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -----------------------------                                           
+      * 11.257 17:13 IKP   C300014 - Graniti Giuseppe (USUPD000)                
+      * -------------------------------------------------                       
+      * 11.257 16:48 IKP   C300014 - Graniti Giuseppe (USUPD000)                
+      * ---------------------------------------------                           
+      * 11.244 13:27 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------                                                
+      * 11.244 13:18 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.236 18:43 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.236 18:40 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.236 18:34 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.236 18:26 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * --------------------------------                                        
+      * 11.236 18:24 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * --------------------------------                                        
+      * 11.236 18:21 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.236 18:16 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------                                      
+      * 11.214 11:07 IKP   C300014 - Graniti Giuseppe (USUPD000)                
+      * -----------------------------------------------                         
+      * 11.191 15:41 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -----------------------------------                                     
+      * 11.187 09:11 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -----------------------------------                                     
+      * 11.180 19:53 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ---------------------------                                             
+      * 11.178 19:04 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM116R - PER TIPO RAPPORTO '$F' O '$G' VALORIZZA 'VA'                   
+      * 11.168 23:10 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------------------                                    
+      * 11.036 00:38 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------------------------                              
+      * 10.348 11:47 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------------                                          
+      * 10.330 16:46 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------------------                                    
+      * 10.132 12:14        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+      * 10.131 18:32        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+      * 10.070 09:38        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+      * 10.069 18:04        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+      * 10.064 15:53        IKP  0000 US01101                                   
+      * -------------------------------------                                   
+      * 10.059 13:23        IKP  0000 US01101                                   
+      * ..............................                                          
+      * 10.048 16:41        IKP  0000 US01437                                   
+      * AGGIUNTA GESTIONE LISTRAPA SE TT-KEYA = ALL                             
+      * 10.014 12:37        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+       IDENTIFICATION DIVISION.                                                 
+      *----------------------------------------------------------------*        
+       PROGRAM-ID. IKPGSLAC.                                                    
+       AUTHOR.                                                                  
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      *                    GEB LISTA ACCOUNTS (RAPPPORTI)              *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................DICEMBRE   2009 *        
+      * DA PARTE DI ..................................TEZZA SARA EURIS *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       ENVIRONMENT DIVISION.                                                    
+      *----------------------------------------------------------------*        
+       CONFIGURATION SECTION.                                                   
+DBG-->*SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SOURCE-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+      *----------------------------------------------------------------*        
+       DATA DIVISION.                                                           
+      *----------------------------------------------------------------*        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------*                                                 
+       77  PGM                          PIC  X(08) VALUE 'IKPGSLAC'.            
+       01  WS-ABI                       PIC  X(05).                             
+       01  WS-ABI-RED REDEFINES WS-ABI.                                         
+           05  WS-ABI-NUM               PIC  9(05).                             
+       01  WS-SPO                       PIC  X(05).                             
+       01  WS-SPO-RED REDEFINES WS-SPO.                                         
+           05  WS-SPO-NUM               PIC  9(05).                             
+       77  WS-CAB                       PIC  9(07) VALUE ZEROES.                
+       01  WS-NUM-CONTO                 PIC  9(14).                             
+       01  WS-NUM-CONTO-RED REDEFINES WS-NUM-CONTO.                             
+           05  WS-FILLER                PIC  9(02).                             
+           05  WS-CONTO                 PIC  9(12).                             
+       01  NUM                         PIC 9(18).                               
+       01  NUM-CHR REDEFINES NUM.                                               
+           05  FILLER                  PIC X(09).                               
+           05  NUM09-CHR.                                                       
+               10  FILLER              PIC X(04).                               
+               10  NUM05-CHR           PIC X(05).                               
+           05  NUMXX-CHR REDEFINES NUM09-CHR.                                   
+               10  FILLER              PIC X(02).                               
+               10  NUM07-2-CHR         PIC X(07).                               
+       01  NUM-CHR-1  REDEFINES NUM.                                            
+           05  FILLER                  PIC X(06).                               
+           05  NUM12-CHR               PIC X(12).                               
+       01  NUM-CHR14  REDEFINES NUM.                                            
+           05  FILLER                  PIC X(04).                               
+           05  NUM14-CHR               PIC X(14).                               
+       01  NUM-CHR11  REDEFINES NUM.                                            
+           05  FILLER                  PIC X(07).                               
+           05  NUM11-CHR               PIC X(11).                               
+       01  NUM2-CHR REDEFINES NUM.                                              
+           05  FILLER                  PIC  X(10).                              
+           05  NUM08-CHR               PIC  X(08).                              
+       01  NUM18-CHR REDEFINES NUM.                                             
+           05  FILLER                  PIC X(09).                               
+           05  NUM07-CHR.                                                       
+               10  FILLER              PIC X(07).                               
+               10  NUM02-CHR           PIC X(02).                               
+                                                                                
+       77  FILLER                       PIC  X(01) VALUE SPACES.                
+           88 FINE-CURSORE                         VALUE '1'.                   
+       01  WS-RCDESC.                                                           
+           03 WS-DESC-ERR               PIC  X(32) VALUE SPACES.                
+           03 FILLER                    PIC  X(05) VALUE ' SQL '.               
+           03 WS-SQLCODE                PIC  -999.                              
+           03 FILLER                    PIC  X(01) VALUE SPACES.                
+           03 WS-SQLERRM                PIC  X(18) VALUE SPACES.                
+      *----------------------------------------------------------------*        
+      *  Aree di interfaccia con altri moduli                                   
+      *----------------------------------------------------------------*        
+                                                                                
+      *--> Mod. SISBRCR2 acquisizione dati della Banca(01 CODICI-CASSA)         
+       77  SISBRCR2                     PIC  X(08) VALUE 'SISBRCR2'.            
+           COPY SISBRCR2.                                                       
+       01  TGERCOAN                    PIC  X(08) VALUE 'TGERCOAN'.             
+          COPY  TGECCOAN.                                                       
+                                                                                
+      *--> Mod. SISBRDIP interrogazione Dipendenze    (01 SISBCDIP)             
+       77  SISBRDIP                     PIC  X(08) VALUE 'SISBRDIP'.            
+           COPY SISBCDIP.                                                       
+IKI    77  IKI02IAC                        PIC  X(08) VALUE 'IKI02IAC'.         
+IKI        COPY IKI0C2DB.                                                       
+IKI        COPY IKI0TAAC.                                                       
+                                                                                
+       01  UTMIBAN                     PIC  X(08) VALUE 'UTMIBAN'.              
+           COPY UTCIBAN.                                                        
+       01  WS-COD-IBAN.                                                         
+           05 WS-CI-PAESE              PIC  X(02).                              
+           05 WS-CI-CIN-EUROPA         PIC  9(02).                              
+           05 WS-CI-BBAN.                                                       
+              10 WS-CI-CIN-ITA         PIC  X(01).                              
+              10 WS-CI-ABI             PIC  9(05).                              
+              10 WS-CI-CAB             PIC  9(05).                              
+              10 WS-CI-CONTO           PIC  X(12).                              
+              10 FILLER                PIC  X(07).                              
+           05 WS-CI-BBAN-ESTERO REDEFINES WS-CI-BBAN.                           
+              10 WS-CI-BBAN-ES         PIC  X(30).                              
+                                                                                
+      *----------------------------------------------------------------*        
+      *  Aree per i database DB2                                                
+      *----------------------------------------------------------------*        
+                                                                                
+      *- Variabili HOST della Global Temporary IKPKEYA_0                        
+       01  IND-KEYA                     PIC 9(2).                               
+       01  TAB-KEYA                     PIC X(1000).                            
+       01  FILLER REDEFINES TAB-KEYA.                                           
+           05  ELE-KEYA                 OCCURS 50                               
+                                        PIC X(20).                              
+                                                                                
+       01  SAVE-KEYR                    PIC X(26) VALUE SPACES.                 
+       01  TT-TKEYA                     PIC X(20).                              
+      *- Variabili HOST della Global Temporary IKPGEBLISTACCOUNT_0              
+       01  TT-KEYR                      PIC  X(26).                             
+       01  TT-KEYA                      PIC  X(20).                             
+       01  TT-ABI                       PIC  X(05).                             
+       01  TT-TIPO                      PIC  X(02).                             
+       01  TT-NUMERO                    PIC  X(12).                             
+       01  TT-SPORTELLO                 PIC  X(05).                             
+       01  TT-STATO                     PIC  X(01).                             
+       01  TT-DIVISA                    PIC  X(03).                             
+       01  TT-CAB                       PIC  X(05).                             
+       01  TT-CIN                       PIC  X(01).                             
+       01  TT-IBAN                      PIC  X(35).                             
+       01  TT-CODICEPAESE               PIC  X(02).                             
+       01  TT-CHECKDIGIT                PIC  X(01).                             
+       01  TT-PROVENIENZA               PIC  X(01).                             
+       01  TT-BIC                       PIC  X(11).                             
+       01  TT-TAG25                     PIC  X(35).                             
+                                                                                
+           EXEC SQL INCLUDE SQLCA     END-EXEC.                                 
+           EXEC SQL INCLUDE IKP0TARP  END-EXEC.                                 
+           EXEC SQL INCLUDE IKP0TARC  END-EXEC.                                 
+CA0048     EXEC SQL INCLUDE IKP0TAAN  END-EXEC.                                 
+           EXEC SQL INCLUDE IKP0TADP  END-EXEC.                                 
+                                                                                
+      *---------------*                                                         
+       LINKAGE SECTION.                                                         
+      *---------------*                                                         
+       01  CODOPER                      PIC  X(32).                             
+       01  VERSIONE                     PIC S9(03) COMP-3.                      
+       01  AMBIENTE-IBG                 PIC  X(01).                             
+       01  GEB-REBNUM                   PIC S9(14)V USAGE COMP-3.               
+       01  GEB-REBTYPE                  PIC  X(02).                             
+      *01  GEB-MKEYA.                                                           
+      *    03 GEB-MKEYA-LEN             PIC S9(4) USAGE COMP.                   
+      *    03 GEB-MKEYA-TEXT            PIC X(1000).                            
+       01  RC                           PIC  X(12).                             
+       01  RCDESC                       PIC  X(64).                             
+       01  RCFLAG                       PIC  X(01).                             
+                                                                                
+      *================================================================*        
+       PROCEDURE DIVISION USING CODOPER                                         
+                                VERSIONE                                        
+                                AMBIENTE-IBG                                    
+                                GEB-REBNUM                                      
+                                GEB-REBTYPE                                     
+      *                         GEB-MKEYA                                       
+                                RC                                              
+                                RCDESC                                          
+                                RCFLAG.                                         
+      *================================================================*        
+      *                                                                         
+DBG-->DDECLARATIVES.                                                            
+DBG-->DTRACE-PROGRAM SECTION.                                                   
+DBG-->D    USE FOR DEBUGGING ALL PROCEDURES.                                    
+DBG-->DSHOW-TRACE.                                                              
+DBG-->D                                                                         
+DBG-->D    DISPLAY PGM ' ' DEBUG-NAME ' ' DEBUG-CONTENTS.                       
+DBG-->D                                                                         
+DBG-->DEND DECLARATIVES.                                                        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       INIZIO SECTION.                                                          
+      *----------------------------------------------------------------*        
+x-test     display 'peppe inizio ikpgslac'                                      
+           PERFORM OPERAZIONI-INIZIALI                                          
+                                                                                
+      *    IF RC = SPACES                                                       
+      *       IF GEB-MKEYA-TEXT > SPACES                                        
+      *          PERFORM CARICA-TT-KEYA                                         
+      *       END-IF                                                            
+      *    END-IF                                                               
+CA0048     PERFORM SELECT-IKPKEYA-0                                             
+           IF RC = SPACES                                                       
+              PERFORM APERTURA-CURSORE                                          
+              PERFORM UNTIL FINE-CURSORE OR RC NOT = SPACES                     
+                 PERFORM LETTURA-CURSORE                                        
+                 IF NOT FINE-CURSORE AND RC = SPACES                            
+NEYES2*          AND TT-STATO = 'A'                                             
+NEYES2           AND TT-STATO = 'A' OR 'D'                                      
+GC-295           AND TT-KEYR NOT = SAVE-KEYR                                    
+                    PERFORM VALORIZZA-AREE                                      
+GC-295              MOVE TT-KEYR TO SAVE-KEYR                                   
+                 END-IF                                                         
+              END-PERFORM                                                       
+              IF RC = SPACES                                                    
+                 PERFORM CHIUSURA-CURSORE                                       
+              END-IF                                                            
+           END-IF                                                               
+                                                                                
+           IF RC = SPACES                                                       
+              PERFORM FA-RISPOSTA                                               
+           END-IF                                                               
+                                                                                
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+                                                                                
+       EX-INIZIO.                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE RC RCDESC.                                                
+DDS        CALL SISBRCR2 USING CODICI-CASSA.                                    
+                                                                                
+      *    EXEC SQL                                                             
+      *      DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPKEYA_0                   
+      *                (KEYA            CHAR(20) NOT NULL                       
+      *                )                                                        
+      *              ON COMMIT DROP TABLE                                       
+      *    END-EXEC                                                             
+      *    IF SQLCODE NOT EQUAL ZEROS                                           
+      *       MOVE 'CXRÙIKP00099'       TO RC                                   
+      *       MOVE 'E'                  TO RCFLAG                               
+      *       MOVE 'DECLARE TEMPORARY TABLE KEYA'                               
+      *                                 TO WS-DESC-ERR                          
+      *       MOVE SQLCODE              TO WS-SQLCODE                           
+      *       MOVE SQLERRMC(1 : SQLERRML)                                       
+      *                                 TO WS-SQLERRM                           
+      *       MOVE WS-RCDESC            TO RCDESC                               
+      *    END-IF.                                                              
+                                                                                
+      *    EXEC SQL                                                             
+      *      DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPGEBLISTACCOUNT_0         
+      *                (GEB_KEYR         CHAR(26) NOT NULL,                     
+      *                 GEB_KEYA         CHAR(20) NOT NULL,                     
+      *                 GEB_ABI          CHAR(05) NOT NULL,                     
+      *                 GEB_TIPO         CHAR(02) NOT NULL,                     
+      *                 GEB_NUMERO       CHAR(12) NOT NULL,                     
+      *                 GEB_SPORTELLO    CHAR(05) NOT NULL,                     
+      *                 GEB_STATO        CHAR(01) NOT NULL,                     
+      *                 GEB_DIVISA       CHAR(03) NOT NULL,                     
+      *                 GEB_CAB          CHAR(05) NOT NULL,                     
+      *                 GEB_CIN          CHAR(01) NOT NULL,                     
+      *                 GEB_IBAN         CHAR(35) NOT NULL,                     
+      *                 GEB_CODICEPAESE  CHAR(02) NOT NULL,                     
+      *                 GEB_CHECKDIGIT   CHAR(01) NOT NULL,                     
+      *                 GEB_PROVENIENZA  CHAR(01) NOT NULL,                     
+      *                 GEB_BIC          CHAR(01) NOT NULL,                     
+      *                 GEB_TAG25        CHAR(01) NOT NULL                      
+      *                )                                                        
+      *              ON COMMIT DROP TABLE                                       
+      *    END-EXEC                                                             
+      *    IF SQLCODE NOT EQUAL ZEROS                                           
+      *       MOVE 'CXRÙIKP00099'       TO RC                                   
+      *       MOVE 'E'                  TO RCFLAG                               
+      *       MOVE 'DECLARE TEMPORARY TABLE'                                    
+      *                                 TO WS-DESC-ERR                          
+      *       MOVE SQLCODE              TO WS-SQLCODE                           
+      *       MOVE SQLERRMC(1 : SQLERRML)                                       
+      *                                 TO WS-SQLERRM                           
+      *       MOVE WS-RCDESC            TO RCDESC                               
+      *       DISPLAY ' ' WS-DESC-ERR ' ' WS-SQLCODE ' ' WS-SQLERRM             
+      *    END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIAMATA-IBAN SECTION.                                                   
+      *----------------------------------------------------------------*        
+           INITIALIZE UTMIBAN-PARAMETRI UTMIBAN-DATI                            
+           MOVE 'IT'                       TO UT-PAESE                          
+           MOVE WS-ABI-NUM                 TO UT-ABI                            
+           MOVE WS-CAB                     TO UT-CAB                            
+           MOVE TT-NUMERO                  TO UT-NUM-CONTO                      
+           SET  GENERAZIONE-IBAN           TO TRUE                              
+           CALL UTMIBAN USING UTMIBAN-PARAMETRI UTMIBAN-DATI                    
+           IF  NOT OK OF UTMIBAN-PARAMETRI                                      
+               MOVE 'ERRORE RECUPERO IBAN' TO TT-IBAN                           
+           ELSE                                                                 
+               MOVE UT-PAESE               TO WS-CI-PAESE                       
+               MOVE UT-CIN-EUROPA          TO WS-CI-CIN-EUROPA                  
+               MOVE UT-CIN-ITALIA          TO WS-CI-CIN-ITA                     
+               MOVE UT-ABI                 TO WS-CI-ABI                         
+               MOVE UT-CAB                 TO WS-CI-CAB                         
+               MOVE UT-NUM-CONTO           TO WS-CI-CONTO                       
+                                                                                
+               MOVE WS-COD-IBAN            TO  TT-IBAN                          
+               INSPECT TT-IBAN REPLACING ALL LOW-VALUE BY SPACES                
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-AREE SECTION.                                                  
+      *----------------------------------------------------------------*        
+           EVALUATE VERSIONE                                                    
+            WHEN 1                                                              
+              MOVE SPACES               TO WS-ABI                               
+TS0069        IF  TT-ABI > SPACES                                               
+TS0069            MOVE TT-ABI       TO WS-ABI                                   
+TS0069        ELSE                                                              
+                  EVALUATE IKPRP-BANCA                                          
+                  WHEN '83'                                                     
+                      MOVE '03226'           TO WS-ABI                          
+                  WHEN '86'                                                     
+                      MOVE '03223'           TO WS-ABI                          
+                  WHEN '01'                                                     
+                      MOVE '02008'           TO WS-ABI                          
+                  WHEN '33'                                                     
+                      MOVE '10639'           TO WS-ABI                          
+                  WHEN '49'                                                     
+                      MOVE '03214'           TO WS-ABI                          
+                  WHEN '37'                                                     
+                      MOVE '06285'           TO WS-ABI                          
+                  WHEN '05'                                                     
+                      MOVE '06170'           TO WS-ABI                          
+                  WHEN '71'                                                     
+                      MOVE '05437'           TO WS-ABI                          
+                  WHEN '23'                                                     
+                      MOVE '03002'           TO WS-ABI                          
+                  WHEN '62'                                                     
+                      MOVE '01020'           TO WS-ABI                          
+                  WHEN '95'                                                     
+                      MOVE '12000'           TO WS-ABI                          
+                  WHEN '94'                                                     
+                      MOVE '97003'           TO WS-ABI                          
+                  WHEN OTHER                                                    
+                      MOVE '99999'           TO WS-ABI                          
+                  END-EVALUATE                                                  
+TS0069        END-IF                                                            
+              IF TT-TIPO (1:1) NOT = 'X'                                        
+TS0069            IF IKPRP-TORRE NOT = 'XX'                                     
+TS0069               PERFORM CERCA-CAB                                          
+TS0069               MOVE WS-CAB(3 : 5)    TO TT-CAB                            
+TS0069            ELSE                                                          
+TS0069               MOVE IKPRC-TAG25(6 : 12) TO TT-NUMERO                      
+TS0069               MOVE IKPRC-TAG25(1 : 5) TO TT-CAB                          
+TS0069            END-IF                                                        
+              END-IF                                                            
+              MOVE WS-ABI               TO TT-ABI                               
+              IF TT-TIPO = 'C1'                                                 
+              OR TT-TIPO = 'C2'                                                 
+RAPPCR        OR TT-TIPO = 'CR'                                                 
+CA0090         EVALUATE IKPRP-TORRE                                             
+CA0090            WHEN 'HV'                                                     
+                      IF TORRE = 'HV'                                           
+                          INITIALIZE TGECCOAN-AREA                              
+                          MOVE 'B'             TO ENVIRONMENT-CODE              
+                          MOVE 'IT'            TO MESSAGE-LANGUAGE              
+                          INITIALIZE NUM                                        
+                          MOVE '94'         TO NUM02-CHR                        
+                          MOVE num             TO BANK-ID                       
+                          MOVE ZERO            TO PROGR-PAGE                    
+                          MOVE '09'            TO FUNCTION-REQUESTED            
+                          SET OUT-IBAN-REQUIRED TO TRUE                         
+                          INITIALIZE NUM                                        
+                          MOVE tt-sportello TO NUM                              
+                          MOVE NUM05-CHR TO TGECCOAN-IN-BRANCH-ID               
+                          MOVE ikprp-numrap TO TGECCOAN-IN-BID-ACC-NUM          
+                          MOVE tt-tipo       TO TGECCOAN-IN-ACC-TYPE            
+                          MOVE 'Y'        TO TGECCOAN-IN-FLG-MULTIP             
+                          CALL TGERCOAN USING TGECCOAN-AREA                     
+                          move TGECCOAN-OU-IBAN to tt-iban                      
+                      ELSE                                                      
+                          EXEC SQL                                              
+                               SELECT IKPDP_VALORE                              
+                                 INTO :IKPDP-VALORE                             
+                                 FROM IKPDATIRAPPORTI                           
+                                WHERE IKPDP_KEYR = :TT-KEYR                     
+                                  AND IKPDP_DATO = 'IBANTEDESCO'                
+                                 WITH UR                                        
+                          END-EXEC                                              
+                          move IKPDP-VALORE to tt-iban                          
+                      END-IF                                                    
+                      MOVE TT-IBAN(5:8) TO TT-BIC                               
+                      MOVE TT-IBAN(14:10) TO TT-TAG25                           
+CA0090            WHEN 'C0'                                                     
+                      PERFORM CHIAMATA-IBAN                                     
+                      MOVE WS-CI-CIN-ITA TO TT-CIN                              
+                      MOVE WS-COD-IBAN TO TT-IBAN                               
+CA0090            WHEN 'BA'                                                     
+                      MOVE 'BABABABA' TO TT-IBAN                                
+CA0090            END-EVALUATE                                                  
+              ELSE                                                              
+                  MOVE SPACES         TO TT-CIN                                 
+                  MOVE SPACES         TO TT-IBAN                                
+              END-IF                                                            
+              IF  TT-TIPO  = 'VA'                                               
+DN1283        OR  TT-TIPO  = 'VB'                                               
+DN1283        OR  TT-TIPO  = 'VV'                                               
+              OR  TT-TIPO = 'Y1'                                                
+                  PERFORM CHIAMATA-IBAN-VA                                      
+                  MOVE WS-CI-CIN-ITA     TO TT-CIN                              
+                  MOVE WS-COD-IBAN       TO TT-IBAN                             
+              END-IF                                                            
+              IF  IKPRC-BIC(6:1) > ' '                                          
+                  MOVE IKPRC-TAG25  TO TT-TAG25                                 
+                                        TT-IBAN                                 
+                  MOVE IKPRC-BIC    TO TT-BIC                                   
+                  IF TT-TIPO      = 'EU'                                        
+                     MOVE '$E'      TO TT-TIPO                                  
+                  END-IF                                                        
+                  MOVE '90000'      TO TT-ABI                                   
+                  MOVE '99999'      TO TT-CAB                                   
+                  MOVE IKPRC-NUMRAP TO NUM                                      
+                  MOVE NUM12-CHR    TO TT-NUMERO                                
+              ELSE                                                              
+                  IF  IKPRP-TORRE = 'HV'                                        
+                      CONTINUE                                                  
+                  ELSE                                                          
+                      MOVE SPACES TO TT-TAG25                                   
+                      MOVE SPACES TO TT-BIC                                     
+                  END-IF                                                        
+              END-IF                                                            
+                                                                                
+TS0069        IF TT-TIPO      = '$E' OR 'EU'                                    
+GM116R                       OR '$F' OR '$G'                                    
+TS0069           MOVE '$E'                 TO TT-TIPO                           
+TS0069        END-IF                                                            
+                                                                                
+TS0069        IF TT-TIPO      = 'VA'                                            
+DN1283        OR TT-TIPO      = 'VB'                                            
+DN1283        OR TT-TIPO      = 'VV'                                            
+TS0069           IF IKPRP-MATR-INS(1 : 3) = 'IKB'                               
+TS0069           OR IKPRP-MATR-INS  =  'IKP0ICBI'                               
+TS0069           OR IKPRP-MATR-INS  =  'IKP0C101'                               
+TS0069              CONTINUE                                                    
+TS0069           ELSE                                                           
+TS0069              MOVE 'VH'              TO TT-TIPO                           
+TS0069           END-IF                                                         
+TS0069        END-IF                                                            
+              INSPECT IKPRC-BIC REPLACING ALL LOW-VALUE BY SPACES               
+                                                                                
+              IF  IKPRC-BIC(6:1) > ' '                                          
+                  MOVE '90000'                  TO TT-ABI                       
+                  MOVE '99999'                  TO TT-CAB                       
+                  MOVE IKPRC-BIC               TO TT-BIC                        
+                  MOVE IKPRC-TAG25             TO TT-TAG25                      
+              ELSE                                                              
+                  IF TORRE NOT = 'HV'                                           
+                     MOVE SPACES                  TO TT-BIC                     
+                     MOVE SPACES                  TO TT-TAG25                   
+                  END-IF                                                        
+              END-IF                                                            
+                                                                                
+              IF TT-TIPO(1:1) = 'X'                                             
+                 INITIALIZE IKI02DB                                             
+                            IKI0TABAC                                           
+                 SET  2DBKIN-AC-SELEC02 TO TRUE                                 
+                 MOVE TT-SPORTELLO      TO WS-SPO                               
+                 MOVE WS-SPO-NUM        TO ikiac-branch                         
+                 MOVE TT-TIPO           TO IKIAC-TECHNICAL-TYPE                 
+                 MOVE TT-NUMERO         TO WS-CONTO                             
+                 move '00' to WS-FILLER                                         
+                 MOVE WS-NUM-CONTO      TO IKIAC-NUMBER                         
+                 MOVE IKI0TABAC TO 2DBKIN-RIGA                                  
+                 CALL IKI02IAC USING IKI02DB                                    
+                 IF  2DBKRC-SQLCODE  = ZERO                                     
+                      MOVE 2DBKOU-RIGA TO IKI0TABAC                             
+                      MOVE IKIAC-iban-text TO TT-tag25                          
+                      MOVE IKIAC-BIC-text TO  TT-bic                            
+                      move '90000' to tt-abi                                    
+                 END-IF                                                         
+                 MOVE SPACES                 TO TT-CIN                          
+                 MOVE IKIAC-iban-text        TO TT-IBAN                         
+                 MOVE IKIAC-BIC-text(5:2)    TO TT-CODICEPAESE                  
+              END-IF                                                            
+DDS   ***     IF TORRE = 'HV'                                                   
+DDS   ***        MOVE IKPRP-TORRE          TO TT-CODICEPAESE                    
+DDS   ***        MOVE TT-IBAN(5:8)         TO TT-BIC                            
+DDS   ***     END-IF                                                            
+                                                                                
+                                                                                
+              MOVE SPACES                TO TT-CHECKDIGIT                       
+                                                                                
+              IF IKPRP-TORRE = 'XX'                                             
+                 MOVE 'A'                  TO TT-PROVENIENZA                    
+              ELSE                                                              
+                 MOVE 'B'                  TO TT-PROVENIENZA                    
+              END-IF                                                            
+      *                                                                         
+      *       DISPLAY ' INSERIMENTO IN TT IKPGEBLISTACCOUNT_0 '                 
+      *       DISPLAY 'TT-KEYR           :' TT-KEYR                             
+      *       DISPLAY 'TT-KEYA           :' TT-KEYA                             
+      *       DISPLAY 'TT-ABI            :' TT-ABI                              
+      *       DISPLAY 'TT-TIPO           :' TT-TIPO                             
+      *       DISPLAY 'TT-NUMERO         :' TT-NUMERO                           
+      *       DISPLAY 'TT-SPORTELLO      :' TT-SPORTELLO                        
+      *       DISPLAY 'TT-STATO          :' TT-STATO                            
+      *       DISPLAY 'TT-DIVISA         :' TT-DIVISA                           
+      *       DISPLAY 'TT-CAB            :' TT-CAB                              
+      *       DISPLAY 'TT-CIN            :' TT-CIN                              
+      *       DISPLAY 'TT-IBAN           :' TT-IBAN                             
+      *       DISPLAY 'TT-CODICEPAESE    :' TT-CODICEPAESE                      
+      *       DISPLAY 'TT-CHECKDIGIT     :' TT-CHECKDIGIT                       
+      *       DISPLAY 'TT-PROVENIENZA    :' TT-PROVENIENZA                      
+      *       DISPLAY 'TT-BIC            :' TT-BIC                              
+      *       DISPLAY 'TT-TAG25          :' TT-TAG25                            
+                                                                                
+      *       EXEC SQL INSERT INTO SESSION.IKPGEBLISTACCOUNT_0                  
+              EXEC SQL INSERT INTO IKPGEBLISTACCOUNT_0                          
+KEYR                   VALUES (:TT-KEYR                                         
+KEYA                         , :TT-KEYA                                         
+ABI                          , :TT-ABI                                          
+TIPO                         , :TT-TIPO                                         
+NUMER                        , :TT-NUMERO                                       
+SPORT                        , :TT-SPORTELLO                                    
+STATO                        , :TT-STATO                                        
+DIVIS                        , :TT-DIVISA                                       
+CAB                          , :TT-CAB                                          
+CIN                          , :TT-CIN                                          
+IBAN                         , :TT-IBAN                                         
+CODIC                        , :TT-CODICEPAESE                                  
+CHECK                        , :TT-CHECKDIGIT                                   
+PROVE                        , :TT-PROVENIENZA                                  
+BIC                          , :TT-BIC                                          
+tag25                        , :TT-TAG25                                        
+                              )                                                 
+              END-EXEC                                                          
+           WHEN OTHER                                                           
+             MOVE 'CXRÙIKP00099'        TO RC                                   
+             MOVE 'E'                   TO RCFLAG                               
+             MOVE 'VERSIONE NON CONOSCIUTA'                                     
+                                        TO RCDESC                               
+           END-EVALUATE                                                         
+                                                                                
+           IF SQLCODE NOT EQUAL ZEROS                                           
+              MOVE 'CXRÙIKP00099'       TO RC                                   
+              MOVE 'E'                  TO RCFLAG                               
+              MOVE 'INSERT TEMPORARY TABLE IKPGEBLISTACCOUNT'                   
+                                        TO WS-DESC-ERR                          
+              MOVE SQLCODE              TO WS-SQLCODE                           
+              MOVE SQLERRMC(1 : SQLERRML)                                       
+                                        TO WS-SQLERRM                           
+              MOVE WS-RCDESC            TO RCDESC                               
+      *       DISPLAY ' ' WS-DESC-ERR ' ' WS-SQLCODE ' ' WS-SQLERRM             
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+CA0048*----------------------------------------------------------------*        
+CA0048 SELECT-IKPKEYA-0 SECTION.                                                
+CA0048*----------------------------------------------------------------*        
+CA0048     EXEC SQL SELECT KEYA                                                 
+CA0048                INTO :TT-TKEYA                                            
+CA0048                FROM IKPKEYA_0                                            
+CA0048     END-EXEC.                                                            
+           evaluate sqlcode                                                     
+           WHEN 000                                                             
+CA0048        CONTINUE                                                          
+           WHEN - 811                                                           
+CA0048           MOVE 'XXX'             TO TT-TKEYA                             
+           WHEN 100                                                             
+CA0048          MOVE 'ALL' TO TT-TKEYA                                          
+           WHEN OTHER                                                           
+CA0048       MOVE 'CXRÙIKP00099'        TO RC                                   
+CA0048       MOVE 'E'                   TO RCFLAG                               
+CA0048       MOVE 'SELECT TEMPORARY TABLE IKPKEYA_0 KO'                         
+CA0048                                 TO WS-DESC-ERR                           
+CA0048       MOVE SQLCODE               TO WS-SQLCODE                           
+CA0048       MOVE SQLERRMC(1 : SQLERRML)                                        
+CA0048                                 TO WS-SQLERRM                            
+CA0048       MOVE WS-RCDESC             TO RCDESC                               
+CA0048*      DISPLAY ' ' WS-DESC-ERR ' ' WS-SQLCODE ' ' WS-SQLERRM              
+           END-EVALUATE.                                                        
+CA0048     EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+      *CARICA-TT-KEYA SECTION.                                                  
+      *----------------------------------------------------------------*        
+      *    EVALUATE VERSIONE                                                    
+      *     WHEN 1                                                              
+      *       MOVE GEB-MKEYA-TEXT       TO TAB-KEYA                             
+      *       INSPECT TAB-KEYA REPLACING ALL LOW-VALUE BY SPACES                
+      *       PERFORM VARYING IND-KEYA FROM 1 BY 1                              
+      *           UNTIL IND-KEYA > 50                                           
+      *           OR    SQLCODE NOT EQUAL ZEROS                                 
+      *           OR    ELE-KEYA(IND-KEYA) = SPACES                             
+      *                                                                         
+      *           MOVE ELE-KEYA(IND-KEYA) TO TT-TKEYA                           
+      **          EXEC SQL INSERT INTO SESSION.IKPKEYA_0                        
+      *           EXEC SQL INSERT INTO IKPKEYA_0                                
+      *                    VALUES (:TT-TKEYA)                                   
+      *           END-EXEC                                                      
+      *           IF SQLCODE NOT EQUAL ZEROS                                    
+      *              MOVE 'CXRÙIKP00099'       TO RC                            
+      *              MOVE 'E'                  TO RCFLAG                        
+      *              MOVE 'INSERT TT IKPKEYA'  TO WS-DESC-ERR                   
+      *              MOVE SQLCODE              TO WS-SQLCODE                    
+      *              MOVE SQLERRMC(1:SQLERRML) TO WS-SQLERRM                    
+      *              MOVE WS-RCDESC            TO RCDESC                        
+      *           END-IF                                                        
+      *       END-PERFORM                                                       
+      *    WHEN OTHER                                                           
+      *      MOVE 'CXRÙIKP00099'        TO RC                                   
+      *      MOVE 'E'                   TO RCFLAG                               
+      *      MOVE 'VERSIONE NON CONOSCIUTA'                                     
+      *                                 TO RCDESC                               
+      *    END-EVALUATE                                                         
+      *                                                                         
+      *    EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CERCA-CAB SECTION.                                                       
+      *----------------------------------------------------------------*        
+           INITIALIZE SISBCDIP                                                  
+           MOVE TT-SPORTELLO            TO WS-SPO                               
+           MOVE WS-SPO-NUM              TO S1IN-DIPENDENZA                      
+           MOVE 'CDIP0001'              TO S1OP-VERSIONE                        
+           SET  S1OP-ONLINE             TO TRUE.                                
+                                                                                
+           CALL SISBRDIP USING SISBCDIP                                         
+                                                                                
+           IF NOT S1RC-OK                                                       
+              MOVE 99999                TO WS-CAB                               
+           ELSE                                                                 
+              MOVE S1OU-CAB-ASSEGNI     TO WS-CAB                               
+              COMPUTE WS-CAB = WS-CAB / 10                                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIAMATA-IBAN-VA SECTION.                                                
+      *----------------------------------------------------------------*        
+           INITIALIZE UTMIBAN-PARAMETRI UTMIBAN-DATI                            
+           MOVE 'IT'                     TO UT-PAESE                            
+           MOVE TT-ABI                   TO WS-ABI                              
+           MOVE WS-ABI-NUM               TO UT-ABI                              
+           MOVE IKPRC-TAG25 (1:05)       TO UT-CAB                              
+           MOVE IKPRC-TAG25 (6:12)       TO UT-NUM-CONTO                        
+           SET  GENERAZIONE-IBAN         TO TRUE                                
+           INITIALIZE WS-COD-IBAN                                               
+           CALL UTMIBAN USING UTMIBAN-PARAMETRI UTMIBAN-DATI                    
+           IF NOT OK OF UTMIBAN-PARAMETRI                                       
+               MOVE SPACES        TO WS-CI-CIN-ITA                              
+           ELSE                                                                 
+               MOVE UT-PAESE                 TO WS-CI-PAESE                     
+               MOVE UT-CIN-EUROPA            TO WS-CI-CIN-EUROPA                
+               IF UT-PAESE = 'IT'                                               
+                  MOVE UT-CIN-ITALIA         TO WS-CI-CIN-ITA                   
+                  MOVE UT-ABI                TO WS-CI-ABI                       
+                  MOVE UT-CAB                TO WS-CI-CAB                       
+                  MOVE UT-NUM-CONTO          TO WS-CI-CONTO                     
+               ELSE                                                             
+                  MOVE UT-BBAN-EST           TO WS-CI-BBAN-ES                   
+               END-IF                                                           
+           END-IF.                                                              
+       CHIAMATA-IBAN-EX.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       APERTURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+      *    EVALUATE TRUE                                                        
+      *     WHEN GEB-MKEYA-TEXT > SPACES                                        
+              PERFORM OPEN-GEBRAPP                                              
+      *     WHEN OTHER                                                          
+      *       MOVE 'CXRÙIKP00010'         TO RC                                 
+      *       MOVE 'E'                    TO RCFLAG                             
+      *       MOVE 'RICHIESTA NON VALIDA' TO RCDESC                             
+      *    END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-GEBRAPP SECTION.                                                    
+      *----------------------------------------------------------------*        
+CA0048     IF TT-TKEYA = 'ALL'                                                  
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL                                                       
+GC-295             DECLARE LISTRAPA_C0 CURSOR FOR                               
+GC-295             SELECT IKPRP_BANCA                                           
+GC-295             , IKPRP_KEYR                                                 
+GC-295             , IKPRP_KEYA                                                 
+GC-295             , CHAR(' ',5)                                                
+GC-295             , IKPRP_TIPRAP                                               
+GC-295             , SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                          
+GC-295             , DIGITS(IKPRP_DIPRAP)                                       
+GC-295             , IKPRP_STATO                                                
+GC-295             , IKPRP_DIVRAP                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',2)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , IKPRP_TORRE                                                
+GC-295             , IKPRP_MATR_INS                                             
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',11)                                               
+GC-295             , IKPRP_NUMRAP                                               
+GC-295          FROM DB2C.IKPRAPPORTI                                           
+GC-295             , DB2C.IKPANAGRAFE                                           
+GC-295             , DB2C.IKPABILITAZIONI                                       
+GC-295         WHERE IKPRP_KEYA  = IKPAN_KEYA                                   
+GC-295           AND IKPRP_KEYR  = IKPAB_KEYR                                   
+GC-295           AND IKPAN_REB   = IKPAB_REB                                    
+GC-295           AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                            
+GC-295           AND ' '         IN ('  ',IKPRP_BANCA)                          
+GC-295           AND IKPRP_TIPRAP <> 'VA'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VB'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VV'                                       
+GC-295           AND IKPRP_TIPRAP <> 'AG'                                       
+GC-295           AND IKPRP_TIPRAP <> '  '                                       
+NEYES            AND IKPRP_TIPRAP <> 'AM'                                       
+GC-295           AND IKPAN_REB      = :GEB-REBNUM                               
+GC-295           AND IKPAN_REB_TIPO = :GEB-REBTYPE                              
+GC-295          UNION ALL                                                       
+GC-295          SELECT IKPRC_BANCA                                              
+GC-295             , IKPRC_KEYR                                                 
+GC-295             , IKPRC_KEYA                                                 
+GC-295             , SUBSTR(IKPRC_BIC,1,5)                                      
+GC-295             , IKPRC_TIPRAP                                               
+GC-295             , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+GC-295             , DIGITS(IKPRC_DIPRAP)                                       
+GC-295             , IKPRC_STATO                                                
+GC-295             , IKPRC_DIVRAP                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',2)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , SUBSTR('XX',1,2)                                           
+GC-295             , IKPRC_MATR_INS                                             
+GC-295             , IKPRC_TAG25                                                
+GC-295             , IKPRC_BIC                                                  
+GC-295             , IKPRC_NUMRAP                                               
+GC-295          FROM DB2C.IKPRAPPORTICBI                                        
+GC-295             , DB2C.IKPANAGRAFE                                           
+GC-295             , DB2C.IKPABILITAZIONI                                       
+GC-295         WHERE IKPRC_KEYA  = IKPAN_KEYA                                   
+GC-295           AND IKPRC_KEYR  = IKPAB_KEYR                                   
+GC-295           AND IKPRC_BANCA = IKPAN_BANCA                                  
+GC-295           AND ' '        IN ('  ',IKPRC_BANCA)                           
+GC-295           AND IKPAN_REB = :GEB-REBNUM                                    
+GC-295           AND IKPAN_REB_TIPO = :GEB-REBTYPE                              
+GC-295         UNION ALL                                                        
+GC-295          SELECT IKPRP_BANCA                                              
+GC-295             , IKPRP_KEYR                                                 
+GC-295             , IKPSM_M_KEYA                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , IKPRP_TIPRAP                                               
+GC-295             , SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                          
+GC-295             , DIGITS(IKPRP_DIPRAP)                                       
+GC-295             , IKPRP_STATO                                                
+GC-295             , IKPRP_DIVRAP                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',2)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , IKPRP_TORRE                                                
+GC-295             , IKPRP_MATR_INS                                             
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',11)                                               
+GC-295             , IKPRP_NUMRAP                                               
+GC-295          FROM DB2C.IKPRAPPORTI                                           
+GC-295             , DB2C.IKPANAGRAFE                                           
+GC-295             , DB2C.IKPABILITAZIONI                                       
+GC-295             , DB2C.IKPGEB_SLAVEMASTER                                    
+GC-295         WHERE IKPRP_KEYA  = IKPAN_KEYA                                   
+GC-295           AND IKPRP_KEYR  = IKPAB_KEYR                                   
+GC-295           AND IKPAN_REB   = IKPAB_REB                                    
+GC-295           AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                            
+GC-295           AND ' '         IN ('  ',IKPRP_BANCA)                          
+GC-295           AND IKPRP_TIPRAP <> 'VA'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VB'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VV'                                       
+GC-295           AND IKPRP_TIPRAP <> 'AG'                                       
+GC-295           AND IKPRP_TIPRAP <> '  '                                       
+NEYES            AND IKPRP_TIPRAP <> 'AM'                                       
+GC-295           AND IKPSM_M_REB = :GEB-REBNUM                                  
+GC-295           AND IKPSM_M_REB_TIPO = :GEB-REBTYPE                            
+GC-295           AND IKPSM_S_REB = IKPAN_REB                                    
+GC-295           AND IKPSM_S_REB_TIPO = IKPAN_REB_TIPO                          
+GC-295          UNION ALL                                                       
+GC-295          SELECT IKPRC_BANCA                                              
+GC-295             , IKPRC_KEYR                                                 
+GC-295             , IKPSM_M_KEYA                                               
+GC-295             , SUBSTR(IKPRC_BIC,1,5)                                      
+GC-295             , IKPRC_TIPRAP                                               
+GC-295             , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+GC-295             , DIGITS(IKPRC_DIPRAP)                                       
+GC-295             , IKPRC_STATO                                                
+GC-295             , IKPRC_DIVRAP                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',2)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , SUBSTR('XX',1,2)                                           
+GC-295             , IKPRC_MATR_INS                                             
+GC-295             , IKPRC_TAG25                                                
+GC-295             , IKPRC_BIC                                                  
+GC-295             , IKPRC_NUMRAP                                               
+GC-295          FROM DB2C.IKPRAPPORTICBI                                        
+GC-295             , DB2C.IKPANAGRAFE                                           
+GC-295             , DB2C.IKPABILITAZIONI                                       
+GC-295             , DB2C.IKPGEB_SLAVEMASTER                                    
+GC-295         WHERE IKPRC_KEYA  = IKPAN_KEYA                                   
+GC-295           AND IKPRC_KEYR  = IKPAB_KEYR                                   
+GC-295           AND IKPRC_BANCA = IKPAN_BANCA                                  
+GC-295           AND ' '        IN ('  ',IKPRC_BANCA)                           
+GC-295           AND IKPSM_M_REB = :GEB-REBNUM                                  
+GC-295           AND IKPSM_M_REB_TIPO = :GEB-REBTYPE                            
+GC-295           AND IKPSM_S_REB = IKPAN_REB                                    
+GC-295           AND IKPSM_S_REB_TIPO = IKPAN_REB_TIPO                          
+GC-295         ORDER BY 3,5,6,7,12                                              
+GC-295          WITH UR                                                         
+GC-295        END-EXEC                                                          
+GC-295        EXEC SQL OPEN LISTRAPA_C0 END-EXEC                                
+GC-295                                                                          
+GC-295        ELSE                                                              
+CA0048           EXEC SQL                                                       
+CA0048             DECLARE LISTRAPA CURSOR FOR                                  
+CA0048             SELECT IKPRP_BANCA                                           
+CA0048             , IKPRP_KEYR                                                 
+CA0048             , IKPRP_KEYA                                                 
+CA0048             , CHAR(' ',5)                                                
+CA0048             , IKPRP_TIPRAP                                               
+CA0048             , SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                          
+CA0048             , DIGITS(IKPRP_DIPRAP)                                       
+CA0048             , IKPRP_STATO                                                
+CA0048             , IKPRP_DIVRAP                                               
+CA0048             , CHAR(' ',5)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',35)                                               
+CA0048             , CHAR(' ',2)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , IKPRP_TORRE                                                
+TS0069             , IKPRP_MATR_INS                                             
+TS0069             , CHAR(' ',35)                                               
+TS0069             , CHAR(' ',11)                                               
+                   , IKPRP_NUMRAP                                               
+CA0048          FROM DB2C.IKPRAPPORTI                                           
+CA0048             , DB2C.IKPANAGRAFE                                           
+CA0048         WHERE IKPRP_KEYA  = IKPAN_KEYA                                   
+CA0048           AND ' '         IN ('  ',IKPRP_BANCA)                          
+CA0048           AND IKPRP_TIPRAP <> 'VA'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VB'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VV'                                       
+DDS048*******    AND IKPRP_TIPRAP <> 'AM'                                       
+CA0048           AND IKPRP_TIPRAP <> 'AG'                                       
+CA0048           AND IKPRP_TIPRAP <> '  '                                       
+CA0048           AND IKPAN_REB      = :GEB-REBNUM                               
+CA0048           AND IKPAN_REB_TIPO = :GEB-REBTYPE                              
+CA0048          UNION ALL                                                       
+CA0048          SELECT IKPRC_BANCA                                              
+CA0048             , IKPRC_KEYR                                                 
+CA0048             , IKPRC_KEYA                                                 
+CA0048*TS0069      , CHAR(' ',5)                                                
+TS0069             , SUBSTR(IKPRC_BIC,1,5)                                      
+CA0048             , IKPRC_TIPRAP                                               
+CA0048             , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+CA0048             , DIGITS(IKPRC_DIPRAP)                                       
+CA0048             , IKPRC_STATO                                                
+CA0048             , IKPRC_DIVRAP                                               
+CA0048             , CHAR(' ',5)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',35)                                               
+CA0048             , CHAR(' ',2)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , CHAR(' ',1)                                                
+CA0048             , SUBSTR('XX',1,2)                                           
+TS0069             , IKPRC_MATR_INS                                             
+TS0069             , IKPRC_TAG25                                                
+TS0069             , IKPRC_BIC                                                  
+                   , IKPRC_NUMRAP                                               
+CA0048          FROM DB2C.IKPRAPPORTICBI                                        
+CA0048             , DB2C.IKPANAGRAFE                                           
+CA0048         WHERE IKPRC_KEYA  = IKPAN_KEYA                                   
+CA0048           AND IKPRC_BANCA = IKPAN_BANCA                                  
+CA0048           AND ' '        IN ('  ',IKPRC_BANCA)                           
+CA0048           AND IKPAN_REB = :GEB-REBNUM                                    
+CA0048           AND IKPAN_REB_TIPO = :GEB-REBTYPE                              
+               UNION ALL                                                        
+                SELECT IKPRP_BANCA                                              
+                   , IKPRP_KEYR                                                 
+                   , IKPSM_M_KEYA                                               
+                   , CHAR(' ',5)                                                
+                   , IKPRP_TIPRAP                                               
+                   , SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                          
+                   , DIGITS(IKPRP_DIPRAP)                                       
+                   , IKPRP_STATO                                                
+                   , IKPRP_DIVRAP                                               
+                   , CHAR(' ',5)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',35)                                               
+                   , CHAR(' ',2)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , IKPRP_TORRE                                                
+                   , IKPRP_MATR_INS                                             
+                   , CHAR(' ',35)                                               
+                   , CHAR(' ',11)                                               
+                   , IKPRP_NUMRAP                                               
+                FROM DB2C.IKPRAPPORTI                                           
+                   , DB2C.IKPANAGRAFE                                           
+                   , DB2C.IKPGEB_SLAVEMASTER                                    
+               WHERE IKPRP_KEYA  = IKPAN_KEYA                                   
+                 AND ' '         IN ('  ',IKPRP_BANCA)                          
+                 AND IKPRP_TIPRAP <> 'VA'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VB'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VV'                                       
+DDS*****         AND IKPRP_TIPRAP <> 'AM'                                       
+                 AND IKPRP_TIPRAP <> 'AG'                                       
+                 AND IKPRP_TIPRAP <> '  '                                       
+                 AND IKPSM_M_REB = :GEB-REBNUM                                  
+                 AND IKPSM_M_REB_TIPO = :GEB-REBTYPE                            
+                 AND IKPSM_S_REB = IKPAN_REB                                    
+                 AND IKPSM_S_REB_TIPO = IKPAN_REB_TIPO                          
+                UNION ALL                                                       
+                SELECT IKPRC_BANCA                                              
+                   , IKPRC_KEYR                                                 
+                   , IKPSM_M_KEYA                                               
+                   , SUBSTR(IKPRC_BIC,1,5)                                      
+                   , IKPRC_TIPRAP                                               
+                   , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+                   , DIGITS(IKPRC_DIPRAP)                                       
+                   , IKPRC_STATO                                                
+                   , IKPRC_DIVRAP                                               
+                   , CHAR(' ',5)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',35)                                               
+                   , CHAR(' ',2)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , CHAR(' ',1)                                                
+                   , SUBSTR('XX',1,2)                                           
+                   , IKPRC_MATR_INS                                             
+                   , IKPRC_TAG25                                                
+                   , IKPRC_BIC                                                  
+                   , IKPRC_NUMRAP                                               
+                FROM DB2C.IKPRAPPORTICBI                                        
+                   , DB2C.IKPANAGRAFE                                           
+                   , DB2C.IKPGEB_SLAVEMASTER                                    
+               WHERE IKPRC_KEYA  = IKPAN_KEYA                                   
+                 AND IKPRC_BANCA = IKPAN_BANCA                                  
+                 AND ' '        IN ('  ',IKPRC_BANCA)                           
+                 AND IKPSM_M_REB = :GEB-REBNUM                                  
+                 AND IKPSM_M_REB_TIPO = :GEB-REBTYPE                            
+                 AND IKPSM_S_REB = IKPAN_REB                                    
+                 AND IKPSM_S_REB_TIPO = IKPAN_REB_TIPO                          
+               ORDER BY 3,5,6,7,12                                              
+                WITH UR                                                         
+              END-EXEC                                                          
+              EXEC SQL OPEN LISTRAPA END-EXEC                                   
+GC-295        END-IF                                                            
+           ELSE                                                                 
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL                                                       
+GC-295             DECLARE LISTRAPP_C0 CURSOR FOR                               
+GC-295             SELECT IKPRP_BANCA                                           
+GC-295             ,   IKPRP_KEYR                                               
+GC-295             ,   IKPRP_KEYA                                               
+GC-295             ,   CHAR(' ',5)                                              
+GC-295             ,   IKPRP_TIPRAP                                             
+GC-295             ,   SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                        
+GC-295             ,   DIGITS(IKPRP_DIPRAP)                                     
+GC-295             ,   IKPRP_STATO                                              
+GC-295             ,   IKPRP_DIVRAP                                             
+GC-295             ,   CHAR(' ',5)                                              
+GC-295             ,   CHAR(' ',1)                                              
+GC-295             ,   CHAR(' ',35)                                             
+GC-295             ,   CHAR(' ',2)                                              
+GC-295             ,   CHAR(' ',1)                                              
+GC-295             ,   CHAR(' ',1)                                              
+GC-295             ,   CHAR(' ',11)                                             
+GC-295             ,   CHAR(' ',35)                                             
+GC-295             ,   IKPRP_TORRE                                              
+GC-295             ,   IKPRP_MATR_INS                                           
+GC-295             ,   CHAR(' ',35)                                             
+GC-295             ,   CHAR(' ',11)                                             
+GC-295             , IKPRP_NUMRAP                                               
+GC-295          FROM DB2C.IKPRAPPORTI                                           
+GC-295             , DB2C.IKPABILITAZIONI                                       
+GC-295         WHERE IKPRP_KEYA  IN (SELECT KEYA FROM IKPKEYA_0)                
+GC-295           AND ' '         IN ('  ',IKPRP_BANCA)                          
+GC-295           AND IKPRP_TIPRAP <> 'VA'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VB'                                       
+GC-295           AND IKPRP_TIPRAP <> 'VV'                                       
+GC-295           AND IKPRP_TIPRAP <> '  '                                       
+NEYES            AND IKPRP_TIPRAP <> 'AM'                                       
+GC-295           AND IKPRP_KEYR = IKPAB_KEYR                                    
+GC-295          UNION  ALL                                                      
+GC-295            SELECT IKPRC_BANCA                                            
+GC-295             , IKPRC_KEYR                                                 
+GC-295             , IKPRC_KEYA                                                 
+GC-295             , SUBSTR(IKPRC_BIC,1,5)                                      
+GC-295             , IKPRC_TIPRAP                                               
+GC-295             , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+GC-295             , DIGITS(IKPRC_DIPRAP)                                       
+GC-295             , IKPRC_STATO                                                
+GC-295             , IKPRC_DIVRAP                                               
+GC-295             , CHAR(' ',5)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',35)                                               
+GC-295             , CHAR(' ',2)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , CHAR(' ',1)                                                
+GC-295             , IKPRC_BIC                                                  
+GC-295             , IKPRC_TAG25                                                
+GC-295             , SUBSTR('XX',1,2)                                           
+GC-295             , IKPRC_MATR_INS                                             
+GC-295             , IKPRC_TAG25                                                
+GC-295             , IKPRC_BIC                                                  
+GC-295             , IKPRC_NUMRAP                                               
+GC-295             FROM DB2C.IKPRAPPORTICBI                                     
+GC-295                 ,DB2C.IKPABILITAZIONI                                    
+GC-295             WHERE IKPRC_KEYA IN (SELECT KEYA FROM IKPKEYA_0 )            
+GC-295             AND ' '        IN ('  ',IKPRC_BANCA)                         
+GC-295             AND IKPRC_KEYR = IKPAB_KEYR                                  
+GC-295             ORDER BY 3,5,6,7,12                                          
+GC-295             WITH UR                                                      
+GC-295           END-EXEC                                                       
+GC-295           EXEC SQL OPEN LISTRAPP_C0 END-EXEC                             
+GC-295        ELSE                                                              
+                 EXEC SQL                                                       
+                   DECLARE LISTRAPP CURSOR FOR                                  
+                   SELECT IKPRP_BANCA                                           
+                   ,   IKPRP_KEYR                                               
+KEYA               ,   IKPRP_KEYA                                               
+ABI                ,   CHAR(' ',5)                                              
+TIPO               ,   IKPRP_TIPRAP                                             
+NUMER              ,   SUBSTR(DIGITS(IKPRP_NUMRAP),3,12)                        
+SPORT              ,   DIGITS(IKPRP_DIPRAP)                                     
+STATO              ,   IKPRP_STATO                                              
+DIVIS              ,   IKPRP_DIVRAP                                             
+CAB                ,   CHAR(' ',5)                                              
+CIN                ,   CHAR(' ',1)                                              
+IBAN               ,   CHAR(' ',35)                                             
+CODIC              ,   CHAR(' ',2)                                              
+CHECK              ,   CHAR(' ',1)                                              
+PROVE              ,   CHAR(' ',1)                                              
+BIC                ,   CHAR(' ',11)                                             
+tag25              ,   CHAR(' ',35)                                             
+                   ,   IKPRP_TORRE                                              
+TS0069             ,   IKPRP_MATR_INS                                           
+TS0069             ,   CHAR(' ',35)                                             
+TS0069             ,   CHAR(' ',11)                                             
+                   , IKPRP_NUMRAP                                               
+                FROM DB2C.IKPRAPPORTI                                           
+TS9357*        WHERE IKPRP_KEYA  IN (SELECT KEYA FROM SESSION.IKPKEYA_0)        
+TS9357         WHERE IKPRP_KEYA  IN (SELECT KEYA FROM IKPKEYA_0)                
+                 AND ' '         IN ('  ',IKPRP_BANCA)                          
+                 AND IKPRP_TIPRAP <> 'VA'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VB'                                       
+DN1283           AND IKPRP_TIPRAP <> 'VV'                                       
+                 AND IKPRP_TIPRAP <> '  '                                       
+NEYES            AND IKPRP_TIPRAP <> 'AM'                                       
+                UNION  ALL                                                      
+                  SELECT IKPRC_BANCA                                            
+KEYR               , IKPRC_KEYR                                                 
+KEYA               , IKPRC_KEYA                                                 
+ABI   *TS0069      , CHAR(' ',5)                                                
+ABI                , SUBSTR(IKPRC_BIC,1,5)                                      
+TIPO               , IKPRC_TIPRAP                                               
+NUMER              , SUBSTR(DIGITS(IKPRC_NUMRAP),3,12)                          
+SPORT              , DIGITS(IKPRC_DIPRAP)                                       
+STATO              , IKPRC_STATO                                                
+DIVIS              , IKPRC_DIVRAP                                               
+CAB                , CHAR(' ',5)                                                
+CIN                , CHAR(' ',1)                                                
+IBAN               , CHAR(' ',35)                                               
+CODIC              , CHAR(' ',2)                                                
+CHECK              , CHAR(' ',1)                                                
+PROVE              , CHAR(' ',1)                                                
+BIC                , IKPRC_BIC                                                  
+tag25              , IKPRC_TAG25                                                
+                   , SUBSTR('XX',1,2)                                           
+TS0069             , IKPRC_MATR_INS                                             
+TS0069             , IKPRC_TAG25                                                
+TS0069             , IKPRC_BIC                                                  
+                   , IKPRC_NUMRAP                                               
+                FROM DB2C.IKPRAPPORTICBI                                        
+TS9357*        WHERE IKPRC_KEYA IN (SELECT KEYA FROM SESSION.IKPKEYA_0)         
+TS9357         WHERE IKPRC_KEYA IN (SELECT KEYA FROM IKPKEYA_0 )                
+                 AND ' '        IN ('  ',IKPRC_BANCA)                           
+               ORDER BY 3,5,6,7,12                                              
+                WITH UR                                                         
+              END-EXEC                                                          
+              EXEC SQL OPEN LISTRAPP END-EXEC                                   
+GC-295        END-IF                                                            
+CA0048     END-IF.                                                              
+           IF  SQLCODE = ZERO                                                   
+               CONTINUE                                                         
+           ELSE                                                                 
+               MOVE 'CXRÙIKP00010'       TO RC                                  
+               MOVE 'E'                  TO RCFLAG                              
+               MOVE 'OPEN LISTRAPP'      TO RCDESC                              
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-CURSORE SECTION.                                                 
+      *----------------------------------------------------------------*        
+      *    EVALUATE TRUE                                                        
+      *     WHEN GEB-MKEYA-TEXT > SPACES                                        
+              PERFORM FETCH-GEBRAPP                                             
+      *     WHEN OTHER                                                          
+      *       MOVE 'CXRÙIKP00010'       TO RC                                   
+      *       MOVE 'E'                  TO RCFLAG                               
+      *       MOVE 'FUNZIONE NON GESTITA'                                       
+      *                                 TO RCDESC                               
+      *    END-EVALUATE.                                                        
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-GEBRAPP SECTION.                                                   
+      *----------------------------------------------------------------*        
+CA0048     IF TT-TKEYA = 'ALL'                                                  
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL                                                       
+GC-295             FETCH LISTRAPA_C0                                            
+GC-295             INTO :IKPRP-BANCA                                            
+GC-295               ,  :TT-KEYR                                                
+GC-295               ,  :TT-KEYA                                                
+GC-295               ,  :TT-ABI                                                 
+GC-295               ,  :TT-TIPO                                                
+GC-295               ,  :TT-NUMERO                                              
+GC-295               ,  :TT-SPORTELLO                                           
+GC-295               ,  :TT-STATO                                               
+GC-295               ,  :TT-DIVISA                                              
+GC-295               ,  :TT-CAB                                                 
+GC-295               ,  :TT-CIN                                                 
+GC-295               ,  :TT-IBAN                                                
+GC-295               ,  :TT-CODICEPAESE                                         
+GC-295               ,  :TT-CHECKDIGIT                                          
+GC-295               ,  :TT-PROVENIENZA                                         
+GC-295               ,  :TT-BIC                                                 
+GC-295               ,  :TT-TAG25                                               
+GC-295               ,  :IKPRP-TORRE                                            
+GC-295               ,  :IKPRP-MATR-INS                                         
+GC-295               ,  :IKPRC-TAG25                                            
+GC-295               ,  :IKPRC-BIC                                              
+GC-295               ,  :IKPRP-NUMRAP                                           
+GC-295           END-EXEC                                                       
+GC-295        ELSE                                                              
+                 EXEC SQL                                                       
+                   FETCH LISTRAPA                                               
+                   INTO :IKPRP-BANCA                                            
+KEYR                 ,  :TT-KEYR                                                
+KEYA                 ,  :TT-KEYA                                                
+ABI                  ,  :TT-ABI                                                 
+TIPO                 ,  :TT-TIPO                                                
+NUMER                ,  :TT-NUMERO                                              
+SPORT                ,  :TT-SPORTELLO                                           
+STATO                ,  :TT-STATO                                               
+DIVIS                ,  :TT-DIVISA                                              
+CAB                  ,  :TT-CAB                                                 
+CIN                  ,  :TT-CIN                                                 
+IBAN                 ,  :TT-IBAN                                                
+CODIC                ,  :TT-CODICEPAESE                                         
+CHECK                ,  :TT-CHECKDIGIT                                          
+PROVE                ,  :TT-PROVENIENZA                                         
+BIC                  ,  :TT-BIC                                                 
+TAG25                ,  :TT-TAG25                                               
+                     ,  :IKPRP-TORRE                                            
+TS0069               ,  :IKPRP-MATR-INS                                         
+TS0069               ,  :IKPRC-TAG25                                            
+TS0069               ,  :IKPRC-BIC                                              
+TS0069               ,  :IKPRP-NUMRAP                                           
+                 END-EXEC                                                       
+GC-295        END-IF                                                            
+CA0048     ELSE                                                                 
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL                                                       
+GC-295             FETCH LISTRAPP_C0                                            
+GC-295             INTO :IKPRP-BANCA                                            
+GC-295               , :TT-KEYR                                                 
+GC-295               , :TT-KEYA                                                 
+GC-295               , :TT-ABI                                                  
+GC-295               , :TT-TIPO                                                 
+GC-295               , :TT-NUMERO                                               
+GC-295               , :TT-SPORTELLO                                            
+GC-295               , :TT-STATO                                                
+GC-295               , :TT-DIVISA                                               
+GC-295               , :TT-CAB                                                  
+GC-295               , :TT-CIN                                                  
+GC-295               , :TT-IBAN                                                 
+GC-295               , :TT-CODICEPAESE                                          
+GC-295               , :TT-CHECKDIGIT                                           
+GC-295               , :TT-PROVENIENZA                                          
+GC-295               , :TT-BIC                                                  
+GC-295               , :TT-TAG25                                                
+GC-295               , :IKPRP-TORRE                                             
+GC-295               , :IKPRP-MATR-INS                                          
+GC-295               , :IKPRC-TAG25                                             
+GC-295               , :IKPRC-BIC                                               
+GC-295               , :IKPRP-NUMRAP                                            
+GC-295           END-EXEC                                                       
+GC-295        ELSE                                                              
+                 EXEC SQL                                                       
+                   FETCH LISTRAPP                                               
+                   INTO :IKPRP-BANCA                                            
+KEYR                 , :TT-KEYR                                                 
+KEYA                 , :TT-KEYA                                                 
+ABI                  , :TT-ABI                                                  
+TIPO                 , :TT-TIPO                                                 
+NUMER                , :TT-NUMERO                                               
+SPORT                , :TT-SPORTELLO                                            
+STATO                , :TT-STATO                                                
+DIVIS                , :TT-DIVISA                                               
+CAB                  , :TT-CAB                                                  
+CIN                  , :TT-CIN                                                  
+IBAN                 , :TT-IBAN                                                 
+CODIC                , :TT-CODICEPAESE                                          
+CHECK                , :TT-CHECKDIGIT                                           
+PROVE                , :TT-PROVENIENZA                                          
+BIC                  , :TT-BIC                                                  
+TAG25                , :TT-TAG25                                                
+                     , :IKPRP-TORRE                                             
+TS0069               , :IKPRP-MATR-INS                                          
+TS0069               , :IKPRC-TAG25                                             
+TS0069               , :IKPRC-BIC                                               
+TS0069               , :IKPRP-NUMRAP                                            
+                 END-EXEC                                                       
+GC-295        END-IF                                                            
+CA0048     END-IF.                                                              
+           EVALUATE TRUE                                                        
+           WHEN SQLCODE = ZEROS                                                 
+              CONTINUE                                                          
+      *       display 'LETTO:'                                                  
+      *       display 'IKPRP-BANCA            ' IKPRP-BANCA                     
+      *       display 'TT-KEYR                ' TT-KEYR                         
+      *       display 'TT-KEYA                ' TT-KEYA                         
+      *       display 'TT-ABI                 ' TT-ABI                          
+      *       display 'TT-TIPO                ' TT-TIPO                         
+      *       display 'TT-NUMERO              ' TT-NUMERO                       
+      *       display 'TT-SPORTELLO           ' TT-SPORTELLO                    
+      *       display 'TT-STATO               ' TT-STATO                        
+      *       display 'TT-DIVISA              ' TT-DIVISA                       
+      *       display 'TT-CAB                 ' TT-CAB                          
+      *       display 'TT-CIN                 ' TT-CIN                          
+      *       display 'TT-IBAN                ' TT-IBAN                         
+      *       display 'TT-CODICEPAESE         ' TT-CODICEPAESE                  
+      *       display 'TT-CHECKDIGIT          ' TT-CHECKDIGIT                   
+      *       display 'TT-PROVENIENZA         ' TT-PROVENIENZA                  
+      *       display 'TT-BIC                 ' TT-BIC                          
+      *       display 'TT-TAG25               ' TT-TAG25                        
+      *       display 'IKPRP-TORRE            ' IKPRP-TORRE                     
+      *       display 'IKPRP-MATR-INS         ' IKPRP-MATR-INS                  
+      *       display 'IKPRC-TAG25            ' IKPRC-TAG25                     
+      *       display 'IKPRC-BIC              ' IKPRC-BIC                       
+           WHEN SQLCODE = 100                                                   
+              SET  FINE-CURSORE         TO TRUE                                 
+           WHEN OTHER                                                           
+              MOVE 'CXRÙIKP00010'       TO RC                                   
+              MOVE 'E'                  TO RCFLAG                               
+              MOVE 'FETCH LISTRAPP'     TO RCDESC                               
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CHIUSURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+      *    EVALUATE TRUE                                                        
+      *     WHEN GEB-MKEYA-TEXT > SPACES                                        
+              PERFORM CLOSE-GEBRAPP                                             
+      *     WHEN OTHER                                                          
+      *       MOVE 'CXRÙIKP00010'       TO RC                                   
+      *       MOVE 'E'                  TO RCFLAG                               
+      *       MOVE 'FUNZIONE NON GESTITA'                                       
+      *                                 TO RCDESC                               
+      *    END-EVALUATE.                                                        
+      *                                                                         
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-GEBRAPP SECTION.                                                   
+      *----------------------------------------------------------------*        
+CA0048     IF TT-TKEYA = 'ALL'                                                  
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL CLOSE LISTRAPA_C0 END-EXEC                            
+GC-295        ELSE                                                              
+                 EXEC SQL CLOSE LISTRAPA END-EXEC                               
+GC-295        END-IF                                                            
+CA0048     ELSE                                                                 
+GC-295        IF TORRE = 'C0'                                                   
+GC-295           EXEC SQL CLOSE LISTRAPP_C0 END-EXEC                            
+GC-295        ELSE                                                              
+                 EXEC SQL CLOSE LISTRAPP END-EXEC                               
+GC-295        END-IF                                                            
+CA0048     END-IF.                                                              
+           EVALUATE TRUE                                                        
+            WHEN SQLCODE = ZEROS                                                
+              CONTINUE                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00010'       TO RC                                   
+              MOVE 'E'                  TO RCFLAG                               
+              MOVE 'CLOSE LISTRAPP'     TO RCDESC                               
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FA-RISPOSTA SECTION.                                                     
+      *----------------------------------------------------------------*        
+           EVALUATE VERSIONE                                                    
+            WHEN 1                                                              
+              EXEC SQL DECLARE WEB_GEBLISTACCOUNT CURSOR WITH RETURN FOR        
+                   SELECT *                                                     
+                     FROM IKPGEBLISTACCOUNT_0                                   
+      *              FROM SESSION.IKPGEBLISTACCOUNT_0                           
+              END-EXEC                                                          
+              EXEC SQL                                                          
+                   OPEN WEB_GEBLISTACCOUNT                                      
+              END-EXEC                                                          
+            WHEN OTHER                                                          
+              MOVE 'CXRÙIKP00099'             TO RC                             
+              MOVE 'VERSIONE NON CONOSCIUTA ' TO RCDESC                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           CONTINUE.                                                            
+           EXIT.                                                                
+                                                                                
+      ******************************************************************        
+      *    FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *        
+      ******************************************************************        

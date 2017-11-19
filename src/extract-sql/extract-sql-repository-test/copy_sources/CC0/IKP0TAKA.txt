@@ -1,0 +1,38 @@
+      ******************************************************************        
+      * DCLGEN TABLE(IKPKEYAAID)                                       *        
+      *        LIBRARY(C0.LIZ.C0D0.DCLGEN(IKP0TAKA))                   *        
+      *        ACTION(REPLACE)                                         *        
+      *        LANGUAGE(COBOL)                                         *        
+      *        STRUCTURE(IKP0TABKA)                                    *        
+      *        QUOTE                                                   *        
+      * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *        
+      ******************************************************************        
+           EXEC SQL DECLARE IKPKEYAAID TABLE                                    
+           ( IKPKA_BANCA                    CHAR(2) NOT NULL,                   
+             IKPKA_KEYA                     CHAR(16) NOT NULL,                  
+             IKPKA_AID                      DECIMAL(8, 0) NOT NULL,             
+             IKPKA_STATO                    CHAR(1) NOT NULL,                   
+             IKPKA_DATA_INS                 DATE NOT NULL,                      
+             IKPKA_MATR_INS                 CHAR(8) NOT NULL,                   
+             IKPKA_DATA_VAR                 DATE NOT NULL,                      
+             IKPKA_MATR_VAR                 CHAR(8) NOT NULL,                   
+             IKPKA_DATA_REV                 DATE NOT NULL,                      
+             IKPKA_MATR_REV                 CHAR(8) NOT NULL                    
+           ) END-EXEC.                                                          
+      ******************************************************************        
+      * COBOL DECLARATION FOR TABLE IKPKEYAAID                         *        
+      ******************************************************************        
+       01  IKP0TABKA.                                                           
+           10 IKPKA-BANCA          PIC X(2).                                    
+           10 IKPKA-KEYA           PIC X(16).                                   
+           10 IKPKA-AID            PIC S9(8)V USAGE COMP-3.                     
+           10 IKPKA-STATO          PIC X(1).                                    
+           10 IKPKA-DATA-INS       PIC X(10).                                   
+           10 IKPKA-MATR-INS       PIC X(8).                                    
+           10 IKPKA-DATA-VAR       PIC X(10).                                   
+           10 IKPKA-MATR-VAR       PIC X(8).                                    
+           10 IKPKA-DATA-REV       PIC X(10).                                   
+           10 IKPKA-MATR-REV       PIC X(8).                                    
+      ******************************************************************        
+      * THE NUMBER OF COLUMNS DESCRIBED BY THIS DECLARATION IS 10      *        
+      ******************************************************************        

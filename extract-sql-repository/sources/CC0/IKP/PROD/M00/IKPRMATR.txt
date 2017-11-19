@@ -1,0 +1,608 @@
+      * ASCMAT  EE37303 ALESSANDRO SETTE AGGIUNTO PER AMBITO = S                
+      *         CONTROLLO MATRICOLA DA TABELLA-MATRICOLE                        
+      * ......................                                                  
+      * 15.328 14:49 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * totlo test per filiali pilota del contrattone e monoope                 
+      * RATORE.                                                                 
+      * 15.296 09:53 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * CA5296 - aggiunto filiale 8687  per test monooperatore                  
+      * 15.294 13:06 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ca5294 - inserito altre filiali pilota per esclusione c                 
+      * ONTRATTONE E 4EYES                                                      
+      * 15.259 15:26 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aaaaaaaaaaaaaaaaaaaa                                                    
+      * 15.259 14:00 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ......................                                                  
+      * 15.258 16:56 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto filiale 31385 per test monooperatore                           
+      * 15.254 10:04 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * sistemazione per contrattone e 4eyes eliminato                          
+      * 15.254 09:50 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * compilazione.                                                           
+      * 15.253 15:24 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..........                                                              
+      * 15.253 14:58 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............... AGGIUNTO MATRICOLA PSE CONTRATTONE                      
+      * 15.253 14:22 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ......................................................                  
+      * 15.253 10:51 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..........................                                              
+      * 15.252 09:59 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto filiale pilota 200 per contrattomne                            
+      * 15.250 15:33 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............................                                            
+      * 15.250 11:45 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ......................                                                  
+      * 15.250 10:56 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .........................                                               
+      * 15.212 15:52 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * verifiche per escludere conrtattone                                     
+      * 15.212 15:32 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..............................                                          
+      * 15.212 15:30 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .................                                                       
+      * 15.212 15:23 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...................                                                     
+      * 15.212 11:36 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * AGGIUNTO CHIAMATA PER RECUPERARE SE CONTRATTONE                         
+      * 15.210 14:33 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...............................                                         
+      * 15.209 17:28 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............................                                            
+      * 15.209 11:12 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * AGGIUNTO CHIAMATO A ROUITINE PER MONOOPERATORE.                         
+      * 14.331 09:37 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * pulizia rc per ft ebswi (non 4eyes)                                     
+      * 14.330 10:20 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * AZZERATO RC 29 SE MATRICOLA NON TROVATA E FT NON ABILIT                 
+      * ATA A 4EYES.                                                            
+      * 13.312 14:07 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * -------------------                                                     
+      * 13.043 09:57 IKP   C300014 - Graniti Giuseppe (USUPD090)                
+      * -------------------------------------------                             
+      * 13.017 18:54 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * --------------------                                                    
+      * 13.017 18:43 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * ----------------                                                        
+      * 12.328 15:03 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * -----------------------                                                 
+      * 12.129 10:04 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .............................................                           
+      * 12.128 09:48 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...................                                                     
+      * 12.037 09:12 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ---------------------------------                                       
+      * 11.333 21:25 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -------------------------------                                         
+      * 11.327 10:24 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -------------------------                                               
+      * 11.297 17:01 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...................                                                     
+      * 11.287 16:59 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto aree 5309 e 5310 .                                             
+      * 11.280 16:46 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..........................                                              
+      * 11.273 11:37 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiutno areee per 4eyes.                                               
+      * 11.269 08:38 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ------------------------------------------------                        
+      * 11.262 09:36 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .........................                                               
+      * 11.257 16:38 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..................                                                      
+      * 11.257 14:58 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...........................                                             
+      * 11.256 18:13 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ....................................                                    
+      * 11.256 14:10 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..............                                                          
+      * 11.255 12:33 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .......................                                                 
+      * 11.255 12:23 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...............                                                         
+      * 11.250 13:09 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * * aggiunto controllo della sede area 5913                               
+      * 11.214 12:52 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto matricola ikpg per geb.                                        
+      * 11.165 10:45 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............................                                            
+      * 11.157 16:24 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto filiale 3200 per prossimo pilota.                              
+      * 11.143 17:09 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ....................................                                    
+      * 11.143 09:24 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * testato solo la dipendenza 200 per partenza 4eyes.                      
+      * 11.132 15:21 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .................................                                       
+      * 11.132 15:03 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...............................                                         
+      * 11.124 09:44 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ................................                                        
+      * 11.116 10:08 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ...............................                                         
+      * 11.110 10:09 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .tolto UR00823 da abilitazione in collaudo.                             
+      * 11.105 14:43 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............................                                            
+      * 11.054 15:28 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ..............................aggiunto matricole banca                  
+      * 11.014 12:09 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto matricola ta00230                                              
+      * 11.014 10:48 IKP   Y994052 - Spr Tezza Sara (Y9US0000)                  
+      * aggiunto bypass controllo 'UGIS0804'                                    
+      * 11.004 14:31 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ------------------------------                                          
+      * 10.344 15:39 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunta matricola CS00BSPE                                             
+      * 10.328 12:34 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * --------------------------------------                                  
+      * 10.318 18:58  IKP  0000 US01101                                         
+      * ---------------------------------                                       
+      * 10.308 18:22        IKP  0000 US01437                                   
+      * .............................                                           
+      * 10.308 18:21        IKP  0000 US01437                                   
+      * ............................                                            
+      * 10.280 14:43        IKP  0000 US01437                                   
+      * ....................aggiunto matricola TA00001                          
+      * 10.279 13:02        IKP  0000 US01651                                   
+      * ---------------------------                                             
+      * 10.273 09:41        IKP  0000 US01437                                   
+      * ..................................................                      
+      * ......                                                                  
+      * 10.265 09:50        IKP  0000 Y994052                                   
+      * compilazione                                                            
+      * 10.264 17:07        IKP  0000 US01437                                   
+      * ..........................                                              
+      * 10.263 10:19        IKP  0000 US01101                                   
+      * ---------------------------                                             
+      * 10.259 16:56        IKP  0000 US01437                                   
+      * ..............................                                          
+      * 10.250 15:16        IKP  0000 US01437                                   
+      * ..................................                                      
+      * 10.238 12:30        IKP  0000 US01437                                   
+      * .......................................                                 
+      * 10.238 12:29        IKP  0000 US01437                                   
+      * .....................................                                   
+      * 10.238 12:13        IKP  0000 US01437                                   
+      * .........................................                               
+      * 10.229 16:08        IKP  0000 US01437                                   
+      * ...................................                                     
+      * 10.229 16:04        IKP  0000 US01437                                   
+      * .......................................                                 
+      * 10.229 15:57        IKP  0000 US01437                                   
+      * .......................................                                 
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKPRMATR.                                                    
+      ******************************************************************        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................. ROUTINE *        
+      *----------------------------------------------------------------*        
+      * NOTE .......................REPERIMENTO MATRICOLE ABILITATE             
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ..............................AGOSTO  2010   *        
+      * DA PARTE DI .............................UGIS - CHERUBINI.A.   *        
+      ******************************************************************        
+       ENVIRONMENT  DIVISION.                                                   
+      ******************************************************************        
+       CONFIGURATION  SECTION.                                                  
+      *SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       OBJECT-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+      ******************************************************************        
+       DATA  DIVISION.                                                          
+      ******************************************************************        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  PGM                           PIC X(11)  VALUE '*IKPRMATR*'.         
+       77  SKP                           PIC X(09)  VALUE '>>>>>>> '.           
+       77  SISBRCR2                      PIC X(08)  VALUE 'SISBRCR2'.           
+           COPY SISBRCR2.                                                       
+           COPY XSOLCENV.                                                       
+                                                                                
+       77  SYSTDACP                      PIC X(08)  VALUE 'SYSTDACP'.           
+           COPY SYSTCACP.                                                       
+                                                                                
+       77  IKP0RFT0                      PIC X(08)  VALUE 'IKP0RFT0'.           
+           COPY IKP0CFT0.                                                       
+      *--- per sportello mono operatore                                         
+ca5209 01  LT-PRMMONFI                   PIC X(08)  VALUE 'PRMMONFI'.           
+ca5209 01  AREA-PRMMONFI.                                                       
+ca5209     03  PRMMONFI-INPUT.                                                  
+ca5209         05  PRMMONFI-ISTI           PIC X(05).                           
+ca5209         05  PRMMONFI-FILIALE        PIC X(05).                           
+ca5209         05  PRMMONFI-DATARIF        PIC X(10).                           
+ca5209         05  FILLER                   PIC X(60).                          
+ca5209     03  PRMMONFI-OUTPUT.                                                 
+ca5209         05  PRMMONFI-RET-CODE       PIC X(02).                           
+ca5209             88 PRMMONFI-OK         VALUE '00'.                           
+ca5209             88 PRMMONFI-ERR-IN     VALUE '01'.                           
+ca5209             88 PRMMONFI-ERR-DB     VALUE '02'.                           
+ca5209         05  PRMMONFI-MSG-ERRORE    PIC X(30).                            
+ca5209         05  PRMMONFI-SQLCODE        PIC S9(5) COMP-3.                    
+ca5209         05  PRMMONFI-FLAG           PIC X(01).                           
+ca5209         05  FILLER                PIC X(44).                             
+ca5209                                                                          
+ca5209 01 CODICE-BANCA-5                 PIC X(05).                             
+ca5209 01 FILLER REDEFINES CODICE-BANCA-5.                                      
+ca5209    02 CODICE-BANCA-2              PIC X(02).                             
+ca5209    02 CODICE-BANCA-3              PIC X(03).                             
+ca5209 01  MONO-OPERATORE                PIC X(01).                             
+ca5209     88 SI-MONO-OPER                   VALUE 'Y'.                         
+ca5209     88 NO-MONO-OPER                   VALUE 'N'.                         
+                                                                                
+      *--> MoD. PRMGAPRI acquisizione Dati Da PRTBAPRI                          
+       77  PRMGAPRI                      PIC  X(08) VALUE 'PRMGAPRI'.           
+           COPY PRCGAPRI.                                                       
+       01  WS-MATRICOLA-IN               PIC X(08).                             
+       01  WS-FORMA-TECN                 PIC X(05).                             
+       01  TABELLA-MATRICOLE             PIC X(08).                             
+           88 MATRICOLA-NON-ABIL             VALUE 'TA00097 '                   
+                                                   'TA00150 '                   
+                                                   'TA00672 '                   
+                                                   'TA00001 '                   
+CA1014                                             'TA00230 '                   
+                                                   '0804PROF'                   
+TS1014                                             'UGIS0804'                   
+                                                   'CS00BSPE'                   
+                                                   'IKP0RCUT'.                  
+       01  SEDE-AREA-APPO               PIC S9(5)V USAGE COMP-3 VALUE 0.        
+                                                                                
+      *-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+      *-----------------------------------------------------------------        
+           COPY IKP0CMAT.                                                       
+      *-----------------------------------------------------------------        
+       PROCEDURE DIVISION USING IKP0MAT.                                        
+      *-----------------------------------------------------------------        
+      DDECLARATIVES.                                                            
+      DCBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+      D    DISPLAY DEBUG-LINE ' ' PGM DEBUG-NAME.                               
+      D    EXIT.                                                                
+      DEND DECLARATIVES.                                                        
+      *-----------------------------------------------------------------        
+       IKPRMATR-INIZIO.                                                         
+      *-----------------------------------------------------------------        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+                                                                                
+CA5209     CALL XSOL-XSOLRENV   USING XSOLCENV.                                 
+           display '----------------------------------'                         
+           display ' WS-MATRICOLA-IN ' WS-MATRICOLA-IN                          
+           display ' XSOL-IMS.  ' XSOL-IMS.                                     
+           display ' XSOL-IMS-TRAN  ' XSOL-IMS-TRAN                             
+           display ' XSOL-IMS-PSB  ' XSOL-IMS-PSB                               
+           display ' XSOL-IMS-LTERM  ' XSOL-IMS-LTERM                           
+           display ' XSOL-IMS-IODAT  ' XSOL-IMS-IODAT                           
+           display ' XSOL-IMS-IOTIM  ' XSOL-IMS-IOTIM                           
+           display ' XSOL-IMS-FMT  ' XSOL-IMS-FMT                               
+           display ' XSOL-IMS-USER  ' XSOL-IMS-USER                             
+           display ' XSOL-IMS-IMSID  ' XSOL-IMS-IMSID                           
+           display ' XSOL-IMS-RELE  ' XSOL-IMS-RELE                             
+           display ' XSOL-IMS-REGTY  ' XSOL-IMS-REGTY                           
+           display ' XSOL-IMS-REGID  ' XSOL-IMS-REGID                           
+           display ' XSOL-IMS-SHRQ  ' XSOL-IMS-SHRQ                             
+           display ' XSOL-IMS-STCUS  ' XSOL-IMS-STCUS                           
+           display ' XSOL-CICS  ' XSOL-CICS                                     
+           display '----------------------------------'                         
+           IF XSOL-IMS-TRAN = 'GCU0APCU' OR XSOL-IMS-PSB = 'GCU0APCU'           
+              INITIALIZE WS-MATRICOLA-IN                                        
+              MOVE XSOL-IMS-USER TO WS-MATRICOLA-IN                             
+              PERFORM CALL-PRMGAPRI                                             
+           END-IF.                                                              
+TS0265     IF  MATIN-MATRICOLA-CTR(1:4) = 'IKP0'                                
+CA1214     OR  MATIN-MATRICOLA-CTR(1:4) = 'IKPG'                                
+ESGA       OR  MATIN-MATRICOLA-CTR(1:4) = 'IKPE'                                
+ESGA       OR  MATIN-MATRICOLA-CTR(3:5) IS NOT NUMERIC                          
+TS0265     OR  MATIN-MATRICOLA-CTR    IS NUMERIC                                
+TS0265     OR  MATIN-MATRICOLA-CTR      = 'ASSOCIA'                             
+ca5328*    OR ( XSOL-IMS-TRAN = 'GCU0APCU' AND OAPRI-DIP-LAV = 200)             
+ca5328*    OR (XSOL-IMS-PSB = 'GCU0APCU' AND OAPRI-DIP-LAV = 200)               
+ca5328*    OR ( XSOL-IMS-TRAN = 'GCU0APCU' AND OAPRI-DIP-LAV = 34312)           
+ca5328*    OR (XSOL-IMS-PSB = 'GCU0APCU' AND OAPRI-DIP-LAV = 34312)             
+ca5328*    OR ( XSOL-IMS-TRAN = 'GCU0APCU' AND OAPRI-DIP-LAV = 1031)            
+ca5328*    OR (XSOL-IMS-PSB = 'GCU0APCU' AND OAPRI-DIP-LAV = 1031)              
+ca5328     OR ( XSOL-IMS-TRAN = 'GCU0APCU' )                                    
+ca5328     OR (XSOL-IMS-PSB = 'GCU0APCU' )                                      
+TS0265         SET MATOU-ABILITATA-NO TO TRUE                                   
+TS0265         SET MATOU-FT-ABIL-NO  TO TRUE                                    
+TS0265     ELSE                                                                 
+               IF TORRE = 'C0'                                                  
+BA             OR TORRE = 'BA'                                                  
+                  PERFORM CONTROLLI-INIZIALI                                    
+BA                IF  TORRE = 'BA'                                              
+BA                    MOVE 'P' TO AMBIENTE                                      
+BA                END-IF                                                        
+                  IF RC-OK OF MATRC-RC                                          
+                     IF AMBIENTE = 'S'                                          
+                         PERFORM CERCA-MATRICOLA-S                              
+                     ELSE                                                       
+                         PERFORM CERCA-MATRICOLA-P                              
+                     END-IF                                                     
+                  END-IF                                                        
+                  IF RC-OK OF MATRC-RC                                          
+                     PERFORM CERCA-FT                                           
+                  END-IF                                                        
+               ELSE                                                             
+                   SET MATOU-ABILITATA-NO TO TRUE                               
+                   SET MATOU-FT-ABIL-NO  TO TRUE                                
+               END-IF                                                           
+TS0265     END-IF                                                               
+      *    display ' MATOU-MATRICOLA-ABILITATA '                                
+      *              MATOU-MATRICOLA-ABILITATA                                  
+      *    display ' MATOU-FT ' MATOU-FT                                        
+                                                                                
+           PERFORM CONTROLLI-FINALI.                                            
+      *-----------------------------------------------------------------        
+       IKPRMATR-FINE.                                                           
+      *-----------------------------------------------------------------        
+           GOBACK.                                                              
+                                                                                
+      *-----------------------------------------------------------------        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *-----------------------------------------------------------------        
+           INITIALIZE MATOU.                                                    
+           CALL SISBRCR2                USING CODICI-CASSA.                     
+           CALL SYSTDACP                USING SYSTCACP.                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-INIZIALI SECTION.                                              
+      *-----------------------------------------------------------------        
+           EVALUATE TRUE                                                        
+           WHEN MATIN-MATRICOLA-CTR    = SPACES                                 
+               MOVE 'ERR'                  TO MATRC-RC                          
+               MOVE 242                    TO MATRC-CODICE                      
+               MOVE 'PARAMETRI RICERCA NON VALIDI ' TO MATRC-SQLERRMC           
+               DISPLAY 'MATIN-MATRICOLA-CTR  'MATIN-MATRICOLA-CTR               
+                   ' MATIN-FT             'MATIN-FT                             
+           WHEN MATIN-FT               = SPACES                                 
+               MOVE 'ERR'                  TO MATRC-RC                          
+               MOVE 242                    TO MATRC-CODICE                      
+               MOVE 'PARAMETRI RICERCA NON VALIDI ' TO MATRC-SQLERRMC           
+               DISPLAY 'MATIN-MATRICOLA-CTR  'MATIN-MATRICOLA-CTR               
+                   ' MATIN-FT             'MATIN-FT                             
+           END-EVALUATE.                                                        
+                                                                                
+           MOVE MATIN-MATRICOLA-CTR        TO WS-MATRICOLA-IN                   
+                                              TABELLA-MATRICOLE.                
+           MOVE MATIN-FT                   TO WS-FORMA-TECN                     
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CERCA-MATRICOLA-S SECTION.                                               
+      *-----------------------------------------------------------------        
+           IF  MATIN-MATRICOLA-CTR =  'UI44507 '                                
+            OR MATIN-MATRICOLA-CTR =  'US01437 '                                
+            OR MATIN-MATRICOLA-CTR =  'UI44360 '                                
+ca5209         PERFORM CALL-PRMGAPRI                                            
+ca5209         INITIALIZE MONO-OPERATORE                                        
+ca5209         PERFORM CONTROLLA-MONOOPERATORE                                  
+ca5209                                                                          
+ca5209         IF NO-MONO-OPER                                                  
+ca5209            SET MATOU-ABILITATA-SI TO TRUE                                
+ca5209         ELSE                                                             
+ca5209            SET MATOU-ABILITATA-NO TO TRUE                                
+ca5209         END-IF                                                           
+CA5209     ELSE                                                                 
+ASCMAT         IF MATRICOLA-NON-ABIL                                            
+ASCMAT            SET MATOU-ABILITATA-NO TO TRUE                                
+ASCMAT         ELSE                                                             
+                  SET MATOU-ABILITATA-SI       TO TRUE                          
+                  PERFORM CALL-PRMGAPRI                                         
+CA5209         END-IF                                                           
+CA5209     END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CERCA-MATRICOLA-P SECTION.                                               
+      *-----------------------------------------------------------------        
+           SET MATOU-TEMP-SI               TO TRUE                              
+ca1054     IF  MATIN-MATRICOLA-CTR(1:4)=  'US01101'                             
+ca1054     OR  MATIN-MATRICOLA-CTR(1:4)=  'US01437'                             
+ca1054*                                   Rotondo                               
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UI45160'                             
+ca1054*                                   Ferrari                               
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UI44507'                             
+ca1054*                                   Ciampitti                             
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UR00823'                             
+ca1054*                                   Carbone                               
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UI44328'                             
+ca1054*                                   Capalbo                               
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UI44275'                             
+ca1054*                                   Asnaghi                               
+ca1054*    OR  MATIN-MATRICOLA-CTR =      'UI50651'                             
+                                                                                
+               SET MATOU-ABILITATA-SI  TO TRUE                                  
+           END-IF                                                               
+           IF MATRICOLA-NON-ABIL                                                
+               SET MATOU-ABILITATA-NO TO TRUE                                   
+           ELSE                                                                 
+      *-- DECODIFICA MATRICOLA DIPENDENZA                                       
+              PERFORM  CALL-PRMGAPRI                                            
+CA1142*        IF MATOU-DIP-LAV = 200                                           
+CA1157*        OR MATOU-DIP-LAV = 3200                                          
+CA1250*        OR SEDE-AREA-APPO = 5913                                         
+CA1250*        OR SEDE-AREA-APPO = 5301                                         
+CA1277*        OR SEDE-AREA-APPO = 5914                                         
+CA1277*        OR SEDE-AREA-APPO = 5922                                         
+CA1277*        OR SEDE-AREA-APPO = 5917                                         
+CA1280*        OR SEDE-AREA-APPO = 5916                                         
+CA1280*        OR SEDE-AREA-APPO = 5920                                         
+CA1280**       OR SEDE-AREA-APPO = 5307                                         
+CA1280**       OR SEDE-AREA-APPO = 5309                                         
+CA1280*        OR SEDE-AREA-APPO = 5310                                         
+CA1255*        OR  MATIN-MATRICOLA-CTR =      'UR00823'                         
+CA1255*        OR  MATIN-MATRICOLA-CTR =      'US01437'                         
+ca1054*        OR  MATIN-MATRICOLA-CTR =      'UI44507'                         
+                                                                                
+ca5209         INITIALIZE MONO-OPERATORE                                        
+               IF TORRE = 'C0'                                                  
+ca5328*        AND (MATOU-DIP-LAV = 31385                                       
+ca5328*         OR MATOU-DIP-LAV = 8687)                                        
+ca5209*        AND AMBIENTE = 'S'                                               
+ca5209            PERFORM CONTROLLA-MONOOPERATORE                               
+ca5209         ELSE                                                             
+ca5209            SET NO-MONO-OPER TO TRUE                                      
+ca5209         END-IF                                                           
+               display 'MONO-OPERATORE ' MONO-OPERATORE                         
+BA             IF TORRE = 'BA'                                                  
+C0             OR (TORRE = 'C0'  AND                                            
+GG3043             MATOU-DIP-LAV NOT = 9090)                                    
+CA1142            SET MATOU-ABILITATA-SI TO TRUE                                
+CA1142         ELSE                                                             
+CA1142            SET MATOU-ABILITATA-NO TO TRUE                                
+CA1142         END-IF                                                           
+               IF TORRE = 'C0'                                                  
+CA1142            AND SI-MONO-OPER                                              
+CA1142            SET MATOU-ABILITATA-NO TO TRUE                                
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+                                                                                
+ca5209*-----------------------------------------------------------------        
+ca5209 CONTROLLA-MONOOPERATORE SECTION.                                         
+CA5209*-----------------------------------------------------------------        
+CA5209     INITIALIZE AREA-PRMMONFI                                             
+CA5209                                                                          
+CA5209     MOVE SPACES                   TO CODICE-BANCA-5                      
+CA5209     MOVE SPACES                   TO CODICE-BANCA-3                      
+CA5209     MOVE CODICE-BANCA             TO CODICE-BANCA-2                      
+CA5209     MOVE CODICE-BANCA-5           TO PRMMONFI-ISTI                       
+CA5209     MOVE MATOU-DIP-LAV            TO PRMMONFI-FILIALE                    
+CA5209     MOVE SYST-DATE-DB2            TO PRMMONFI-DATARIF                    
+                                                                                
+           DISPLAY ' CODICE-BANCA-5   ' CODICE-BANCA-5                          
+           DISPLAY ' CODICE-BANCA-3   ' CODICE-BANCA-3                          
+           DISPLAY ' CODICE-BANCA-2   ' CODICE-BANCA-2                          
+           DISPLAY ' PRMMONFI-ISTI    ' PRMMONFI-ISTI                           
+           DISPLAY ' PRMMONFI-FILIALE ' PRMMONFI-FILIALE                        
+           DISPLAY ' PRMMONFI-DATARIF ' PRMMONFI-DATARIF                        
+                                                                                
+CA5209     CALL LT-PRMMONFI           USING AREA-PRMMONFI.                      
+CA5209                                                                          
+           DISPLAY ' PRMMONFI-RET-CODE ' PRMMONFI-RET-CODE                      
+           DISPLAY ' PRMMONFI-FLAG     ' PRMMONFI-FLAG                          
+CA5209     IF PRMMONFI-RET-CODE = '00'                                          
+CA5209        IF PRMMONFI-FLAG = '1'                                            
+CA5209           SET SI-MONO-OPER TO TRUE                                       
+CA5209        ELSE                                                              
+CA5209           SET NO-MONO-OPER TO TRUE                                       
+CA5209        END-IF                                                            
+CA5209     ELSE                                                                 
+CA5209        IF PRMMONFI-RET-CODE = '01'                                       
+CA5209           SET   RC-WARNING    OF MATRC-RC                                
+CA5209                                   TO TRUE                                
+CA5209           MOVE PRMMONFI-MSG-ERRORE                                       
+CA5209                                   TO MATRC-SQLERRMC                      
+CA5209           MOVE 029                TO MATRC-CODICE                        
+CA5209        ELSE                                                              
+CA5209           SET   RC-BLOCCANTE  OF MATRC-RC                                
+CA5209                                   TO TRUE                                
+CA5209           MOVE PRMMONFI-MSG-ERRORE                                       
+CA5209                                   TO MATRC-SQLERRMC                      
+CA5209           MOVE 029                TO MATRC-CODICE                        
+CA5209        END-IF                                                            
+CA5209     END-IF.                                                              
+MM6279*SE MATRICOLA CON PROFILO 'W' (GESTORE VICTORY) SALTO 4EYES               
+MM6279     IF  OAPRI-ABIL1(35:1) = 'W'                                          
+MM6279         SET MATOU-ABILITATA-NO TO TRUE                                   
+MM6279     END-IF.                                                              
+           display ' MONO-OPERATORE ' MONO-OPERATORE .                          
+CA5209     EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CERCA-FT SECTION.                                                        
+      *-----------------------------------------------------------------        
+      *-- DECODIFICA MATRICOLA DIPENDENZA                                       
+           PERFORM CALL-IKP0RFT0.                                               
+           IF FT0OU-4EYES-SI                                                    
+              SET  MATOU-FT-ABIL-SI     TO TRUE                                 
+           ELSE                                                                 
+              IF FT0OU-4EYES-NO                                                 
+                 IF AMBIENTE = 'S'                                              
+                    SET  MATOU-FT-ABIL-SI     TO TRUE                           
+                 ELSE                                                           
+                    SET  MATOU-FT-ABIL-NO     TO TRUE                           
+                 END-IF                                                         
+              END-IF                                                            
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CALL-PRMGAPRI SECTION.                                                   
+      *-----------------------------------------------------------------        
+           INITIALIZE PRMGAPRI-AREA.                                            
+           INITIALIZE MATRC                                                     
+           DISPLAY 'WS-MATRICOLA-IN ' WS-MATRICOLA-IN                           
+           MOVE '1'                     TO IAPRI-TIPO-CHIAMATA.                 
+           MOVE WS-MATRICOLA-IN         TO IAPRI-CODOP.                         
+                                                                                
+           CALL PRMGAPRI             USING PRMGAPRI-AREA                        
+                                                                                
+           IF  OAPRI-RET-CODE = '03'                                            
+           AND AMBIENTE       = 'S'                                             
+               SET PRMGAPRI-OK          TO TRUE                                 
+               MOVE '9'                 TO OAPRI-ABIL1(35 : 1)                  
+               MOVE 9233                TO OAPRI-DIP-LAV                        
+           END-IF                                                               
+           IF  PRMGAPRI-OK                                                      
+               MOVE OAPRI-DIP-LAV       TO MATOU-DIP-LAV                        
+               MOVE 0                   TO SEDE-AREA-APPO                       
+               MOVE OAPRI-SEDE-AREA     TO SEDE-AREA-APPO                       
+           ELSE                                                                 
+               IF TORRE = 'C0' AND MATIN-FT = 'EBSWI'                           
+                 INITIALIZE MATRC                                               
+                 SET MATOU-ABILITATA-NO TO TRUE                                 
+               ELSE                                                             
+                 SET RC-BLOCCANTE OF MATRC-RC                                   
+                                           TO TRUE                              
+                 MOVE 029                TO MATRC-CODICE                        
+               END-IF                                                           
+           END-IF.                                                              
+           display 'MATOU-MATRICOLA-ABILITATA '                                 
+                                MATOU-MATRICOLA-ABILITATA.                      
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CALL-IKP0RFT0 SECTION.                                                   
+      *-----------------------------------------------------------------        
+           INITIALIZE IKP0FT0.                                                  
+                                                                                
+           MOVE WS-FORMA-TECN              TO FT0IN-FT.                         
+                                                                                
+           CALL IKP0RFT0                USING IKP0FT0.                          
+           IF RC-OK OF FT0RC                                                    
+               CONTINUE                                                         
+           ELSE                                                                 
+              DISPLAY PGM                                                       
+              DISPLAY PGM 'ERRORE IN ROUTINE ' IKP0RFT0                         
+              DISPLAY PGM 'RC............... ' FT0RC-RC                         
+              DISPLAY PGM 'ERRORE........... ' FT0RC-SQLERRMC                   
+              DISPLAY PGM                                                       
+              DISPLAY PGM 'FT0IN-FT......... ' FT0IN-FT                         
+              DISPLAY PGM                                                       
+              STRING   PGM FT0RC-SQLERRMC DELIMITED BY SIZE                     
+                                         INTO MATRC-SQLERRMC                    
+              MOVE FT0RC-CODICE            TO MATRC-CODICE                      
+              SET RC-BLOCCANTE OF MATRC    TO TRUE                              
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-FINALI SECTION.                                                
+      *-----------------------------------------------------------------        
+           IF MATIN-DEBUG-ON                                                    
+              IF RC-OK OF MATRC-RC                                              
+                 DISPLAY SKP PGM 'RC............. OK|'                          
+              ELSE                                                              
+                 DISPLAY SKP PGM 'RC............. ' MATRC-RC                    
+                 DISPLAY SKP PGM 'CODICE......... ' MATRC-CODICE                
+                 DISPLAY SKP PGM 'ERRORE......... ' MATRC-SQLERRMC              
+              END-IF                                                            
+           END-IF.                                                              
+           EXIT.                                                                

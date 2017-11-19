@@ -28,7 +28,6 @@ export const rollingSubstrings = (sourceString: string, substringLength: number)
 export const searchStringOccurrences = (stringToSearch: string, target: string) => {
     return rollingSubstrings(stringToSearch, target.length)
         .filter(stringAndPosition => stringAndPosition.string === target)
-        .map(stringAndPosition => stringAndPosition.position)
 }
 
 

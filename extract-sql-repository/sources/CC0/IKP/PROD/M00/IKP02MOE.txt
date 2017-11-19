@@ -1,0 +1,392 @@
+      * 12.053 16:24 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ...................................                                     
+      * 12.031 23:16 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------------------                                    
+      * 12.024 16:48 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ........................                                                
+      * 12.024 16:29 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ..........................                                              
+      * 12.024 15:01 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ................................                                        
+      * 12.024 14:29 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * .............................                                           
+      * 12.024 14:28 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ...........................                                             
+      * 12.024 11:57 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * .................................                                       
+      * 12.024 10:07 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ............................                                            
+      * 12.023 16:48 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ..............................                                          
+      * 12.023 15:49 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ............................                                            
+      * 12.023 15:48 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ....................................                                    
+      * 12.020 16:34 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ....................................                                    
+      * 12.020 15:51 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ................................                                        
+      * 12.019 16:57 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * ...........................                                             
+      * 12.019 16:34 IKP   EE14154 - DAL SANTO DEBORA (USUPD000)                
+      * .................................                                       
+      * 12.019 12:15 IKP  EE14154 - DAL SANTO DEBORA (USUPD000)                 
+      * ..................................                                      
+      * 12.019 12:13 IKP  EE14154 - DAL SANTO DEBORA (USUPD000)                 
+      * ..................................                                      
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02MOE.                                                    
+       AUTHOR.                                                                  
+      ******************************************************************        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .. OPERAZIONI DI AGGIORNAMENTO SU TABELLA IKPMEMO         *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .....................................06/2005 *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       01  PGM                              PIC X(08) VALUE 'IKP02MOE'.         
+       01  SAVE-SQLCODE                     PIC S9(09) COMP.                    
+       01  MESSAGGIO                        PIC X(80) VALUE SPACE.              
+       01  WRK-CONTO-NEW                    PIC S9(14)V USAGE COMP-3.           
+       01  HV-CONTATORE                     PIC S9(09) COMP-3.                  
+       01  SAVE-FUNZIONE                    PIC X(08) VALUE SPACES.             
+       01  SAVE-TABLE                       PIC X(18) VALUE SPACES.             
+                                                                                
+       01  IKP0RLOC                         PIC X(08) VALUE 'IKP0RLOC'.         
+           COPY IKP0CLOC.                                                       
+                                                                                
+       01  FILLER                           PIC 9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+           88  ERRORE-GENERICO-INPUT                  VALUE 4.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                       PIC 9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  SW-TIPO-FORMA-TEC                PIC 9(01) VALUE 0.                  
+              88 TIPO-UNIWEB                          VALUE 1.                  
+                                                                                
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                 PIC X(16).                          
+                                                                                
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR              PIC X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+                                                                                
+       01  IKP0RDBG                         PIC X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+                                                                                
+       01  SISBRCR2                         PIC X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAOE                                                
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+                                                                                
+           IF  NOT-ERRORE                                                       
+               PERFORM GESTIONE-AGG-LOCALE                                      
+           END-IF.                                                              
+                                                                                
+           PERFORM OPERAZIONI-FINALI.                                           
+                                                                                
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+                                                                                
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE                TO TRUE                                
+           INITIALIZE 2DBRC.                                                    
+           MOVE 2DBIN-RIGA               TO IKP0TABOE.                          
+           MOVE 'IKPMEMO'                TO 2DBRC-TABLE                         
+           IF  2DBIN-REMOTO NOT = 'N'                                           
+               SET  ERRORE-GENERICO-INPUT TO TRUE                               
+           END-IF.                                                              
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       GESTIONE-AGG-LOCALE SECTION.                                             
+      *----------------------------------------------------------------*        
+                                                                                
+           INITIALIZE IKP0LOC.                                                  
+                                                                                
+           MOVE 2DBIN-REMOTO     TO LOCIN-REMOTO                                
+           MOVE 2DBIN-AMBIENTE   TO LOCIN-AMBIENTE                              
+           MOVE 2DBIN-DEBUG      TO LOCIN-DEBUG                                 
+           MOVE 'X'              TO LOCIN-FUNZIONE                              
+           MOVE 2DBRC-TABLE      TO LOCIN-TABELLA                               
+                                                                                
+           CALL IKP0RLOC USING IKP0LOC.                                         
+           EVALUATE LOCRC-RC                                                    
+           WHEN '   '                                                           
+               IF LOCOU-CONNECT-YES                                             
+                  SET CONNESSIONE-APERTA TO TRUE                                
+               ELSE                                                             
+                  SET CONNESSIONE-CHIUSA TO TRUE                                
+               END-IF                                                           
+               PERFORM ELABORA-FUNZIONI-LOCALI                                  
+               IF LOCOU-GIRO-2-YES                                              
+               AND NOT-ERRORE                                                   
+               AND CONNESSIONE-APERTA                                           
+                   PERFORM FUNZIONE-RESET                                       
+                   PERFORM ELABORA-FUNZIONI-LOCALI                              
+               END-IF                                                           
+           WHEN 'ERR'                                                           
+                SET ERRORE-SQL TO TRUE                                          
+                MOVE LOCRC-SQLCODE   TO 2DBRC-CNT-SQLCODE                       
+                                        2DBRC-SQLCODE                           
+                MOVE LOCRC-SQLERRMC  TO  2DBRC-CNT-SQLERRMC                     
+                                         2DBRC-SQLERRMC                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       ELABORA-FUNZIONI-LOCALI SECTION.                                         
+      *----------------------------------------------------------------*        
+           EVALUATE 2DBIN-SQL-FUNZIONE                                          
+               WHEN 'INSERT01'                                                  
+                   PERFORM FUNZIONE-INSERT01                                    
+               WHEN 'UPDATE01'                                                  
+                   PERFORM FUNZIONE-UPDATE01                                    
+               WHEN 'UPDATE02'                                                  
+                   PERFORM FUNZIONE-UPDATE02                                    
+               WHEN 'UPDATE03'                                                  
+                   PERFORM FUNZIONE-UPDATE03                                    
+               WHEN 'UPDATE04'                                                  
+                   PERFORM FUNZIONE-UPDATE04                                    
+               WHEN OTHER                                                       
+                   SET ERRORE-GENERICO   TO TRUE                                
+           END-EVALUATE                                                         
+           EXIT.                                                                
+                                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-INSERT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               INSERT INTO IKPMEMO                                              
+                    (  IKPOE_TIMESTAMP                                          
+                    ,  IKPOE_DIP                                                
+                    ,  IKPOE_GESTORE                                            
+                    ,  IKPOE_REB                                                
+                    ,  IKPOE_REB_TIPO                                           
+                    ,  IKPOE_FT                                                 
+                    ,  IKPOE_NDG                                                
+                    ,  IKPOE_NDG_DESC                                           
+                    ,  IKPOE_CODOPER                                            
+                    ,  IKPOE_MATRICOLA_INS                                      
+                    ,  IKPOE_STATO                                              
+                    ,  IKPOE_TIMESTAMP_SIST                                     
+                    ,  IKPOE_MATRICOLA_SIST)                                    
+               VALUES                                                           
+                    ( CURRENT TIMESTAMP                                         
+                    , :IKPOE-DIP                                                
+                    , :IKPOE-GESTORE                                            
+                    , :IKPOE-REB                                                
+                    , :IKPOE-REB-TIPO                                           
+                    , :IKPOE-FT                                                 
+                    , :IKPOE-NDG                                                
+                    , :IKPOE-NDG-DESC                                           
+                    , :IKPOE-CODOPER                                            
+                    , :IKPOE-MATRICOLA-INS                                      
+                    , :IKPOE-STATO                                              
+                    , :IKPOE-TIMESTAMP-SIST                                     
+                    , :IKPOE-MATRICOLA-SIST)                                    
+           END-EXEC.                                                            
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               UPDATE IKPMEMO                                                   
+               SET    IKPOE_STATO          = 'L'                                
+               ,      IKPOE_TIMESTAMP_SIST = CURRENT TIMESTAMP                  
+               ,      IKPOE_MATRICOLA_SIST = :IKPOE-MATRICOLA-SIST              
+               WHERE  IKPOE_REB       = :IKPOE-REB                              
+               AND    IKPOE_REB_TIPO  = :IKPOE-REB-TIPO                         
+               AND    IKPOE_CODOPER   = :IKPOE-CODOPER                          
+               AND    IKPOE_STATO     = 'I'                                     
+           END-EXEC.                                                            
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           IF  SQLCODE NOT = ZERO AND NOT = +100                                
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE02 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               UPDATE IKPMEMO                                                   
+               SET    IKPOE_GESTORE        = :IKPOE-GESTORE                     
+               WHERE  IKPOE_REB       = :IKPOE-REB                              
+               AND    IKPOE_REB_TIPO  = :IKPOE-REB-TIPO                         
+               AND    IKPOE_CODOPER   = :IKPOE-CODOPER                          
+               AND    IKPOE_STATO     = 'I'                                     
+           END-EXEC.                                                            
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE03 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               UPDATE IKPMEMO                                                   
+               SET    IKPOE_STATO     = 'E'                                     
+               WHERE  IKPOE_REB       = :IKPOE-REB                              
+               AND    IKPOE_REB_TIPO  = :IKPOE-REB-TIPO                         
+               AND    IKPOE_CODOPER   = :IKPOE-CODOPER                          
+               AND    IKPOE_STATO     = 'I'                                     
+           END-EXEC.                                                            
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE04 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               UPDATE IKPMEMO                                                   
+               SET    IKPOE_DIP            = :IKPOE-DIP                         
+               WHERE  IKPOE_REB       = :IKPOE-REB                              
+               AND    IKPOE_REB_TIPO  = :IKPOE-REB-TIPO                         
+               AND    IKPOE_STATO     = 'I'                                     
+           END-EXEC.                                                            
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           IF  SQLCODE NOT = ZERO AND NOT +100                                  
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE              TO SAVE-SQLCODE                        
+               SET CONNESSIONE-CHIUSA    TO TRUE                                
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE     TO SQLCODE                             
+               ELSE                                                             
+                   SET ERRORE-SQL        TO TRUE                                
+                   MOVE SQLCODE          TO 2DBRC-CNT-SQLCODE                   
+                   MOVE SQLERRMC         TO 2DBRC-CNT-SQLERRMC                  
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :' DELIMITED BY SIZE                                  
+                  2DBRC-TABLE DELIMITED BY SPACE                                
+                  '-' DELIMITED BY SIZE                                         
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+                                                                                
+           IF  NOT ERRORE-SQL                                                   
+               PERFORM FUNZIONE-RESET                                           
+           END-IF.                                                              
+                                                                                
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11               TO 2DBRC-CODICE                        
+                   MOVE 999              TO 2DBRC-SQLCODE                       
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET  RC-BLOCCANTE     TO TRUE                                
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-GENERICO-INPUT                                       
+                   MOVE 104              TO 2DBRC-CODICE                        
+                   MOVE 999              TO 2DBRC-SQLCODE                       
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET  RC-BLOCCANTE     TO TRUE                                
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET  RC-WARNING       TO TRUE                                
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE     TO TRUE                                
+                   MOVE 99               TO 2DBRC-CODICE                        
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

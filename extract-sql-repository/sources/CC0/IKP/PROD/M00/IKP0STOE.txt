@@ -1,0 +1,319 @@
+      * 07.312 12:46        IKP  0000                                           
+      * DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                           
+      * 07.309 11:59        IKP  0000                                           
+      * FORZATO LA SEVERITY PER PROCEDURE NON STORED                            
+      * 07.307 19:18        IKP  0000                                           
+      * GESTITO IL CODICE PROCEDURA IN INPUT                                    
+      * 07.307 13:01        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.301 21:37        IKP  0000                                           
+      * IIIIIIIIIIIIIIIIIIIIIIIIIII                                             
+      * 07.301 21:35        IKP  0000                                           
+      * IIIIIIIIIIIIIIIIIIIIIIIIII                                              
+      * 06.272 10:41        IKP 0000                                            
+      * ---------------------------------                                       
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0STOE.                                                    
+       AUTHOR. ABACO-AL.                                                        
+      ****************************************************************          
+      *    PREPARAZIONE DEI MESSAGGI DI ERRORE DA PASSARE A WEB.     *          
+      *                                                              *          
+      ****************************************************************          
+      *                    MODIFICHE EFFETTUATE                      *          
+      *                 ==========================                   *          
+      *                                                              *          
+      * 21/09/00 - PRIMA PROMOZIONE DEL PROGRAMMA.                   *          
+      * ABACO-AL   (09:51. MODIFICHE NON EFFETTUATE).                *          
+      *                                                              *          
+      * 29/11/00 - GESTIONE DEL TIPO ONDE GESTIRE ROLLBACK.          *          
+      * ABACO-AL   (HH:MM. MODIFICHE SIGLATE CON "LA00BV").          *          
+      *                                                              *          
+      * 03/11/07 - GESTITO IL CODICE PROCEDURA IN INPUT.             *          
+      * ABACO-AL   (19:18. MODIFICHE SIGLATE CON "LA07B3").          *          
+      *                                                              *          
+      * 05/11/07 - FORZATO LA SEVERITY PER PROCEDURE NON STORED.     *          
+      * ABACO-AL   (11:59. MODIFICHE SIGLATE CON "LA07B5").          *          
+      *                                                              *          
+      * 07/11/07 - ISTRUZIONE PROVVISORIA DA ELIMINARE QUANDO OK.    *          
+      * ABACO-AL   (12:45. MODIFICHE SIGLATE CON "CAVA-E").          *          
+      *                                                              *          
+      * GG/MM/AA - ...............................................   *          
+      * USER-ID    (HH:MM. MODIFICHE SIGLATE CON "......").          *          
+      *                                                              *          
+      ****************************************************************          
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+DBG-->*SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+       FILE-CONTROL.                                                            
+       DATA DIVISION.                                                           
+       FILE SECTION.                                                            
+       WORKING-STORAGE SECTION.                                                 
+       77  PROGRAMMA                    PIC X(08) VALUE 'IKP0STOE'.             
+       77  TGMESS                       PIC X(08) VALUE 'TGMESS'.               
+           COPY TGMESS.                                                         
+       77  IKA0STOZ                     PIC X(08) VALUE 'IKA0STOZ'.             
+       77  MESSAGGIO                    PIC X(80) VALUE SPACE.                  
+DBG-->*77 MESSAGGIO-DBG                 PIC X(80) VALUE SPACE.                  
+DBG-->*77 SYSTEM-ORA                    PIC 9(08).                              
+       77  IND-DES                      PIC 9(03) COMP-3.                       
+       77  IND-DES-MAX                  PIC 9(03) COMP-3.                       
+       77  IND-MSG                      PIC 9(03) COMP-3.                       
+       77  IND-MSG-MAX                  PIC 9(03) COMP-3.                       
+       77  IND-VAL                      PIC 9(03) COMP-3.                       
+       77  IND-VAL-MAX                  PIC 9(03) COMP-3.                       
+LA07B3 77  ERRORE-PROC                  PIC X(03).                              
+LA07B3     88  ERRORE-PROC-NULLA            VALUE SPACE LOW-VALUE.              
+LA07B3     88  ERRORE-PROC-DEFAULT          VALUE 'IBX'.                        
+       77  QUADRA-APERTA                PIC X(01) VALUE X'AD'.                  
+       77  QUADRA-CHIUSA                PIC X(01) VALUE X'BD'.                  
+       77  SAVE-MARKER                  PIC X(08).                              
+       77  NOME-TABELLA                 PIC X(40) VALUE                         
+           'JAV0_SEGNALAZIONI_UTENTE'.                                          
+       01  TABELLA-DESCRIZIONI.                                                 
+           05  FILLER                   PIC X(22) VALUE                         
+               ':    ERRORE ORIGINARIO'.                                        
+           05  ORIGINARIO-COD           PIC 9(04).                              
+           05  ORIGINARIO-MSG           PIC X(100).                             
+LA00BV     05  ORIGINARIO-TIP           PIC X(01).                              
+           05  FILLER                   PIC X(22) VALUE                         
+               ':    ERRORE DERIVATO'.                                          
+           05  DERIVATO-COD             PIC 9(04).                              
+           05  DERIVATO-MSG             PIC X(100).                             
+LA00BV     05  DERIVATO-TIP             PIC X(01).                              
+       01  FILLER REDEFINES TABELLA-DESCRIZIONI.                                
+           05  TAB-DES-ELEMENTO OCCURS 2 TIMES.                                 
+               10  TAB-DES-DES          PIC X(22).                              
+               10  TAB-DES-COD          PIC 9(04).                              
+               10  TAB-DES-MSG          PIC X(100).                             
+LA00BV         10  TAB-DES-TIP          PIC X(01).                              
+       01  TABELLA-MESSAGGI.                                                    
+           05  FILLER.                                                          
+               10  FILLER               PIC X(04) VALUE 'IKA0'.                 
+LA00BV*        10  FILLER               PIC X(01) VALUE '0'.                    
+LA00BV         10  ERRORE-TIP1          PIC X(01) VALUE SPACE.                  
+               10  FILLER               PIC X(25) VALUE                         
+                   '      A T T E N Z I O N E'.                                 
+               10  ERRORE-TES           PIC X(75) VALUE SPACE.                  
+           05  FILLER.                                                          
+               10  FILLER               PIC X(04) VALUE 'IKA0'.                 
+LA00BV*        10  FILLER               PIC X(01) VALUE '0'.                    
+LA00BV         10  ERRORE-TIP2          PIC X(01) VALUE SPACE.                  
+               10  ERRORE-MSG           PIC X(100).                             
+           05  FILLER.                                                          
+               10  FILLER               PIC X(04) VALUE 'IKA0'.                 
+LA00BV*        10  FILLER               PIC X(01) VALUE '0'.                    
+LA00BV         10  ERRORE-TIP3          PIC X(01) VALUE SPACE.                  
+               10  FILLER               PIC X(16) VALUE                         
+                   'CODICE ERRORE = '.                                          
+               10  ERRORE-COD           PIC 9(04).                              
+               10  FILLER               PIC X(80) VALUE SPACE.                  
+       01  FILLER REDEFINES TABELLA-MESSAGGI.                                   
+           05  TAB-MSG-ELEMENTO OCCURS 3 TIMES.                                 
+               10  TAB-MSG-PRO          PIC X(04).                              
+               10  TAB-MSG-TIP          PIC X(01).                              
+               10  TAB-MSG-MSG          PIC X(100).                             
+       01  TABELLA-VALORI.                                                      
+           05  TAB-VAL-ELEMENTO OCCURS 300 TIMES.                               
+               10  TAB-VAL-VAL          PIC X(5000) VALUE SPACE.                
+                   88  TAB-VAL-FINE                 VALUE SPACE.                
+       77  NOME-TABELLA-CXR             PIC X(40) VALUE                         
+           'CXR_MESSAGE'.                                                       
+       LINKAGE SECTION.                                                         
+           COPY IKA0ELM2.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKA0ELM2-DIALOG.                                
+      *================================================================*        
+       INIZIO SECTION.                                                          
+DBG-->*    ACCEPT SYSTEM-ORA FROM TIME                                          
+DBG-->*    MOVE 'INIZIO PROGRAMMA' TO MESSAGGIO-DBG                             
+DBG-->*    PERFORM DISPLAY-DBG                                                  
+DBG-->*    DISPLAY '    IKA0ELM2-RC........ = ' IKA0ELM2-RC                     
+DBG-->*    DISPLAY '    IKA0ELM2-VALUE..... = '                                 
+DBG-->*            IKA0ELM2-VALUE(1:IKA0ELM2-VALUE-LEN)                         
+           PERFORM OPERAZIONI-INIZIALI                                          
+           PERFORM TRATTAMENTO-STANDARD                                         
+GIGIO *    MOVE 777 TO IKA0ELM2-RC                                              
+GIGIO *    MOVE 'SIMULAZIONE DI ERRORE SU ERRORE' TO IKA0ELM2-VALUE             
+           IF IKA0ELM2-RC NOT = ZERO                                            
+               PERFORM TRATTAMENTO-RISERVA                                      
+           END-IF.                                                              
+       FINE.                                                                    
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+DBG-->*    MOVE 'OPERAZIONI-INIZIALI' TO MESSAGGIO-DBG                          
+DBG-->*    PERFORM DISPLAY-DBG                                                  
+           DIVIDE LENGTH OF TABELLA-DESCRIZIONI BY                              
+                  LENGTH OF TAB-DES-ELEMENTO(1)                                 
+                  GIVING IND-DES-MAX                                            
+           DIVIDE LENGTH OF TABELLA-MESSAGGI BY                                 
+                  LENGTH OF TAB-MSG-ELEMENTO(1)                                 
+                  GIVING IND-MSG-MAX                                            
+           DIVIDE LENGTH OF TABELLA-VALORI BY                                   
+                  LENGTH OF TAB-VAL-ELEMENTO(1)                                 
+                  GIVING IND-VAL-MAX                                            
+           MOVE IKA0ELM2-VALUE TO ORIGINARIO-MSG                                
+                                  ERRORE-MSG                                    
+LA07B3     MOVE IKA0ELM2-RC-PROC TO ERRORE-PROC                                 
+LA07B3     IF ERRORE-PROC-NULLA                                                 
+LA07B3         SET ERRORE-PROC-DEFAULT TO TRUE                                  
+LA07B3     END-IF                                                               
+           MOVE IKA0ELM2-RC TO ORIGINARIO-COD                                   
+                               ERRORE-COD                                       
+LA00BV     MOVE IKA0ELM2-SEP-CHAR TO ORIGINARIO-TIP                             
+LA00BV                               DERIVATO-TIP                               
+LA00BV                               ERRORE-TIP1                                
+LA00BV                               ERRORE-TIP2                                
+LA00BV                               ERRORE-TIP3                                
+           MOVE IKA0ELM2-MARKER TO SAVE-MARKER                                  
+           INITIALIZE IKA0ELM2-DIALOG                                           
+           MOVE SAVE-MARKER TO IKA0ELM2-MARKER.                                 
+       OPERAZIONI-INIZIALI-EX.                                                  
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-STANDARD SECTION.                                            
+      *----------------------------------------------------------------*        
+DBG-->*    MOVE 'TRATTAMENTO-STANDARD' TO MESSAGGIO-DBG                         
+DBG-->*    PERFORM DISPLAY-DBG                                                  
+           MOVE NOME-TABELLA-CXR TO IKA0ELM2-TAB-NAME                           
+           MOVE 'ER' TO IKA0ELM2-TYPE-PREC                                      
+           PERFORM VARYING IND-MSG FROM 1 BY 1                                  
+                   UNTIL IND-MSG > 1 OR                                         
+                         IKA0ELM2-RC NOT = ZERO                                 
+               MOVE 'SC' TO IKA0ELM2-TYPE                                       
+LA07B3*        STRING 'IBX0'ERRORE-COD DELIMITED BY SIZE                        
+LA07B3         STRING ERRORE-PROC DELIMITED BY SIZE                             
+                      '0' DELIMITED BY SIZE                                     
+                      ERRORE-COD DELIMITED BY SIZE                              
+                 INTO TAB-VAL-VAL(1)                                            
+               END-STRING                                                       
+               PERFORM CALL-TGTBMESS                                            
+               MOVE TG-MESSAGGIO         TO TAB-VAL-VAL(2)                      
+LA07B5         IF ERRORE-PROC = 'IBX' OR                                        
+LA07B5                          'IKA' OR                                        
+LA07B5                          'IKC' OR                                        
+LA07B5                          'IKP'                                           
+                   MOVE TG-TIPO-MESSAGGIO TO TAB-VAL-VAL(3)                     
+CAVA-E             MOVE 'E' TO TAB-VAL-VAL(3)                                   
+LA07B5         ELSE                                                             
+LA07B5             MOVE 'E' TO TAB-VAL-VAL(3)                                   
+LA07B5         END-IF                                                           
+               MOVE 'N'                  TO TAB-VAL-VAL(4)                      
+               MOVE '0'                  TO TAB-VAL-VAL(5)                      
+               MOVE TAB-MSG-TIP(IND-MSG) TO TAB-VAL-VAL(6)                      
+GIGIO *        MOVE SPACES               TO TAB-VAL-VAL(7)                      
+GIGIO          MOVE '********'           TO TAB-VAL-VAL(7)                      
+               PERFORM VARYING IND-VAL FROM 1 BY 1                              
+                       UNTIL IND-VAL > 7 OR                                     
+                             TAB-VAL-FINE(IND-VAL) OR                           
+                             IKA0ELM2-RC NOT = ZERO                             
+                   IF IND-VAL = 7 OR                                            
+                      TAB-VAL-FINE(IND-VAL + 1)                                 
+                       MOVE 'SR' TO IKA0ELM2-TYPE                               
+                   END-IF                                                       
+                   MOVE TAB-VAL-VAL(IND-VAL) TO IKA0ELM2-VALUE                  
+                   PERFORM CHIAMATA-IKA0STOZ                                    
+               END-PERFORM                                                      
+           END-PERFORM                                                          
+           IF IKA0ELM2-RC = ZERO                                                
+               MOVE 'CC' TO IKA0ELM2-TYPE                                       
+               PERFORM CHIAMATA-IKA0STOZ                                        
+           END-IF.                                                              
+       TRATTAMENTO-STANDARD-EX.                                                 
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+       CALL-TGTBMESS SECTION.                                                   
+      *-----------------------------------------------------------------        
+           INITIALIZE TGMESS-AREA-PARAMETRI                                     
+           MOVE '1'                    TO TG-FLAG-LETTURA                       
+                                       OF TGMESS-AREA-PARAMETRI.                
+LA07B3*    MOVE 'IBX'                  TO TG-COD-SERVIZIO                       
+LA07B3     MOVE ERRORE-PROC            TO TG-COD-SERVIZIO                       
+                                       OF TGMESS-AREA-PARAMETRI.                
+           MOVE ERRORE-COD             TO TG-PROG-MESSAGGIO                     
+                                       OF TGMESS-AREA-PARAMETRI.                
+           MOVE 'EN'                   TO TG-LINGUA-MESSAGGIO                   
+                                       OF TGMESS-AREA-PARAMETRI                 
+           MOVE SPACES                 TO TG-PAESE-MESSAGGIO                    
+                                       OF TGMESS-AREA-PARAMETRI.                
+           CALL TGMESS              USING TGMESS-AREA-PARAMETRI                 
+                                          TGMESS-AREA-DATI.                     
+           EVALUATE TRUE                                                        
+             WHEN OK                                                            
+                CONTINUE                                                        
+             WHEN ELEMENTO-NON-TROVATO                                          
+                MOVE 'MESSAGE NOT AVAILABLE' TO TG-MESSAGGIO                    
+             WHEN OTHER                                                         
+                MOVE SPACES             TO TG-MESSAGGIO                         
+                MOVE 'GENERIC ERROR '   TO TG-MESSAGGIO                         
+           END-EVALUATE.                                                        
+       CALL-TGTBMESS-EX.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       CHIAMATA-IKA0STOZ SECTION.                                               
+      *----------------------------------------------------------------*        
+DBG-->*    MOVE 'CHIAMATA-IKA0STOZ' TO MESSAGGIO-DBG                            
+DBG-->*    PERFORM DISPLAY-DBG                                                  
+           CALL IKA0STOZ USING IKA0ELM2-DIALOG.                                 
+       CHIAMATA-IKA0STOZ-EX.                                                    
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-RISERVA SECTION.                                             
+      *----------------------------------------------------------------*        
+DBG-->*    MOVE 'TRATTAMENTO-RISERVA' TO MESSAGGIO-DBG                          
+DBG-->*    PERFORM DISPLAY-DBG                                                  
+           MOVE IKA0ELM2-RC TO DERIVATO-COD                                     
+           MOVE IKA0ELM2-VALUE TO DERIVATO-MSG                                  
+           INITIALIZE IKA0ELM2-DIALOG                                           
+           MOVE SAVE-MARKER TO IKA0ELM2-MARKER                                  
+           MOVE 1 TO IKA0ELM2-FORM-LEN                                          
+           STRING NOME-TABELLA DELIMITED BY SPACE                               
+                  '=' DELIMITED BY SIZE                                         
+                  QUADRA-APERTA DELIMITED BY SIZE                               
+                  'PROCEDURA_MSG TIPO_MSG TESTO_MSG,' DELIMITED BY SIZE         
+             INTO IKA0ELM2-FORM-VALUE                                           
+             WITH POINTER IKA0ELM2-FORM-LEN                                     
+           END-STRING                                                           
+           PERFORM VARYING IND-DES FROM 1 BY 1                                  
+                   UNTIL IND-DES > IND-DES-MAX                                  
+               MOVE TAB-DES-MSG(IND-DES) TO ERRORE-MSG                          
+               MOVE TAB-DES-COD(IND-DES) TO ERRORE-COD                          
+               MOVE TAB-DES-DES(IND-DES) TO ERRORE-TES                          
+LA00BV         MOVE TAB-DES-TIP(IND-DES) TO ERRORE-TIP1                         
+LA00BV                                      ERRORE-TIP2                         
+LA00BV                                      ERRORE-TIP3                         
+               PERFORM VARYING IND-MSG FROM 1 BY 1                              
+                       UNTIL IND-MSG > IND-MSG-MAX                              
+                   STRING ' "' DELIMITED BY SIZE                                
+                          TAB-MSG-PRO(IND-MSG) DELIMITED BY SPACE               
+                          '" "' DELIMITED BY SIZE                               
+                          TAB-MSG-TIP(IND-MSG) DELIMITED BY SPACE               
+                          '" "' DELIMITED BY SIZE                               
+                          TAB-MSG-MSG(IND-MSG) DELIMITED BY SIZE                
+                          '"' DELIMITED BY SIZE                                 
+                     INTO IKA0ELM2-FORM-VALUE                                   
+                     WITH POINTER IKA0ELM2-FORM-LEN                             
+                   END-STRING                                                   
+               END-PERFORM                                                      
+           END-PERFORM                                                          
+           STRING QUADRA-CHIUSA DELIMITED BY SIZE                               
+             INTO IKA0ELM2-FORM-VALUE                                           
+             WITH POINTER IKA0ELM2-FORM-LEN                                     
+           END-STRING                                                           
+           SUBTRACT 1 FROM IKA0ELM2-FORM-LEN.                                   
+       TRATTAMENTO-RISERVA-EX.                                                  
+           EXIT.                                                                
+DBG-->**----------------------------------------------------------------        
+DBG-->* DISPLAY-DBG SECTION.                                                    
+DBG-->**----------------------------------------------------------------        
+DBG-->*    DISPLAY PROGRAMMA   '-'  SYSTEM-ORA  '-'  MESSAGGIO-DBG              
+DBG-->*    INITIALIZE MESSAGGIO-DBG.                                            
+DBG-->* DISPLAY-DBG-EX.                                                         
+DBG-->*    EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

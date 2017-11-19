@@ -1,0 +1,207 @@
+      * 07.281 14:31        IKP 0000                                            
+      * COMPILAZIONE                                                            
+      * 07.281 14:29        IKP 0000                                            
+      * COMPILAZIONE                                                            
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02IBL.                                                    
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. OPERAZIONI INQUIRY SU TABELLA IKPBLACKLIST *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... OTTOBRE 2007 *        
+      * DA PARTE DI ..................................... SARA EURIS   *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                             PIC  X(08) VALUE 'IKP02IBL'.         
+       77  SAVE-SQLCODE                    PIC S9(09) COMP.                     
+       77  HV-CONTATORE                    PIC S9(09) COMP-3.                   
+       77  MESSAGGIO                       PIC  X(80) VALUE SPACE.              
+       77  IND-XXX                         PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-BYP                     PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-MAX                     PIC  9(05) COMP-3 VALUE 19.          
+       01  FILLER                          PIC  9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR01-CHIUSO                       VALUE ZERO.               
+               88  CUR01-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR02-CHIUSO                       VALUE ZERO.               
+               88  CUR02-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR03-CHIUSO                       VALUE ZERO.               
+               88  CUR03-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                PIC  X(16).                          
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR             PIC  X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+       01  IKP0RDBG                        PIC  X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+       01  IKP0RUID                        PIC  X(08) VALUE 'IKP0RUID'.         
+           COPY IKP0CUID.                                                       
+       01  SISBRCR2                        PIC  X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TABL                                                
+           END-EXEC.                                                            
+                                                                                
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+           IF  NOT-ERRORE                                                       
+               EVALUATE 2DBIN-SQL-FUNZIONE                                      
+                   WHEN 'SELECT01'                                              
+                       PERFORM FUNZIONE-SELECT01                                
+                   WHEN OTHER                                                   
+                       SET ERRORE-GENERICO TO TRUE                              
+               END-EVALUATE                                                     
+           END-IF.                                                              
+           PERFORM OPERAZIONI-FINALI.                                           
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE                  TO TRUE.                             
+           INITIALIZE 2DBRC.                                                    
+           MOVE 2DBIN-RIGA                 TO IKP0TABBL.                        
+           MOVE 'IKPBLACKLIST'             TO 2DBRC-TABLE.                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPBL_TIPO                                                
+               ,      IKPBL_UID                                                 
+               ,      IKPBL_NUMRAP                                              
+               INTO  :IKPBL-TIPO                                                
+               ,     :IKPBL-UID                                                 
+               ,     :IKPBL-NUMRAP                                              
+               FROM   IKPBLACKLIST                                              
+               WHERE  IKPBL_TIPO     = :IKPBL-TIPO                              
+               AND    IKPBL_UID      = :IKPBL-UID                               
+               AND    IKPBL_NUMRAP   = :IKPBL-NUMRAP                            
+               WITH UR                                                          
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABBL          TO 2DBOU-RIGA                        
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11                 TO 2DBRC-CODICE                      
+                   MOVE 999             TO 2DBRC-SQLCODE                        
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET RC-BLOCCANTE        OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET RC-WARNING          OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   MOVE 03                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE       OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   MOVE 99                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE                TO SAVE-SQLCODE                      
+               SET CONNESSIONE-CHIUSA      TO TRUE                              
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE       TO SQLCODE                           
+               ELSE                                                             
+                   SET ERRORE-SQL          TO TRUE                              
+                   MOVE SQLCODE            TO 2DBRC-CNT-SQLCODE                 
+                   MOVE SQLERRMC           TO 2DBRC-CNT-SQLERRMC                
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :'         DELIMITED BY SIZE                          
+                  2DBRC-TABLE        DELIMITED BY SPACE                         
+                  '-'                DELIMITED BY SIZE                          
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE                    TO 2DBRC-SQLCODE.                    
+           EXIT.                                                                
+                                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

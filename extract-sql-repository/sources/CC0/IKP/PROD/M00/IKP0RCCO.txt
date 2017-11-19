@@ -1,0 +1,109 @@
+      * 14.252 11:02 IKP   EE07475 - MODENA MATTEO (USUPD010)                   
+      * MM4244 AGGIUNTO EBCMT                                                   
+      * 11.291 10:54 IKP   Y994052 - SPR TEZZA SARA (Y9US0000)                  
+      * COMPILAZIONE                                                            
+      * 11.072 15:39 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------------                                   
+      * 10.103 19:04        IKP  0000 US01101                                   
+      * --------------------------------------------------                      
+      * 09.236 13:16        IKP  0000 US01101                                   
+      * -----------------------------------                                     
+      * 09.233 14:36        IKP  0000 US01101                                   
+      * -------------------------------                                         
+      * 08.049 14:02        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 08.049 13:59        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 08.049 11:38        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.329 16:17        IKP  0000                                           
+      * 111111111111111111111111                                                
+      * 07.288 17:39        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.281 16:31        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.275 16:15        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.262 14:59        IKP 0000                                            
+      * IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII                                     
+      * 07.262 14:52        IKP 0000                                            
+      * IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII                                
+      * 07.262 11:26        IKP 0000                                            
+      * LLLLLLLLLLLLLLLLL                                                       
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0RCCO.                                                    
+      ******************************************************************        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................. ROUTINE *        
+      *----------------------------------------------------------------*        
+      * NOTE ...................................GESTIONE COMBO         *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. DICEMBRE 2003 *        
+      * DA PARTE DI ........................................... USI/VR *        
+      * ULTIMA MODIFICA ................................ DICEMBRE 2003 *        
+      * DA PARTE DI .................................... F.ALDRIGHETTI *        
+      ******************************************************************        
+       ENVIRONMENT  DIVISION.                                                   
+       CONFIGURATION  SECTION.                                                  
+      *SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       OBJECT-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+       DATA  DIVISION.                                                          
+                                                                                
+      *-----------------------------------------------------------------        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  PGM                       PIC X(11)  VALUE '*IKP0RCCO*'.             
+      *-----------------------------------------------------------------        
+       77  SKP                       PIC X(07)  VALUE '>>>>>>'.                 
+       77  SISBRCR2                  PIC X(08)  VALUE 'SISBRCR2'.               
+       COPY SISBRCR2.                                                           
+       77  IKP0RFT0                  PIC X(08)  VALUE 'IKP0RFT0'.               
+       COPY IKP0CFT0.                                                           
+      *-----------------------------------------------------------------        
+                                                                                
+      *-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+      *-----------------------------------------------------------------        
+           COPY IKP0CCCO.                                                       
+                                                                                
+      *-----------------------------------------------------------------        
+       PROCEDURE DIVISION USING IKP0CCO.                                        
+      *-----------------------------------------------------------------        
+       IKP0RCCO-INIZIO.                                                         
+      *-----------------------------------------------------------------        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           INITIALIZE IKP0FT0.                                                  
+           MOVE CCOIN-FT             TO FT0IN-FT.                               
+           CALL IKP0RFT0 USING IKP0FT0.                                         
+           INITIALIZE CCOOU.                                                    
+           MOVE 'N' TO CCOOU-VOCE-VUOTA                                         
+           MOVE 'N' TO CCOOU-VOCE-TUTTI                                         
+           MOVE 'N' TO CCOOU-TASTO-SBLOCCA                                      
+           MOVE 'N' TO CCOOU-VOCE-TUTTI-FIR                                     
+           IF  TORRE = 'E5'                                                     
+               EVALUATE TRUE                                                    
+               WHEN FT0OU-GWS-K-SI                                              
+      *            MOVE 'S' TO CCOOU-VOCE-VUOTA                                 
+                   MOVE 'S' TO CCOOU-TASTO-SBLOCCA                              
+               WHEN FT0OU-SWIFTMENU-SI                                          
+TS1291         WHEN FT0OU-ISPMENU-SI                                            
+MM4244         WHEN FT0OU-CMTMENU-SI                                            
+      *            MOVE 'S' TO CCOOU-VOCE-VUOTA                                 
+                   MOVE 'S' TO CCOOU-TASTO-SBLOCCA                              
+               WHEN FT0OU-ZIVNO-CLIENT-SI                                       
+                   MOVE 'S' TO CCOOU-VOCE-TUTTI                                 
+      *            MOVE 'S' TO CCOOU-VOCE-VUOTA                                 
+                   MOVE 'S' TO CCOOU-TASTO-SBLOCCA                              
+               END-EVALUATE                                                     
+           END-IF.                                                              
+           IF  FT0OU-AMMINISTRAZIONE-SI                                         
+               MOVE 'S'     TO CCOOU-VOCE-TUTTI-FIR                             
+           END-IF.                                                              
+      *-----------------------------------------------------------------        
+       IKP0RCCO-FINE.                                                           
+      *-----------------------------------------------------------------        
+           GOBACK.                                                              

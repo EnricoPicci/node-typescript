@@ -1,0 +1,1510 @@
+      * ....................................                                    
+      * EE37303 25/07/2017 ASPEND GESTIONE REB IN STATO PENDING                 
+      * ....................................                                    
+      * EBFTT AGGIUNTA ESTRAZIONE REB FT EBFTT SENZA RAPPORTI                   
+      * EE37303 ALESSANDRO SETTE 31/05/2017                                     
+      * ..............................                                          
+      * 16.011 14:37 IKP   EE14154 - DAL SANTO DEBORA (USUPD090)                
+      * ........................                                                
+      * 15.265 14:36 IKP   EE37303 - SETTE ALESSANDRO (USUPD090)                
+      * ALLINEATO CON MODIFICHE MYBANK DI IKP0SLRE                              
+      * 14.288 10:36 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * INIZIALIZZAZIONE RCFLAG                                                 
+      * 14.184 15:19 IKP   Y994052 - TEZZA SARA (USUPD010)                      
+      * AGGIUNTO WITH UR.                                                       
+      * 14.170 17:33 IKP   US01437 - CHERUBINI ALESSANDRA (USUPD090)            
+      * COPMPILAZIONE                                                           
+      * 14.170 17:16 IKP   Y994052 - TEZZA SARA (USUPD010)                      
+      * COMPILAZIONE                                                            
+      * 14.143 12:39 IKP   Y994052 - TEZZA SARA (USUPD010)                      
+      * COMPILAZIONE                                                            
+      * 14.113 14:42 IKP   Y994052 - TEZZA SARA (USUPD010)                      
+      * INSERITO FLAG "M" SU PROFILO SE STATO REB = "Z"                         
+      * 12.293 17:51 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * COPIA ULTIMA VERSIONE IKP0SLRE                                          
+      * 12.026 09:41 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM121Q - AMBIENTE VALIDAZIONE                                           
+      * 11.238 13:55 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------                                         
+      * 11.201 08:38 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * --------------------------------                                        
+      * 11.200 21:23 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------                                         
+      * 11.198 19:59 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ----------------------------                                            
+      * 11.196 12:37 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------------                                          
+      * 11.186 14:21 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -----------------------------                                           
+      * 11.148 12:27 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------------------                                    
+      * 11.088 18:03 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM113T - NUOVA VERSIONE PER RESTITUIRE ANCHE L'NDG                      
+      * 10.279 19:09        IKP  0000 US01651                                   
+      * ONE4C -------------------------                                         
+      * 10.258 21:55        IKP  0000 US01101                                   
+      * VERSIONE NUOVA PER O4C -- DIVISIONE E SOTTODIV                          
+      * 10.229 13:24        IKP  0000 US01651                                   
+      * FT 88999, 88BSN, 88BS1                                                  
+      * 09.363 18:54        IKP  0000 US01651                                   
+      * TOLTO DEBUG                                                             
+      * 09.363 09:51        IKP  0000 US01437                                   
+      * CAMBIATO TEST PER EB001 EB002                                           
+      * 09.280 14:17        IKP  0000 US01651                                   
+      * GM0998 - USO DELLA GTT DEFINITA (SENZA SESSION)                         
+      * 09.251 15:57        IKP  0000 US01651                                   
+      * GM0998 - VERSIONE 3: RESTITUISCE ANCHE DIPEN. REB                       
+      * 09.107 11:39        IKP  0000 US01651                                   
+      * GM094H - VERSIONE 2: RESTITUISCE ANCHE TIPO ANAGR.                      
+      * 08.238 10:45        IKP  0000                                           
+      * MODIFICA PER AMMI1                                                      
+      * 08.228 11:07        IKP  0000                                           
+      * MODIFICHE PER ESTERO                                                    
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP03LRE.                                                    
+       AUTHOR. LIGOZZI.                                                         
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. LISTA REB                                  *        
+      * PROGRAMMA ORIGINALE IKP0SLRE                                   *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... FEBBRAIO 2008*        
+      * DA PARTE DI .............................................. UGIS*        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+DBG-->*SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SOURCE-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                         PIC  X(08) VALUE 'IKP03LRE'.             
+       01  COMO-REB                    PIC  9(08).                              
+       01  NUMINS                      PIC  9(09).                              
+LMGG   77  HV-CONTATORE-GRUPPI         PIC S9(9) COMP-3 VALUE ZERO.             
+MYBANK 77  SAVE-SQLCODE                PIC S9(9) COMP-3 VALUE ZERO.             
+MYBANK 77  HV-CONTATORE-MYBANK         PIC S9(9) COMP-3 VALUE ZERO.             
+LMGG   01  SW-TIPO                     PIC  X(01) VALUE SPACE.                  
+LMGG       88 GRUPPI                              VALUE 'G'.                    
+LMGG       88 NORMALE                             VALUE SPACE.                  
+SP4113 01  SW-RACCORDO                 PIC  X(01) VALUE SPACE.                  
+SP4113     88 SI-TROVATO-RACC                     VALUE 'S'.                    
+SP4113     88 NO-TROVATO-RACC                     VALUE 'N'.                    
+       01  NUM                         PIC  9(18).                              
+       01  NUM18-CHR REDEFINES NUM.                                             
+           05  FILLER PIC X(10).                                                
+           05  NUM08-CHR.                                                       
+               10  FILLER              PIC  X(05).                              
+               10  NUM03-CHR           PIC  X(03).                              
+GM0998     05  FILLER REDEFINES NUM08-CHR.                                      
+GM0998         10  FILLER              PIC  X(03).                              
+GM0998         10  NUM05-CHR           PIC  X(05).                              
+GM094H 01  WS-RCDESC.                                                           
+GM094H     03  WS-DESC-ERR             PIC  X(32) VALUE SPACES.                 
+GM094H     03  FILLER                  PIC  X(05) VALUE ' SQL '.                
+GM094H     03  WS-SQLCODE              PIC  -999.                               
+GM094H     03  FILLER                  PIC  X(01) VALUE SPACES.                 
+GM094H     03  WS-SQLERRM              PIC  X(18) VALUE SPACES.                 
+GM094H                                                                          
+       01  TT-REB                      PIC  X(08).                              
+       01  TT-REBTIPO                  PIC  X(02).                              
+       01  TT-FT                       PIC  X(05).                              
+       01  TT-PROFILO                  PIC  X(08).                              
+       01  TT-RUOLO                    PIC  X(08).                              
+       01  TT-SERVIZIO                 PIC  X(03).                              
+       01  TT-AMMSIC                   PIC  X(01).                              
+       01  TT-REBDESCR                 PIC  X(64).                              
+       01  TT-SIADESCR                 PIC  X(64).                              
+       01  TT-SIA                      PIC  X(05).                              
+       01  TT-CODFISC                  PIC  X(16).                              
+       01  TT-FIRMATARIO               PIC  X(01).                              
+       01  TT-KEYA                     PIC  X(16).                              
+       01  TT-KEYA-LUNGA               PIC  X(24).                              
+       01  TT-TORREREB                 PIC  X(02).                              
+GM094H 01  TT-TIPO                     PIC  X(01).                              
+       01  TT-DIVISIONE                PIC  X(03).                              
+       01  TT-SOTTO-DIV                PIC  X(01).                              
+GM0998 01  TT-REBDIP                   PIC  X(05).                              
+GM113T 01  TT-NDG                      PIC  X(16).                              
+                                                                                
+       01  SISBRCR2                    PIC  X(08) VALUE 'SISBRCR2'.             
+           COPY SISBRCR2.                                                       
+                                                                                
+      *--> MOD. IKP0RFT0 RICERCA FORMA TECNICA E PARAMETRI RELATIVI             
+CA9363 01  IKP0RFT0                    PIC  X(08) VALUE 'IKP0RFT0'.             
+CA9363     COPY IKP0CFT0.                                                       
+CA9363                                                                          
+           EXEC SQL INCLUDE SQLCA      END-EXEC.                                
+                                                                                
+           EXEC SQL INCLUDE IKP0TAOP   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TAAN   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TARE   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TADR   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TADA   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TAFU   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TAMA   END-EXEC.                                
+           EXEC SQL INCLUDE IKP0TADO   END-EXEC.                                
+LMGG       EXEC SQL INCLUDE IKP0TAGG   END-EXEC.                                
+SP4113     EXEC SQL INCLUDE IKP0TAXX   END-EXEC.                                
+                                                                                
+       LINKAGE SECTION.                                                         
+       01 CODOPER                      PIC  X(32).                              
+       01 VERSIONE                     PIC S9(03)  COMP-3.                      
+       01 AMBIENTE-IBG                 PIC  X(01).                              
+       01 UID                          PIC  X(20).                              
+       01 KEYA                         PIC  X(16).                              
+       01 PERSONA                      PIC  X(02).                              
+       01 RC                           PIC  X(12).                              
+       01 RCDESC                       PIC  X(64).                              
+       01 RCFLAG                       PIC  X(01).                              
+      *================================================================*        
+       PROCEDURE DIVISION USING  CODOPER                                        
+                                 VERSIONE                                       
+                                 AMBIENTE-IBG                                   
+                                 UID                                            
+                                 KEYA                                           
+                                 PERSONA                                        
+                                 RC                                             
+                                 RCDESC                                         
+                                 RCFLAG.                                        
+      *================================================================*        
+DBG-->*DECLARATIVES.                                                            
+DBG-->*TRACE-PROGRAM SECTION.                                                   
+DBG-->*    USE FOR DEBUGGING ALL PROCEDURES.                                    
+DBG-->*SHOW-TRACE.                                                              
+DBG-->*                                                                         
+DBG-->*    DISPLAY PGM ' ' DEBUG-NAME ' ' DEBUG-CONTENTS.                       
+DBG-->*                                                                         
+DBG-->*END DECLARATIVES.                                                        
+      *----------------------------------------------------------------*        
+       INIZIO SECTION.                                                          
+      *----------------------------------------------------------------*        
+           PERFORM OPERAZIONI-INIZIALI                                          
+LMGG       IF  UID(1:3) = 'SIA'                                                 
+LMGG       OR  UID(1:3) = 'USI'                                                 
+LMGG           MOVE UID TO IKPGG-UID                                            
+LMGG           EXEC SQL SELECT COUNT(*)                                         
+LMGG                 INTO :HV-CONTATORE-GRUPPI                                  
+LMGG                 FROM IKPGRUPPI_USER                                        
+LMGG                  WHERE IKPGG_UID = :IKPGG-UID                              
+NEYES                 AND IKPGG_STATO µ= 'Y'                                    
+LMGG                  WITH UR                                                   
+LMGG           END-EXEC                                                         
+LMGG       END-IF                                                               
+           IF  RC = SPACES                                                      
+LMGG       AND HV-CONTATORE-GRUPPI = 0                                          
+LMGG           SET NORMALE TO TRUE                                              
+               PERFORM APERTURA-CURSORE                                         
+               PERFORM UNTIL SQLCODE NOT = ZERO                                 
+                   PERFORM LETTURA-CURSORE                                      
+MYBANK             MOVE 1 TO HV-CONTATORE-MYBANK                                
+MYBANK             IF  CODOPER = 'MYBANK'                                       
+MYBANK                 MOVE SQLCODE TO SAVE-SQLCODE                             
+MYBANKD                DISPLAY PGM ' IKPRE-REB      ' IKPRE-REB                 
+MYBANKD                DISPLAY PGM ' IKPRE-REB-TIPO ' IKPRE-REB-TIPO            
+MYBANKD                DISPLAY PGM ' UID            ' UID                       
+MYBANK                 EXEC SQL                                                 
+MYBANK                 SELECT COUNT(*)                                          
+MYBANK                   INTO :HV-CONTATORE-MYBANK                              
+MYBANK                   FROM IKPABILITAZIONI                                   
+MYBANK                  WHERE IKPAB_REB       = :IKPRE-REB                      
+MYBANK                    AND IKPAB_REB_TIPO  = :IKPRE-REB-TIPO                 
+MYBANK                    AND IKPAB_UID       = :UID                            
+MYBANK                    AND SUBSTR(IKPAB_ABIL1,INTEGER(144), 1) ^= '0'        
+NEYES                     AND IKPAB_PROG IN (1,2)                               
+MYBANK                   WITH UR                                                
+MYBANK                 END-EXEC                                                 
+MYBANK                 MOVE SAVE-SQLCODE     TO SQLCODE                         
+MYBANK             END-IF                                                       
+MYBANK             IF  HV-CONTATORE-MYBANK = 0                                  
+MYBANK                 MOVE 'S' TO IKPAN-STATO                                  
+MYBANK             END-IF                                                       
+                   IF  IKPRE-STATO = 'M'                                        
+ASPEND*            OR  IKPAN-STATO = 'S'                                        
+                       DISPLAY 'SCARTO REB ' IKPRE-REB ' PER MIGRAZIONE'        
+                   END-IF                                                       
+ASPEND             IF  IKPAN-STATO = 'S'                                        
+ASPEND                 DISPLAY 'SCARTO REB ' IKPRE-REB ' SOSPESO'               
+ASPEND             END-IF                                                       
+ASPEND             IF  IKPAN-STATO = 'P'                                        
+ASPEND                 DISPLAY 'SCARTO REB ' IKPRE-REB ' PER PENDING'           
+ASPEND             END-IF                                                       
+                   IF  IKPOP-STATO NOT = 'A'                                    
+                       DISPLAY 'SCARTO REB ' IKPRE-REB ' PER STATO'             
+                   END-IF                                                       
+                                                                                
+SP4113** SE STATO = 'Z' VERIFICO IN IKPRACCORDO SE PRESENTE IL DATO             
+SP4113** MIGRATO                                                                
+SP4113             DISPLAY PGM ' SQLCODE = ' SQLCODE                            
+SP4113             DISPLAY PGM ' IKPAN-STATO = ' IKPAN-STATO                    
+SP4113*                                                                         
+SP4113             IF  SQLCODE = ZERO                                           
+SP4113             AND IKPAN-STATO = 'Z'                                        
+SP4113                 DISPLAY PGM ' VERIFICO RACCORDO '                        
+SP4113                 PERFORM VERIFICA-RACCORDO                                
+SP4113             END-IF                                                       
+SP4113*                                                                         
+                   IF  SQLCODE = ZERO                                           
+                   AND IKPRE-STATO NOT = 'M'                                    
+ASPEND             AND IKPAN-STATO NOT = 'P'                                    
+                   AND IKPAN-STATO NOT = 'S'                                    
+                   AND IKPOP-STATO     = 'A'                                    
+GM121Q             AND (AMBIENTE-IBG   = 'V'                                    
+GM121Q             OR  (AMBIENTE-IBG NOT = 'V'                                  
+GM121Q             AND  IKPFU-STATO    = 'A'))                                  
+                       PERFORM VALORIZZA-AREE                                   
+                   END-IF                                                       
+               END-PERFORM                                                      
+               PERFORM CHIUSURA-CURSORE                                         
+           END-IF                                                               
+LMGG       IF  RC = SPACES                                                      
+LMGG       AND HV-CONTATORE-GRUPPI > 0                                          
+LMGG           SET GRUPPI TO TRUE                                               
+LMGG           PERFORM APERTURA-CURSORE                                         
+LMGG           PERFORM UNTIL SQLCODE NOT = ZERO                                 
+LMGG               PERFORM LETTURA-CURSORE                                      
+MYBANK             MOVE 1 TO HV-CONTATORE-MYBANK                                
+MYBANK             IF  CODOPER = 'MYBANK'                                       
+MYBANK                 MOVE SQLCODE TO SAVE-SQLCODE                             
+MYBANKD                DISPLAY PGM ' IKPRE-REB      ' IKPRE-REB                 
+MYBANKD                DISPLAY PGM ' IKPRE-REB-TIPO ' IKPRE-REB-TIPO            
+MYBANKD                DISPLAY PGM ' UID            ' UID                       
+MYBANK                 EXEC SQL                                                 
+MYBANK                 SELECT COUNT(*)                                          
+MYBANK                   INTO :HV-CONTATORE-MYBANK                              
+MYBANK                   FROM IKPABILITAZIONI                                   
+MYBANK                  WHERE IKPAB_REB       = :IKPRE-REB                      
+MYBANK                    AND IKPAB_REB_TIPO  = :IKPRE-REB-TIPO                 
+MYBANK                    AND IKPAB_UID       = :UID                            
+MYBANK                    AND SUBSTR(IKPAB_ABIL1,INTEGER(144), 1) ^= '0'        
+MYBANK                    AND NOT EXISTS (SELECT 1 FROM IKPGRUPPI_USER          
+MYBANK                    WHERE IKPAB_REB = IKPGG_REB                           
+MYBANK                    AND IKPAB_REB_TIPO = IKPGG_REB_TIPO                   
+MYBANK                    AND IKPGG_UID = IKPAB_UID                             
+NEYES                     AND IKPGG_STATO  µ= 'Y'  )                            
+NEYES                     AND IKPAB_PROG IN (1,2)                               
+                       UNION ALL                                                
+MYBANK                 SELECT COUNT(*)                                          
+MYBANK                   INTO :HV-CONTATORE-MYBANK                              
+MYBANK                   FROM IKPABILITAZIONI,                                  
+MYBANK                        IKPGRUPPI_USER                                    
+MYBANK                  WHERE IKPAB_REB       = :IKPRE-REB                      
+MYBANK                    AND IKPAB_REB_TIPO  = :IKPRE-REB-TIPO                 
+MYBANK                    AND IKPAB_UID       = :UID                            
+MYBANK                    AND SUBSTR(IKPAB_ABIL1,INTEGER(144), 1) ^= '0'        
+MYBANK                    AND IKPAB_REB = IKPGG_REB                             
+MYBANK                    AND IKPAB_REB_TIPO = IKPGG_REB_TIPO                   
+MYBANK                    AND IKPGG_UID = IKPAB_UID                             
+NEYES                     AND IKPAB_PROG IN (1,2)                               
+NEYES                     AND IKPGG_STATO  µ= 'Y'                               
+MYBANK                   WITH UR                                                
+MYBANK                 END-EXEC                                                 
+MYBANK                 MOVE SAVE-SQLCODE     TO SQLCODE                         
+MYBANK             END-IF                                                       
+MYBANK             IF  HV-CONTATORE-MYBANK = 0                                  
+MYBANK                 MOVE 'S' TO IKPAN-STATO                                  
+MYBANK             END-IF                                                       
+                   IF  IKPRE-STATO = 'M'                                        
+ASPEND*            OR  IKPAN-STATO = 'S'                                        
+                       DISPLAY 'SCARTO REB ' IKPRE-REB ' PER MIGRAZIONE'        
+                   END-IF                                                       
+ASPEND             IF  IKPAN-STATO = 'S'                                        
+ASPEND                 DISPLAY 'SCARTO REB ' IKPRE-REB ' SOSPESO'               
+ASPEND             END-IF                                                       
+ASPEND             IF  IKPAN-STATO = 'P'                                        
+ASPEND                 DISPLAY 'SCARTO REB ' IKPRE-REB ' PER PENDING'           
+ASPEND             END-IF                                                       
+                   IF  IKPOP-STATO NOT = 'A'                                    
+                       DISPLAY 'SCARTO REB ' IKPRE-REB ' PER STATO'             
+                   END-IF                                                       
+SP4113** SE STATO = 'Z' VERIFICO IN IKPRACCORDO SE PRESENTE IL DATO             
+SP4113** MIGRATO                                                                
+SP4113             DISPLAY PGM ' SQLCODE = ' SQLCODE                            
+SP4113             DISPLAY PGM ' IKPAN-STATO = ' IKPAN-STATO                    
+SP4113*                                                                         
+SP4113             IF  SQLCODE = ZERO                                           
+SP4113             AND IKPAN-STATO = 'Z'                                        
+SP4113                 DISPLAY PGM ' VERIFICA RACCORDO'                         
+SP4113                 PERFORM VERIFICA-RACCORDO                                
+SP4113             END-IF                                                       
+SP4113*                                                                         
+LMGG               IF  SQLCODE = ZERO                                           
+LMGG               AND IKPRE-STATO NOT = 'M'                                    
+ASPEND             AND IKPAN-STATO NOT = 'P'                                    
+LMGG               AND IKPAN-STATO NOT = 'S'                                    
+                   AND IKPOP-STATO     = 'A'                                    
+LMGG                   PERFORM VALORIZZA-AREE                                   
+LMGG               END-IF                                                       
+LMGG               IF  SQLCODE = ZERO                                           
+LMGG               AND IKPRE-STATO NOT = 'M'                                    
+ASPEND             AND IKPAN-STATO NOT = 'P'                                    
+LMGG               AND IKPOP-AMM-SICUR = 'S'                                    
+LMGG               AND IKPOP-STATO     = 'A'                                    
+LMGG                   MOVE 3 TO IKPFU-SERVIZIO                                 
+LMGG                   PERFORM VALORIZZA-AREE                                   
+LMGG               END-IF                                                       
+LMGG           END-PERFORM                                                      
+LMGG           PERFORM CHIUSURA-CURSORE                                         
+LMGG       END-IF                                                               
+           IF  RC = SPACES                                                      
+               PERFORM FAI-RISPOSTA                                             
+           END-IF                                                               
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+.          INITIALIZE RC RCDESC RCFLAG NUMINS.                                  
+      D    DISPLAY PGM '>LISTA REB, PER ' UID ' ' KEYA ' ' PERSONA.             
+GM094H*    EVALUATE VERSIONE                                                    
+GM094H*    WHEN 1                                                               
+      *        EXEC SQL                                                         
+      *             DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPLISTAREB_0        
+      *                     (REB         CHAR(8)  NOT NULL,                     
+      *                      REBTIPO     CHAR(2)  NOT NULL,                     
+      *                      FT          CHAR(5)  NOT NULL,                     
+      *                      PROFILO     CHAR(8)  NOT NULL,                     
+      *                      SERVIZIO    CHAR(3)  NOT NULL,                     
+      *                      AMMSIC      CHAR(1)  NOT NULL,                     
+      *                      REBDESCR    CHAR(64) NOT NULL,                     
+      *                      SIADESCR    CHAR(64) NOT NULL,                     
+      *                      SIA         CHAR(5)  NOT NULL,                     
+      *                      CODFISC     CHAR(16) NOT NULL,                     
+      *                      FIRMATARIO  CHAR(1)  NOT NULL,                     
+      *                      KEYA        CHAR(16) NOT NULL,                     
+      *                      TORREREB    CHAR(2)  NOT NULL,                     
+      *                      RUOLO       CHAR(8)  NOT NULL)                     
+      *                  ON COMMIT DROP TABLE                                   
+      *        END-EXEC                                                         
+      *        IF  SQLCODE NOT EQUAL ZERO                                       
+      *            MOVE 'CXRÙIKP00099'                TO RC                     
+      *            MOVE 'E'                           TO RCFLAG                 
+      *            MOVE 'ERRORE DECLARE TEMP TAB' TO RCDESC                     
+      *        END-IF                                                           
+GM094H*    WHEN 2                                                               
+GM094H*        EXEC SQL                                                         
+GM094H*             DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPLISTAREB_1        
+GM094H*                    (REB         CHAR(8)  NOT NULL,                      
+GM094H*                     REBTIPO     CHAR(2)  NOT NULL,                      
+GM094H*                     FT          CHAR(5)  NOT NULL,                      
+GM094H*                     PROFILO     CHAR(8)  NOT NULL,                      
+GM094H*                     SERVIZIO    CHAR(3)  NOT NULL,                      
+GM094H*                     AMMSIC      CHAR(1)  NOT NULL,                      
+GM094H*                     REBDESCR    CHAR(64) NOT NULL,                      
+GM094H*                     SIADESCR    CHAR(64) NOT NULL,                      
+GM094H*                     SIA         CHAR(5)  NOT NULL,                      
+GM094H*                     CODFISC     CHAR(16) NOT NULL,                      
+GM094H*                     FIRMATARIO  CHAR(1)  NOT NULL,                      
+GM094H*                     KEYA        CHAR(16) NOT NULL,                      
+GM094H*                     TORREREB    CHAR(2)  NOT NULL,                      
+GM094H*                     RUOLO       CHAR(8)  NOT NULL,                      
+GM094H*                     TIPO        CHAR(1)  NOT NULL)                      
+GM094H*                  ON COMMIT DROP TABLE                                   
+GM094H*        END-EXEC                                                         
+GM094H*        IF  SQLCODE NOT EQUAL ZERO                                       
+GM094H*            MOVE 'CXRÙIKP00099'            TO RC                         
+GM094H*            MOVE 'E'                       TO RCFLAG                     
+GM094H*            MOVE 'DECLARE TEMPORARY TABLE' TO WS-DESC-ERR                
+GM094H*            MOVE SQLCODE                   TO WS-SQLCODE                 
+GM094H*            MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                 
+GM094H*            MOVE WS-RCDESC                 TO RCDESC                     
+GM094H*        END-IF                                                           
+GM094H*    WHEN OTHER                                                           
+GM094H*        MOVE 'CXRÙIKP00099'            TO RC                             
+GM094H*        MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+GM094H*    END-EVALUATE.                                                        
+GM0998*    EVALUATE VERSIONE                                                    
+GM0998*    WHEN 3                                                               
+GM0998*        EXEC SQL                                                         
+GM0998*             DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPLISTAREB_2        
+GM0998*                    (REB         CHAR(8)  NOT NULL,                      
+GM0998*                     REBTIPO     CHAR(2)  NOT NULL,                      
+GM0998*                     FT          CHAR(5)  NOT NULL,                      
+GM0998*                     PROFILO     CHAR(8)  NOT NULL,                      
+GM0998*                     SERVIZIO    CHAR(3)  NOT NULL,                      
+GM0998*                     AMMSIC      CHAR(1)  NOT NULL,                      
+GM0998*                     REBDESCR    CHAR(64) NOT NULL,                      
+GM0998*                     SIADESCR    CHAR(64) NOT NULL,                      
+GM0998*                     SIA         CHAR(5)  NOT NULL,                      
+GM0998*                     CODFISC     CHAR(16) NOT NULL,                      
+GM0998*                     FIRMATARIO  CHAR(1)  NOT NULL,                      
+GM0998*                     KEYA        CHAR(16) NOT NULL,                      
+GM0998*                     TORREREB    CHAR(2)  NOT NULL,                      
+GM0998*                     RUOLO       CHAR(8)  NOT NULL,                      
+GM0998*                     TIPO        CHAR(1)  NOT NULL,                      
+GM0998*                     REBDIP      CHAR(5)  NOT NULL)                      
+GM0998*                  ON COMMIT DROP TABLE                                   
+GM0998*        END-EXEC                                                         
+GM0998*        IF  SQLCODE NOT EQUAL ZERO                                       
+GM0998*            MOVE 'CXRÙIKP00099'            TO RC                         
+GM0998*            MOVE 'E'                       TO RCFLAG                     
+GM0998*            MOVE 'DECLARE TEMPORARY TABLE' TO WS-DESC-ERR                
+GM0998*            MOVE SQLCODE                   TO WS-SQLCODE                 
+GM0998*            MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                 
+GM0998*            MOVE WS-RCDESC                 TO RCDESC                     
+GM0998*        END-IF                                                           
+GM0998*    END-EVALUATE.                                                        
+           IF  KEYA > ' '                                                       
+               MOVE 4 TO VERSIONE                                               
+               EXEC SQL                                                         
+                  DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPLISTAREB_K          
+                         (REB         CHAR(8)  NOT NULL,                        
+                            REBTIPO     CHAR(2)  NOT NULL,                      
+                            FT          CHAR(5)  NOT NULL,                      
+                            PROFILO     CHAR(8)  NOT NULL,                      
+                            SERVIZIO    CHAR(3)  NOT NULL,                      
+                            AMMSIC      CHAR(1)  NOT NULL,                      
+                            REBDESCR    CHAR(64) NOT NULL,                      
+                            SIADESCR    CHAR(64) NOT NULL,                      
+                            SIA         CHAR(5)  NOT NULL,                      
+                            CODFISC     CHAR(16) NOT NULL,                      
+                            FIRMATARIO  CHAR(1)  NOT NULL,                      
+                            KEYA        CHAR(24) NOT NULL,                      
+                            TORREREB    CHAR(2)  NOT NULL,                      
+                            RUOLO       CHAR(8)  NOT NULL,                      
+                            TIPO        CHAR(1)  NOT NULL,                      
+                            REBDIP      CHAR(5)  NOT NULL)                      
+                         ON COMMIT DROP TABLE                                   
+               END-EXEC                                                         
+               IF  SQLCODE NOT EQUAL ZERO                                       
+                   MOVE 'CXRÙIKP00099'            TO RC                         
+                   MOVE 'E'                       TO RCFLAG                     
+                   MOVE 'DECLARE TEMPORARY TABLE' TO WS-DESC-ERR                
+                   MOVE SQLCODE                   TO WS-SQLCODE                 
+                   MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                 
+                   MOVE WS-RCDESC                 TO RCDESC                     
+               END-IF                                                           
+           END-IF                                                               
+      D    DISPLAY PGM ' VERSIONE ' VERSIONE.                                   
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-AREE SECTION.                                                  
+      *----------------------------------------------------------------*        
+           MOVE IKPRE-REB          TO NUM                                       
+           MOVE NUM08-CHR          TO TT-REB                                    
+           MOVE IKPRE-REB-TIPO     TO TT-REBTIPO                                
+           MOVE IKPRE-DESCRIZIONE  TO TT-REBDESCR                               
+           MOVE IKPDR-VALORE(1:8)  TO TT-PROFILO                                
+SP4113     IF SI-TROVATO-RACC                                                   
+SP4113        DISPLAY PGM 'TROVATO RACCORDO, IMPOSTO M SU PROFILO'              
+SP4113        MOVE 'M'             TO TT-PROFILO(5:1)                           
+SP4113     END-IF.                                                              
+SP4113     DISPLAY ' TT-PROFILO = ' TT-PROFILO                                  
+                                                                                
+           MOVE IKPDR-VALORE(10:3) TO TT-DIVISIONE                              
+           MOVE IKPDR-VALORE(13:1) TO TT-SOTTO-DIV                              
+           MOVE IKPRE-FT           TO TT-FT                                     
+           MOVE IKPRE-TORRE        TO TT-TORREREB                               
+           MOVE IKPFU-PRG-CODICE   TO NUM                                       
+           MOVE NUM03-CHR          TO TT-SERVIZIO                               
+           MOVE IKPOP-AMM-SICUR    TO TT-AMMSIC                                 
+           MOVE IKPAN-DESCRIZIONE  TO TT-SIADESCR                               
+           MOVE IKPAN-SIA          TO TT-SIA                                    
+           MOVE IKPAN-KEYA         TO TT-KEYA                                   
+           MOVE IKPAN-COD-FISC     TO TT-CODFISC                                
+           MOVE IKPOP-FIRMATARIO   TO TT-FIRMATARIO                             
+GM094H     MOVE IKPAN-TIPO         TO TT-TIPO                                   
+GM0998     MOVE IKPRE-REB-DIP      TO NUM                                       
+GM0998     MOVE NUM05-CHR          TO TT-REBDIP                                 
+GM113T     MOVE IKPAN-NDG          TO TT-NDG                                    
+           ADD  1 TO NUMINS                                                     
+           EVALUATE VERSIONE                                                    
+           WHEN 1                                                               
+      *        IF  IKPRE-STATO NOT = 'A'                                        
+      *            DISPLAY PGM ' STATO ANOMALO ' IKPRE-REB                      
+      *                                    ' - ' IKPRE-STATO                    
+      *        END-IF                                                           
+               EXEC SQL INSERT INTO IKPLISTAREB_0                               
+                       VALUES                                                   
+                    ( :TT-REB                                                   
+                    , :TT-REBTIPO                                               
+                    , :TT-FT                                                    
+                    , :TT-PROFILO                                               
+                    , :TT-SERVIZIO                                              
+                    , :TT-AMMSIC                                                
+                    , :TT-REBDESCR                                              
+                    , :TT-SIADESCR                                              
+                    , :TT-SIA                                                   
+                    , :TT-CODFISC                                               
+                    , :TT-FIRMATARIO                                            
+                    , :TT-KEYA                                                  
+                    , :TT-TORREREB                                              
+                    , :TT-RUOLO                                                 
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+                    )                                                           
+               END-EXEC                                                         
+GM094H     WHEN 2                                                               
+GM094H         EXEC SQL INSERT INTO IKPLISTAREB_1                               
+GM094H                 VALUES                                                   
+GM094H              ( :TT-REB                                                   
+GM094H              , :TT-REBTIPO                                               
+GM094H              , :TT-FT                                                    
+GM094H              , :TT-PROFILO                                               
+GM094H              , :TT-SERVIZIO                                              
+GM094H              , :TT-AMMSIC                                                
+GM094H              , :TT-REBDESCR                                              
+GM094H              , :TT-SIADESCR                                              
+GM094H              , :TT-SIA                                                   
+GM094H              , :TT-CODFISC                                               
+GM094H              , :TT-FIRMATARIO                                            
+GM094H              , :TT-KEYA                                                  
+GM094H              , :TT-TORREREB                                              
+GM094H              , :TT-RUOLO                                                 
+GM094H              , :TT-TIPO                                                  
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+GM094H              )                                                           
+GM094H         END-EXEC                                                         
+GM0998     WHEN 3                                                               
+GM0998         EXEC SQL INSERT INTO IKPLISTAREB_2                               
+GM0998                 VALUES                                                   
+GM0998              ( :TT-REB                                                   
+GM0998              , :TT-REBTIPO                                               
+GM0998              , :TT-FT                                                    
+GM0998              , :TT-PROFILO                                               
+GM0998              , :TT-SERVIZIO                                              
+GM0998              , :TT-AMMSIC                                                
+GM0998              , :TT-REBDESCR                                              
+GM0998              , :TT-SIADESCR                                              
+GM0998              , :TT-SIA                                                   
+GM0998              , :TT-CODFISC                                               
+GM0998              , :TT-FIRMATARIO                                            
+GM0998              , :TT-KEYA                                                  
+GM0998              , :TT-TORREREB                                              
+GM0998              , :TT-RUOLO                                                 
+GM0998              , :TT-TIPO                                                  
+GM0998              , :TT-REBDIP                                                
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+GM0998              )                                                           
+GM0998         END-EXEC                                                         
+           WHEN 4                                                               
+               STRING IKPAN-KEYA DELIMITED BY SIZE                              
+                    ';'          DELIMITED BY SIZE                              
+                    IKPDA-VALORE DELIMITED BY '   '                             
+                            INTO TT-KEYA-LUNGA                                  
+               EXEC SQL INSERT INTO SESSION.IKPLISTAREB_K                       
+                       VALUES                                                   
+                    ( :TT-REB                                                   
+                    , :TT-REBTIPO                                               
+                    , :TT-FT                                                    
+                    , :TT-PROFILO                                               
+                    , :TT-SERVIZIO                                              
+                    , :TT-AMMSIC                                                
+                    , :TT-REBDESCR                                              
+                    , :TT-SIADESCR                                              
+                    , :TT-SIA                                                   
+                    , :TT-CODFISC                                               
+                    , :TT-FIRMATARIO                                            
+                    , :TT-KEYA-LUNGA                                            
+                    , :TT-TORREREB                                              
+                    , :TT-RUOLO                                                 
+                    , :TT-TIPO                                                  
+                    , :TT-REBDIP                                                
+                    )                                                           
+               END-EXEC                                                         
+GM113T     WHEN 5                                                               
+GM113T         EXEC SQL INSERT INTO IKPLISTAREB_3                               
+GM113T                 VALUES                                                   
+GM113T              ( :TT-REB                                                   
+GM113T              , :TT-REBTIPO                                               
+GM113T              , :TT-FT                                                    
+GM113T              , :TT-PROFILO                                               
+GM113T              , :TT-SERVIZIO                                              
+GM113T              , :TT-AMMSIC                                                
+GM113T              , :TT-REBDESCR                                              
+GM113T              , :TT-SIADESCR                                              
+GM113T              , :TT-SIA                                                   
+GM113T              , :TT-CODFISC                                               
+GM113T              , :TT-FIRMATARIO                                            
+GM113T              , :TT-KEYA                                                  
+GM113T              , :TT-TORREREB                                              
+GM113T              , :TT-RUOLO                                                 
+GM113T              , :TT-TIPO                                                  
+GM113T              , :TT-REBDIP                                                
+GM113T              , :TT-DIVISIONE                                             
+GM113T              , :TT-SOTTO-DIV                                             
+GM113T              , :TT-NDG                                                   
+GM113T              )                                                           
+GM113T         END-EXEC                                                         
+           WHEN OTHER                                                           
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+               MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+           END-EVALUATE                                                         
+                                                                                
+           IF  SQLCODE NOT EQUAL ZERO                                           
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE INSERT TAB REB  ' TO RCDESC                         
+GM094H         MOVE 'ERRORE INSERT TAB REB  ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       APERTURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+      *    WHEN AMBIENTE-IBG = 'V'                                              
+      *        PERFORM OPEN-NORMALE                                             
+      *        PERFORM OPEN-DI-VALIDAZIONE                                      
+           WHEN KEYA  > ' '                                                     
+               PERFORM OPEN-CON-KEYA                                            
+      *        MOVE 'CXRÙIKP00010'         TO RC                                
+      *        MOVE 'E'                    TO RCFLAG                            
+      *        MOVE 'FUNZIONE NON GESTITA' TO RCDESC                            
+           WHEN OTHER                                                           
+LMGG           IF  GRUPPI                                                       
+LMGG               PERFORM OPEN-GRUPPI                                          
+LMGG           ELSE                                                             
+                   PERFORM OPEN-NORMALE                                         
+LMGG           END-IF                                                           
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPEN-NORMALE SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                DECLARE CUR01 CURSOR FOR                                        
+                     SELECT DISTINCT                                            
+                            IKPRE_REB                                           
+                         ,  IKPRE_REB_TIPO                                      
+                         ,  IKPRE_FT                                            
+                         ,  IKPRE_STATO                                         
+                         ,  IKPDR_VALORE                                        
+                         ,  IKPFU_PRG_CODICE                                    
+                         ,  IKPFU_ORDINALE                                      
+GM121Q                   ,  IKPFU_STATO                                         
+                         ,  IKPOP_AMM_SICUR                                     
+                         ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+                         ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+                         ,  IKPAN_SIA                                           
+                         ,  IKPOP_FIRMATARIO                                    
+                         ,  IKPAN_KEYA                                          
+                         ,  IKPRE_TORRE                                         
+                         ,  IKPAN_COD_FISC                                      
+                         ,  IKPDR_MATR_REV                                      
+GM094H                   ,  IKPAN_TIPO                                          
+GM0998                   ,  IKPRE_REB_DIP                                       
+GM113T                   ,  IKPAN_NDG                                           
+                         ,  IKPOP_STATO                                         
+                         ,  IKPAN_STATO                                         
+SP4113                   ,  IKPRE_BANCA                                         
+                       FROM IKPREB                                              
+                         ,  IKPOPERATORI                                        
+                         ,  IKPDATIREB                                          
+                         ,  IKPANAGRAFE                                         
+                         ,  IKPFUNZIONI                                         
+                         ,  IKPRAPPORTI                                         
+                         ,  IKPABILITAZIONI                                     
+                         ,  IKPOPRAPPORTI                                       
+                     WHERE IKPOP_UID    = :UID                                  
+                       AND IKPAB_UID    = IKPOR_UID                             
+                       AND IKPAB_KEYR   = IKPOR_KEYR                            
+                       AND IKPRP_KEYR   = IKPAB_KEYR                            
+                       AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+                       AND IKPRE_REB    = IKPOP_REB                             
+                       AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+                       AND IKPRE_REB    = IKPAN_REB                             
+                       AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+                       AND IKPAN_KEYA   = IKPRP_KEYA                            
+                       AND IKPAN_BANCA  = IKPRP_BANCA                           
+                       AND IKPRE_REB    = IKPAB_REB                             
+                       AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+                       AND IKPRE_REB    = IKPDR_REB                             
+                       AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+                       AND IKPDR_DATO     = 'PROFILO'                           
+                       AND IKPOP_UID      = IKPAB_UID                           
+                       AND IKPRE_FT    = IKPFU_FT                               
+                       AND IKPFU_BANCA IN ('  ',IKPRE_BANCA)                    
+                       AND  IKPFU_PRG_PADRE  = 0                                
+                       AND  SUBSTR(IKPAB_ABIL,                                  
+                       INTEGER(IKPFU_PRG_CODICE),1) ^= '0'                      
+                       AND  SUBSTR(IKPAB_ABIL,                                  
+                       INTEGER(IKPFU_PRG_CODICE),1) = 'P'                       
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+EBTFF                UNION ALL                                                  
+EBTFF                SELECT DISTINCT                                            
+EBTFF                       IKPRE_REB                                           
+EBTFF                    ,  IKPRE_REB_TIPO                                      
+EBTFF                    ,  IKPRE_FT                                            
+EBTFF                    ,  IKPRE_STATO                                         
+EBTFF                    ,  IKPDR_VALORE                                        
+EBTFF                    ,  1                                                   
+EBTFF                    ,  1                                                   
+EBTFF                    ,  'A'                                                 
+EBTFF                    ,  IKPOP_AMM_SICUR                                     
+EBTFF                    ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+EBTFF                    ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+EBTFF                    ,  IKPAN_SIA                                           
+EBTFF                    ,  IKPOP_FIRMATARIO                                    
+EBTFF                    ,  IKPAN_KEYA                                          
+EBTFF                    ,  IKPRE_TORRE                                         
+EBTFF                    ,  IKPAN_COD_FISC                                      
+EBTFF                    ,  IKPDR_MATR_REV                                      
+EBTFF                    ,  IKPAN_TIPO                                          
+EBTFF                    ,  IKPRE_REB_DIP                                       
+EBTFF                    ,  IKPAN_NDG                                           
+EBTFF                    ,  IKPOP_STATO                                         
+EBTFF                    ,  IKPAN_STATO                                         
+EBTFF                    ,  IKPRE_BANCA                                         
+EBTFF                  FROM IKPREB                                              
+EBTFF                    ,  IKPOPERATORI                                        
+EBTFF                    ,  IKPDATIREB                                          
+EBTFF                    ,  IKPANAGRAFE                                         
+EBTFF                WHERE IKPOP_UID       = :UID                               
+EBTFF                  AND IKPRE_REB       = IKPOP_REB                          
+EBTFF                  AND IKPRE_REB_TIPO  = IKPOP_REB_TIPO                     
+EBTFF                  AND IKPRE_REB       = IKPAN_REB                          
+EBTFF                  AND IKPRE_REB_TIPO  = IKPAN_REB_TIPO                     
+EBTFF                  AND IKPRE_REB       = IKPDR_REB                          
+EBTFF                  AND IKPRE_REB_TIPO  = IKPDR_REB_TIPO                     
+EBTFF                  AND IKPDR_DATO      = 'PROFILO'                          
+EBTFF                  AND IKPRE_FT        = 'EBTFF'                            
+                       ORDER BY 1 , 7                                           
+                     WITH UR                                                    
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+           EXEC SQL OPEN CUR01  END-EXEC.                                       
+           IF  SQLCODE = ZERO                                                   
+               CONTINUE                                                         
+           ELSE                                                                 
+               MOVE 'CXRÙIKP00010'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE OPEN            ' TO RCDESC                         
+GM094H         MOVE 'ERRORE OPEN CURSORE    ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-IF.                                                              
+           EXIT.                                                                
+LMGG  *----------------------------------------------------------------*        
+LMGG   OPEN-GRUPPI SECTION.                                                     
+LMGG  *----------------------------------------------------------------*        
+LMGG       EXEC SQL                                                             
+LMGG            DECLARE CUR03 CURSOR FOR                                        
+LMGG                 SELECT DISTINCT                                            
+LMGG                        IKPRE_REB                                           
+LMGG                     ,  IKPRE_REB_TIPO                                      
+LMGG                     ,  IKPRE_FT                                            
+LMGG                     ,  IKPRE_STATO                                         
+LMGG                     ,  IKPDR_VALORE                                        
+LMGG                     ,  IKPFU_PRG_CODICE                                    
+LMGG                     ,  IKPFU_ORDINALE                                      
+LMGG                     ,  IKPOP_AMM_SICUR                                     
+LMGG                     ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+LMGG                     ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+LMGG                     ,  IKPAN_SIA                                           
+LMGG                     ,  IKPOP_FIRMATARIO                                    
+LMGG                     ,  IKPAN_KEYA                                          
+LMGG                     ,  IKPRE_TORRE                                         
+LMGG                     ,  IKPAN_COD_FISC                                      
+LMGG                     ,  IKPDR_MATR_REV                                      
+LMGG                     ,  IKPAN_TIPO                                          
+LMGG                     ,  IKPRE_REB_DIP                                       
+LMGG                     ,  IKPAN_NDG                                           
+LMGG                     ,  IKPOP_STATO                                         
+LMGG                     ,  IKPAN_STATO                                         
+SP4113                   ,  IKPRE_BANCA                                         
+LMGG                   FROM IKPREB                                              
+LMGG                     ,  IKPOPERATORI                                        
+LMGG                     ,  IKPDATIREB                                          
+LMGG                     ,  IKPANAGRAFE                                         
+LMGG                     ,  IKPFUNZIONI                                         
+LMGG                     ,  IKPRAPPORTI                                         
+LMGG                     ,  IKPABILITAZIONI                                     
+LMGG                     ,  IKPOPRAPPORTI                                       
+LMGG                 WHERE IKPOP_UID    = :UID                                  
+LMGG                   AND IKPAB_UID    = IKPOR_UID                             
+LMGG                   AND IKPAB_KEYR   = IKPOR_KEYR                            
+LMGG                   AND IKPRP_KEYR   = IKPAB_KEYR                            
+LMGG                   AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+LMGG                   AND IKPRE_REB    = IKPOP_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+LMGG                   AND IKPRE_REB    = IKPAN_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+LMGG                   AND IKPAN_KEYA   = IKPRP_KEYA                            
+LMGG                   AND IKPAN_BANCA  = IKPRP_BANCA                           
+LMGG                   AND IKPRE_REB    = IKPAB_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+LMGG                   AND IKPRE_REB    = IKPDR_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+LMGG                   AND IKPDR_DATO     = 'PROFILO'                           
+LMGG                   AND IKPOP_UID      = IKPAB_UID                           
+LMGG                   AND IKPRE_FT    = IKPFU_FT                               
+LMGG                   AND IKPFU_BANCA IN ('  ',IKPRE_BANCA)                    
+LMGG                   AND  IKPFU_PRG_PADRE  = 0                                
+LMGG                   AND  SUBSTR(IKPAB_ABIL,                                  
+LMGG                   INTEGER(IKPFU_PRG_CODICE),1) ^= '0'                      
+LMGG                   AND  SUBSTR(IKPAB_ABIL,                                  
+LMGG                   INTEGER(IKPFU_PRG_CODICE),1) = 'P'                       
+LMGG                   AND NOT EXISTS (SELECT 1 FROM IKPGRUPPI_USER             
+LMGG                   WHERE IKPRE_REB = IKPGG_REB                              
+LMGG                   AND IKPRE_REB_TIPO = IKPGG_REB_TIPO                      
+LMGG                   AND IKPGG_UID = IKPOP_UID                                
+NEYES                  AND IKPGG_STATO µ= 'Y'   )                               
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+LMGG                 UNION ALL                                                  
+LMGG                 SELECT DISTINCT                                            
+LMGG                        IKPRE_REB                                           
+LMGG                     ,  IKPRE_REB_TIPO                                      
+LMGG                     ,  IKPRE_FT                                            
+LMGG                     ,  IKPRE_STATO                                         
+LMGG                     ,  IKPDR_VALORE                                        
+LMGG                     ,  IKPFU_PRG_CODICE                                    
+LMGG                     ,  IKPFU_ORDINALE                                      
+LMGG                     ,  IKPOP_AMM_SICUR                                     
+LMGG                     ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+LMGG                     ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+LMGG                     ,  IKPAN_SIA                                           
+LMGG                     ,  IKPOP_FIRMATARIO                                    
+LMGG                     ,  IKPAN_KEYA                                          
+LMGG                     ,  IKPRE_TORRE                                         
+LMGG                     ,  IKPAN_COD_FISC                                      
+LMGG                     ,  IKPDR_MATR_REV                                      
+LMGG                     ,  IKPAN_TIPO                                          
+LMGG                     ,  IKPRE_REB_DIP                                       
+LMGG                     ,  IKPAN_NDG                                           
+LMGG                     ,  IKPOP_STATO                                         
+LMGG                     ,  IKPAN_STATO                                         
+SP4113                   ,  IKPRE_BANCA                                         
+LMGG                   FROM IKPREB                                              
+LMGG                     ,  IKPOPERATORI                                        
+LMGG                     ,  IKPGRUPPI_USER                                      
+LMGG                     ,  IKPDATIREB                                          
+LMGG                     ,  IKPANAGRAFE                                         
+LMGG                     ,  IKPFUNZIONI                                         
+LMGG                     ,  IKPRAPPORTI                                         
+LMGG                     ,  IKPABILITAZIONI                                     
+LMGG                     ,  IKPOPRAPPORTI                                       
+LMGG                 WHERE IKPGG_UID    = :UID                                  
+LMGG                   AND IKPOP_UID    = IKPGG_UID                             
+LMGG                   AND IKPOP_REB    = IKPGG_REB                             
+LMGG                   AND IKPOP_REB_TIPO = IKPGG_REB_TIPO                      
+LMGG                   AND IKPAB_UID    = IKPOR_UID                             
+LMGG                   AND IKPAB_KEYR   = IKPOR_KEYR                            
+LMGG                   AND IKPRP_KEYR   = IKPAB_KEYR                            
+LMGG                   AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+LMGG                   AND IKPRE_REB    = IKPOP_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+LMGG                   AND IKPRE_REB    = IKPAN_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+LMGG                   AND IKPAN_KEYA   = IKPRP_KEYA                            
+LMGG                   AND IKPAN_BANCA  = IKPRP_BANCA                           
+LMGG                   AND IKPRE_REB    = IKPAB_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+LMGG                   AND IKPRE_REB    = IKPDR_REB                             
+LMGG                   AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+LMGG                   AND IKPDR_DATO     = 'PROFILO'                           
+LMGG                   AND IKPGG_ID_IKP   = IKPAB_UID                           
+LMGG                   AND IKPRE_FT    = IKPFU_FT                               
+LMGG                   AND IKPFU_BANCA IN ('  ',IKPRE_BANCA)                    
+LMGG                   AND  IKPFU_PRG_PADRE  = 0                                
+LMGG                   AND  SUBSTR(IKPAB_ABIL,                                  
+LMGG                   INTEGER(IKPFU_PRG_CODICE),1) ^= '0'                      
+LMGG                   AND  SUBSTR(IKPAB_ABIL,                                  
+LMGG                   INTEGER(IKPFU_PRG_CODICE),1) = 'P'                       
+NEYES                  AND IKPGG_STATO  µ= 'Y'                                  
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+EBTFF                UNION ALL                                                  
+EBTFF                SELECT DISTINCT                                            
+EBTFF                       IKPRE_REB                                           
+EBTFF                    ,  IKPRE_REB_TIPO                                      
+EBTFF                    ,  IKPRE_FT                                            
+EBTFF                    ,  IKPRE_STATO                                         
+EBTFF                    ,  IKPDR_VALORE                                        
+EBTFF                    ,  1                                                   
+EBTFF                    ,  1                                                   
+EBTFF                    ,  IKPOP_AMM_SICUR                                     
+EBTFF                    ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+EBTFF                    ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+EBTFF                    ,  IKPAN_SIA                                           
+EBTFF                    ,  IKPOP_FIRMATARIO                                    
+EBTFF                    ,  IKPAN_KEYA                                          
+EBTFF                    ,  IKPRE_TORRE                                         
+EBTFF                    ,  IKPAN_COD_FISC                                      
+EBTFF                    ,  IKPDR_MATR_REV                                      
+EBTFF                    ,  IKPAN_TIPO                                          
+EBTFF                    ,  IKPRE_REB_DIP                                       
+EBTFF                    ,  IKPAN_NDG                                           
+EBTFF                    ,  IKPOP_STATO                                         
+EBTFF                    ,  IKPAN_STATO                                         
+EBTFF                    ,  IKPRE_BANCA                                         
+EBTFF                  FROM IKPREB                                              
+EBTFF                    ,  IKPOPERATORI                                        
+EBTFF                    ,  IKPGRUPPI_USER                                      
+EBTFF                    ,  IKPDATIREB                                          
+EBTFF                    ,  IKPANAGRAFE                                         
+EBTFF                WHERE IKPGG_UID      = :UID                                
+EBTFF                  AND IKPOP_UID      = IKPGG_UID                           
+EBTFF                  AND IKPOP_REB      = IKPGG_REB                           
+EBTFF                  AND IKPOP_REB_TIPO = IKPGG_REB_TIPO                      
+EBTFF                  AND IKPRE_REB      = IKPOP_REB                           
+EBTFF                  AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+EBTFF                  AND IKPRE_REB      = IKPAN_REB                           
+EBTFF                  AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+EBTFF                  AND IKPRE_REB      = IKPDR_REB                           
+EBTFF                  AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+EBTFF                  AND IKPDR_DATO     = 'PROFILO'                           
+NEYES                  AND IKPGG_STATO   µ= 'Y'                                 
+EBTFF                  AND IKPRE_FT       = 'EBTFF'                             
+LMGG                   ORDER BY 1 , 7                                           
+LMGG                 WITH UR                                                    
+LMGG                FOR FETCH ONLY                                              
+LMGG       END-EXEC                                                             
+LMGG       EXEC SQL OPEN CUR03  END-EXEC.                                       
+LMGG       IF  SQLCODE = ZERO                                                   
+LMGG           CONTINUE                                                         
+LMGG       ELSE                                                                 
+LMGG           MOVE 'CXRÙIKP00010'            TO RC                             
+LMGG           MOVE 'E'                       TO RCFLAG                         
+LMGG           MOVE 'ERRORE OPEN CURSORE    ' TO WS-DESC-ERR                    
+LMGG           MOVE SQLCODE                   TO WS-SQLCODE                     
+LMGG           MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+LMGG           MOVE WS-RCDESC                 TO RCDESC                         
+LMGG       END-IF.                                                              
+LMGG       EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CON-KEYA           SECTION.                                         
+      *----------------------------------------------------------------*        
+           MOVE KEYA TO IKPAN-KEYA                                              
+           EXEC SQL                                                             
+                DECLARE CUR02 CURSOR FOR                                        
+                     SELECT DISTINCT                                            
+                            IKPRE_REB                                           
+                         ,  IKPRE_REB_TIPO                                      
+                         ,  IKPRE_FT                                            
+                         ,  IKPRE_STATO                                         
+                         ,  IKPDR_VALORE                                        
+                         ,  IKPFU_PRG_CODICE                                    
+                         ,  IKPFU_ORDINALE                                      
+GM121Q                   ,  IKPFU_STATO                                         
+                         ,  IKPOP_AMM_SICUR                                     
+                         ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+                         ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+                         ,  IKPAN_SIA                                           
+                         ,  IKPOP_FIRMATARIO                                    
+                         ,  IKPAN_KEYA                                          
+                         ,  IKPRE_TORRE                                         
+                         ,  IKPAN_COD_FISC                                      
+                         ,  IKPDR_MATR_REV                                      
+GM094H                   ,  IKPAN_TIPO                                          
+GM0998                   ,  IKPRE_REB_DIP                                       
+GM0998                   ,  IKPOP_STATO                                         
+                         ,  IKPAN_STATO                                         
+SP4113                   ,  IKPRE_BANCA                                         
+                       FROM IKPREB                                              
+                         ,  IKPOPERATORI                                        
+                         ,  IKPDATIREB                                          
+                         ,  IKPANAGRAFE                                         
+                         ,  IKPFUNZIONI                                         
+                         ,  IKPRAPPORTI                                         
+                         ,  IKPABILITAZIONI                                     
+                         ,  IKPOPRAPPORTI                                       
+                     WHERE IKPOP_UID    = :UID                                  
+                       AND IKPAB_UID    = IKPOR_UID                             
+                       AND IKPAB_KEYR   = IKPOR_KEYR                            
+                       AND IKPRP_KEYR   = IKPAB_KEYR                            
+                       AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+                       AND IKPRE_REB    = IKPOP_REB                             
+                       AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+                       AND IKPRE_REB    = IKPAN_REB                             
+                       AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+                       AND IKPAN_KEYA   = IKPRP_KEYA                            
+                       AND IKPAN_BANCA  = IKPRP_BANCA                           
+                       AND IKPRE_REB    = IKPAB_REB                             
+                       AND IKPAN_KEYA   = :IKPAN-KEYA                           
+                       AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+                       AND IKPRE_REB    = IKPDR_REB                             
+                       AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+                       AND IKPDR_DATO     = 'PROFILO'                           
+                       AND IKPOP_UID      = IKPAB_UID                           
+                       AND IKPRE_FT    = IKPFU_FT                               
+                       AND IKPFU_BANCA IN ('  ',IKPRE_BANCA)                    
+                       AND  IKPFU_PRG_PADRE  = 0                                
+                       AND  SUBSTR(IKPAB_ABIL,                                  
+                       INTEGER(IKPFU_PRG_CODICE),1) ^= '0'                      
+                       AND  SUBSTR(IKPAB_ABIL,                                  
+                       INTEGER(IKPFU_PRG_CODICE),1) = 'P'                       
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+                       ORDER BY 1 , 7                                           
+                     WITH UR                                                    
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+           EXEC SQL OPEN CUR02  END-EXEC.                                       
+           IF  SQLCODE = ZERO                                                   
+               CONTINUE                                                         
+           ELSE                                                                 
+               MOVE 'CXRÙIKP00010'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE OPEN            ' TO RCDESC                         
+GM094H         MOVE 'ERRORE OPEN CURSORE    ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-CURSORE SECTION.                                                 
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+      *    WHEN AMBIENTE-IBG = 'V'                                              
+      *        PERFORM FETCH-NORMALE                                            
+      *        PERFORM FETCH-DI-VALIDAZIONE                                     
+           WHEN KEYA  > ' '                                                     
+               PERFORM FETCH-CON-KEYA                                           
+      *        MOVE 'CXRÙIKP00010'         TO RC                                
+      *        MOVE 'E'                    TO RCFLAG                            
+      *        MOVE 'FUNZIONE NON GESTITA' TO RCDESC                            
+           WHEN OTHER                                                           
+LMGG           IF  GRUPPI                                                       
+LMGG               PERFORM FETCH-GRUPPI                                         
+LMGG           ELSE                                                             
+                   PERFORM FETCH-NORMALE                                        
+LMGG           END-IF                                                           
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FETCH-NORMALE SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CUR01                                                     
+                INTO   :IKPRE-REB                                               
+                   ,   :IKPRE-REB-TIPO                                          
+                   ,   :IKPRE-FT                                                
+                   ,   :IKPRE-STATO                                             
+                   ,   :IKPDR-VALORE                                            
+                   ,   :IKPFU-PRG-CODICE                                        
+                   ,   :IKPFU-ORDINALE                                          
+GM121Q             ,   :IKPFU-STATO                                             
+                   ,   :IKPOP-AMM-SICUR                                         
+                   ,   :IKPRE-DESCRIZIONE                                       
+                   ,   :IKPAN-DESCRIZIONE                                       
+                   ,   :IKPAN-SIA                                               
+                   ,   :IKPOP-FIRMATARIO                                        
+                   ,   :IKPAN-KEYA                                              
+                   ,   :IKPRE-TORRE                                             
+                   ,   :IKPAN-COD-FISC                                          
+                   ,   :IKPDR-MATR-REV                                          
+GM094H             ,   :IKPAN-TIPO                                              
+GM0998             ,   :IKPRE-REB-DIP                                           
+GM113T             ,   :IKPAN-NDG                                               
+                   ,   :IKPOP-STATO                                             
+                   ,   :IKPAN-STATO                                             
+SP4113             ,   :IKPRE-BANCA                                             
+           END-EXEC                                                             
+           EVALUATE TRUE                                                        
+           WHEN SQLCODE = ZERO                                                  
+               IF  IKPRE-REB NOT = COMO-REB                                     
+CA9363             PERFORM CHIAMA-IKP0RFT0                                      
+CA9363             IF FT0OU-AMMINISTRAZIONE-SI                                  
+CA9363*            IF IKPRE-FT = 'EB001'                                        
+CA9363*            OR IKPRE-FT = 'EB002'                                        
+      *            OR IKPRE-FT = '83CBI'                                        
+                       EXEC SQL SELECT IKPDO_VALORE                             
+                                 INTO :IKPDO-VALORE                             
+                                 FROM DB2C.IKPDATIOPERATORI                     
+                                 WHERE IKPDO_REB = :IKPRE-REB                   
+                                 AND   IKPDO_REB_TIPO = :IKPRE-REB-TIPO         
+                                 AND   IKPDO_UID = :UID                         
+                                 AND   IKPDO_DATO = 'RUOLO'                     
+                                 WITH UR                                        
+                       END-EXEC                                                 
+                       EVALUATE SQLCODE                                         
+                       WHEN 000                                                 
+                          EVALUATE IKPDO-VALORE(1:5)                            
+                          WHEN 'OPER1'                                          
+                          WHEN 'AMMI1'                                          
+                              MOVE 'U1' TO TT-RUOLO                             
+                          WHEN 'OPER2'                                          
+                              MOVE 'U2' TO TT-RUOLO                             
+                          WHEN 'FIRM1'                                          
+                              MOVE 'F1' TO TT-RUOLO                             
+                          WHEN 'FIRM2'                                          
+                              MOVE 'F2' TO TT-RUOLO                             
+                          WHEN OTHER                                            
+                              MOVE IKPDO-VALORE TO TT-RUOLO                     
+                          END-EVALUATE                                          
+                       WHEN OTHER                                               
+                          IF IKPOP-FIRMATARIO = 'S'                             
+                              MOVE 'F1' TO TT-RUOLO                             
+                          ELSE                                                  
+                              MOVE 'U1' TO TT-RUOLO                             
+                          END-IF                                                
+                          INITIALIZE SQLCODE                                    
+                       END-EVALUATE                                             
+                   ELSE                                                         
+                       MOVE 'F1' TO TT-RUOLO                                    
+                   END-IF                                                       
+                   MOVE IKPRE-REB TO COMO-REB                                   
+               END-IF                                                           
+               IF  IKPDR-VALORE = 'CLVP003F'                                    
+               OR  IKPOP-UID = 'INT-0000000068921658'                           
+                   MOVE 'PB00003F' TO IKPDR-VALORE                              
+               END-IF                                                           
+               IF  IKPDR-MATR-REV = 'ESTERO'                                    
+                   MOVE 'ESTERO3F' TO IKPDR-VALORE                              
+               END-IF                                                           
+           WHEN SQLCODE = 100                                                   
+               CONTINUE                                                         
+           WHEN OTHER                                                           
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE FETCH       '     TO RCDESC                         
+GM094H         MOVE 'ERRORE FETCH CURSORE   ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+LMGG  *----------------------------------------------------------------*        
+LMGG   FETCH-GRUPPI  SECTION.                                                   
+LMGG  *----------------------------------------------------------------*        
+LMGG       EXEC SQL                                                             
+LMGG            FETCH CUR03                                                     
+LMGG            INTO   :IKPRE-REB                                               
+LMGG               ,   :IKPRE-REB-TIPO                                          
+LMGG               ,   :IKPRE-FT                                                
+LMGG               ,   :IKPRE-STATO                                             
+LMGG               ,   :IKPDR-VALORE                                            
+LMGG               ,   :IKPFU-PRG-CODICE                                        
+LMGG               ,   :IKPFU-ORDINALE                                          
+LMGG               ,   :IKPOP-AMM-SICUR                                         
+LMGG               ,   :IKPRE-DESCRIZIONE                                       
+LMGG               ,   :IKPAN-DESCRIZIONE                                       
+LMGG               ,   :IKPAN-SIA                                               
+LMGG               ,   :IKPOP-FIRMATARIO                                        
+LMGG               ,   :IKPAN-KEYA                                              
+LMGG               ,   :IKPRE-TORRE                                             
+LMGG               ,   :IKPAN-COD-FISC                                          
+LMGG               ,   :IKPDR-MATR-REV                                          
+LMGG               ,   :IKPAN-TIPO                                              
+LMGG               ,   :IKPRE-REB-DIP                                           
+LMGG               ,   :IKPAN-NDG                                               
+LMGG               ,   :IKPOP-STATO                                             
+LMGG               ,   :IKPAN-STATO                                             
+SP4113             ,   :IKPRE-BANCA                                             
+LMGG       END-EXEC                                                             
+LMGG       EVALUATE TRUE                                                        
+LMGG       WHEN SQLCODE = ZERO                                                  
+LMGG           IF  IKPRE-REB NOT = COMO-REB                                     
+LMGG               PERFORM CHIAMA-IKP0RFT0                                      
+LMGG               IF FT0OU-AMMINISTRAZIONE-SI                                  
+LMGG                   EXEC SQL SELECT IKPDO_VALORE                             
+LMGG                             INTO :IKPDO-VALORE                             
+LMGG                             FROM DB2C.IKPDATIOPERATORI                     
+LMGG                             WHERE IKPDO_REB = :IKPRE-REB                   
+LMGG                             AND   IKPDO_REB_TIPO = :IKPRE-REB-TIPO         
+LMGG                             AND   IKPDO_UID = :UID                         
+LMGG                             AND   IKPDO_DATO = 'RUOLO'                     
+LMGG                             WITH UR                                        
+LMGG                   END-EXEC                                                 
+LMGG                   EVALUATE SQLCODE                                         
+LMGG                   WHEN 000                                                 
+LMGG                      EVALUATE IKPDO-VALORE(1:5)                            
+LMGG                      WHEN 'OPER1'                                          
+LMGG                      WHEN 'AMMI1'                                          
+LMGG                          MOVE 'U1' TO TT-RUOLO                             
+LMGG                      WHEN 'OPER2'                                          
+LMGG                          MOVE 'U2' TO TT-RUOLO                             
+LMGG                      WHEN 'FIRM1'                                          
+LMGG                          MOVE 'F1' TO TT-RUOLO                             
+LMGG                      WHEN 'FIRM2'                                          
+LMGG                          MOVE 'F2' TO TT-RUOLO                             
+LMGG                      WHEN OTHER                                            
+LMGG                          MOVE IKPDO-VALORE TO TT-RUOLO                     
+LMGG                      END-EVALUATE                                          
+LMGG                   WHEN OTHER                                               
+LMGG                      IF IKPOP-FIRMATARIO = 'S'                             
+LMGG                          MOVE 'F1' TO TT-RUOLO                             
+LMGG                      ELSE                                                  
+LMGG                          MOVE 'U1' TO TT-RUOLO                             
+LMGG                      END-IF                                                
+LMGG                      INITIALIZE SQLCODE                                    
+LMGG                   END-EVALUATE                                             
+LMGG               ELSE                                                         
+LMGG                   MOVE 'F1' TO TT-RUOLO                                    
+LMGG               END-IF                                                       
+LMGG               MOVE IKPRE-REB TO COMO-REB                                   
+LMGG           END-IF                                                           
+LMGG           IF  IKPDR-VALORE = 'CLVP003F'                                    
+LMGG           OR  IKPOP-UID = 'INT-0000000068921658'                           
+LMGG               MOVE 'PB00003F' TO IKPDR-VALORE                              
+LMGG           END-IF                                                           
+LMGG           IF  IKPDR-MATR-REV = 'ESTERO'                                    
+LMGG               MOVE 'ESTERO3F' TO IKPDR-VALORE                              
+LMGG           END-IF                                                           
+LMGG       WHEN SQLCODE = 100                                                   
+LMGG           CONTINUE                                                         
+LMGG       WHEN OTHER                                                           
+LMGG           MOVE 'CXRÙIKP00099'            TO RC                             
+LMGG           MOVE 'E'                       TO RCFLAG                         
+LMGG           MOVE 'ERRORE FETCH CURSORE   ' TO WS-DESC-ERR                    
+LMGG           MOVE SQLCODE                   TO WS-SQLCODE                     
+LMGG           MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+LMGG           MOVE WS-RCDESC                 TO RCDESC                         
+LMGG       END-EVALUATE.                                                        
+LMGG       EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CON-KEYA SECTION.                                                  
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                FETCH CUR02                                                     
+                INTO   :IKPRE-REB                                               
+                   ,   :IKPRE-REB-TIPO                                          
+                   ,   :IKPRE-FT                                                
+                   ,   :IKPRE-STATO                                             
+                   ,   :IKPDR-VALORE                                            
+                   ,   :IKPFU-PRG-CODICE                                        
+                   ,   :IKPFU-ORDINALE                                          
+GM121Q             ,   :IKPFU-STATO                                             
+                   ,   :IKPOP-AMM-SICUR                                         
+                   ,   :IKPRE-DESCRIZIONE                                       
+                   ,   :IKPAN-DESCRIZIONE                                       
+                   ,   :IKPAN-SIA                                               
+                   ,   :IKPOP-FIRMATARIO                                        
+                   ,   :IKPAN-KEYA                                              
+                   ,   :IKPRE-TORRE                                             
+                   ,   :IKPAN-COD-FISC                                          
+                   ,   :IKPDR-MATR-REV                                          
+GM094H             ,   :IKPAN-TIPO                                              
+GM0998             ,   :IKPRE-REB-DIP                                           
+                   ,   :IKPOP-STATO                                             
+                   ,   :IKPAN-STATO                                             
+SP4113             ,   :IKPRE-BANCA                                             
+           END-EXEC                                                             
+           EVALUATE TRUE                                                        
+           WHEN SQLCODE = ZERO                                                  
+                   IF IKPRE-FT = '83FPP'                                        
+                       EXEC SQL SELECT IKPDA_VALORE                             
+                                 INTO :IKPDA-VALORE                             
+                                 FROM DB2C.IKPDATIANAGRAFE                      
+                                 WHERE IKPDA_REB = :IKPRE-REB                   
+                                 AND   IKPDA_REB_TIPO = :IKPRE-REB-TIPO         
+                                 AND   IKPDA_KEYA = :IKPAN-KEYA                 
+                                 AND   IKPDA_DATO = 'MANDATO'                   
+                                 WITH UR                                        
+                       END-EXEC                                                 
+      D                DISPLAY PGM ' ' SQLCODE                                  
+                       EVALUATE SQLCODE                                         
+                       WHEN 000                                                 
+                           DISPLAY PGM ' MANDATO ' IKPDA-VALORE(1:40)           
+                       WHEN OTHER                                               
+                           CONTINUE                                             
+                       END-EVALUATE                                             
+                   END-IF                                                       
+           WHEN SQLCODE = 100                                                   
+               CONTINUE                                                         
+           WHEN OTHER                                                           
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE FETCH       '     TO RCDESC                         
+GM094H         MOVE 'ERRORE FETCH CURSORE   ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       CHIUSURA-CURSORE SECTION.                                                
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+      *    WHEN AMBIENTE-IBG = 'V'                                              
+      *        PERFORM CLOSE-NORMALE                                            
+      *        PERFORM OPEN-DI-VALIDAZIONE                                      
+           WHEN KEYA  > ' '                                                     
+               PERFORM CLOSE-CON-KEYA                                           
+      *        MOVE 'CXRÙIKP00010'         TO RC                                
+      *        MOVE 'E'                    TO RCFLAG                            
+      *        MOVE 'FUNZIONE NON GESTITA' TO RCDESC                            
+           WHEN OTHER                                                           
+LMGG           IF  GRUPPI                                                       
+LMGG               PERFORM CLOSE-GRUPPI                                         
+LMGG           ELSE                                                             
+                   PERFORM CLOSE-NORMALE                                        
+LMGG           END-IF                                                           
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-NORMALE SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CUR01                                                     
+           END-EXEC                                                             
+           IF  SQLCODE NOT = ZERO                                               
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE CLOSE '           TO RCDESC                         
+GM094H         MOVE 'ERRORE CLOSE CURSORE   ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-IF.                                                              
+           EXIT.                                                                
+LMGG  *----------------------------------------------------------------*        
+LMGG   CLOSE-GRUPPI SECTION.                                                    
+LMGG  *----------------------------------------------------------------*        
+LMGG       EXEC SQL                                                             
+LMGG            CLOSE CUR03                                                     
+LMGG       END-EXEC                                                             
+LMGG       IF  SQLCODE NOT = ZERO                                               
+LMGG           MOVE 'CXRÙIKP00099'            TO RC                             
+LMGG           MOVE 'E'                       TO RCFLAG                         
+LMGG           MOVE 'ERRORE CLOSE CURSORE   ' TO WS-DESC-ERR                    
+LMGG           MOVE SQLCODE                   TO WS-SQLCODE                     
+LMGG           MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+LMGG           MOVE WS-RCDESC                 TO RCDESC                         
+LMGG       END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CON-KEYA SECTION.                                                  
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                CLOSE CUR02                                                     
+           END-EXEC                                                             
+           IF  SQLCODE NOT = ZERO                                               
+               MOVE 'CXRÙIKP00099'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+GM094H*        MOVE 'ERRORE CLOSE '           TO RCDESC                         
+GM094H         MOVE 'ERRORE CLOSE CURSORE   ' TO WS-DESC-ERR                    
+GM094H         MOVE SQLCODE                   TO WS-SQLCODE                     
+GM094H         MOVE SQLERRMC(1 : SQLERRML)    TO WS-SQLERRM                     
+GM094H         MOVE WS-RCDESC                 TO RCDESC                         
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FAI-RISPOSTA SECTION.                                                    
+      *----------------------------------------------------------------*        
+           IF  NUMINS = 0                                                       
+               MOVE 'CXRÙIKP06969'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+               MOVE 'NESSUN REB'              TO RCDESC                         
+      *        DISPLAY PGM ' ERRORE 6969, PER ' UID '-' PERSONA                 
+      *                    ' (NESSUN REB)'                                      
+           ELSE                                                                 
+               EVALUATE VERSIONE                                                
+               WHEN 1                                                           
+                   EXEC SQL DECLARE LISTPOL CURSOR WITH RETURN FOR              
+                        SELECT *                                                
+                          FROM IKPLISTAREB_0                                    
+                   END-EXEC                                                     
+                   EXEC SQL OPEN LISTPOL END-EXEC                               
+GM094H         WHEN 2                                                           
+GM094H             EXEC SQL DECLARE LISTPOL1 CURSOR WITH RETURN FOR             
+GM094H                  SELECT *                                                
+GM094H                    FROM IKPLISTAREB_1                                    
+GM094H             END-EXEC                                                     
+GM094H             EXEC SQL OPEN LISTPOL1 END-EXEC                              
+GM0998         WHEN 3                                                           
+GM0998             EXEC SQL DECLARE LISTPOL2 CURSOR WITH RETURN FOR             
+GM0998                  SELECT *                                                
+GM0998                    FROM IKPLISTAREB_2                                    
+GM0998             END-EXEC                                                     
+GM0998             EXEC SQL OPEN LISTPOL2 END-EXEC                              
+               WHEN 4                                                           
+                   EXEC SQL DECLARE LISTPOL3 CURSOR WITH RETURN FOR             
+                        SELECT *                                                
+                          FROM SESSION.IKPLISTAREB_K                            
+                   END-EXEC                                                     
+                   EXEC SQL OPEN LISTPOL3 END-EXEC                              
+GM113T         WHEN 5                                                           
+GM113T             EXEC SQL DECLARE LISTPOL4 CURSOR WITH RETURN FOR             
+GM113T                  SELECT *                                                
+GM113T                    FROM IKPLISTAREB_3                                    
+GM113T             END-EXEC                                                     
+GM113T             EXEC SQL OPEN LISTPOL4 END-EXEC                              
+               WHEN OTHER                                                       
+                   MOVE 'CXRÙIKP00099'             TO RC                        
+                   MOVE 'VERSIONE NON CONOSCIUTA ' TO RCDESC                    
+               END-EVALUATE                                                     
+           END-IF                                                               
+           EXIT.                                                                
+SP4113*----------------------------------------------------------------*        
+SP4113 VERIFICA-RACCORDO SECTION.                                               
+SP4113*----------------------------------------------------------------*        
+SP4113* VERIFICA SE PRESENTE LA RIGA IN IKPRACCORDO CON STATO 'Z'.              
+SP4113* SE PRESENTE IMPOSTO IL FLAG 'M' SUL 5› BYTE DEL PROFILO.                
+SP4113*                                                                         
+SP4113     DISPLAY ' STATO = Z VERIFICO RACCORDO '                              
+SP4113*                                                                         
+SP4113     MOVE IKPRE-REB              TO IKPRAC-REB-NEW                        
+SP4113     MOVE IKPRE-REB-TIPO         TO IKPRAC-REB-T-NEW                      
+SP4113*                                                                         
+SP4113     DISPLAY ' IKPRAC-REB-NEW    = ' IKPRAC-REB-NEW.                      
+SP4113     DISPLAY ' IKPRAC-REB-T-NEW  = ' IKPRAC-REB-T-NEW.                    
+SP4113*                                                                         
+SP4113     EXEC SQL                                                             
+SP4113         SELECT IKPRAC_BANCA                                              
+SP4113           INTO :IKPRAC-BANCA                                             
+SP4113           FROM IKPRACCORDO                                               
+SP4113          WHERE IKPRAC_REB_NEW   = :IKPRAC-REB-NEW                        
+SP4113            AND IKPRAC_REB_T_NEW = :IKPRAC-REB-T-NEW                      
+TS4182           WITH UR                                                        
+SP4113     END-EXEC.                                                            
+SP4113                                                                          
+SP4113     DISPLAY ' RACCORDO SQLCODE  = ' SQLCODE                              
+TS4170     EVALUATE TRUE                                                        
+TS4170     WHEN SQLCODE = ZERO                                                  
+TS4170     WHEN SQLCODE = -811                                                  
+TS4170         DISPLAY ' RACCORDO TROVATO'                                      
+TS4170         SET SI-TROVATO-RACC              TO TRUE                         
+TS4170         INITIALIZE                       SQLCODE                         
+TS4170     WHEN OTHER                                                           
+TS4170         DISPLAY ' RACCORDO NON TROVATO'                                  
+TS4170         SET NO-TROVATO-RACC           TO TRUE                            
+TS4170         INITIALIZE                       SQLCODE                         
+TS4170     END-EVALUATE                                                         
+SP4113     DISPLAY ' FLAG RACCORDO     = ' SW-RACCORDO.                         
+SP4113*                                                                         
+SP4113     EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+GM094H     IF RC NOT = SPACE                                                    
+GM094H        DISPLAY PGM ' UID: ' UID                                          
+GM094H                    'PERS: ' PERSONA ' VERS: ' VERSIONE                   
+GM094H                    ' AMB: ' AMBIENTE-IBG  ' RC: ' RC                     
+GM094H     END-IF.                                                              
+           CONTINUE.                                                            
+           EXIT.                                                                
+CA9363*----------------------------------------------------------------*        
+CA9363 CHIAMA-IKP0RFT0 SECTION.                                                 
+CA9363*----------------------------------------------------------------*        
+CA9363     INITIALIZE IKP0FT0.                                                  
+CA9363                                                                          
+CA9363     MOVE IKPRE-FT                   TO FT0IN-FT.                         
+......*    IF  IKPRE-FT = '88999' OR '88BSN' OR '88BS1'                         
+......*        MOVE '83' TO FT0IN-FT(1 : 2)                                     
+......*    END-IF                                                               
+CA9363                                                                          
+CA9363     CALL IKP0RFT0                USING IKP0FT0.                          
+CA9363                                                                          
+CA9363     IF RC-OK OF FT0RC                                                    
+CA9363        CONTINUE                                                          
+CA9363     ELSE                                                                 
+CA9363        DISPLAY PGM                                                       
+CA9363        DISPLAY PGM 'ERRORE IN ROUTINE ' IKP0RFT0                         
+CA9363        DISPLAY PGM 'RC............... ' FT0RC-RC                         
+CA9363        DISPLAY PGM 'ERRORE........... ' FT0RC-SQLERRMC                   
+CA9363        DISPLAY PGM                                                       
+CA9363        DISPLAY PGM 'FT0IN-FT......... ' FT0IN-FT                         
+CA9363        DISPLAY PGM                                                       
+CA9363        MOVE 'CXRÙIKP00099'       TO RC                                   
+CA9363        MOVE 'E'                  TO RCFLAG                               
+CA9363        MOVE 'ERRORE IN ROUTINE IKP0RFT0'  TO RCDESC                      
+CA9363     END-IF.                                                              
+CA9363     EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

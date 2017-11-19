@@ -1,0 +1,170 @@
+      * 04.208 12:38        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 04.124 12:52        IKP  0000                                           
+      * -------------------------------------                                   
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0RMES.                                                    
+      ******************************************************************        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................. ROUTINE *        
+      *----------------------------------------------------------------*        
+      * NOTE ....................................... GESTIONE MESSAGGI *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. DICEMBRE 2003 *        
+      * DA PARTE DI ........................................... USI/VR *        
+      * ULTIMA MODIFICA ................................ DICEMBRE 2003 *        
+      * DA PARTE DI .................................... F.ALDRIGHETTI *        
+      ******************************************************************        
+       ENVIRONMENT  DIVISION.                                                   
+       CONFIGURATION  SECTION.                                                  
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       OBJECT-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+       DATA  DIVISION.                                                          
+                                                                                
+      *-----------------------------------------------------------------        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  PGM                       PIC X(08)  VALUE 'IKP0RMES'.               
+      *-----------------------------------------------------------------        
+       77  SKP                       PIC X(07)  VALUE '>>>>>>'.                 
+       77  COMO-LEN                  PIC 9(04)  VALUE ZEROES.                   
+      *-----------------------------------------------------------------        
+       77  IKP0RDBG                  PIC X(08)  VALUE 'IKP0RDBG'.               
+      *-----------------------------------------------------------------        
+           COPY IKP0CDBG.                                                       
+      *-----------------------------------------------------------------        
+       01  SQLCODE-COBOL             PIC  -(06)9(03).                           
+      *-----------------------------------------------------------------        
+           EXEC SQL INCLUDE SQLCA    END-EXEC.                                  
+      *-----------------------------------------------------------------        
+           EXEC SQL INCLUDE IKP0TAME END-EXEC.                                  
+      *-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+      *-----------------------------------------------------------------        
+           COPY IKP0CMES.                                                       
+                                                                                
+      *-----------------------------------------------------------------        
+       PROCEDURE DIVISION USING IKP0MES.                                        
+      *-----------------------------------------------------------------        
+      DDECLARATIVES.                                                            
+      DCBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+      *    INITIALIZE                       IKP0DBG                             
+      D    MOVE MESIN-AMBIENTE           TO DBGIN-AMBIENTE                      
+      D    MOVE MESIN-DEBUG              TO DBGIN-DEBUG                         
+      D    MOVE MESIN-MATRICOLA          TO DBGIN-MATRICOLA                     
+      D    MOVE MESIN-CODOPER            TO DBGIN-CODOPER                       
+      D    MOVE PGM                      TO DBGIN-PGM                           
+      D    MOVE DEBUG-NAME               TO DBGIN-NAME                          
+      D    CALL IKP0RDBG USING IKP0DBG.                                         
+      D    EXIT.                                                                
+      DEND DECLARATIVES.                                                        
+      *-----------------------------------------------------------------        
+       IKP0RMES-INIZIO.                                                         
+      *-----------------------------------------------------------------        
+           PERFORM CONTROLLI-INIZIALI.                                          
+                                                                                
+           IF  RC-OK OF IKP0MES                                                 
+               PERFORM CERCA-MESSAGGIO                                          
+           END-IF.                                                              
+                                                                                
+           PERFORM CONTROLLI-FINALI.                                            
+      *-----------------------------------------------------------------        
+       IKP0RMES-FINE.                                                           
+      *-----------------------------------------------------------------        
+           GOBACK.                                                              
+                                                                                
+      *-----------------------------------------------------------------        
+       CERCA-MESSAGGIO SECTION.                                                 
+      *-----------------------------------------------------------------        
+           MOVE  MESIN-CODICE                TO IKPME-CODICE.                   
+           MOVE  MESIN-LINGUA                TO IKPME-LINGUA.                   
+                                                                                
+           INITIALIZE IKP0DBG                                                   
+           MOVE 'MESIN-CODICE    '           TO DBGIN-FIELD(1)                  
+           MOVE  MESIN-CODICE                TO DBGIN-VALUE(1)                  
+           MOVE 'MESIN-LINGUA    '           TO DBGIN-FIELD(2)                  
+           MOVE  MESIN-LINGUA                TO DBGIN-VALUE(2)                  
+           MOVE  2                           TO COMO-LEN                        
+           PERFORM CALL-IKP0RDBG                                                
+                                                                                
+           EXEC SQL                                                             
+               SELECT IKPME_TIPO                                                
+               ,      IKPME_MESSAGGIO                                           
+               INTO  :IKPME-TIPO                                                
+               ,     :IKPME-MESSAGGIO                                           
+               FROM   IKPMESSAGGI                                               
+               WHERE  IKPME_CODICE        = :IKPME-CODICE                       
+               AND    IKPME_LINGUA        = :IKPME-LINGUA                       
+               WITH   UR                                                        
+           END-EXEC.                                                            
+                                                                                
+           EVALUATE SQLCODE                                                     
+           WHEN 000                                                             
+               MOVE  IKPME-TIPO              TO MESOU-RC                        
+               MOVE  IKPME-MESSAGGIO         TO MESOU-MESSAGGIO                 
+           WHEN 100                                                             
+               MOVE 'ERR'                    TO MESRC-RC MESOU-RC               
+               MOVE  SQLCODE                 TO MESRC-SQLCODE                   
+               MOVE  SQLERRMC                TO MESRC-SQLERRMC                  
+               MOVE 'IKPMESSAGGI'            TO MESRC-TABLE                     
+               MOVE 'ERRORE NON CODIFICATO ' TO MESOU-MESSAGGIO                 
+           WHEN OTHER                                                           
+               MOVE 'ERR'                    TO MESRC-RC MESOU-RC               
+               MOVE  SQLCODE                 TO MESRC-SQLCODE                   
+               MOVE  SQLERRMC                TO MESRC-SQLERRMC                  
+               MOVE 'IKPMESSAGGI'            TO MESRC-TABLE                     
+               MOVE 'DB2 NON DISPONIBILE   ' TO MESOU-MESSAGGIO                 
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CALL-IKP0RDBG SECTION.                                                   
+      *-----------------------------------------------------------------        
+           MOVE MESIN-DEBUG                  TO DBGIN-DEBUG                     
+           MOVE MESIN-AMBIENTE               TO DBGIN-AMBIENTE                  
+           MOVE MESIN-MATRICOLA              TO DBGIN-MATRICOLA                 
+           MOVE MESIN-CODOPER                TO DBGIN-CODOPER                   
+           MOVE COMO-LEN                     TO DBGIN-LEN                       
+           MOVE PGM                          TO DBGIN-PGM                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-INIZIALI SECTION.                                              
+      *-----------------------------------------------------------------        
+           INITIALIZE MESRC MESOU.                                              
+                                                                                
+           IF  MESIN-LINGUA               =  SPACES                             
+               MOVE 'IT'                     TO MESIN-LINGUA                    
+           END-IF                                                               
+                                                                                
+           IF  MESIN-CODICE             NOT  NUMERIC                            
+               MOVE ZEROES                   TO MESIN-CODICE                    
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-FINALI SECTION.                                                
+      *-----------------------------------------------------------------        
+      D    INITIALIZE IKP0DBG                                                   
+      D    IF  RC-OK OF IKP0MES                                                 
+      D        MOVE 'RC.............'        TO DBGIN-FIELD(1)                  
+      D        MOVE 'OK|            '        TO DBGIN-VALUE(1)                  
+      D        MOVE  1                       TO COMO-LEN                        
+      D        PERFORM CALL-IKP0RDBG                                            
+      D    ELSE                                                                 
+      D        MOVE 'RC.............'        TO DBGIN-FIELD(1)                  
+      D        MOVE  MESOU-RC                TO DBGIN-VALUE(1)                  
+      D        MOVE 'MESSAGGIO......'        TO DBGIN-FIELD(2)                  
+      D        MOVE  MESOU-MESSAGGIO         TO DBGIN-VALUE(2)                  
+      D        MOVE  2                       TO COMO-LEN                        
+      D        PERFORM CALL-IKP0RDBG                                            
+      D    END-IF.                                                              
+           CONTINUE.                                                            
+           EXIT.                                                                
+                                                                                
+                                                                                

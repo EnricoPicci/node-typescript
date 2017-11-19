@@ -1,0 +1,432 @@
+sql snippet 1
+           EXEC SQL INCLUDE SQLCA      END-EXEC.                                
+
+
+sql snippet 2
+           EXEC SQL INCLUDE IKP0TAOP   END-EXEC.                                
+
+
+sql snippet 3
+           EXEC SQL INCLUDE IKP0TAAN   END-EXEC.                                
+
+
+sql snippet 4
+           EXEC SQL INCLUDE IKP0TARE   END-EXEC.                                
+
+
+sql snippet 5
+           EXEC SQL INCLUDE IKP0TADR   END-EXEC.                                
+
+
+sql snippet 6
+           EXEC SQL INCLUDE IKP0TADA   END-EXEC.                                
+
+
+sql snippet 7
+           EXEC SQL INCLUDE IKP0TAFU   END-EXEC.                                
+
+
+sql snippet 8
+           EXEC SQL INCLUDE IKP0TAIB   END-EXEC.                                
+
+
+sql snippet 9
+           EXEC SQL INCLUDE IKP0TAMA   END-EXEC.                                
+
+
+sql snippet 10
+           EXEC SQL INCLUDE IKP0TADO   END-EXEC.                                
+
+
+sql snippet 11
+           EXEC SQL INCLUDE IKPGTASM   END-EXEC.                                
+
+
+sql snippet 12
+               EXEC SQL                                                         
+                  DECLARE GLOBAL TEMPORARY TABLE SESSION.IKPLISTAREB_3          
+                         (REB         CHAR(8)  NOT NULL,                        
+                            REBTIPO     CHAR(2)  NOT NULL,                      
+                            FT          CHAR(5)  NOT NULL,                      
+                            PROFILO     CHAR(8)  NOT NULL,                      
+                            SERVIZIO    CHAR(3)  NOT NULL,                      
+                            AMMSIC      CHAR(1)  NOT NULL,                      
+                            REBDESCR    CHAR(64) NOT NULL,                      
+                            SIADESCR    CHAR(64) NOT NULL,                      
+                            SIA         CHAR(5)  NOT NULL,                      
+                            CODFISC     CHAR(16) NOT NULL,                      
+                            FIRMATARIO  CHAR(1)  NOT NULL,                      
+                            KEYA        CHAR(24) NOT NULL,                      
+                            TORREREB    CHAR(2)  NOT NULL,                      
+                            RUOLO       CHAR(8)  NOT NULL,                      
+                            TIPO        CHAR(1)  NOT NULL,                      
+                            REBDIP      CHAR(5)  NOT NULL)                      
+                         ON COMMIT DROP TABLE                                   
+               END-EXEC                                                         
+
+
+sql snippet 13
+                EXEC SQL SELECT IKPSM_M_REB                                     
+                        , IKPSM_M_REB_TIPO                                      
+                        , IKPSM_M_KEYA                                          
+                    INTO :IKPSM-M-REB                                           
+                      , :IKPSM-M-REB-TIPO                                       
+                      , :IKPSM-M-KEYA                                           
+                   FROM IKPGEB_SLAVEMASTER                                      
+                   WHERE IKPSM_S_REB  = :IKPSM-S-REB                            
+                   AND   IKPSM_S_REB_TIPO = :IKPSM-S-REB-TIPO                   
+                   WITH UR                                                      
+                END-EXEC                                                        
+
+
+sql snippet 14
+               EXEC SQL INSERT INTO IKPLISTAREB_0                               
+                       VALUES                                                   
+                    ( :TT-REB                                                   
+                    , :TT-REBTIPO                                               
+                    , :TT-FT                                                    
+                    , :TT-PROFILO                                               
+                    , :TT-SERVIZIO                                              
+                    , :TT-AMMSIC                                                
+                    , :TT-REBDESCR                                              
+                    , :TT-SIADESCR                                              
+                    , :TT-SIA                                                   
+                    , :TT-CODFISC                                               
+                    , :TT-FIRMATARIO                                            
+                    , :TT-KEYA                                                  
+                    , :TT-TORREREB                                              
+                    , :TT-RUOLO                                                 
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+                    )                                                           
+               END-EXEC                                                         
+
+
+sql snippet 15
+GM094H         EXEC SQL INSERT INTO IKPLISTAREB_1                               
+GM094H                 VALUES                                                   
+GM094H              ( :TT-REB                                                   
+GM094H              , :TT-REBTIPO                                               
+GM094H              , :TT-FT                                                    
+GM094H              , :TT-PROFILO                                               
+GM094H              , :TT-SERVIZIO                                              
+GM094H              , :TT-AMMSIC                                                
+GM094H              , :TT-REBDESCR                                              
+GM094H              , :TT-SIADESCR                                              
+GM094H              , :TT-SIA                                                   
+GM094H              , :TT-CODFISC                                               
+GM094H              , :TT-FIRMATARIO                                            
+GM094H              , :TT-KEYA                                                  
+GM094H              , :TT-TORREREB                                              
+GM094H              , :TT-RUOLO                                                 
+GM094H              , :TT-TIPO                                                  
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+GM094H              )                                                           
+GM094H         END-EXEC                                                         
+
+
+sql snippet 16
+GM0998         EXEC SQL INSERT INTO IKPLISTAREB_2                               
+GM0998                 VALUES                                                   
+GM0998              ( :TT-REB                                                   
+GM0998              , :TT-REBTIPO                                               
+GM0998              , :TT-FT                                                    
+GM0998              , :TT-PROFILO                                               
+GM0998              , :TT-SERVIZIO                                              
+GM0998              , :TT-AMMSIC                                                
+GM0998              , :TT-REBDESCR                                              
+GM0998              , :TT-SIADESCR                                              
+GM0998              , :TT-SIA                                                   
+GM0998              , :TT-CODFISC                                               
+GM0998              , :TT-FIRMATARIO                                            
+GM0998              , :TT-KEYA                                                  
+GM0998              , :TT-TORREREB                                              
+GM0998              , :TT-RUOLO                                                 
+GM0998              , :TT-TIPO                                                  
+GM0998              , :TT-REBDIP                                                
+                    , :TT-DIVISIONE                                             
+                    , :TT-SOTTO-DIV                                             
+GM0998              )                                                           
+GM0998         END-EXEC                                                         
+
+
+sql snippet 17
+               EXEC SQL INSERT INTO SESSION.IKPLISTAREB_3                       
+                       VALUES                                                   
+                    ( :TT-REB                                                   
+                    , :TT-REBTIPO                                               
+                    , :TT-FT                                                    
+                    , :TT-PROFILO                                               
+                    , :TT-SERVIZIO                                              
+                    , :TT-AMMSIC                                                
+                    , :TT-REBDESCR                                              
+                    , :TT-SIADESCR                                              
+                    , :TT-SIA                                                   
+                    , :TT-CODFISC                                               
+                    , :TT-FIRMATARIO                                            
+                    , :TT-KEYA-LUNGA                                            
+                    , :TT-TORREREB                                              
+                    , :TT-RUOLO                                                 
+                    , :TT-TIPO                                                  
+                    , :TT-REBDIP                                                
+                    )                                                           
+               END-EXEC                                                         
+
+
+sql snippet 18
+           EXEC SQL                                                             
+                DECLARE CUR01 CURSOR FOR                                        
+                     SELECT DISTINCT                                            
+                            IKPRE_REB                                           
+                         ,  IKPRE_REB_TIPO                                      
+                         ,  IKPRE_FT                                            
+                         ,  IKPRE_STATO                                         
+                         ,  IKPDR_VALORE                                        
+                         ,  IKPOP_AMM_SICUR                                     
+                         ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+                         ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+                         ,  IKPAN_SIA                                           
+                         ,  IKPAN_NDG                                           
+                         ,  IKPOP_FIRMATARIO                                    
+                         ,  IKPAN_KEYA                                          
+                         ,  IKPRE_TORRE                                         
+                         ,  IKPAN_COD_FISC                                      
+                         ,  IKPDR_MATR_REV                                      
+GM094H                   ,  IKPAN_TIPO                                          
+GM0998                   ,  IKPRE_REB_DIP                                       
+                       FROM IKPREB                                              
+                         ,  IKPOPERATORI                                        
+                         ,  IKPDATIREB                                          
+                         ,  IKPANAGRAFE                                         
+                         ,  IKPRAPPORTI                                         
+                         ,  IKPABILITAZIONI                                     
+                         ,  IKPOPRAPPORTI                                       
+                     WHERE IKPOP_UID    = :UID                                  
+                       AND IKPAB_UID    = IKPOR_UID                             
+                       AND IKPAB_KEYR   = IKPOR_KEYR                            
+                       AND IKPRP_KEYR   = IKPAB_KEYR                            
+                       AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+                       AND IKPRE_REB    = IKPOP_REB                             
+                       AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+                       AND IKPRE_REB    = IKPAN_REB                             
+                       AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+                       AND IKPAN_KEYA   = IKPRP_KEYA                            
+                       AND IKPAN_BANCA  = IKPRP_BANCA                           
+                       AND IKPRE_REB    = IKPAB_REB                             
+                       AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+                       AND IKPRE_REB    = IKPDR_REB                             
+                       AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+                       AND IKPDR_DATO     = 'PROFILO'                           
+                       AND IKPOP_UID      = IKPAB_UID                           
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+                       ORDER BY 2, 1 , 7                                        
+                     WITH UR                                                    
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+
+
+sql snippet 19
+           EXEC SQL OPEN CUR01  END-EXEC.                                       
+
+
+sql snippet 20
+           EXEC SQL                                                             
+                DECLARE CUR02 CURSOR FOR                                        
+                     SELECT DISTINCT                                            
+                            IKPRE_REB                                           
+                         ,  IKPRE_REB_TIPO                                      
+                         ,  IKPRE_FT                                            
+                         ,  IKPRE_STATO                                         
+                         ,  IKPDR_VALORE                                        
+                         ,  IKPOP_AMM_SICUR                                     
+                         ,  SUBSTR(IKPRE_DESCRIZIONE,1,60)                      
+                         ,  SUBSTR(IKPAN_DESCRIZIONE,1,60)                      
+                         ,  IKPAN_SIA                                           
+                         ,  IKPAN_NDG                                           
+                         ,  IKPOP_FIRMATARIO                                    
+                         ,  IKPAN_KEYA                                          
+                         ,  IKPRE_TORRE                                         
+                         ,  IKPAN_COD_FISC                                      
+                         ,  IKPDR_MATR_REV                                      
+GM094H                   ,  IKPAN_TIPO                                          
+GM0998                   ,  IKPRE_REB_DIP                                       
+                       FROM IKPREB                                              
+                         ,  IKPOPERATORI                                        
+                         ,  IKPDATIREB                                          
+                         ,  IKPANAGRAFE                                         
+                         ,  IKPRAPPORTI                                         
+                         ,  IKPABILITAZIONI                                     
+                         ,  IKPOPRAPPORTI                                       
+                     WHERE IKPOP_UID    = :UID                                  
+                       AND IKPAB_UID    = IKPOR_UID                             
+                       AND IKPAB_KEYR   = IKPOR_KEYR                            
+                       AND IKPRP_KEYR   = IKPAB_KEYR                            
+                       AND :PERSONA IN  ('  ',IKPOR_TIPOPERSONA)                
+                       AND IKPRE_REB    = IKPOP_REB                             
+                       AND IKPRE_REB_TIPO = IKPOP_REB_TIPO                      
+                       AND IKPRE_REB    = IKPAN_REB                             
+                       AND IKPRE_REB_TIPO = IKPAN_REB_TIPO                      
+                       AND IKPAN_KEYA   = IKPRP_KEYA                            
+                       AND IKPAN_BANCA  = IKPRP_BANCA                           
+                       AND IKPRE_REB    = IKPAB_REB                             
+                       AND IKPAN_KEYA   = :IKPAN-KEYA                           
+                       AND IKPRE_REB_TIPO = IKPAB_REB_TIPO                      
+                       AND IKPRE_REB    = IKPDR_REB                             
+                       AND IKPRE_REB_TIPO = IKPDR_REB_TIPO                      
+                       AND IKPDR_DATO     = 'PROFILO'                           
+                       AND IKPOP_UID      = IKPAB_UID                           
+NEYES                  AND IKPAB_PROG IN (1,2)                                  
+                       ORDER BY 2, 1 , 7                                        
+                     WITH UR                                                    
+                    FOR FETCH ONLY                                              
+           END-EXEC                                                             
+
+
+sql snippet 21
+           EXEC SQL OPEN CUR02  END-EXEC.                                       
+
+
+sql snippet 22
+           EXEC SQL                                                             
+                FETCH CUR01                                                     
+                INTO   :IKPRE-REB                                               
+                   ,   :IKPRE-REB-TIPO                                          
+                   ,   :IKPRE-FT                                                
+                   ,   :IKPRE-STATO                                             
+                   ,   :IKPDR-VALORE                                            
+                   ,   :IKPOP-AMM-SICUR                                         
+                   ,   :IKPRE-DESCRIZIONE                                       
+                   ,   :IKPAN-DESCRIZIONE                                       
+                   ,   :IKPAN-SIA                                               
+                   ,   :IKPAN-NDG                                               
+                   ,   :IKPOP-FIRMATARIO                                        
+                   ,   :IKPAN-KEYA                                              
+                   ,   :IKPRE-TORRE                                             
+                   ,   :IKPAN-COD-FISC                                          
+                   ,   :IKPDR-MATR-REV                                          
+GM094H             ,   :IKPAN-TIPO                                              
+GM0998             ,   :IKPRE-REB-DIP                                           
+           END-EXEC                                                             
+
+
+sql snippet 23
+                       EXEC SQL SELECT IKPDO_VALORE                             
+                                 INTO :IKPDO-VALORE                             
+                                 FROM DB2C.IKPDATIOPERATORI                     
+                                 WHERE IKPDO_REB = :IKPRE-REB                   
+                                 AND   IKPDO_REB_TIPO = :IKPRE-REB-TIPO         
+                                 AND   IKPDO_UID = :UID                         
+                                 AND   IKPDO_DATO = 'RUOLO'                     
+                                 WITH UR                                        
+                       END-EXEC                                                 
+
+
+sql snippet 24
+           EXEC SQL                                                             
+                FETCH CUR02                                                     
+                INTO   :IKPRE-REB                                               
+                   ,   :IKPRE-REB-TIPO                                          
+                   ,   :IKPRE-FT                                                
+                   ,   :IKPRE-STATO                                             
+                   ,   :IKPDR-VALORE                                            
+                   ,   :IKPOP-AMM-SICUR                                         
+                   ,   :IKPRE-DESCRIZIONE                                       
+                   ,   :IKPAN-DESCRIZIONE                                       
+                   ,   :IKPAN-SIA                                               
+                   ,   :IKPAN-NDG                                               
+                   ,   :IKPOP-FIRMATARIO                                        
+                   ,   :IKPAN-KEYA                                              
+                   ,   :IKPRE-TORRE                                             
+                   ,   :IKPAN-COD-FISC                                          
+                   ,   :IKPDR-MATR-REV                                          
+GM094H             ,   :IKPAN-TIPO                                              
+GM0998             ,   :IKPRE-REB-DIP                                           
+           END-EXEC                                                             
+
+
+sql snippet 25
+                       EXEC SQL SELECT IKPDA_VALORE                             
+                                 INTO :IKPDA-VALORE                             
+                                 FROM DB2C.IKPDATIANAGRAFE                      
+                                 WHERE IKPDA_REB = :IKPRE-REB                   
+                                 AND   IKPDA_REB_TIPO = :IKPRE-REB-TIPO         
+                                 AND   IKPDA_KEYA = :IKPAN-KEYA                 
+                                 AND   IKPDA_DATO = 'MANDATO'                   
+                                 WITH UR                                        
+                       END-EXEC                                                 
+
+
+sql snippet 26
+           EXEC SQL                                                             
+                CLOSE CUR01                                                     
+           END-EXEC                                                             
+
+
+sql snippet 27
+           EXEC SQL                                                             
+                CLOSE CUR02                                                     
+           END-EXEC                                                             
+
+
+sql snippet 28
+                   EXEC SQL DECLARE LISTPOL CURSOR WITH RETURN FOR              
+                        SELECT *                                                
+                          FROM IKPLISTAREB_0                                    
+                   END-EXEC                                                     
+
+
+sql snippet 29
+                   EXEC SQL OPEN LISTPOL END-EXEC                               
+
+
+sql snippet 30
+GM094H             EXEC SQL DECLARE LISTPOL1 CURSOR WITH RETURN FOR             
+GM094H                  SELECT *                                                
+GM094H                    FROM IKPLISTAREB_1                                    
+GM094H             END-EXEC                                                     
+
+
+sql snippet 31
+GM094H             EXEC SQL OPEN LISTPOL1 END-EXEC                              
+
+
+sql snippet 32
+GM0998             EXEC SQL DECLARE LISTPOL2 CURSOR WITH RETURN FOR             
+GM0998                  SELECT REB                                              
+                        ,      REBTIPO                                          
+                        ,      FT                                               
+                        ,      PROFILO                                          
+                        ,      SERVIZIO                                         
+                        ,      AMMSIC                                           
+                        ,      REBDESCR                                         
+                        ,      SIADESCR                                         
+                        ,      SIA                                              
+                        ,      CODFISC                                          
+                        ,      FIRMATARIO                                       
+                        ,      KEYA                                             
+                        ,      TORREREB                                         
+                        ,      RUOLO                                            
+                        ,      TIPO                                             
+                        ,      REBDIP                                           
+GM0998                    FROM IKPLISTAREB_2                                    
+GM0998                    JOIN IKPANAGRAFE                                      
+                          ON IKPAN_KEYA = KEYA                                  
+GM0998             END-EXEC                                                     
+
+
+sql snippet 33
+GM0998             EXEC SQL OPEN LISTPOL2 END-EXEC                              
+
+
+sql snippet 34
+                   EXEC SQL DECLARE LISTPOL3 CURSOR WITH RETURN FOR             
+                        SELECT *                                                
+                          FROM SESSION.IKPLISTAREB_3                            
+                   END-EXEC                                                     
+
+
+sql snippet 35
+                   EXEC SQL OPEN LISTPOL3 END-EXEC                              
+
+

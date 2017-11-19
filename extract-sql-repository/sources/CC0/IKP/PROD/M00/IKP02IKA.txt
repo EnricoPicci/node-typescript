@@ -1,0 +1,433 @@
+      * 10.251 19:49        IKP  0000 US01101                                   
+      * ----------------------------------                                      
+      * 10.188 10:18        IKP  0000 Y994052                                   
+      * COMPILAZIONE                                                            
+      * 09.362 21:51        IKP  0000 US01101                                   
+      * ACCETTO CON SOMMO DISPIACE CHE NON ESISTA                               
+      * 09.360 12:19        IKP  0000 US01101                                   
+      * ----------------------------------------                                
+      * 09.320 22:49        IKP  0000 US01101                                   
+      * --------------------------------------                                  
+      * 09.201 21:12        IKP  0000 US01101                                   
+      * ---------------------------------                                       
+      * 09.201 21:12        IKP  0000 US01101                                   
+      * ------------------------------------                                    
+      * 08.220 20:26        IKP  0000                                           
+      * SISTEMATI DISPLAY                                                       
+      * 08.190 16:09        IKP  0000                                           
+      * CF8183 - GESTIONE TORRE BR E BD                                         
+      * 08.170 19:21        IKP  0000                                           
+      * AAAAAAAAAAAAAAAAAAAAAAAAAA                                              
+      * 08.133 11:01        IKP  0000                                           
+      * ---------------------------------                                       
+      * 08.129 16:36        IKP  0000                                           
+      * --------------------------------------                                  
+      * 08.128 16:07        IKP  0000                                           
+      * ---------------------------------                                       
+      * 08.128 11:52        IKP  0000                                           
+      * COMPILAZIONE                                                            
+      * 08.015 19:35        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.344 10:59        IKP  0000                                           
+      * COMPILAZIONE                                                            
+      * 07.341 20:22        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.341 20:09        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.341 18:52        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.341 11:22        IKP 0000                                            
+      * CCCCCCCCCCCCCCCCCCCCCCCCCC                                              
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02IKA.                                                    
+       AUTHOR. A. ALDEGHERI.                                                    
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. OPERAZIONI INQUIRY SU TABELLA IKPKEYAAID   *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... DICEMBRE 2007*        
+      * DA PARTE DI .............................................. UGIS*        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                             PIC  X(08) VALUE 'IKP02IKA'.         
+       77  SAVE-SQLCODE                    PIC S9(09) COMP.                     
+       01  COMO-AID-X                      PIC  X(08).                          
+       01  COMO-AID-9 REDEFINES COMO-AID-X PIC  9(08).                          
+       77  HV-CONTATORE                    PIC S9(09) COMP-3 VALUE ZERO.        
+       77  CONTA-RIGHE                     PIC S9(09) COMP-3 VALUE ZERO.        
+       01  FILLER                          PIC  9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+           88  ERRORE-RIGHE-0                         VALUE 4.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR01-CHIUSO                       VALUE ZERO.               
+               88  CUR01-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR02-CHIUSO                       VALUE ZERO.               
+               88  CUR02-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR03-CHIUSO                       VALUE ZERO.               
+               88  CUR03-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR04-CHIUSO                       VALUE ZERO.               
+               88  CUR04-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                PIC  X(16).                          
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR             PIC  X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+       01  IKP0RDBG                        PIC  X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+       01  SISBRCR2                        PIC  X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+TS8128 01  XDMP                              PIC X       VALUE SPACE.           
+TS8128 01  DUMP REDEFINES XDMP               PIC S9.                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAKA                                                
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+                                                                                
+       LINKAGE SECTION.                                                         
+           EXEC SQL INCLUDE IKP0C2DB END-EXEC.                                  
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE ' '                        TO DBGIN-DEBUG.                      
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI                                          
+           IF  NOT-ERRORE                                                       
+               EVALUATE 2DBIN-SQL-FUNZIONE                                      
+                   WHEN 'SELECT01'                                              
+                       IF  TORRE = 'HV'                                         
+LIGO                       MOVE IKPKA-KEYA(3:8) TO COMO-AID-X                   
+LIGO                       MOVE COMO-AID-9 TO IKPKA-AID                         
+LIGO                       MOVE IKP0TABKA  TO 2DBOU-RIGA                        
+                       ELSE                                                     
+                           PERFORM FUNZIONE-SELECT01                            
+TS8128                 END-IF                                                   
+                   WHEN 'SELECT02'                                              
+                       PERFORM FUNZIONE-SELECT02                                
+                   WHEN 'SELECT03'                                              
+                       PERFORM FUNZIONE-SELECT03                                
+                   WHEN 'SELECT04'                                              
+                       PERFORM FUNZIONE-SELECT04                                
+                   WHEN OTHER                                                   
+                       SET ERRORE-GENERICO TO TRUE                              
+               END-EVALUATE                                                     
+           END-IF                                                               
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE                  TO TRUE                              
+           INITIALIZE 2DBRC 2DBOU                                               
+           MOVE 2DBIN-RIGA                 TO IKP0TABKA.                        
+           MOVE 'IKPKEYAAID'               TO 2DBRC-TABLE                       
+      *    PERFORM FUNZIONE-CONNECT.                                            
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPKA_BANCA                                               
+               ,      IKPKA_KEYA                                                
+               ,      IKPKA_AID                                                 
+               ,      IKPKA_STATO                                               
+               ,      IKPKA_DATA_INS                                            
+               ,      IKPKA_MATR_INS                                            
+               ,      IKPKA_DATA_VAR                                            
+               ,      IKPKA_MATR_VAR                                            
+               ,      IKPKA_DATA_REV                                            
+               ,      IKPKA_MATR_REV                                            
+               INTO  :IKPKA-BANCA                                               
+               ,     :IKPKA-KEYA                                                
+               ,     :IKPKA-AID                                                 
+               ,     :IKPKA-STATO                                               
+               ,     :IKPKA-DATA-INS                                            
+               ,     :IKPKA-MATR-INS                                            
+               ,     :IKPKA-DATA-VAR                                            
+               ,     :IKPKA-MATR-VAR                                            
+               ,     :IKPKA-DATA-REV                                            
+               ,     :IKPKA-MATR-REV                                            
+               FROM   IKPKEYAAID                                                
+               WHERE  IKPKA_KEYA = :IKPKA-KEYA                                  
+               WITH   UR                                                        
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+               WHEN SQLCODE = 100                                               
+LIGO               MOVE IKPKA-KEYA(3:8)  TO COMO-AID-X                          
+LIGO               MOVE COMO-AID-9       TO IKPKA-AID                           
+LIGO               MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+TS8128*            IF  2DBIN-MATRICOLA NOT = 'IKC0RSIA'                         
+TS8128*            AND IKPKA-KEYA(1:2) NOT = '83'                               
+TS8128*            AND IKPKA-KEYA(1:2) NOT = 'CE'                               
+TS8128*                DISPLAY '*------------------------------*'               
+TS8128*                DISPLAY '  KEYA                         |'               
+TS8128*                DISPLAY '|'IKPKA-KEYA '  NON PRESENTE|'                  
+TS8128*                DISPLAY '|                              |'               
+TS8128*                DISPLAY '| ABENDDDDDDDDDDDDDDDDDDDDDDDD |'               
+TS8128*                DISPLAY '*------------------------------*'               
+TS8128*                ADD 1 TO DUMP                                            
+TS8128*            END-IF                                                       
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT02 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPKA_BANCA                                               
+               ,      IKPKA_KEYA                                                
+               ,      IKPKA_AID                                                 
+               ,      IKPKA_STATO                                               
+               ,      IKPKA_DATA_INS                                            
+               ,      IKPKA_MATR_INS                                            
+               ,      IKPKA_DATA_VAR                                            
+               ,      IKPKA_MATR_VAR                                            
+               ,      IKPKA_DATA_REV                                            
+               ,      IKPKA_MATR_REV                                            
+               INTO  :IKPKA-BANCA                                               
+               ,     :IKPKA-KEYA                                                
+               ,     :IKPKA-AID                                                 
+               ,     :IKPKA-STATO                                               
+               ,     :IKPKA-DATA-INS                                            
+               ,     :IKPKA-MATR-INS                                            
+               ,     :IKPKA-DATA-VAR                                            
+               ,     :IKPKA-MATR-VAR                                            
+               ,     :IKPKA-DATA-REV                                            
+               ,     :IKPKA-MATR-REV                                            
+               FROM   IKPKEYAAID                                                
+               WHERE  IKPKA_AID = :IKPKA-AID                                    
+               WITH   UR                                                        
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+               WHEN SQLCODE = 100                                               
+LIGO               MOVE IKPKA-AID        TO COMO-AID-9                          
+LIGO               STRING 'EB' COMO-AID-X '      '                              
+LIGO               DELIMITED BY SIZE INTO IKPKA-KEYA                            
+LIGO               MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+TS8128             IF  2DBIN-MATRICOLA NOT = 'IKC0RSIA'                         
+                       IF IKPKA-AID < 750000                                    
+TS8128                     DISPLAY '*-----------------------*'                  
+TS8128                     DISPLAY '|                       |'                  
+TS8128                     DISPLAY '|KEYA' IKPKA-KEYA 'NON PRESENTE|'           
+TS8128                     DISPLAY '|                       |'                  
+TS8128                     DISPLAY '| ABENDDDDDDDDDDDDDDDDD |'                  
+TS8128                     DISPLAY '*-----------------------*'                  
+LIGO                       MOVE IKPKA-AID TO COMO-AID-9                         
+LIGO                       STRING 'EP' COMO-AID-X '      '                      
+LIGO                       DELIMITED BY SIZE INTO IKPKA-KEYA                    
+LIGO                       MOVE IKP0TABKA TO 2DBOU-RIGA                         
+                       END-IF                                                   
+TS8128             END-IF                                                       
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT03 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPKA_BANCA                                               
+               ,      IKPKA_KEYA                                                
+               ,      IKPKA_AID                                                 
+               ,      IKPKA_STATO                                               
+               ,      IKPKA_DATA_INS                                            
+               ,      IKPKA_MATR_INS                                            
+               ,      IKPKA_DATA_VAR                                            
+               ,      IKPKA_MATR_VAR                                            
+               ,      IKPKA_DATA_REV                                            
+               ,      IKPKA_MATR_REV                                            
+               INTO  :IKPKA-BANCA                                               
+               ,     :IKPKA-KEYA                                                
+               ,     :IKPKA-AID                                                 
+               ,     :IKPKA-STATO                                               
+               ,     :IKPKA-DATA-INS                                            
+               ,     :IKPKA-MATR-INS                                            
+               ,     :IKPKA-DATA-VAR                                            
+               ,     :IKPKA-MATR-VAR                                            
+               ,     :IKPKA-DATA-REV                                            
+               ,     :IKPKA-MATR-REV                                            
+               FROM   IKPKEYAAID                                                
+               WHERE  IKPKA_KEYA = :IKPKA-KEYA                                  
+               WITH   UR                                                        
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+               WHEN SQLCODE = 100                                               
+                   INITIALIZE IKP0TABKA                                         
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT04 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPKA_BANCA                                               
+               ,      IKPKA_KEYA                                                
+               ,      IKPKA_AID                                                 
+               ,      IKPKA_STATO                                               
+               ,      IKPKA_DATA_INS                                            
+               ,      IKPKA_MATR_INS                                            
+               ,      IKPKA_DATA_VAR                                            
+               ,      IKPKA_MATR_VAR                                            
+               ,      IKPKA_DATA_REV                                            
+               ,      IKPKA_MATR_REV                                            
+               INTO  :IKPKA-BANCA                                               
+               ,     :IKPKA-KEYA                                                
+               ,     :IKPKA-AID                                                 
+               ,     :IKPKA-STATO                                               
+               ,     :IKPKA-DATA-INS                                            
+               ,     :IKPKA-MATR-INS                                            
+               ,     :IKPKA-DATA-VAR                                            
+               ,     :IKPKA-MATR-VAR                                            
+               ,     :IKPKA-DATA-REV                                            
+               ,     :IKPKA-MATR-REV                                            
+               FROM   IKPKEYAAID                                                
+               WHERE  IKPKA_AID  = :IKPKA-AID                                   
+               AND    IKPKA_STATO = 'A'                                         
+               WITH   UR                                                        
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABKA        TO 2DBOU-RIGA                          
+               WHEN SQLCODE = 100                                               
+                   INITIALIZE IKP0TABKA                                         
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-CONNECT SECTION.                                                
+      *----------------------------------------------------------------*        
+           MOVE 2DBIN-LOCATION             TO HV-DATA-BASE                      
+           EXEC SQL                                                             
+                CONNECT TO :HV-DATA-BASE                                        
+           END-EXEC                                                             
+           IF  SQLCODE = ZERO                                                   
+               SET CONNESSIONE-APERTA      TO TRUE                              
+           ELSE                                                                 
+               SET ERRORE-SQL              TO TRUE                              
+               MOVE SQLCODE                TO 2DBRC-CNT-SQLCODE                 
+               MOVE SQLERRMC               TO 2DBRC-CNT-SQLERRMC                
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE                TO SAVE-SQLCODE                      
+               SET CONNESSIONE-CHIUSA      TO TRUE                              
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE       TO SQLCODE                           
+               ELSE                                                             
+                   SET ERRORE-SQL          TO TRUE                              
+                   MOVE SQLCODE            TO 2DBRC-CNT-SQLCODE                 
+                   MOVE SQLERRMC           TO 2DBRC-CNT-SQLERRMC                
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :' DELIMITED BY SIZE                                  
+                  2DBRC-TABLE DELIMITED BY SPACE                                
+                  '-' DELIMITED BY SIZE                                         
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO 2DBRC-SQLERRMC                                                
+           END-STRING.                                                          
+           MOVE SQLCODE                    TO 2DBRC-SQLCODE                     
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+      *    IF  NOT ERRORE-SQL                                                   
+      *        PERFORM FUNZIONE-RESET                                           
+      *    END-IF                                                               
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11                 TO 2DBRC-CODICE                      
+                   MOVE 999             TO 2DBRC-SQLCODE                        
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET  RC-BLOCCANTE       TO TRUE                              
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET RC-WARNING          TO TRUE                              
+                   MOVE 03                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-RIGHE-0                                              
+                   SET  RC-BLOCCANTE       TO TRUE                              
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE       TO TRUE                              
+                   MOVE 99                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

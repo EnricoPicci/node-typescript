@@ -1,0 +1,496 @@
+      * 09.251 11:18        IKP  0000 US01437                                   
+      * .......................                                                 
+      * 09.174 21:40        IKP  0000 US01101                                   
+      * ----------------------------------                                      
+      * 09.174 21:36        IKP  0000 US01101                                   
+      * --------------------------------                                        
+      * 09.174 21:30        IKP  0000 US01101                                   
+      * ------------------------------------                                    
+      * 09.167 09:44        IKP 0000 US01437                                    
+      * .....................................                                   
+      * 09.167 09:41        IKP 0000 US01437                                    
+      * ...................................                                     
+      * 09.167 09:33        IKP  0000 US01437                                   
+      * ...................................                                     
+      * 09.167 09:30        IKP  0000 US01437                                   
+      * CAMBIATO IKPCX_4_PAN IN IKPCX_5_PAN                                     
+      * 09.147 11:37        IKP  0000 US01437                                   
+      * ..........................................                              
+      * 09.147 10:27        IKP  0000 US01437                                   
+      * ..................................                                      
+      * 09.147 10:26        IKP  0000 US01437                                   
+      * ...................................                                     
+      * 09.147 10:24        IKP  0000 US01437                                   
+      * ..................................                                      
+      * 09.135 15:39        IKP  0000 Y994052                                   
+      * TS9135 - AGGIUNTO UPDATE03                                              
+      * 09.075 10:57        IKP 0000 US01437                                    
+      * CA9316 - INSTALLAZIONE                    .                             
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02MCX.                                                    
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .........OPERAZIONI AGGIORNAMENTI TABELLA IKPCARTE_CARMAS *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ................................. MARZO 2009 *        
+      * DA PARTE DI ..................................... A. CHERUBINI *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+      ******************************************************************        
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+      ******************************************************************        
+       DATA DIVISION.                                                           
+      ******************************************************************        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  NOME-PGM                      PIC X(08) VALUE 'IKP02MCX'.            
+       77  SAVE-SQLCODE                  PIC S9(09) COMP.                       
+                                                                                
+       01  SISBRCR2                      PIC X(08) VALUE 'SISBRCR2'.            
+           COPY SISBRCR2.                                                       
+                                                                                
+       01  IKP0RDBG                      PIC X(08) VALUE 'IKP0RDBG'.            
+           COPY IKP0CDBG.                                                       
+                                                                                
+       01  IKP0RLOC                      PIC X(08) VALUE 'IKP0RLOC'.            
+           COPY IKP0CLOC.                                                       
+                                                                                
+       01  IKP0RLMD                      PIC X(08) VALUE 'IKP0RLMD'.            
+           COPY IKP0CLMD.                                                       
+                                                                                
+       01 IND1                           PIC 9(03) VALUE 0.                     
+       01 IND2                           PIC 9(03) VALUE 0.                     
+       01 WRK-DESCRIZIONE                PIC X(64) VALUE SPACES.                
+       01 SW-PRIMOSPAZIO                 PIC  9(01) VALUE 0.                    
+          88 NO-PRIMOSPAZIO                         VALUE 0.                    
+          88 SI-PRIMOSPAZIO                         VALUE 1.                    
+                                                                                
+      *---                                                                      
+       01 SEGNALATORI-DI-STATO.                                                 
+          05 FILLER                      PIC 9(01) VALUE ZERO.                  
+             88 CONNESSIONE-CHIUSA                 VALUE ZERO.                  
+             88 CONNESSIONE-APERTA                 VALUE 1.                     
+      *-----                                                                    
+       01 MESSAGGIO                      PIC X(80) VALUE SPACE.                 
+       01 FILLER                         PIC 9(01) VALUE ZERO.                  
+          88 NOT-ERRORE                            VALUE ZERO.                  
+          88 ERRORE                                VALUE 1 THRU 9.              
+          88 ERRORE-GENERICO                       VALUE 1.                     
+          88 ERRORE-WARNING                        VALUE 2.                     
+          88 ERRORE-SQL                            VALUE 3.                     
+          88 ERRORE-GENERICO-INPUT                 VALUE 4.                     
+          88 ERRORE-SQL-803                        VALUE 5.                     
+                                                                                
+       01 DS-AREA.                                                              
+          05 DS-FUNZIONE-ERR             PIC X(50) VALUE                        
+             'FUNZIONE NON PREVISTA'.                                           
+                                                                                
+           EXEC SQL INCLUDE SQLCA END-EXEC.                                     
+           EXEC SQL INCLUDE IKP0TACX END-EXEC.                                  
+                                                                                
+      *-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      ******************************************************************        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      ******************************************************************        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE NOME-PGM                   TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      ******************************************************************        
+       INIZIO SECTION.                                                          
+      *----------------------------------------------------------------         
+                                                                                
+           PERFORM OPERAZIONI-INIZIALI                                          
+           IF NOT-ERRORE                                                        
+               PERFORM ELABORA-FUNZIONI-LOCALI                                  
+           END-IF.                                                              
+                                                                                
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2              USING CODICI-CASSA.                       
+           SET NOT-ERRORE                TO TRUE.                               
+                                                                                
+           INITIALIZE 2DBRC.                                                    
+                                                                                
+           MOVE 2DBIN-RIGA                 TO IKP0TABCX.                        
+           MOVE 'IKPCARTE_CARMAS'          TO 2DBRC-TABLE.                      
+           MOVE 'N'                        TO 2DBIN-REMOTO                      
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       ELABORA-FUNZIONI-LOCALI SECTION.                                         
+      *----------------------------------------------------------------*        
+           EVALUATE 2DBIN-SQL-FUNZIONE                                          
+              WHEN 'INSERT01'                                                   
+                 PERFORM FUNZIONE-INSERT01                                      
+              WHEN 'UPDATE01'                                                   
+                 PERFORM FUNZIONE-UPDATE01                                      
+              WHEN 'UPDATE02'                                                   
+                 PERFORM FUNZIONE-UPDATE02                                      
+TS9135        WHEN 'UPDATE03'                                                   
+TS9135           PERFORM FUNZIONE-UPDATE03                                      
+              WHEN 'UPDATE04'                                                   
+                 PERFORM FUNZIONE-UPDATE04                                      
+              WHEN 'UPDATE05'                                                   
+                 PERFORM FUNZIONE-UPDATE05                                      
+              WHEN 'UPDATE06'                                                   
+                 PERFORM FUNZIONE-UPDATE06                                      
+              WHEN 'DELETE01'                                                   
+                 PERFORM FUNZIONE-DELETE01                                      
+              WHEN OTHER                                                        
+                 SET ERRORE-GENERICO       TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :' DELIMITED BY SIZE                                  
+                  2DBRC-TABLE DELIMITED BY SPACE                                
+                  '-' DELIMITED BY SIZE                                         
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+                                         INTO MESSAGGIO                         
+           END-STRING.                                                          
+           MOVE SQLCODE                    TO 2DBRC-SQLCODE                     
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       COMPATTA-ANAGRAFICA SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE WRK-DESCRIZIONE                                           
+           INITIALIZE IND2                                                      
+                                                                                
+           SET NO-PRIMOSPAZIO              TO TRUE                              
+                                                                                
+           PERFORM VARYING IND1 FROM 1 BY 1 UNTIL IND1 > 64                     
+              IF IKPCX-DESCRIZIONE (IND1 : 1) EQUAL SPACES                      
+                 IF NO-PRIMOSPAZIO                                              
+                    ADD 1                  TO IND2                              
+                    SET SI-PRIMOSPAZIO     TO TRUE                              
+                 ELSE                                                           
+                    CONTINUE                                                    
+                 END-IF                                                         
+              ELSE                                                              
+                 SET NO-PRIMOSPAZIO        TO TRUE                              
+                 ADD 1                     TO IND2                              
+                 MOVE IKPCX-DESCRIZIONE(IND1 : 1 )                              
+                                           TO WRK-DESCRIZIONE(IND2 : 1 )        
+              END-IF                                                            
+           END-PERFORM.                                                         
+           MOVE WRK-DESCRIZIONE            TO IKPCX-DESCRIZIONE.                
+           EXIT.                                                                
+                                                                                
+      ****************************************************************          
+      *----------------------------------------------------------------*        
+       INSERISCI-LOGMASTERDATA-CX SECTION.                                      
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0LMD.                                                  
+           MOVE 2DBIN-MATRICOLA            TO LMDIN-MATRICOLA                   
+           MOVE 2DBIN-CODOPER              TO LMDIN-CODOPER                     
+           MOVE 2DBIN-AMBIENTE             TO LMDIN-AMBIENTE                    
+           MOVE 2DBIN-PGM-CHIAMANTE        TO LMDIN-PGM-CHIAMANTE               
+           MOVE NOME-PGM                   TO LMDIN-PGM-DB2                     
+           MOVE 2DBIN-SQL-FUNZIONE         TO LMDIN-FUNZIONE-DB2                
+           SET GRUPPO-OK                   TO TRUE                              
+           SET ANAGRAFE-OK                 TO TRUE                              
+           SET LMDIN-IRE-REB               TO TRUE                              
+                                                                                
+           IF NOT ERRORE-SQL                                                    
+                                                                                
+              CALL IKP0RLMD             USING IKP0LMD                           
+                                                                                
+              IF NOT RC-OK OF IKP0LMD                                           
+                 MOVE LMDRC-CODICE         TO 2DBRC-CODICE                      
+                 MOVE LMDRC-SQLCODE        TO 2DBRC-SQLCODE                     
+                 MOVE LMDRC-SQLERRMC       TO 2DBRC-SQLERRMC                    
+                 MOVE LMDRC-TABLE          TO 2DBRC-TABLE                       
+                 MOVE LMDRC-RC             TO 2DBRC-RC                          
+              END-IF                                                            
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+      *--   F U N Z I O N I    S Q L                                            
+      *----------------------------------------------------------------*        
+      *----------------------------------------------------------------*        
+       FUNZIONE-INSERT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           PERFORM COMPATTA-ANAGRAFICA                                          
+                                                                                
+           EXEC SQL INSERT INTO IKPCARTE_CARMAS                                 
+                      ( IKPCX_BANCA                                             
+                       ,IKPCX_PAN                                               
+                       ,IKPCX_DATA_SCAD                                         
+                       ,IKPCX_DATA_NASC                                         
+                       ,IKPCX_NUM_ERRORI                                        
+                       ,IKPCX_STATO                                             
+                       ,IKPCX_NDG                                               
+                       ,IKPCX_DESCRIZIONE                                       
+                       ,IKPCX_REB                                               
+                       ,IKPCX_TIMESTAMP                                         
+                       ,IKPCX_COD_FISC                                          
+                       ,IKPCX_5_PAN)                                            
+               VALUES (:IKPCX-BANCA                                             
+                      ,:IKPCX-PAN                                               
+                      ,:IKPCX-DATA-SCAD                                         
+                      ,:IKPCX-DATA-NASC                                         
+                      ,:IKPCX-NUM-ERRORI                                        
+                      ,:IKPCX-STATO                                             
+                      ,:IKPCX-NDG                                               
+                      ,:IKPCX-DESCRIZIONE                                       
+                      ,:IKPCX-REB                                               
+                      , CURRENT TIMESTAMP                                       
+                      ,:IKPCX-COD-FISC                                          
+                      ,:IKPCX-5-PAN)                                            
+           END-EXEC.                                                            
+           IF IKPCX-STATO = ' '                                                 
+              DISPLAY 'INSERT '                                                 
+              MOVE -904 TO SQLCODE                                              
+           END-IF                                                               
+           EVALUATE SQLCODE                                                     
+           WHEN 000                                                             
+              CONTINUE                                                          
+           WHEN -803                                                            
+              SET ERRORE-SQL-803           TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           WHEN OTHER                                                           
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           END-EVALUATE.                                                        
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL UPDATE IKPCARTE_CARMAS                                      
+                    SET IKPCX_DATA_SCAD   = :IKPCX-DATA-SCAD                    
+                      , IKPCX_DATA_NASC   = :IKPCX-DATA-NASC                    
+                      , IKPCX_COD_FISC    = :IKPCX-COD-FISC                     
+                      , IKPCX_NDG         = :IKPCX-NDG                          
+                      , IKPCX_TIMESTAMP   =  CURRENT TIMESTAMP                  
+                  WHERE IKPCX_BANCA       =: IKPCX-BANCA                        
+                    AND IKPCX_PAN         = :IKPCX-PAN                          
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+              DISPLAY IKPCX-BANCA                                               
+                '-'   IKPCX-PAN                                                 
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE02 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL UPDATE IKPCARTE_CARMAS                                      
+                    SET IKPCX_STATO       = :IKPCX-STATO                        
+                       ,IKPCX_NUM_ERRORI  = :IKPCX-NUM-ERRORI                   
+                       ,IKPCX_TIMESTAMP   =  CURRENT TIMESTAMP                  
+                  WHERE IKPCX_BANCA       = :IKPCX-BANCA                        
+                    AND IKPCX_COD_FISC    = :IKPCX-COD-FISC                     
+           END-EXEC                                                             
+                                                                                
+           IF IKPCX-STATO = ' '                                                 
+              DISPLAY 'UPDATE 02 '                                              
+              MOVE -904 TO SQLCODE                                              
+           END-IF                                                               
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+TS9135*----------------------------------------------------------------*        
+TS9135 FUNZIONE-UPDATE03 SECTION.                                               
+TS9135*----------------------------------------------------------------*        
+TS9135     PERFORM COMPATTA-ANAGRAFICA.                                         
+TS9135                                                                          
+TS9135     EXEC SQL                                                             
+TS9135         UPDATE IKPCARTE_CARMAS                                           
+TS9135         SET    IKPCX_DESCRIZIONE  = :IKPCX-DESCRIZIONE                   
+TS9135         ,      IKPCX_COD_FISC     = :IKPCX-COD-FISC                      
+TS9135         WHERE  IKPCX_NDG          = :IKPCX-NDG                           
+TS9135     END-EXEC.                                                            
+TS9135                                                                          
+TS9135     IF SQLCODE NOT = ZERO                                                
+TS9135        SET ERRORE-SQL               TO TRUE                              
+TS9135        MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+TS9135        MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+TS9135     END-IF                                                               
+TS9135     EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE04 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL UPDATE IKPCARTE_CARMAS                                      
+                    SET IKPCX_COD_FISC    = :IKPCX-COD-FISC                     
+                      , IKPCX_DESCRIZIONE = :IKPCX-DESCRIZIONE                  
+                      , IKPCX_DATA_SCAD   = :IKPCX-DATA-SCAD                    
+                      , IKPCX_DATA_NASC   = :IKPCX-DATA-NASC                    
+                      , IKPCX_NDG         = :IKPCX-NDG                          
+                      , IKPCX_STATO       = :IKPCX-STATO                        
+                      , IKPCX_TIMESTAMP   =  CURRENT TIMESTAMP                  
+                      , IKPCX_REB         = :IKPCX-REB                          
+                  WHERE IKPCX_PAN         = :IKPCX-PAN                          
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+              DISPLAY IKPCX-BANCA                                               
+                '-'   IKPCX-PAN                                                 
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE05 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL UPDATE IKPCARTE_CARMAS                                      
+                    SET IKPCX_STATO       = :IKPCX-STATO                        
+                      , IKPCX_REB         = :IKPCX-REB                          
+                  WHERE IKPCX_NDG         = :IKPCX-NDG                          
+                    AND IKPCX_STATO       = 'C'                                 
+           END-EXEC.                                                            
+           IF IKPCX-STATO = ' '                                                 
+              DISPLAY 'UPDATE 05 '                                              
+              MOVE -904 TO SQLCODE                                              
+           END-IF                                                               
+                                                                                
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE06 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL UPDATE IKPCARTE_CARMAS                                      
+                    SET IKPCX_STATO       = :IKPCX-STATO                        
+                      , IKPCX_REB         = :IKPCX-REB                          
+                      , IKPCX_TIMESTAMP    =  CURRENT TIMESTAMP                 
+                  WHERE IKPCX_NDG         = :IKPCX-NDG                          
+                    AND IKPCX_PAN         = :IKPCX-PAN                          
+           END-EXEC.                                                            
+                                                                                
+           IF IKPCX-STATO = ' '                                                 
+              DISPLAY 'UPDATE 06 '                                              
+              MOVE -904 TO SQLCODE                                              
+           END-IF                                                               
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-DELETE01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL DELETE FROM DB2C.IKPCARTE_CARMAS                            
+                  WHERE IKPCX_NDG         = :IKPCX-NDG                          
+                    AND IKPCX_PAN         = :IKPCX-PAN                          
+           END-EXEC.                                                            
+                                                                                
+           IF SQLCODE NOT = ZERO                                                
+              SET ERRORE-SQL               TO TRUE                              
+              MOVE SQLCODE                 TO 2DBRC-SQLCODE                     
+              MOVE SQLERRMC                TO 2DBRC-SQLERRMC                    
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF CONNESSIONE-APERTA                                                
+              MOVE SQLCODE                 TO SAVE-SQLCODE                      
+              SET CONNESSIONE-CHIUSA       TO TRUE                              
+                                                                                
+              EXEC SQL CONNECT RESET END-EXEC                                   
+                                                                                
+              IF SQLCODE = ZERO                                                 
+                 MOVE SAVE-SQLCODE         TO SQLCODE                           
+              ELSE                                                              
+                 SET ERRORE-SQL            TO TRUE                              
+                 MOVE SQLCODE              TO 2DBRC-CNT-SQLCODE                 
+                 MOVE SQLERRMC             TO 2DBRC-CNT-SQLERRMC                
+              END-IF                                                            
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           IF NOT ERRORE-SQL                                                    
+              PERFORM FUNZIONE-RESET                                            
+           END-IF                                                               
+           EVALUATE TRUE                                                        
+              WHEN ERRORE-GENERICO                                              
+                 MOVE 11                   TO 2DBRC-CODICE                      
+                 MOVE 999                  TO 2DBRC-SQLCODE                     
+                 STRING NOME-PGM DELIMITED BY SIZE                              
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                                         INTO 2DBRC-SQLERRMC                    
+                 SET RC-BLOCCANTE OF IKP02DB                                    
+                                           TO TRUE                              
+                 PERFORM FUNZIONE-RESET                                         
+              WHEN ERRORE-GENERICO-INPUT                                        
+                 MOVE 135                  TO 2DBRC-CODICE                      
+                 MOVE 999                  TO 2DBRC-SQLCODE                     
+                 STRING NOME-PGM DELIMITED BY SIZE                              
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                                         INTO 2DBRC-SQLERRMC                    
+                 SET RC-BLOCCANTE OF IKP02DB                                    
+                                           TO TRUE                              
+                 PERFORM FUNZIONE-RESET                                         
+              WHEN ERRORE-WARNING                                               
+                 SET RC-WARNING OF IKP02DB TO TRUE                              
+                 PERFORM SEGNALAZIONI-SQL                                       
+              WHEN ERRORE-SQL                                                   
+                 SET RC-BLOCCANTE OF IKP02DB                                    
+                                           TO TRUE                              
+                 MOVE 99                   TO 2DBRC-CODICE                      
+                 PERFORM SEGNALAZIONI-SQL                                       
+                 PERFORM FUNZIONE-RESET                                         
+              WHEN ERRORE-SQL-803                                               
+                 SET RC-BLOCCANTE OF IKP02DB                                    
+                                           TO TRUE                              
+                 MOVE 218                  TO 2DBRC-CODICE                      
+                 PERFORM SEGNALAZIONI-SQL                                       
+                 PERFORM FUNZIONE-RESET                                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+                                                                                

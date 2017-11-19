@@ -1,6 +1,6 @@
 // ==================    TO LAUNCH   =================
 // npm run tsc  
-// node ./dist/move-tower/move-tower.js
+// node ./dist/tower-of-hanoi/move-tower.script.js
 // =================================================== 
 
 import {moveTower, createTower, Disk} from './move-tower';
@@ -11,7 +11,7 @@ const spare = new Array<Disk>();
 
 const bottomDisk = source[0];
 
-const iterations = moveTower(bottomDisk, source, dest, spare);
+const iterations = moveTower(source, dest, spare, bottomDisk);
 
 console.log('iterations', iterations);
 

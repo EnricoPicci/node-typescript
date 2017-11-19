@@ -1,0 +1,160 @@
+      * 08.067 12:38        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 05.033 16:37        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 03.316 18:56        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 03.309 12:37        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 03.309 12:33        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 03.309 11:58        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 03.309 11:17        IKP 0000                                            
+      * RICOMPILAZIONE                                                          
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0IDBG.                                                    
+      ******************************************************************        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................. ROUTINE *        
+      *----------------------------------------------------------------*        
+      * NOTE ................................... VERIFICA DEBUG ATTIVO *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. DICEMBRE 2003 *        
+      * DA PARTE DI ........................................... USI/VR *        
+      * ULTIMA MODIFICA ................................ DICEMBRE 2003 *        
+      * DA PARTE DI ........................................ M.LIGOZZI *        
+      ******************************************************************        
+       ENVIRONMENT  DIVISION.                                                   
+       CONFIGURATION  SECTION.                                                  
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       OBJECT-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+       DATA  DIVISION.                                                          
+                                                                                
+      *-----------------------------------------------------------------        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  PGM                       PIC X(08)  VALUE 'IKP0IDBG'.               
+       77  SISBRCR2                  PIC X(08)  VALUE 'SISBRCR2'.               
+           COPY SISBRCR2.                                                       
+      *-----------------------------------------------------------------        
+       77  ORA-ADESSO                PIC X(26).                                 
+       77  CODICE-ERR                PIC 9(05).                                 
+      *-----------------------------------------------------------------        
+       01  SQLCODE-COBOL             PIC  -(06)9(03).                           
+      *-----------------------------------------------------------------        
+           EXEC SQL INCLUDE SQLCA    END-EXEC.                                  
+      *-----------------------------------------------------------------        
+           EXEC SQL INCLUDE IKP0TADE END-EXEC.                                  
+                                                                                
+      *-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+      *-----------------------------------------------------------------        
+           COPY IKPICDBG.                                                       
+                                                                                
+      *-----------------------------------------------------------------        
+       PROCEDURE DIVISION USING IKPIDBG.                                        
+      *-----------------------------------------------------------------        
+       IKP0IDBG-INIZIO.                                                         
+      *-----------------------------------------------------------------        
+           PERFORM CONTROLLI-INIZIALI.                                          
+                                                                                
+           IF  RC-OK OF IDBGRC                                                  
+           AND IDBGIN-OGGETTO     NOT =  SPACES                                 
+               PERFORM CERCA-DEBUG                                              
+           END-IF.                                                              
+                                                                                
+           IF  RC-OK OF IDBGRC                                                  
+           AND IDBGIN-OGGETTO     NOT =  SPACES                                 
+               PERFORM CONTROLLA-TIME                                           
+           END-IF.                                                              
+                                                                                
+           PERFORM CONTROLLI-FINALI.                                            
+      *-----------------------------------------------------------------        
+       IKP0IDBG-FINE.                                                           
+      *-----------------------------------------------------------------        
+           GOBACK.                                                              
+                                                                                
+      *-----------------------------------------------------------------        
+       CERCA-DEBUG SECTION.                                                     
+      *-----------------------------------------------------------------        
+           MOVE IDBGIN-UTENTE                TO IKPDE-UTENTE                    
+           MOVE IDBGIN-OGGETTO               TO IKPDE-OGGETTO                   
+                                                                                
+           PERFORM SELECT-DEBUG                                                 
+           IF  SQLCODE = 100                                                    
+           AND IDBGIN-UTENTE NOT = SPACES                                       
+               MOVE SPACES      TO IKPDE-UTENTE                                 
+               PERFORM SELECT-DEBUG                                             
+           END-IF                                                               
+                                                                                
+           EVALUATE SQLCODE                                                     
+           WHEN 000                                                             
+               CONTINUE                                                         
+           WHEN 100                                                             
+               SET DEBUG-OFF                 TO TRUE                            
+           WHEN OTHER                                                           
+               SET  RC-BLOCCANTE             TO TRUE                            
+               SET  DEBUG-OFF                TO TRUE                            
+               MOVE 00099                    TO IDBGRC-CODICE                   
+               MOVE SQLCODE                  TO IDBGRC-SQLCODE                  
+               MOVE SQLERRMC                 TO IDBGRC-SQLERRMC                 
+               MOVE 'IKPDEBUG'               TO IDBGRC-TABLE                    
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+       SELECT-DEBUG SECTION.                                                    
+      *-----------------------------------------------------------------        
+           EXEC SQL                                                             
+               SELECT IKPDE_DA                                                  
+               ,      IKPDE_A                                                   
+               INTO  :IKPDE-DA                                                  
+               ,     :IKPDE-A                                                   
+               FROM   IKPDEBUG                                                  
+               WHERE  IKPDE_OGGETTO       = :IKPDE-OGGETTO                      
+                 AND  IKPDE_UTENTE        = :IKPDE-UTENTE                       
+               WITH   UR                                                        
+           END-EXEC.                                                            
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLA-TIME SECTION.                                                  
+      *-----------------------------------------------------------------        
+           EXEC SQL                                                             
+               SET :ORA-ADESSO   = CURRENT TIMESTAMP                            
+           END-EXEC.                                                            
+           IF  IKPDE-DA < ORA-ADESSO                                            
+           AND IKPDE-A  > ORA-ADESSO                                            
+               SET DEBUG-ON                  TO TRUE                            
+           ELSE                                                                 
+               SET DEBUG-OFF                 TO TRUE                            
+           END-IF.                                                              
+           IF  AMBIENTE = 'S'                                                   
+           AND IDBGIN-OGGETTO(1:6) NOT = 'IKP0MC'                               
+               SET DEBUG-ON                  TO TRUE                            
+           END-IF                                                               
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-INIZIALI SECTION.                                              
+      *-----------------------------------------------------------------        
+           INITIALIZE IDBGRC                                                    
+                      IDBGRC.                                                   
+           IF  RC-OK OF IDBGRC                                                  
+               IF  IDBGIN-OGGETTO         =  SPACES                             
+                   SET DEBUG-OFF             TO TRUE                            
+               END-IF                                                           
+           END-IF.                                                              
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           EXIT.                                                                
+                                                                                
+      /-----------------------------------------------------------------        
+       CONTROLLI-FINALI SECTION.                                                
+      *-----------------------------------------------------------------        
+           CONTINUE.                                                            
+           EXIT.                                                                
+                                                                                
+                                                                                

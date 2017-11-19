@@ -1,0 +1,695 @@
+      * 11.237 17:08 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------                       
+      * 11.200 22:16 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ---------------------------------------                                 
+      * 11.200 10:33 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ---------------------------------------------------                     
+      * 11.178 12:17 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------                             
+      * 11.130 17:04 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ----------------------------------------                                
+      * 11.130 12:46 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * --------------------------------                                        
+      * 11.130 12:41 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ---------------------------------                                       
+      * 11.130 12:29 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -----------------------------------------------                         
+      * 11.130 12:23 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ----------------------------------------                                
+      * 11.130 09:17 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------                                         
+      * 11.098 15:54 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ----------------------------------------                                
+      * 11.098 15:37 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * --------------------------------------------------                      
+      * 11.031 08:45 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.010 09:31 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.004 11:13 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -----------------------------------------------------                   
+      * 11.004 10:47 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.004 10:45 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.004 10:36 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -----------------------------------------------------                   
+      * 11.004 10:28 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.004 10:01 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 11.004 09:01 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 11.004 08:58 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 11.003 17:06 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.365 10:00 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -----------------------------------------------------                   
+      * 10.364 10:50 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.364 10:49 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.364 10:47 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.364 10:16 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 10.364 10:12 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 10.364 10:09 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 10.364 10:05 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.363 16:52 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * -------------------------------------------------------                 
+      * 10.363 16:46 IKP   C300014 - GRANITI GIUSEPPE (USUPD000)                
+      * ------------------------------------------------------                  
+      * 10.363 15:24 IKP  C300014 - GRANITI GIUSEPPE (USUPD000)                 
+      * ------------------------------------------------------                  
+      * 10.363 15:20 IKP  C300014 - GRANITI GIUSEPPE (USUPD000)                 
+      * -----------------------------------------------------                   
+      * 10.363 15:17 IKP  C300014 - GRANITI GIUSEPPE (USUPD000)                 
+      * -------------------------------------------------------                 
+       IDENTIFICATION DIVISION.                                                 
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. SERVIZIO INSERIMENTO IN IKPGRUPPI_USER ....*        
+      * CODOPER ........... IKPINSGRUPPO ..............................*        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. DICEMBRE 2010 *        
+      * DA PARTE DI ............................................. UGIS *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       PROGRAM-ID. IKPGSUIN.                                                    
+       AUTHOR. C300014.                                                         
+       ENVIRONMENT DIVISION.                                                    
+      *----------------------------------------------------------------*        
+       CONFIGURATION SECTION.                                                   
+DBG-->*SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SOURCE-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+      *----------------------------------------------------------------*        
+       DATA DIVISION.                                                           
+      *----------------------------------------------------------------*        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------*                                                 
+       77  PGM                          PIC  X(08) VALUE 'IKPGSUIN'.            
+                                                                                
+       77  CNT-IN                       PIC  9(03) VALUE ZERO.                  
+                                                                                
+       77  FILLER                       PIC  X(01) VALUE SPACES.                
+           88 END-CUR-OUT                          VALUE '1'.                   
+                                                                                
+       77  FILLER                       PIC  X(01) VALUE SPACES.                
+           88 END-CUR-IN                           VALUE '1'.                   
+                                                                                
+       01  WS-RCDESC.                                                           
+           03 WS-DESC-ERR               PIC  X(32) VALUE SPACES.                
+           03 FILLER                    PIC  X(05) VALUE ' SQL '.               
+           03 WS-SQLCODE                PIC  -999.                              
+           03 FILLER                    PIC  X(01) VALUE SPACES.                
+           03 WS-SQLERRM                PIC  X(18) VALUE SPACES.                
+                                                                                
+      *--- ROUTINE E COPY                                                       
+       77  SISBRCR2                     PIC  X(08) VALUE 'SISBRCR2'.            
+           COPY SISBRCR2.                                                       
+       77  SYSTDACP                     PIC  X(08) VALUE 'SYSTDACP'.            
+           COPY SYSTCACP.                                                       
+       77  IKP0RDBG                     PIC  X(08) VALUE 'IKP0RDBG'.            
+           COPY IKP0CDBG.                                                       
+       77  IKP02MPG                     PIC  X(08) VALUE 'IKP02MPG'.            
+           COPY IKP0C2DB.                                                       
+           COPY IKP0TAPG.                                                       
+       77  IKP02IKK                     PIC  X(08) VALUE 'IKP02IKK'.            
+                                                                                
+      *- VARIABILI HOST DELLA GLOBAL TEMPORARY                                  
+                                                                                
+       77  TT-UID-IN                    PIC  X(20).                             
+       77  TT-ACTION-IN                 PIC  X(01).                             
+                                                                                
+       77  TT-BANCA                     PIC  X(02).                             
+       77  TT-REB                       PIC S9(14) COMP-3.                      
+       77  TT-REB-TIPO                  PIC  X(02).                             
+       77  TT-ID-IKP                    PIC  X(20).                             
+       77  TT-UID                       PIC  X(20).                             
+       77  TT-STATO                     PIC  X(01).                             
+                                                                                
+           EXEC SQL INCLUDE SQLCA    END-EXEC.                                  
+           EXEC SQL INCLUDE IKP0TAGG END-EXEC.                                  
+           EXEC SQL INCLUDE IKP0TAOP END-EXEC.                                  
+                                                                                
+           EXEC SQL DECLARE CUR_USRLIST CURSOR FOR                              
+             SELECT                                                             
+                    IKPGG_BANCA                                                 
+               ,    IKPGG_REB                                                   
+               ,    IKPGG_REB_TIPO                                              
+               ,    IKPGG_ID_IKP                                                
+               ,    IKPGG_UID                                                   
+               ,    IKPGG_STATO                                                 
+               ,    IKPGG_DATA_INS                                              
+               ,    IKPGG_MATR_INS                                              
+               ,    IKPGG_DATA_REV                                              
+               ,    IKPGG_MATR_REV                                              
+             FROM                                                               
+                    IKPGRUPPI_USER                                              
+               ,    IKPOPERATORI                                                
+             WHERE                                                              
+                    IKPOP_REB        = IKPGG_REB                                
+               AND  IKPOP_REB_TIPO   = IKPGG_REB_TIPO                           
+               AND  IKPOP_UID        = IKPGG_UID                                
+      *        AND  IKPOP_STATO      = 'A'                                      
+NEYES          AND  IKPGG_STATO      µ=  'Y'                                    
+               AND  IKPGG_REB        = :IKPGG-REB                               
+               AND  IKPGG_REB_TIPO   = :IKPGG-REB-TIPO                          
+               AND  IKPGG_ID_IKP LIKE(:IKPGG-ID-IKP)                            
+             ORDER BY                                                           
+                    IKPGG_UID                                                   
+             WITH UR                                                            
+           END-EXEC                                                             
+                                                                                
+           EXEC SQL DECLARE CUR_USRIN CURSOR FOR                                
+             SELECT UID , ACTION                                                
+             FROM IKPGRUPPI_USER_0                                              
+             WITH UR                                                            
+           END-EXEC                                                             
+                                                                                
+           EXEC SQL DECLARE GEB_USRLIST CURSOR WITH RETURN FOR                  
+             SELECT *                                                           
+             FROM IKPGRUPPI_USER_1                                              
+           END-EXEC                                                             
+                                                                                
+      *---------------*                                                         
+       LINKAGE SECTION.                                                         
+      *---------------*                                                         
+       01  CODOPER                      PIC  X(32).                             
+       01  VERSIONE                     PIC S9(03) COMP-3.                      
+       01  AMBIENTE-IBG                 PIC  X(01).                             
+       01  REB                          PIC S9(14) COMP-3.                      
+       01  REB-TIPO                     PIC  X(2).                              
+       01  ID-IKP                       PIC  X(20).                             
+       01  MATRICOLA                    PIC  X(8).                              
+       01  RC                           PIC  X(12).                             
+       01  RCDESC                       PIC  X(64).                             
+       01  RCFLAG                       PIC  X(01).                             
+                                                                                
+      *================================================================*        
+       PROCEDURE DIVISION USING CODOPER                                         
+                                VERSIONE                                        
+                                AMBIENTE-IBG                                    
+                                REB                                             
+                                REB-TIPO                                        
+                                ID-IKP                                          
+                                MATRICOLA                                       
+                                RC                                              
+                                RCDESC                                          
+                                RCFLAG.                                         
+      *================================================================*        
+      *                                                                         
+DBG-->DDECLARATIVES.                                                            
+DBG-->DTRACE-PROGRAM SECTION.                                                   
+DBG-->D    USE FOR DEBUGGING ALL PROCEDURES.                                    
+DBG-->DSHOW-TRACE.                                                              
+DBG-->D                                                                         
+DBG-->D    DISPLAY PGM ' ' DEBUG-NAME ' ' DEBUG-CONTENTS.                       
+DBG-->D                                                                         
+DBG-->DEND DECLARATIVES.                                                        
+      *                                                                         
+      *----------------------------------------------------------------*        
+       INIZIO SECTION.                                                          
+      *----------------------------------------------------------------*        
+                                                                                
+           PERFORM OPERAZIONI-INIZIALI                                          
+                                                                                
+           IF RC = SPACES                                                       
+             PERFORM ELABORAZIONE                                               
+           END-IF                                                               
+                                                                                
+           PERFORM OPERAZIONI-FINALI                                            
+                                                                                
+           GOBACK.                                                              
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE RC                                                        
+                      RCDESC                                                    
+                      RCFLAG                                                    
+                                                                                
+           CALL SISBRCR2 USING CODICI-CASSA                                     
+           CALL SYSTDACP USING SYSTCACP                                         
+                                                                                
+      D    DISPLAY PGM ' CODOPER     >' CODOPER                                 
+      D    DISPLAY PGM ' VERSIONE    >' VERSIONE                                
+      D    DISPLAY PGM ' AMBIENTE-IBG>' AMBIENTE-IBG                            
+      D    DISPLAY PGM ' REB         >' REB                                     
+      D    DISPLAY PGM ' REB-TIPO    >' REB-TIPO                                
+      D    DISPLAY PGM ' ID-IKP      >' ID-IKP                                  
+      D    DISPLAY PGM ' MATRICOLA   >' MATRICOLA                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       ELABORAZIONE SECTION.                                                    
+      *----------------------------------------------------------------*        
+           IF RC = SPACES                                                       
+             PERFORM OPEN-CUR-IN                                                
+           END-IF                                                               
+                                                                                
+           IF RC = SPACES                                                       
+             PERFORM UNTIL END-CUR-IN OR RC NOT = SPACES                        
+               PERFORM FETCH-CUR-IN                                             
+               IF NOT END-CUR-IN AND RC = SPACES                                
+                 EVALUATE TT-ACTION-IN                                          
+                   WHEN 'I'                                                     
+                     IF TT-UID-IN EQUAL 'USI-0000000090000011' OR               
+                        TT-UID-IN EQUAL 'USI-0000000090000012' OR               
+                        TT-UID-IN EQUAL 'USI-0000000090000013' OR               
+                        TT-UID-IN EQUAL 'USI-0000000090000014'                  
+                       MOVE 'CXRÙIKP00010'         TO RC                        
+                       MOVE 'E'                    TO RCFLAG                    
+                       MOVE 'INSERT ERROR'         TO RCDESC                    
+                     ELSE                                                       
+                       PERFORM INS-GUSER                                        
+                     END-IF                                                     
+                   WHEN 'R'                                                     
+                     PERFORM DEL-GUSER                                          
+                   WHEN OTHER                                                   
+                     CONTINUE                                                   
+                 END-EVALUATE                                                   
+               END-IF                                                           
+             END-PERFORM                                                        
+             PERFORM LIST-GUSER                                                 
+           END-IF                                                               
+                                                                                
+           PERFORM CLOSE-CUR-IN                                                 
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CUR-IN SECTION.                                                     
+      *----------------------------------------------------------------*        
+           INITIALIZE RC                                                        
+                      RCDESC                                                    
+                      RCFLAG                                                    
+                                                                                
+           EXEC SQL                                                             
+             OPEN CUR_USRIN                                                     
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT EQUAL ZERO                                            
+             MOVE 'CXRÙIKP00010'         TO RC                                  
+             MOVE 'E'                    TO RCFLAG                              
+             MOVE 'OPEN CUR_USRIN ERROR' TO WS-DESC-ERR                         
+             MOVE SQLCODE                TO WS-SQLCODE                          
+             MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                          
+             MOVE WS-RCDESC              TO RCDESC                              
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CUR-IN SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+             FETCH CUR_USRIN                                                    
+              INTO :TT-UID-IN, :TT-ACTION-IN                                    
+           END-EXEC                                                             
+                                                                                
+      D    DISPLAY PGM ' TT-UID-IN    >' TT-UID-IN                              
+      D    DISPLAY PGM ' TT-ACTION-IN >' TT-ACTION-IN                           
+                                                                                
+           EVALUATE TRUE                                                        
+             WHEN SQLCODE = 0                                                   
+               ADD 1 TO CNT-IN                                                  
+               CONTINUE                                                         
+             WHEN SQLCODE = +100                                                
+               SET END-CUR-IN TO TRUE                                           
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00010'          TO RC                               
+               MOVE 'E'                     TO RCFLAG                           
+               MOVE 'FETCH CUR_USRIN ERROR' TO WS-DESC-ERR                      
+               MOVE SQLCODE                 TO WS-SQLCODE                       
+               MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                       
+               MOVE WS-RCDESC               TO RCDESC                           
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CUR-IN SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+             CLOSE CUR_USRIN                                                    
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT EQUAL ZERO                                            
+             MOVE 'CXRÙIKP00010'          TO RC                                 
+             MOVE 'E'                     TO RCFLAG                             
+             MOVE 'CLOSE CUR_USRIN ERROR' TO WS-DESC-ERR                        
+             MOVE SQLCODE                 TO WS-SQLCODE                         
+             MOVE SQLERRMC(1 : SQLERRML)  TO WS-SQLERRM                         
+             MOVE WS-RCDESC               TO RCDESC                             
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       INS-GUSER SECTION.                                                       
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0TABGG                                                 
+                                                                                
+           EVALUATE TRUE                                                        
+             WHEN REB       > ZEROES AND                                        
+                  REB-TIPO  > SPACE  AND                                        
+                  ID-IKP    > SPACES AND                                        
+                  MATRICOLA > SPACES                                            
+                                                                                
+               MOVE CODICE-BANCA  TO IKPGG-BANCA                                
+               MOVE REB           TO IKPGG-REB                                  
+               MOVE REB-TIPO      TO IKPGG-REB-TIPO                             
+               MOVE ID-IKP        TO IKPGG-ID-IKP                               
+               MOVE TT-UID-IN     TO IKPGG-UID                                  
+               MOVE 'A'           TO IKPGG-STATO                                
+               MOVE SYST-DATE-DB2 TO IKPGG-DATA-INS                             
+               MOVE MATRICOLA     TO IKPGG-MATR-INS                             
+               MOVE '0001-01-01'  TO IKPGG-DATA-REV                             
+               MOVE ' '           TO IKPGG-MATR-REV                             
+                                                                                
+      D        DISPLAY 'IKPGG-BANCA    : 'IKPGG-BANCA                           
+      D        DISPLAY 'IKPGG-REB      : 'IKPGG-REB                             
+      D        DISPLAY 'IKPGG-REB-TIPO : 'IKPGG-REB-TIPO                        
+      D        DISPLAY 'IKPGG-ID-IKP   : 'IKPGG-ID-IKP                          
+      D        DISPLAY 'IKPGG-UID      : 'IKPGG-UID                             
+      D        DISPLAY 'IKPGG-STATO    : 'IKPGG-STATO                           
+      D        DISPLAY 'IKPGG-DATA-INS : 'IKPGG-DATA-INS                        
+      D        DISPLAY 'IKPGG-MATR-INS : 'IKPGG-MATR-INS                        
+      D        DISPLAY 'IKPGG-DATA-REV : 'IKPGG-DATA-REV                        
+      D        DISPLAY 'IKPGG-MATR-REV : 'IKPGG-MATR-REV                        
+                                                                                
+               EXEC SQL                                                         
+                 INSERT INTO IKPGRUPPI_USER (                                   
+                               IKPGG_BANCA    ,                                 
+                               IKPGG_REB      ,                                 
+                               IKPGG_REB_TIPO ,                                 
+                               IKPGG_ID_IKP   ,                                 
+                               IKPGG_UID      ,                                 
+                               IKPGG_STATO    ,                                 
+                               IKPGG_DATA_INS ,                                 
+                               IKPGG_MATR_INS ,                                 
+                               IKPGG_DATA_REV ,                                 
+                               IKPGG_MATR_REV )                                 
+                             VALUES (                                           
+                              :IKPGG-BANCA    ,                                 
+                              :IKPGG-REB      ,                                 
+                              :IKPGG-REB-TIPO ,                                 
+                              :IKPGG-ID-IKP   ,                                 
+                              :IKPGG-UID      ,                                 
+                              :IKPGG-STATO    ,                                 
+                              :IKPGG-DATA-INS ,                                 
+                              :IKPGG-MATR-INS ,                                 
+                              :IKPGG-DATA-REV ,                                 
+                              :IKPGG-MATR-REV )                                 
+               END-EXEC                                                         
+                                                                                
+               IF SQLCODE NOT EQUAL ZERO                                        
+                 MOVE 'CXRÙIKP00010'         TO RC                              
+                 MOVE 'E'                    TO RCFLAG                          
+                 MOVE 'INSERT ERROR'         TO WS-DESC-ERR                     
+                 MOVE SQLCODE                TO WS-SQLCODE                      
+                 MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                      
+                 MOVE WS-RCDESC              TO RCDESC                          
+               END-IF                                                           
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00505'         TO RC                                
+               MOVE 'E'                    TO RCFLAG                            
+               MOVE 'RICHIESTA NON VALIDA' TO RCDESC                            
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       DEL-GUSER SECTION.                                                       
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0TABGG                                                 
+                                                                                
+           EVALUATE TRUE                                                        
+             WHEN REB       > ZEROES AND                                        
+                  REB-TIPO  > SPACE  AND                                        
+                  ID-IKP    > SPACES                                            
+                                                                                
+               MOVE REB       TO IKPGG-REB                                      
+               MOVE REB-TIPO  TO IKPGG-REB-TIPO                                 
+               MOVE ID-IKP    TO IKPGG-ID-IKP                                   
+               MOVE TT-UID-IN TO IKPGG-UID                                      
+                                                                                
+               EXEC SQL                                                         
+                 DELETE                                                         
+                 FROM  IKPGRUPPI_USER                                           
+                 WHERE IKPGG_REB      = :IKPGG-REB      AND                     
+                       IKPGG_REB_TIPO = :IKPGG-REB-TIPO AND                     
+                       IKPGG_ID_IKP   = :IKPGG-ID-IKP   AND                     
+                       IKPGG_UID      = :IKPGG-UID                              
+               END-EXEC                                                         
+                                                                                
+               EVALUATE TRUE                                                    
+                 WHEN SQLCODE = ZERO                                            
+                   CONTINUE                                                     
+                 WHEN SQLCODE = +100                                            
+                   MOVE 'CXRÙIKP00010'         TO RC                            
+                   MOVE 'W'                    TO RCFLAG                        
+                   MOVE 'ALREADY DELETED'      TO WS-DESC-ERR                   
+                   MOVE SQLCODE                TO WS-SQLCODE                    
+                   MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                    
+                   MOVE WS-RCDESC              TO RCDESC                        
+                 WHEN OTHER                                                     
+                   MOVE 'CXRÙIKP00010'         TO RC                            
+                   MOVE 'E'                    TO RCFLAG                        
+                   MOVE 'DELETE ERROR'         TO WS-DESC-ERR                   
+                   MOVE SQLCODE                TO WS-SQLCODE                    
+                   MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                    
+                   MOVE WS-RCDESC              TO RCDESC                        
+               END-EVALUATE                                                     
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00505'         TO RC                                
+               MOVE 'E'                    TO RCFLAG                            
+               MOVE 'RICHIESTA NON VALIDA' TO RCDESC                            
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LIST-GUSER SECTION.                                                      
+      *----------------------------------------------------------------*        
+                                                                                
+           IF RC = SPACES                                                       
+             PERFORM OPEN-CUR-OUT                                               
+             PERFORM UNTIL END-CUR-OUT OR RC NOT = SPACE                        
+               PERFORM FETCH-CUR-OUT                                            
+               IF NOT END-CUR-OUT AND RC = SPACE                                
+                 PERFORM VALORIZZA-TT-OUT                                       
+               END-IF                                                           
+             END-PERFORM                                                        
+             IF RC = SPACE                                                      
+               PERFORM CLOSE-CUR-OUT                                            
+             END-IF                                                             
+           END-IF                                                               
+                                                                                
+           IF RC = SPACES                                                       
+             PERFORM FA-RISPOSTA                                                
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-CUR-OUT SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+             WHEN REB      > ZEROES AND                                         
+                  REB-TIPO > SPACES                                             
+               PERFORM VALORIZZA-CAMPI                                          
+               PERFORM OPEN-USRLIST                                             
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00505'         TO RC                                
+               MOVE 'E'                    TO RCFLAG                            
+               MOVE 'RICHIESTA NON VALIDA' TO RCDESC                            
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-CAMPI SECTION.                                                 
+      *----------------------------------------------------------------*        
+           INITIALIZE IKP0TABGG                                                 
+                                                                                
+           MOVE REB      TO IKPGG-REB                                           
+           MOVE REB-TIPO TO IKPGG-REB-TIPO                                      
+                                                                                
+           DISPLAY 'REB       : ' REB                                           
+                   ' REB-TIPO  : ' REB-TIPO                                     
+                   ' CNT-IN    : ' CNT-IN                                       
+                   ' ID-IKP    : ' ID-IKP                                       
+                                                                                
+           IF CNT-IN EQUAL ZERO AND                                             
+              ID-IKP EQUAL SPACE                                                
+             MOVE '%%%%%%%%%%%%%%%%%%%%' TO IKPGG-ID-IKP                        
+           ELSE                                                                 
+             MOVE ID-IKP   TO IKPGG-ID-IKP                                      
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPEN-USRLIST SECTION.                                                    
+      *----------------------------------------------------------------*        
+                                                                                
+           EXEC SQL                                                             
+             OPEN CUR_USRLIST                                                   
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT EQUAL ZERO                                            
+             MOVE 'CXRÙIKP00010'         TO RC                                  
+             MOVE 'E'                    TO RCFLAG                              
+             MOVE 'OPEN CURSOR ERROR'    TO WS-DESC-ERR                         
+             MOVE SQLCODE                TO WS-SQLCODE                          
+             MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                          
+             MOVE WS-RCDESC              TO RCDESC                              
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FETCH-CUR-OUT SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+             FETCH CUR_USRLIST                                                  
+             INTO :IKPGG-BANCA    ,                                             
+                  :IKPGG-REB      ,                                             
+                  :IKPGG-REB-TIPO ,                                             
+                  :IKPGG-ID-IKP   ,                                             
+                  :IKPGG-UID      ,                                             
+                  :IKPGG-STATO    ,                                             
+                  :IKPGG-DATA-INS ,                                             
+                  :IKPGG-MATR-INS ,                                             
+                  :IKPGG-DATA-REV ,                                             
+                  :IKPGG-MATR-REV                                               
+           END-EXEC                                                             
+                                                                                
+           EVALUATE TRUE                                                        
+             WHEN SQLCODE = 0                                                   
+               MOVE IKPGG-BANCA    TO TT-BANCA                                  
+               MOVE IKPGG-REB      TO TT-REB                                    
+               MOVE IKPGG-REB-TIPO TO TT-REB-TIPO                               
+               MOVE IKPGG-ID-IKP   TO TT-ID-IKP                                 
+               MOVE IKPGG-UID      TO TT-UID                                    
+               MOVE IKPGG-STATO    TO TT-STATO                                  
+             WHEN SQLCODE = +100                                                
+               SET  END-CUR-OUT TO TRUE                                         
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00010'         TO RC                                
+               MOVE 'E'                    TO RCFLAG                            
+               MOVE 'FETCH ERROR'          TO WS-DESC-ERR                       
+               MOVE SQLCODE                TO WS-SQLCODE                        
+               MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                        
+               MOVE WS-RCDESC              TO RCDESC                            
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-TT-OUT SECTION.                                                
+      *----------------------------------------------------------------*        
+           EVALUATE VERSIONE                                                    
+             WHEN 1                                                             
+               EXEC SQL                                                         
+                 INSERT INTO IKPGRUPPI_USER_1                                   
+                 VALUES ( :TT-BANCA    ,                                        
+                          :TT-REB      ,                                        
+                          :TT-REB-TIPO ,                                        
+                          :TT-ID-IKP   ,                                        
+                          :TT-UID      ,                                        
+                          :TT-STATO    )                                        
+               END-EXEC                                                         
+                                                                                
+               IF SQLCODE NOT EQUAL ZERO                                        
+                 MOVE 'CXRÙIKP00010'         TO RC                              
+                 MOVE 'E'                    TO RCFLAG                          
+                 MOVE 'INSERT TT ERROR'      TO WS-DESC-ERR                     
+                 MOVE SQLCODE                TO WS-SQLCODE                      
+                 MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                      
+                 MOVE WS-RCDESC              TO RCDESC                          
+               END-IF                                                           
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00505'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+               MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       CLOSE-CUR-OUT SECTION.                                                   
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+             CLOSE CUR_USRLIST                                                  
+           END-EXEC                                                             
+                                                                                
+           IF SQLCODE NOT EQUAL ZERO                                            
+             MOVE 'CXRÙIKP00010'         TO RC                                  
+             MOVE 'E'                    TO RCFLAG                              
+             MOVE 'CLOSE CURSOR ERROR'   TO WS-DESC-ERR                         
+             MOVE SQLCODE                TO WS-SQLCODE                          
+             MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                          
+             MOVE WS-RCDESC              TO RCDESC                              
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FA-RISPOSTA SECTION.                                                     
+      *----------------------------------------------------------------*        
+           EVALUATE VERSIONE                                                    
+             WHEN 1                                                             
+               EXEC SQL                                                         
+                 OPEN GEB_USRLIST                                               
+               END-EXEC                                                         
+             WHEN OTHER                                                         
+               MOVE 'CXRÙIKP00505'            TO RC                             
+               MOVE 'E'                       TO RCFLAG                         
+               MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+           END-EVALUATE                                                         
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FAI-ROLLBACK SECTION.                                                    
+      *----------------------------------------------------------------*        
+           EXEC SQL ROLLBACK END-EXEC                                           
+                                                                                
+           IF SQLCODE NOT EQUAL ZERO                                            
+             MOVE 'CXRÙIKP00002'         TO RC                                  
+             MOVE 'E'                    TO RCFLAG                              
+             MOVE 'ERRORE ROLLBACK'      TO WS-DESC-ERR                         
+             MOVE SQLCODE                TO WS-SQLCODE                          
+             MOVE SQLERRMC(1 : SQLERRML) TO WS-SQLERRM                          
+             MOVE WS-RCDESC              TO RCDESC                              
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           IF RC NOT = SPACE                                                    
+             DISPLAY '>>> RC: ' RC ' ' RCDESC                                   
+             PERFORM FAI-ROLLBACK                                               
+           END-IF                                                               
+                                                                                
+           EXIT.                                                                

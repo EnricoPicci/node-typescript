@@ -1,0 +1,622 @@
+      * 11.232 10:32 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------------                                   
+      * 11.232 10:31 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------------------                                    
+      * 11.232 10:30 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------                                                     
+      * 11.232 10:28 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ---------------------------------------                                 
+      * 11.232 10:26 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -----------------------------                                           
+      * 11.232 10:25 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ---------------------------------------------                           
+      * 11.232 10:11 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------------                                   
+      * 11.232 10:10 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * --------------------------------                                        
+      * 11.232 10:09 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ---------------------------------------                                 
+      * 11.232 10:07 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ----------------------------------------                                
+      * 11.232 10:05 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * --------------------------------------                                  
+      * 11.232 09:57 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ----------------------------------------                                
+      * 11.232 09:52 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -----------------------------------                                     
+      * 11.232 09:50 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------                                                
+      * 11.232 09:49 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------                                         
+      * 11.232 09:47 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -----------------------------------                                     
+      * 11.232 09:46 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ---------------------------------------                                 
+      * 11.207 13:01 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * COMPILAZIONE                                                            
+      * 10.358 10:02 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * --------------------------                                              
+      * 10.339 15:03 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -----------------------------                                           
+      * 10.336 10:37 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------                                         
+      * 10.335 22:03 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * -------------------------------                                         
+      * 10.331 18:03 IKP   US01101 - LIGOZZI MASSIMO (USUPD090)                 
+      * ------------------------------------                                    
+      * 09.145 19:05        IKP  0000 US01651                                   
+      * GM095P - CONSIDERA MENU DI 4/5 LIVELLI                                  
+      * 09.057 15:10        IKP  0000 US01101                                   
+      * --------------------------------------                                  
+      * 08.288 17:36        IKP  0000                                           
+      * -----------------------------------                                     
+      * 08.095 08:31        IKP  0000                                           
+      * -------------------------------                                         
+      * 08.065 16:45        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0SLRA.                                                    
+       AUTHOR. LIGOZZI.                                                         
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. LISTA RAPPORTI E MAGGIORDOMO               *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ............................... FEBBRAIO 2008*        
+      * DA PARTE DI .............................................. UGIS*        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                         PIC X(08) VALUE 'IKP0SLRA'.              
+       77  WS-PROFILO-IKI              PIC X(08).                               
+                                                                                
+       01  NUMINS                      PIC 9(09).                               
+                                                                                
+       77  SISBRCR2                    PIC X(08) VALUE 'SISBRCR2'.              
+           COPY SISBRCR2.                                                       
+       77  PRMMUSER                    PIC X(08) VALUE 'PRMMUSER'.              
+       01  WS-PRMMUSER-AREA.                                                    
+           COPY PRCMUSER.                                                       
+       77  TG0001                      PIC X(08) VALUE 'TG0001'.                
+           COPY TG0001.                                                         
+           COPY IKP0DDOL.                                                       
+      *    COPY XSOLCENV.                                                       
+       77  UTMIBAN                     PIC X(08) VALUE 'UTMIBAN'.               
+           COPY UTCIBAN.                                                        
+                                                                                
+       01  TT-KEYA                     PIC X(16).                               
+       01  TT-KEYR                     PIC X(26).                               
+       01  TT-STATO                    PIC X(1).                                
+       01  TT-TIPO                     PIC X(2).                                
+       01  TT-NUMRAP                   PIC S9(14)  COMP-3.                      
+       01  CONTATORE                   PIC S9(14)  COMP-3.                      
+       01  TT-DIPRAP                   PIC S9(05)  COMP-3.                      
+       01  TT-VALRAP                   PIC X(03).                               
+       01  TT-DESCRIZIONE              PIC X(64).                               
+                                                                                
+           EXEC SQL INCLUDE SQLCA      END-EXEC.                                
+           EXEC SQL INCLUDE IKI0TAAC   END-EXEC.                                
+                                                                                
+       LINKAGE SECTION.                                                         
+      *----------------------------------------------------------------*        
+       01 CODOPER                      PIC  X(32).                              
+       01 VERSIONE                     PIC S9(03)  COMP-3.                      
+       01 FT                           PIC  X(05).                              
+       01 REB-TIPO                     PIC  X(02).                              
+       01 REB                          PIC S9(08)  COMP-3.                      
+       01 PRG                          PIC S9(03)  COMP-3.                      
+       01 UID                          PIC  X(20).                              
+       01 TYPEABIL                     PIC  X(02).                              
+       01 MATRICOLA                    PIC  X(08).                              
+       01 RC                           PIC  X(08).                              
+       01 RCDESC                       PIC  X(64).                              
+       01 RCFLAG                       PIC  X(01).                              
+      *================================================================*        
+       PROCEDURE DIVISION USING  CODOPER                                        
+                                 VERSIONE                                       
+                                 FT                                             
+                                 REB-TIPO                                       
+                                 REB                                            
+                                 PRG                                            
+                                 UID                                            
+                                 TYPEABIL                                       
+                                 MATRICOLA                                      
+                                 RC                                             
+                                 RCDESC                                         
+                                 RCFLAG.                                        
+      *================================================================*        
+      DDECLARATIVES.                                                            
+      DTRACE-PROGRAM SECTION.                                                   
+      D    USE FOR DEBUGGING ALL PROCEDURES.                                    
+      DSHOW-TRACE.                                                              
+      D                                                                         
+      D    DISPLAY PGM ' ' DEBUG-NAME ' ' DEBUG-CONTENTS.                       
+      D                                                                         
+      DEND DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI                                          
+           IF  RC = SPACES                                                      
+               IF  TYPEABIL = 'U'                                               
+                   PERFORM VALORIZZA-AREE-UTENZA                                
+               ELSE                                                             
+                   PERFORM VALORIZZA-AREE                                       
+               END-IF                                                           
+               IF  RC = SPACES                                                  
+                   PERFORM FAI-RISPOSTA                                         
+               END-IF                                                           
+           END-IF                                                               
+           PERFORM OPERAZIONI-FINALI                                            
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE RC RCDESC RCFLAG NUMINS                                   
+           CALL SISBRCR2 USING CODICI-CASSA                                     
+           DISPLAY PGM '>LISTA RAPPORTI E MAGGIORDOMO: FT=' FT                  
+                                              ' REB=' REB-TIPO ' ' REB          
+                                              ' UID=' UID                       
+                                              ' PRG=' PRG                       
+                                         ' TYPEABIL=' TYPEABIL.                 
+      *    CALL XSOL-XSOLRENV   USING XSOLCENV.                                 
+      *    DISPLAY XSOLCENV.                                                    
+      *                                                                         
+      * LASCIARE CON SESSION PER PERMETTERE L'UPDATE                            
+           EXEC SQL                                                             
+                DECLARE GLOBAL TEMPORARY                                        
+                TABLE SESSION.IKPCARICAPRGRAPPORTI_0                            
+                        (KEYA             CHAR (16) NOT NULL                    
+                       , KEYR             CHAR (26) NOT NULL                    
+                       , STATO            CHAR (01) NOT NULL                    
+                       , TIPO             CHAR (02) NOT NULL                    
+                       , NUMRAP           DECIMAL(14,0) NOT NULL                
+                       , DIPRAP           DECIMAL(5,0) NOT NULL                 
+                       , VALRAP           CHAR (03) NOT NULL                    
+                       , DESCRIZIONE      CHAR (64) NOT NULL)                   
+                     ON COMMIT DROP TABLE                                       
+           END-EXEC                                                             
+           IF  SQLCODE NOT EQUAL ZERO                                           
+               MOVE 'IKP00099'                TO RC                             
+               MOVE 'ERRORE DECLARE TEMP TAB' TO RCDESC                         
+               MOVE 'E'                       TO RCFLAG                         
+           END-IF                                                               
+           IF  RC = SPACES                                                      
+           AND TORRE = 'UI'                                                     
+               INITIALIZE WS-PRMMUSER-AREA                                      
+               MOVE CODICE-BANCA          TO PR4ABDB2-COD-ISTITUTO              
+               MOVE TORRE OF CODICI-CASSA TO PR4ABDB2-TORRE                     
+               MOVE '6'                   TO PR4ABDB2-TIPO-CHIAMATA             
+               MOVE 'IKI '                TO PR4ABDB2-ALIAS-APPLICAZ            
+               MOVE MATRICOLA             TO PR4ABDB2-COD-OPER                  
+               MOVE SPACES                TO PR4ABDB2-SEGMENTO                  
+               CALL PRMMUSER USING WS-PRMMUSER-AREA                             
+                                                                                
+               IF  PR4ABDB2-OK                                                  
+                   MOVE PR4ABDB2-AUTH-NAME(1)                                   
+                                          TO WS-PROFILO-IKI                     
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-AREE SECTION.                                                  
+      *----------------------------------------------------------------*        
+           EVALUATE VERSIONE                                                    
+           WHEN 1                                                               
+               EXEC SQL INSERT INTO SESSION.IKPCARICAPRGRAPPORTI_0              
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+                          IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+                          IKPRAPPORTI                                           
+                    WHERE IKPAN_REB = IKPAB_REB                                 
+                    AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+                    AND IKPAB_UID = :UID                                        
+                    AND IKPAB_KEYR = IKPRP_KEYR                                 
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_CODICE = :PRG                                 
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAB_REB = :REB                                        
+                    AND IKPAB_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPAN_NDG  = IKPRP_NDG                                  
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+                    UNION ALL                                                   
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+                          IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+                          IKPRAPPORTI                                           
+                    WHERE IKPAN_REB = IKPAB_REB                                 
+                    AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+                    AND IKPAB_UID = :UID                                        
+                    AND IKPAB_KEYR = IKPRP_KEYR                                 
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_PADRE = :PRG                                  
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAB_REB = :REB                                        
+                    AND IKPAB_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+                    AND IKPAN_NDG  = IKPRP_NDG                                  
+                    UNION ALL                                                   
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+                          IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+                          IKPRAPPORTI                                           
+                    WHERE IKPAN_REB = IKPAB_REB                                 
+                    AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+                    AND IKPAB_UID = :UID                                        
+                    AND IKPAB_KEYR = IKPRP_KEYR                                 
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_PADRE IN (                                    
+                        SELECT IKPFU_PRG_CODICE FROM                            
+                        IKPFUNZIONI WHERE                                       
+                        IKPFU_FT = :FT AND  IKPFU_PRG_PADRE = :PRG)             
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAB_REB = :REB                                        
+                    AND IKPAB_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+                    AND IKPAN_NDG  = IKPRP_NDG                                  
+GM095P              UNION ALL                                                   
+GM095P              SELECT DISTINCT                                             
+GM095P               IKPAN_KEYA,                                                
+GM095P               IKPRP_KEYR,                                                
+GM095P               SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+GM095P               IKPRP_TIPRAP,                                              
+GM095P               IKPRP_NUMRAP,                                              
+GM095P               IKPRP_DIPRAP,                                              
+GM095P               IKPRP_DIVRAP,                                              
+GM095P               IKPAN_DESCRIZIONE                                          
+GM095P               FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+GM095P                    IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+GM095P                    IKPRAPPORTI                                           
+GM095P              WHERE IKPAN_REB = IKPAB_REB                                 
+GM095P              AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+GM095P              AND IKPAB_UID = :UID                                        
+GM095P              AND IKPAB_KEYR = IKPRP_KEYR                                 
+GM095P              AND IKPFU_FT = :FT                                          
+GM095P              AND IKPFU_PRG_PADRE IN (                                    
+GM095P                  SELECT IKPFU_PRG_CODICE FROM                            
+GM095P                  IKPFUNZIONI WHERE                                       
+GM095P                  IKPFU_FT = :FT AND  IKPFU_PRG_PADRE IN (                
+GM095P                    SELECT IKPFU_PRG_CODICE FROM                          
+GM095P                    IKPFUNZIONI WHERE                                     
+GM095P                    IKPFU_FT = :FT AND IKPFU_PRG_PADRE = :PRG))           
+GM095P              AND IKPFR_FT = IKPFU_FT                                     
+GM095P              AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+GM095P              AND IKPFR_CODICE = IKPFU_CODICE                             
+GM095P              AND IKPAB_REB = :REB                                        
+GM095P              AND IKPAB_REB_TIPO = :REB-TIPO                              
+GM095P              AND IKPAN_KEYA = IKPRP_KEYA                                 
+GM095P              AND IKPRP_TIPRAP <> 'VA'                                    
+GM095P              AND IKPAN_NDG  = IKPRP_NDG                                  
+GM095P              UNION ALL                                                   
+GM095P              SELECT DISTINCT                                             
+GM095P               IKPAN_KEYA,                                                
+GM095P               IKPRP_KEYR,                                                
+GM095P               SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+GM095P               IKPRP_TIPRAP,                                              
+GM095P               IKPRP_NUMRAP,                                              
+GM095P               IKPRP_DIPRAP,                                              
+GM095P               IKPRP_DIVRAP,                                              
+GM095P               IKPAN_DESCRIZIONE                                          
+GM095P               FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+GM095P                    IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+GM095P                    IKPRAPPORTI                                           
+GM095P              WHERE IKPAN_REB = IKPAB_REB                                 
+GM095P              AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+GM095P              AND IKPAB_UID = :UID                                        
+GM095P              AND IKPAB_KEYR = IKPRP_KEYR                                 
+GM095P              AND IKPFU_FT = :FT                                          
+GM095P              AND IKPFU_PRG_PADRE IN (                                    
+GM095P                  SELECT IKPFU_PRG_CODICE FROM                            
+GM095P                  IKPFUNZIONI WHERE                                       
+GM095P                  IKPFU_FT = :FT AND  IKPFU_PRG_PADRE IN (                
+GM095P                    SELECT IKPFU_PRG_CODICE FROM                          
+GM095P                    IKPFUNZIONI WHERE                                     
+GM095P                    IKPFU_FT = :FT AND IKPFU_PRG_PADRE IN (               
+GM095P                      SELECT IKPFU_PRG_CODICE FROM                        
+GM095P                      IKPFUNZIONI WHERE                                   
+GM095P                      IKPFU_FT = :FT AND IKPFU_PRG_PADRE = :PRG)))        
+GM095P              AND IKPFR_FT = IKPFU_FT                                     
+GM095P              AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+GM095P              AND IKPFR_CODICE = IKPFU_CODICE                             
+GM095P              AND IKPAB_REB = :REB                                        
+GM095P              AND IKPAB_REB_TIPO = :REB-TIPO                              
+GM095P              AND IKPAN_KEYA = IKPRP_KEYA                                 
+GM095P              AND IKPRP_TIPRAP <> 'VA'                                    
+GM095P              AND IKPAN_NDG  = IKPRP_NDG                                  
+LM1232             UNION ALL                                                    
+LM1232              SELECT DISTINCT                                             
+LM1232               IKPAN_KEYA,                                                
+LM1232               IKPRP_KEYR,                                                
+LM1232               SUBSTR(IKPAB_ABIL,INTEGER(:PRG),1),                        
+LM1232               IKPRP_TIPRAP,                                              
+LM1232               IKPRP_NUMRAP,                                              
+LM1232               IKPRP_DIPRAP,                                              
+LM1232               IKPRP_DIVRAP,                                              
+LM1232               IKPAN_DESCRIZIONE                                          
+LM1232               FROM IKPANAGRAFE, IKPABILITAZIONI,                         
+LM1232                    IKPFUNZIONI, IKPFUNZIONIRAPP,                         
+LM1232                    IKPRAPPORTI                                           
+LM1232              WHERE IKPAN_REB = IKPAB_REB                                 
+LM1232              AND IKPAN_REB_TIPO = IKPAB_REB_TIPO                         
+LM1232              AND IKPAB_UID = :UID                                        
+LM1232              AND IKPAB_KEYR = IKPRP_KEYR                                 
+LM1232              AND IKPFU_FT = :FT                                          
+LM1232              AND IKPFU_PRG_PADRE IN (                                    
+LM1232                  SELECT IKPFU_PRG_CODICE FROM                            
+LM1232                  IKPFUNZIONI WHERE                                       
+LM1232                  IKPFU_FT = :FT AND  IKPFU_PRG_PADRE IN (                
+LM1232                  SELECT IKPFU_PRG_CODICE FROM                            
+LM1232                  IKPFUNZIONI WHERE                                       
+LM1232                  IKPFU_FT = :FT AND  IKPFU_PRG_PADRE IN (                
+LM1232                    SELECT IKPFU_PRG_CODICE FROM                          
+LM1232                    IKPFUNZIONI WHERE                                     
+LM1232                    IKPFU_FT = :FT AND IKPFU_PRG_PADRE IN (               
+LM1232                      SELECT IKPFU_PRG_CODICE FROM                        
+LM1232                      IKPFUNZIONI WHERE                                   
+LM1232                      IKPFU_FT = :FT AND IKPFU_PRG_PADRE = :PRG)))        
+                                    )                                           
+LM1232              AND IKPFR_FT = IKPFU_FT                                     
+LM1232              AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+LM1232              AND IKPFR_CODICE = IKPFU_CODICE                             
+LM1232              AND IKPAB_REB = :REB                                        
+LM1232              AND IKPAB_REB_TIPO = :REB-TIPO                              
+LM1232              AND IKPAN_KEYA = IKPRP_KEYA                                 
+LM1232              AND IKPRP_TIPRAP <> 'VA'                                    
+LM1232              AND IKPAN_NDG  = IKPRP_NDG                                  
+               END-EXEC                                                         
+               DISPLAY 'INSERITI :' SQLERRD(3)                                  
+           WHEN OTHER                                                           
+               MOVE 'IKP00099'                TO RC                             
+               MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+               MOVE 'E'                       TO RCFLAG                         
+           END-EVALUATE                                                         
+           DISPLAY SQLCODE                                                      
+           IF  SQLCODE NOT EQUAL ZERO                                           
+               MOVE 'IKP00099'                TO RC                             
+               MOVE 'ERRORE INSERT TAB REB  ' TO RCDESC                         
+               MOVE 'E'                       TO RCFLAG                         
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       VALORIZZA-AREE-UTENZA SECTION.                                           
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+                SELECT IKPCF_FT                                                 
+                 INTO :FT                                                       
+                 FROM IKPCAMBIOFT                                               
+                 WHERE IKPCF_FT_OLD = :FT                                       
+                 WITH UR                                                        
+           END-EXEC                                                             
+           EVALUATE SQLCODE                                                     
+               WHEN 000                                                         
+               WHEN 100                                                         
+                   CONTINUE                                                     
+               WHEN OTHER                                                       
+                   MOVE 'IKP00099'            TO RC                             
+                   MOVE 'CAMBIO FT NON TROVATO'  TO RCDESC                      
+                   MOVE 'E'                   TO RCFLAG                         
+           END-EVALUATE                                                         
+           EVALUATE VERSIONE                                                    
+           WHEN 1                                                               
+               EXEC SQL INSERT INTO SESSION.IKPCARICAPRGRAPPORTI_0              
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPDP_VALORE,INTEGER(:PRG),1),                      
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM DB2C.IKPANAGRAFE, DB2C.IKPDATIRAPPORTI,               
+                    DB2C.IKPFUNZIONI, DB2C.IKPFUNZIONIRAPP                      
+                    , DB2C.IKPRAPPORTI                                          
+                    WHERE IKPDP_KEYR = IKPRP_KEYR                               
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_CODICE = :PRG                                 
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAN_REB = :REB                                        
+                    AND IKPAN_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+                    UNION ALL                                                   
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPDP_VALORE,INTEGER(:PRG),1),                      
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM DB2C.IKPANAGRAFE, DB2C.IKPDATIRAPPORTI,               
+                    DB2C.IKPFUNZIONI, DB2C.IKPFUNZIONIRAPP                      
+                    , DB2C.IKPRAPPORTI                                          
+                    WHERE IKPDP_KEYR = IKPRP_KEYR                               
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_PADRE = :PRG                                  
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAN_REB = :REB                                        
+                    AND IKPAN_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+                    UNION ALL                                                   
+                    SELECT DISTINCT                                             
+                     IKPAN_KEYA,                                                
+                     IKPRP_KEYR,                                                
+                     SUBSTR(IKPDP_VALORE,INTEGER(:PRG),1),                      
+                     IKPRP_TIPRAP,                                              
+                     IKPRP_NUMRAP,                                              
+                     IKPRP_DIPRAP,                                              
+                     IKPRP_DIVRAP,                                              
+                     IKPAN_DESCRIZIONE                                          
+                     FROM DB2C.IKPANAGRAFE, DB2C.IKPDATIRAPPORTI,               
+                    DB2C.IKPFUNZIONI, DB2C.IKPFUNZIONIRAPP                      
+                    , DB2C.IKPRAPPORTI                                          
+                    WHERE IKPDP_KEYR = IKPRP_KEYR                               
+                    AND IKPFU_FT = :FT                                          
+                    AND IKPFU_PRG_PADRE IN (                                    
+                        SELECT IKPFU_PRG_CODICE FROM                            
+                        DB2C.IKPFUNZIONI WHERE                                  
+                        IKPFU_FT = :FT AND  IKPFU_PRG_PADRE = :PRG)             
+                    AND IKPFR_FT = IKPFU_FT                                     
+                    AND IKPFR_RAPP_TIPO = IKPRP_TIPRAP                          
+                    AND IKPFR_CODICE = IKPFU_CODICE                             
+                    AND IKPAN_REB = :REB                                        
+                    AND IKPAN_REB_TIPO = :REB-TIPO                              
+                    AND IKPAN_KEYA = IKPRP_KEYA                                 
+                    AND IKPRP_TIPRAP <> 'VA'                                    
+               END-EXEC                                                         
+           WHEN OTHER                                                           
+               MOVE 'IKP00099'                TO RC                             
+               MOVE 'VERSIONE NON CONOSCIUTA' TO RCDESC                         
+               MOVE 'E'                       TO RCFLAG                         
+           END-EVALUATE                                                         
+           DISPLAY PGM ' ' SQLCODE ' ' SQLERRMC                                 
+           IF  SQLCODE NOT EQUAL ZERO                                           
+               MOVE 'IKP00099'                TO RC                             
+               MOVE 'ERRORE INSERT TAB REB  ' TO RCDESC                         
+               MOVE 'E'                       TO RCFLAG                         
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FAI-RISPOSTA SECTION.                                                    
+      *----------------------------------------------------------------*        
+           IF  TORRE = 'UI'                                                     
+               MOVE WS-PROFILO-IKI(5:2) TO IKIAC-COUNTRY                        
+                                                                                
+               EXEC SQL SELECT COUNT(*)                                         
+               INTO :CONTATORE                                                  
+                      FROM SESSION.IKPCARICAPRGRAPPORTI_0 A                     
+                      , DB2C.IKIACCOUNT                                         
+                      WHERE IKIAC_COUNTRY= :IKIAC-COUNTRY                       
+                      AND      IKIAC_STATO_ACC = 'A'                            
+                      AND TIPO = IKIAC_TECHNICAL_TYPE                           
+                      AND NUMRAP = IKIAC_NUMBER                                 
+                      AND DIPRAP = IKIAC_BRANCH                                 
+               END-EXEC                                                         
+               IF  SQLCODE = 0                                                  
+               AND CONTATORE > 0                                                
+                   CONTINUE                                                     
+               ELSE                                                             
+                   MOVE 'IKP00034'             TO RC                            
+                   MOVE 'VERSIONE NON CONOSCIUTA ' TO RCDESC                    
+                   MOVE 'W'                   TO RCFLAG                         
+               END-IF                                                           
+           END-IF                                                               
+           IF  RCFLAG = ' '                                                     
+           EVALUATE VERSIONE                                                    
+           WHEN 1                                                               
+               EXEC SQL UPDATE SESSION.IKPCARICAPRGRAPPORTI_0                   
+                    SET STATO = '1'                                             
+                    WHERE STATO = 'P'                                           
+               END-EXEC                                                         
+               EXEC SQL UPDATE SESSION.IKPCARICAPRGRAPPORTI_0                   
+                    SET STATO = '0'                                             
+                    WHERE STATO <> '1'                                          
+               END-EXEC                                                         
+               IF  TORRE = 'UI'                                                 
+                   MOVE WS-PROFILO-IKI(5:2) TO IKIAC-COUNTRY                    
+                                                                                
+                   EXEC SQL DECLARE RAPP CURSOR WITH RETURN FOR                 
+                        WITH AA AS (SELECT DISTINCT KEYA AS KEYA                
+                          FROM SESSION.IKPCARICAPRGRAPPORTI_0 A                 
+                          , DB2C.IKIACCOUNT                                     
+                          WHERE IKIAC_COUNTRY= :IKIAC-COUNTRY                   
+                          AND  IKIAC_STATO_ACC = 'A'                            
+                          AND TIPO = IKIAC_TECHNICAL_TYPE                       
+                          AND NUMRAP = IKIAC_NUMBER                             
+                          AND DIPRAP = IKIAC_BRANCH                             
+                          )                                                     
+                        SELECT DISTINCT A.*                                     
+                         , VALUE(IKIAC_BIC,'') AS BIC                           
+                         , VALUE(IKIAC_IBAN,'') AS TAG25                        
+                          FROM SESSION.IKPCARICAPRGRAPPORTI_0 A                 
+                          , AA X                                                
+                          , DB2C.IKIACCOUNT                                     
+                          WHERE A.KEYA = X.KEYA                                 
+                          AND TIPO = IKIAC_TECHNICAL_TYPE                       
+                          AND NUMRAP = IKIAC_NUMBER                             
+                          AND DIPRAP = IKIAC_BRANCH                             
+                          AND  IKIAC_STATO_ACC = 'A'                            
+                          ORDER BY 1                                            
+                   END-EXEC                                                     
+                   EXEC SQL OPEN RAPP END-EXEC                                  
+                   DISPLAY PGM ' ' SQLCODE ' ' SQLERRMC                         
+               ELSE                                                             
+                   EXEC SQL DECLARE RAPP1 CURSOR WITH RETURN FOR                
+                        SELECT DISTINCT A.*                                     
+                         , CHAR(' ') AS BIC                                     
+                         , CHAR(' ') AS TAG25                                   
+                          FROM SESSION.IKPCARICAPRGRAPPORTI_0 AS A              
+                          ORDER BY 1                                            
+                   END-EXEC                                                     
+                   EXEC SQL OPEN RAPP1 END-EXEC                                 
+               END-IF                                                           
+           WHEN OTHER                                                           
+               MOVE 'IKP00099'                 TO RC                            
+               MOVE 'VERSIONE NON CONOSCIUTA ' TO RCDESC                        
+               MOVE 'E'                       TO RCFLAG                         
+           END-EVALUATE                                                         
+           END-IF.                                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           IF RC NOT = SPACE                                                    
+              DISPLAY PGM '> UID: ' UID ' REB: ' REB '-' REB-TIPO               
+                            ' RC: ' RC                                          
+           END-IF.                                                              
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

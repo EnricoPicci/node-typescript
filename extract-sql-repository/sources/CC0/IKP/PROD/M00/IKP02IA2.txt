@@ -1,0 +1,877 @@
+      * 14.220 10:19 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM1488 - ABILITAZIONE 600                                               
+      * 12.159 18:44 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM1267 - ABIL1 E ABIL2 SU CURSORE1 E CURSORE2                           
+      * 11.279 11:22 IKP   EE21112 - DONATIELLO NICOLA (Y9US0000)               
+      * AGGIUNTI TEST SU VIRTUAL ACCOUNT VB,VV                                  
+      * 11.216 14:46 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM1184 - NUOVA FUNZIONE SELECT03 (CON UID, KEYR E PROG)                 
+      * 11.178 18:25 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM116R - ANCHE RAPPORTI '$F' E '$G' (CASH MANAGEMENT)                   
+      * 11.112 13:32 IKP   US01651 - MALDONADO PELAEZ GER (USUPD090)            
+      * GM114M - PROGRESSIVO 1 SU CURSORE 01                                    
+      * 11.066 14:25 IKP   Y994052 - SPR TEZZA SARA (Y9US0000)                  
+      * COMPILAZIONE                                                            
+      * 10.222 18:21        IKP  0000 US01651                                   
+      * GM108A - NUOVE FUNZIONI CURSORE 04                                      
+      * 09.315 12:33        IKP  0000 US01101                                   
+      * XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                    
+      * 09.313 12:25        IKP  0000 US01101                                   
+      * ABIL1 ABIL2                                                             
+      * 09.310 17:22        IKP  0000 US01101                                   
+      * --------------------------------                                        
+      * 09.302 16:15        IKP  0000 US01651                                   
+      * -------------------------------                                         
+      * 09.300 19:35        IKP  0000 US01101                                   
+      * -----------------------------                                           
+      * 08.232 11:43        IKP  0000                                           
+      * GM088J - NUOVA FUNZIONE SELECT (CON UID E KEYR)                         
+      * 08.191 17:26        IKP  0000                                           
+      * GM0879 - CONTEGGIO ABILITAZIONE PER TIPO RAPPORTO                       
+      * 08.127 17:48        IKP  0000                                           
+      * GM0856 - NUOVA FUNZIONE CURSORE-03                                      
+      * 08.090 11:30        IKP  0000                                           
+      * ---------------------------------                                       
+      * 08.071 22:06        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 08.059 09:47        IKP  0000                                           
+      * COMPILAZIONE                                                            
+      * 07.284 09:31        IKP  0000                                           
+      * CF7283 - INSERITE FUNZIONI OPEN01 E OPEN02                              
+      * 07.274 11:02        IKP 0000                                            
+      * COMPILAZIONE                                                            
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02IA2.                                                    
+      ******************************************************************        
+      *                                                                *        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE .................... ABILITAZIONI BANCA                   *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE ...............................OTTOBRE  2007 *        
+      * DA PARTE DI .....................................TEZZA EURIS   *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+      *SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SOURCE-COMPUTER.                                                         
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       77  PGM                             PIC  X(08) VALUE 'IKP02IA2'.         
+       77  SAVE-SQLCODE                    PIC S9(09) COMP.                     
+       77  HV-CONTATORE                    PIC S9(09) COMP-3.                   
+       77  MESSAGGIO                       PIC  X(80) VALUE SPACE.              
+       77  IND-XXX                         PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-BYP                     PIC  9(05) COMP-3 VALUE ZERO.        
+       77  IND-XXX-MAX                     PIC  9(05) COMP-3 VALUE 19.          
+       01  FILLER                          PIC  9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR01-CHIUSO                       VALUE ZERO.               
+               88  CUR01-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR02-CHIUSO                       VALUE ZERO.               
+               88  CUR02-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CUR03-CHIUSO                       VALUE ZERO.               
+               88  CUR03-APERTO                       VALUE 1.                  
+GM108A     05  FILLER                      PIC  9(01) VALUE ZERO.               
+GM108A         88  CUR04-CHIUSO                       VALUE ZERO.               
+GM108A         88  CUR04-APERTO                       VALUE 1.                  
+           05  FILLER                      PIC  9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                PIC  X(16).                          
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR             PIC  X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+       01  IKP0RDBG                        PIC  X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+       01  SISBRCR2                        PIC  X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAA2                                                
+           END-EXEC.                                                            
+                                                                                
+GM108A     EXEC SQL                                                             
+GM108A          INCLUDE IKP0TAAB                                                
+GM108A     END-EXEC.                                                            
+GM108A                                                                          
+           EXEC SQL                                                             
+                INCLUDE IKP0TAFU                                                
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TARP                                                
+           END-EXEC.                                                            
+                                                                                
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE 2DBIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE 2DBIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE 2DBIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE 2DBIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+      *================================================================*        
+       INIZIO SECTION.                                                          
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+           IF  NOT-ERRORE                                                       
+               EVALUATE 2DBIN-SQL-FUNZIONE                                      
+                   WHEN 'SELECT01'                                              
+                       PERFORM FUNZIONE-SELECT01                                
+GM088J             WHEN 'SELECT02'                                              
+GM088J                 PERFORM FUNZIONE-SELECT02                                
+GM1184             WHEN 'SELECT03'                                              
+GM1184                 PERFORM FUNZIONE-SELECT03                                
+                   WHEN 'COUNT01'                                               
+                       PERFORM FUNZIONE-COUNT01                                 
+CF7283             WHEN 'OPEN01  '                                              
+CF7283                 PERFORM FUNZIONE-OPEN01                                  
+CF7283             WHEN 'FETCH01 '                                              
+CF7283                 PERFORM FUNZIONE-FETCH01                                 
+CF7283             WHEN 'CLOSE01 '                                              
+CF7283                 PERFORM FUNZIONE-CLOSE01                                 
+CF7283             WHEN 'OPEN02  '                                              
+CF7283                 PERFORM FUNZIONE-OPEN02                                  
+CF7283             WHEN 'FETCH02 '                                              
+CF7283                 PERFORM FUNZIONE-FETCH02                                 
+CF7283             WHEN 'CLOSE02 '                                              
+CF7283                 PERFORM FUNZIONE-CLOSE02                                 
+GM0856             WHEN 'OPEN03  '                                              
+GM0856                 PERFORM FUNZIONE-OPEN03                                  
+GM0856             WHEN 'FETCH03 '                                              
+GM0856                 PERFORM FUNZIONE-FETCH03                                 
+GM0856             WHEN 'CLOSE03 '                                              
+GM0856                 PERFORM FUNZIONE-CLOSE03                                 
+GM108A             WHEN 'OPEN04  '                                              
+GM108A                 PERFORM FUNZIONE-OPEN04                                  
+GM108A             WHEN 'FETCH04 '                                              
+GM108A                 PERFORM FUNZIONE-FETCH04                                 
+GM108A             WHEN 'CLOSE04 '                                              
+GM108A                 PERFORM FUNZIONE-CLOSE04                                 
+                   WHEN OTHER                                                   
+                       SET ERRORE-GENERICO TO TRUE                              
+               END-EVALUATE                                                     
+           END-IF.                                                              
+           PERFORM OPERAZIONI-FINALI.                                           
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           CALL SISBRCR2 USING CODICI-CASSA.                                    
+           SET NOT-ERRORE                  TO TRUE.                             
+           INITIALIZE 2DBRC.                                                    
+           MOVE 2DBIN-RIGA                 TO IKP0TABA2                         
+           MOVE 'IKPABBANCA'               TO 2DBRC-TABLE.                      
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-COUNT01 SECTION.                                                
+      *----------------------------------------------------------------*        
+           UNSTRING 2DBIN-RIGA                                                  
+           INTO  IKP0TABA2(1:326)                                               
+                 IKP0TABFU(1:465)                                               
+                 IKP0TABRP                                                      
+           END-UNSTRING                                                         
+GM0879     EVALUATE IKPRP-TIPRAP                                                
+GM0879         WHEN '  '                                                        
+                    EXEC SQL                                                    
+                         SELECT DISTINCT                                        
+                         CASE                                                   
+GM1488*                  SUBSTR(CONCAT(IKPA2_ABIL,IKPA2_ABIL1)                  
+GM1488                   SUBSTR(IKPA2_ABIL ÙÙ IKPA2_ABIL1 ÙÙ IKPA2_ABIL2        
+                         ,INTEGER(:IKPFU-PRG-CODICE),1)                         
+                                  WHEN 'P' THEN '1'                             
+                                  WHEN '1' THEN '1'                             
+                                  WHEN '0' THEN '0'                             
+                                  WHEN ' ' THEN '0'                             
+                                  ELSE 'X'                                      
+                              END                                               
+                         INTO   :IKPA2-ABIL                                     
+                         FROM    IKPABBANCA                                     
+                         WHERE   IKPA2_BANCA       = :IKPA2-BANCA               
+                         AND     IKPA2_REB         = :IKPA2-REB                 
+                         AND     IKPA2_REB_TIPO    = :IKPA2-REB-TIPO            
+                         AND     IKPA2_UID         = :IKPA2-UID                 
+                         AND EXISTS                                             
+                            (SELECT 1 FROM IKPRAPPORTI                          
+                             WHERE  IKPRP_KEYA     = :IKPRP-KEYA                
+                             AND    IKPRP_KEYR     =  IKPA2_KEYR                
+                             AND    IKPRP_BANCA    =  IKPA2_BANCA)              
+                         WITH UR                                                
+                    END-EXEC                                                    
+GM0879         WHEN 'VA'                                                        
+DN1279         WHEN 'VB'                                                        
+DN1279         WHEN 'VV'                                                        
+GM0879         WHEN '$E'                                                        
+GM116R         WHEN '$F'                                                        
+GM116R         WHEN '$G'                                                        
+GM0879         WHEN 'EU'                                                        
+GM0879              EXEC SQL                                                    
+GM0879                   SELECT DISTINCT                                        
+GM0879                   CASE                                                   
+GM1488*                  SUBSTR(CONCAT(IKPA2_ABIL,IKPA2_ABIL1)                  
+GM1488                   SUBSTR(IKPA2_ABIL ÙÙ IKPA2_ABIL1 ÙÙ IKPA2_ABIL2        
+                         ,INTEGER(:IKPFU-PRG-CODICE),1)                         
+GM0879                            WHEN 'P' THEN '1'                             
+GM0879                            WHEN '1' THEN '1'                             
+GM0879                            WHEN '0' THEN '0'                             
+                                  WHEN ' ' THEN '0'                             
+GM0879                            ELSE 'X'                                      
+GM0879                        END                                               
+GM0879                   INTO   :IKPA2-ABIL                                     
+GM0879                   FROM    IKPABBANCA                                     
+GM0879                   WHERE   IKPA2_BANCA       = :IKPA2-BANCA               
+GM0879                   AND     IKPA2_REB         = :IKPA2-REB                 
+GM0879                   AND     IKPA2_REB_TIPO    = :IKPA2-REB-TIPO            
+GM0879                   AND     IKPA2_UID         = :IKPA2-UID                 
+GM0879                   AND EXISTS                                             
+GM0879                      (SELECT 1 FROM IKPRAPPORTICBI                       
+GM0879                       WHERE  IKPRC_KEYA     = :IKPRP-KEYA                
+GM0879                       AND    IKPRC_TIPRAP   = :IKPRP-TIPRAP              
+GM0879                       AND    IKPRC_KEYR     =  IKPA2_KEYR                
+GM0879                       AND    IKPRC_BANCA    =  IKPA2_BANCA)              
+GM0879                   WITH UR                                                
+GM0879              END-EXEC                                                    
+GM0879         WHEN OTHER                                                       
+GM0879              EXEC SQL                                                    
+GM0879                   SELECT DISTINCT                                        
+GM0879                   CASE                                                   
+GM1488*                  SUBSTR(CONCAT(IKPA2_ABIL,IKPA2_ABIL1)                  
+GM1488                   SUBSTR(IKPA2_ABIL ÙÙ IKPA2_ABIL1 ÙÙ IKPA2_ABIL2        
+                         ,INTEGER(:IKPFU-PRG-CODICE),1)                         
+GM0879                            WHEN 'P' THEN '1'                             
+GM0879                            WHEN '1' THEN '1'                             
+GM0879                            WHEN '0' THEN '0'                             
+                                  WHEN ' ' THEN '0'                             
+GM0879                            ELSE 'X'                                      
+GM0879                        END                                               
+GM0879                   INTO   :IKPA2-ABIL                                     
+GM0879                   FROM    IKPABBANCA                                     
+GM0879                   WHERE   IKPA2_BANCA       = :IKPA2-BANCA               
+GM0879                   AND     IKPA2_REB         = :IKPA2-REB                 
+GM0879                   AND     IKPA2_REB_TIPO    = :IKPA2-REB-TIPO            
+GM0879                   AND     IKPA2_UID         = :IKPA2-UID                 
+GM0879                   AND EXISTS                                             
+GM0879                      (SELECT 1 FROM IKPRAPPORTI                          
+GM0879                       WHERE  IKPRP_KEYA     = :IKPRP-KEYA                
+GM0879                       AND    IKPRP_TIPRAP   = :IKPRP-TIPRAP              
+GM0879                       AND    IKPRP_KEYR     =  IKPA2_KEYR                
+GM0879                       AND    IKPRP_BANCA    =  IKPA2_BANCA)              
+GM0879                   WITH UR                                                
+GM0879              END-EXEC                                                    
+GM0879     END-EVALUATE                                                         
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                    IF IKPA2-ABIL(1 : 1) = '1'                                  
+                    OR IKPA2-ABIL(1 : 1) = 'P'                                  
+                       MOVE 1              TO HV-CONTATORE                      
+                    ELSE                                                        
+                       MOVE 0              TO HV-CONTATORE                      
+                    END-IF                                                      
+               WHEN SQLCODE = -811                                              
+                    MOVE 2                 TO HV-CONTATORE                      
+               WHEN SQLCODE = +100                                              
+                    MOVE 3                 TO HV-CONTATORE                      
+               WHEN OTHER                                                       
+                    SET ERRORE-SQL         TO TRUE                              
+           END-EVALUATE.                                                        
+DEBUG *    DISPLAY PGM ' ' IKPA2-REB  ' ' IKPA2-REB-TIPO ' ' IKPA2-UID          
+DEBUG *                ' ' IKPRP-KEYA(1 : 12)     ' TIPO=' IKPRP-TIPRAP         
+DEBUG *            ' PRG=' IKPFU-PRG-CODICE ' ABIL=' IKPA2-ABIL(1 : 1)          
+DEBUG *        ' SQLCODE=' SQLCODE     ' CONTATORE=' HV-CONTATORE.              
+           MOVE HV-CONTATORE               TO 2DBOU-COUNT.                      
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-SELECT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               SELECT IKPA2_BANCA                                               
+               ,      IKPA2_REB                                                 
+               ,      IKPA2_REB_TIPO                                            
+               ,      IKPA2_UID                                                 
+               ,      IKPA2_OPE                                                 
+               ,      IKPA2_OPE_TIPO                                            
+               ,      IKPA2_KEYR                                                
+               ,      IKPA2_CANALE                                              
+               ,      IKPA2_PROG                                                
+               ,      IKPA2_ABIL                                                
+               ,      IKPA2_ABIL1                                               
+               ,      IKPA2_ABIL2                                               
+               ,      IKPA2_DATA_INS                                            
+               ,      IKPA2_MATR_INS                                            
+               ,      IKPA2_DATA_VAR                                            
+               ,      IKPA2_MATR_VAR                                            
+               ,      IKPA2_DATA_REV                                            
+               ,      IKPA2_MATR_REV                                            
+               INTO  :IKPA2-BANCA                                               
+               ,     :IKPA2-REB                                                 
+               ,     :IKPA2-REB-TIPO                                            
+               ,     :IKPA2-UID                                                 
+               ,     :IKPA2-OPE                                                 
+               ,     :IKPA2-OPE-TIPO                                            
+               ,     :IKPA2-KEYR                                                
+               ,     :IKPA2-CANALE                                              
+               ,     :IKPA2-PROG                                                
+               ,     :IKPA2-ABIL                                                
+               ,     :IKPA2-ABIL1                                               
+               ,     :IKPA2-ABIL2                                               
+               ,     :IKPA2-DATA-INS                                            
+               ,     :IKPA2-MATR-INS                                            
+               ,     :IKPA2-DATA-VAR                                            
+               ,     :IKPA2-MATR-VAR                                            
+               ,     :IKPA2-DATA-REV                                            
+               ,     :IKPA2-MATR-REV                                            
+               FROM   IKPABBANCA                                                
+               WHERE  IKPA2_REB      = :IKPA2-REB                               
+                 AND  IKPA2_REB_TIPO = :IKPA2-REB-TIPO                          
+                 AND  IKPA2_OPE      = :IKPA2-OPE                               
+                 AND  IKPA2_OPE_TIPO = :IKPA2-OPE-TIPO                          
+                 AND  IKPA2_KEYR     = :IKPA2-KEYR                              
+                 AND  IKPA2_CANALE   = :IKPA2-CANALE                            
+                 AND  IKPA2_PROG     = :IKPA2-PROG                              
+                 AND  IKPA2_BANCA    = :IKPA2-BANCA                             
+               WITH UR                                                          
+           END-EXEC.                                                            
+           EVALUATE TRUE                                                        
+               WHEN SQLCODE = ZERO                                              
+                   MOVE IKP0TABA2          TO 2DBOU-RIGA                        
+               WHEN SQLCODE = 100                                               
+                   SET ERRORE-WARNING      TO TRUE                              
+               WHEN OTHER                                                       
+                   SET ERRORE-SQL          TO TRUE                              
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+GM088J*----------------------------------------------------------------*        
+GM088J FUNZIONE-SELECT02 SECTION.                                               
+GM088J*----------------------------------------------------------------*        
+GM088J     EXEC SQL                                                             
+GM088J         SELECT IKPA2_BANCA                                               
+GM088J         ,      IKPA2_REB                                                 
+GM088J         ,      IKPA2_REB_TIPO                                            
+GM088J         ,      IKPA2_UID                                                 
+GM088J         ,      IKPA2_OPE                                                 
+GM088J         ,      IKPA2_OPE_TIPO                                            
+GM088J         ,      IKPA2_KEYR                                                
+GM088J         ,      IKPA2_CANALE                                              
+GM088J         ,      IKPA2_PROG                                                
+GM088J         ,      IKPA2_ABIL                                                
+               ,      IKPA2_ABIL1                                               
+               ,      IKPA2_ABIL2                                               
+GM088J         ,      IKPA2_DATA_INS                                            
+GM088J         ,      IKPA2_MATR_INS                                            
+GM088J         ,      IKPA2_DATA_VAR                                            
+GM088J         ,      IKPA2_MATR_VAR                                            
+GM088J         ,      IKPA2_DATA_REV                                            
+GM088J         ,      IKPA2_MATR_REV                                            
+GM088J         INTO  :IKPA2-BANCA                                               
+GM088J         ,     :IKPA2-REB                                                 
+GM088J         ,     :IKPA2-REB-TIPO                                            
+GM088J         ,     :IKPA2-UID                                                 
+GM088J         ,     :IKPA2-OPE                                                 
+GM088J         ,     :IKPA2-OPE-TIPO                                            
+GM088J         ,     :IKPA2-KEYR                                                
+GM088J         ,     :IKPA2-CANALE                                              
+GM088J         ,     :IKPA2-PROG                                                
+GM088J         ,     :IKPA2-ABIL                                                
+               ,     :IKPA2-ABIL1                                               
+               ,     :IKPA2-ABIL2                                               
+GM088J         ,     :IKPA2-DATA-INS                                            
+GM088J         ,     :IKPA2-MATR-INS                                            
+GM088J         ,     :IKPA2-DATA-VAR                                            
+GM088J         ,     :IKPA2-MATR-VAR                                            
+GM088J         ,     :IKPA2-DATA-REV                                            
+GM088J         ,     :IKPA2-MATR-REV                                            
+GM088J         FROM   IKPABBANCA                                                
+GM088J         WHERE  IKPA2_UID      = :IKPA2-UID                               
+GM088J           AND  IKPA2_KEYR     = :IKPA2-KEYR                              
+GM088J         WITH UR                                                          
+GM088J     END-EXEC.                                                            
+GM088J     EVALUATE TRUE                                                        
+GM088J         WHEN SQLCODE = ZERO                                              
+GM088J             MOVE IKP0TABA2          TO 2DBOU-RIGA                        
+GM088J         WHEN SQLCODE = 100                                               
+GM088J             SET ERRORE-WARNING      TO TRUE                              
+GM088J         WHEN OTHER                                                       
+GM088J             SET ERRORE-SQL          TO TRUE                              
+GM088J     END-EVALUATE.                                                        
+GM088J     EXIT.                                                                
+GM088J                                                                          
+GM1184*----------------------------------------------------------------*        
+GM1184 FUNZIONE-SELECT03 SECTION.                                               
+GM1184*----------------------------------------------------------------*        
+GM1184     EXEC SQL                                                             
+GM1184         SELECT IKPA2_BANCA                                               
+GM1184         ,      IKPA2_REB                                                 
+GM1184         ,      IKPA2_REB_TIPO                                            
+GM1184         ,      IKPA2_UID                                                 
+GM1184         ,      IKPA2_OPE                                                 
+GM1184         ,      IKPA2_OPE_TIPO                                            
+GM1184         ,      IKPA2_KEYR                                                
+GM1184         ,      IKPA2_CANALE                                              
+GM1184         ,      IKPA2_PROG                                                
+GM1184         ,      IKPA2_ABIL                                                
+GM1184         ,      IKPA2_ABIL1                                               
+GM1184         ,      IKPA2_ABIL2                                               
+GM1184         ,      IKPA2_DATA_INS                                            
+GM1184         ,      IKPA2_MATR_INS                                            
+GM1184         ,      IKPA2_DATA_VAR                                            
+GM1184         ,      IKPA2_MATR_VAR                                            
+GM1184         ,      IKPA2_DATA_REV                                            
+GM1184         ,      IKPA2_MATR_REV                                            
+GM1184         INTO  :IKPA2-BANCA                                               
+GM1184         ,     :IKPA2-REB                                                 
+GM1184         ,     :IKPA2-REB-TIPO                                            
+GM1184         ,     :IKPA2-UID                                                 
+GM1184         ,     :IKPA2-OPE                                                 
+GM1184         ,     :IKPA2-OPE-TIPO                                            
+GM1184         ,     :IKPA2-KEYR                                                
+GM1184         ,     :IKPA2-CANALE                                              
+GM1184         ,     :IKPA2-PROG                                                
+GM1184         ,     :IKPA2-ABIL                                                
+GM1184         ,     :IKPA2-ABIL1                                               
+GM1184         ,     :IKPA2-ABIL2                                               
+GM1184         ,     :IKPA2-DATA-INS                                            
+GM1184         ,     :IKPA2-MATR-INS                                            
+GM1184         ,     :IKPA2-DATA-VAR                                            
+GM1184         ,     :IKPA2-MATR-VAR                                            
+GM1184         ,     :IKPA2-DATA-REV                                            
+GM1184         ,     :IKPA2-MATR-REV                                            
+GM1184         FROM   IKPABBANCA                                                
+GM1184         WHERE  IKPA2_UID      = :IKPA2-UID                               
+GM1184           AND  IKPA2_KEYR     = :IKPA2-KEYR                              
+GM1184           AND  IKPA2_PROG     = :IKPA2-PROG                              
+GM1184         WITH UR                                                          
+GM1184     END-EXEC.                                                            
+GM1184     EVALUATE TRUE                                                        
+GM1184         WHEN SQLCODE = ZERO                                              
+GM1184             MOVE IKP0TABA2          TO 2DBOU-RIGA                        
+GM1184         WHEN SQLCODE = 100                                               
+GM1184             SET ERRORE-WARNING      TO TRUE                              
+GM1184         WHEN OTHER                                                       
+GM1184             SET ERRORE-SQL          TO TRUE                              
+GM1184     END-EVALUATE.                                                        
+GM1184     EXIT.                                                                
+GM1184                                                                          
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-OPEN01 SECTION.                                                 
+CF7283*----------------------------------------------------------------*        
+CF7283     EXEC SQL                                                             
+CF7283          DECLARE CUR01 CURSOR FOR                                        
+CF7283          SELECT IKPA2_ABIL                                               
+CF7283              ,  IKPA2_PROG                                               
+GM1267              ,  IKPA2_ABIL1                                              
+GM1267              ,  IKPA2_ABIL2                                              
+CF7283           FROM  IKPABBANCA                                               
+CF7283           WHERE IKPA2_REB         = :IKPA2-REB                           
+CF7283             AND IKPA2_REB_TIPO    = :IKPA2-REB-TIPO                      
+CF7283             AND IKPA2_OPE         = :IKPA2-OPE                           
+CF7283             AND IKPA2_OPE_TIPO    = :IKPA2-OPE-TIPO                      
+CF7283             AND IKPA2_KEYR        = :IKPA2-KEYR                          
+CF7283             AND IKPA2_CANALE      = :IKPA2-CANALE                        
+GM114M             AND IKPA2_PROG        = 1                                    
+CF7283           ORDER BY 1                                                     
+CF7283            WITH UR                                                       
+CF7283     END-EXEC                                                             
+CF7283     EXEC SQL OPEN CUR01 END-EXEC.                                        
+CF7283     IF  SQLCODE = ZERO                                                   
+CF7283         SET CUR01-APERTO          TO TRUE                                
+CF7283     ELSE                                                                 
+CF7283         SET ERRORE-SQL            TO TRUE                                
+CF7283         MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+CF7283         MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+CF7283     END-IF.                                                              
+CF7283     EXIT.                                                                
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-FETCH01 SECTION.                                                
+CF7283*----------------------------------------------------------------*        
+CF7283     EXEC SQL                                                             
+CF7283          FETCH CUR01                                                     
+CF7283          INTO   :IKPA2-ABIL                                              
+CF7283           ,     :IKPA2-PROG                                              
+GM1267           ,     :IKPA2-ABIL1                                             
+GM1267           ,     :IKPA2-ABIL2                                             
+CF7283     END-EXEC                                                             
+CF7283     EVALUATE TRUE                                                        
+CF7283         WHEN SQLCODE = ZERO                                              
+CF7283             MOVE IKP0TABA2        TO 2DBOU-RIGA                          
+CF7283         WHEN SQLCODE = 100                                               
+CF7283             SET ERRORE-WARNING    TO TRUE                                
+CF7283         WHEN OTHER                                                       
+CF7283             SET ERRORE-SQL        TO TRUE                                
+CF7283             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+CF7283             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+CF7283     END-EVALUATE.                                                        
+CF7283     EXIT.                                                                
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-CLOSE01 SECTION.                                                
+CF7283*----------------------------------------------------------------*        
+CF7283     IF  CUR01-APERTO                                                     
+CF7283         SET CUR01-CHIUSO          TO TRUE                                
+CF7283         EXEC SQL                                                         
+CF7283              CLOSE CUR01                                                 
+CF7283         END-EXEC                                                         
+CF7283         IF  SQLCODE NOT = ZERO                                           
+CF7283         AND SQLCODE NOT = -502                                           
+CF7283             SET ERRORE-SQL        TO TRUE                                
+CF7283             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+CF7283             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+CF7283         END-IF                                                           
+CF7283     END-IF.                                                              
+CF7283     EXIT.                                                                
+CF7283                                                                          
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-OPEN02 SECTION.                                                 
+CF7283*----------------------------------------------------------------*        
+CF7283     EXEC SQL                                                             
+CF7283          DECLARE CUR02 CURSOR FOR                                        
+CF7283          SELECT IKPA2_ABIL                                               
+CF7283              ,  IKPA2_PROG                                               
+GM1267              ,  IKPA2_ABIL1                                              
+GM1267              ,  IKPA2_ABIL2                                              
+CF7283           FROM  IKPABBANCA                                               
+CF7283           WHERE IKPA2_REB         = :IKPA2-REB                           
+CF7283             AND IKPA2_REB_TIPO    = :IKPA2-REB-TIPO                      
+CF7283             AND IKPA2_OPE         = :IKPA2-OPE                           
+CF7283             AND IKPA2_OPE_TIPO    = :IKPA2-OPE-TIPO                      
+CF7283             AND IKPA2_CANALE      = :IKPA2-CANALE                        
+CF7283           ORDER BY 1                                                     
+CF7283            WITH UR                                                       
+CF7283     END-EXEC                                                             
+CF7283     EXEC SQL OPEN CUR02 END-EXEC.                                        
+CF7283     IF  SQLCODE = ZERO                                                   
+CF7283         SET CUR02-APERTO          TO TRUE                                
+CF7283     ELSE                                                                 
+CF7283         SET ERRORE-SQL            TO TRUE                                
+CF7283         MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+CF7283         MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+CF7283     END-IF.                                                              
+CF7283     EXIT.                                                                
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-FETCH02 SECTION.                                                
+CF7283*----------------------------------------------------------------*        
+CF7283     EXEC SQL                                                             
+CF7283          FETCH CUR02                                                     
+CF7283          INTO   :IKPA2-ABIL                                              
+CF7283           ,     :IKPA2-PROG                                              
+GM1267           ,     :IKPA2-ABIL1                                             
+GM1267           ,     :IKPA2-ABIL2                                             
+CF7283     END-EXEC                                                             
+CF7283     EVALUATE TRUE                                                        
+CF7283         WHEN SQLCODE = ZERO                                              
+CF7283             MOVE IKP0TABA2        TO 2DBOU-RIGA                          
+CF7283         WHEN SQLCODE = 100                                               
+CF7283             SET ERRORE-WARNING    TO TRUE                                
+CF7283         WHEN OTHER                                                       
+CF7283             SET ERRORE-SQL        TO TRUE                                
+CF7283             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+CF7283             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+CF7283     END-EVALUATE.                                                        
+CF7283     EXIT.                                                                
+CF7283*----------------------------------------------------------------*        
+CF7283 FUNZIONE-CLOSE02 SECTION.                                                
+CF7283*----------------------------------------------------------------*        
+CF7283     IF  CUR02-APERTO                                                     
+CF7283         SET CUR02-CHIUSO          TO TRUE                                
+CF7283         EXEC SQL                                                         
+CF7283              CLOSE CUR02                                                 
+CF7283         END-EXEC                                                         
+CF7283         IF  SQLCODE NOT = ZERO                                           
+CF7283             SET ERRORE-SQL        TO TRUE                                
+CF7283             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+CF7283             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+CF7283         END-IF                                                           
+CF7283     END-IF.                                                              
+CF7283     EXIT.                                                                
+CF7283                                                                          
+GM0856*----------------------------------------------------------------*        
+GM0856 FUNZIONE-OPEN03 SECTION.                                                 
+GM0856*----------------------------------------------------------------*        
+GM0856     EXEC SQL                                                             
+GM0856          DECLARE CUR03 CURSOR FOR                                        
+GM0856           SELECT IKPA2_BANCA                                             
+GM0856                , IKPA2_REB                                               
+GM0856                , IKPA2_REB_TIPO                                          
+GM0856                , IKPA2_UID                                               
+GM0856                , IKPA2_OPE                                               
+GM0856                , IKPA2_OPE_TIPO                                          
+GM0856                , IKPA2_KEYR                                              
+GM0856                , IKPA2_CANALE                                            
+GM0856                , IKPA2_PROG                                              
+GM0856                , IKPA2_ABIL                                              
+                      , IKPA2_ABIL1                                             
+                      , IKPA2_ABIL2                                             
+GM0856                , IKPA2_DATA_INS                                          
+GM0856                , IKPA2_MATR_INS                                          
+GM0856                , IKPA2_DATA_VAR                                          
+GM0856                , IKPA2_MATR_VAR                                          
+GM0856                , IKPA2_DATA_REV                                          
+GM0856                , IKPA2_MATR_REV                                          
+GM0856             FROM IKPABBANCA                                              
+GM0856            ORDER BY 2, 3, 4, 7                                           
+GM0856             WITH UR                                                      
+GM0856     END-EXEC                                                             
+GM0856     EXEC SQL OPEN CUR03 END-EXEC.                                        
+GM0856     IF  SQLCODE = ZERO                                                   
+GM0856         SET CUR03-APERTO          TO TRUE                                
+GM0856     ELSE                                                                 
+GM0856         SET ERRORE-SQL            TO TRUE                                
+GM0856         MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+GM0856         MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+GM0856     END-IF.                                                              
+GM0856     EXIT.                                                                
+GM0856*----------------------------------------------------------------*        
+GM0856 FUNZIONE-FETCH03 SECTION.                                                
+GM0856*----------------------------------------------------------------*        
+GM0856     EXEC SQL                                                             
+GM0856          FETCH  CUR03                                                    
+GM0856           INTO :IKPA2-BANCA                                              
+GM0856              , :IKPA2-REB                                                
+GM0856              , :IKPA2-REB-TIPO                                           
+GM0856              , :IKPA2-UID                                                
+GM0856              , :IKPA2-OPE                                                
+GM0856              , :IKPA2-OPE-TIPO                                           
+GM0856              , :IKPA2-KEYR                                               
+GM0856              , :IKPA2-CANALE                                             
+GM0856              , :IKPA2-PROG                                               
+GM0856              , :IKPA2-ABIL                                               
+                    , :IKPA2-ABIL1                                              
+                    , :IKPA2-ABIL2                                              
+GM0856              , :IKPA2-DATA-INS                                           
+GM0856              , :IKPA2-MATR-INS                                           
+GM0856              , :IKPA2-DATA-VAR                                           
+GM0856              , :IKPA2-MATR-VAR                                           
+GM0856              , :IKPA2-DATA-REV                                           
+GM0856              , :IKPA2-MATR-REV                                           
+GM0856     END-EXEC                                                             
+GM0856     EVALUATE TRUE                                                        
+GM0856         WHEN SQLCODE = ZERO                                              
+GM0856             MOVE IKP0TABA2        TO 2DBOU-RIGA                          
+GM0856         WHEN SQLCODE = +100                                              
+GM0856             SET ERRORE-WARNING    TO TRUE                                
+GM0856         WHEN OTHER                                                       
+GM0856             SET ERRORE-SQL        TO TRUE                                
+GM0856             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+GM0856             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+GM0856     END-EVALUATE.                                                        
+GM0856     EXIT.                                                                
+GM0856*----------------------------------------------------------------*        
+GM0856 FUNZIONE-CLOSE03 SECTION.                                                
+GM0856*----------------------------------------------------------------*        
+GM0856     IF  CUR03-APERTO                                                     
+GM0856         SET CUR03-CHIUSO          TO TRUE                                
+GM0856         EXEC SQL                                                         
+GM0856              CLOSE CUR03                                                 
+GM0856         END-EXEC                                                         
+GM0856         IF  SQLCODE NOT = ZERO                                           
+GM0856         AND SQLCODE NOT = -502                                           
+GM0856             SET ERRORE-SQL        TO TRUE                                
+GM0856             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+GM0856             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+GM0856         END-IF                                                           
+GM0856     END-IF.                                                              
+GM0856     EXIT.                                                                
+GM0856                                                                          
+GM108A*----------------------------------------------------------------*        
+GM108A FUNZIONE-OPEN04 SECTION.                                                 
+GM108A*----------------------------------------------------------------*        
+GM108A     EXEC SQL                                                             
+GM108A          DECLARE CUR04 CURSOR FOR                                        
+GM108A          SELECT IKPAB_BANCA                                              
+GM108A               , IKPAB_REB                                                
+GM108A               , IKPAB_REB_TIPO                                           
+GM108A               , IKPAB_UID                                                
+GM108A               , IKPAB_OPE                                                
+GM108A               , IKPAB_OPE_TIPO                                           
+GM108A               , IKPAB_KEYR                                               
+GM108A               , IKPAB_CANALE                                             
+GM108A               , IKPAB_PROG                                               
+GM108A               , IKPAB_ABIL                                               
+GM108A               , IKPAB_ABIL1                                              
+GM108A               , IKPAB_ABIL2                                              
+GM108A               , IKPAB_DATA_INS                                           
+GM108A               , IKPAB_MATR_INS                                           
+GM108A               , IKPAB_DATA_VAR                                           
+GM108A               , IKPAB_MATR_VAR                                           
+GM108A               , IKPAB_DATA_REV                                           
+GM108A               , IKPAB_MATR_REV                                           
+GM108A               , VALUE(IKPA2_ABIL ,IKPAB_ABIL ) AS IKPA2_ABIL             
+GM108A               , VALUE(IKPA2_ABIL1,IKPAB_ABIL1) AS IKPA2_ABIL1            
+GM108A               , VALUE(IKPA2_ABIL2,IKPAB_ABIL2) AS IKPA2_ABIL2            
+GM108A            FROM IKPABILITAZIONI                                          
+GM108A            LEFT OUTER                                                    
+GM108A            JOIN IKPABBANCA                                               
+GM108A              ON IKPA2_BANCA       =  IKPAB_BANCA                         
+GM108A             AND IKPA2_REB         =  IKPAB_REB                           
+GM108A             AND IKPA2_REB_TIPO    =  IKPAB_REB_TIPO                      
+GM108A             AND IKPA2_OPE         =  IKPAB_OPE                           
+GM108A             AND IKPA2_OPE_TIPO    =  IKPAB_OPE_TIPO                      
+GM108A             AND IKPA2_KEYR        =  IKPAB_KEYR                          
+GM108A           WHERE IKPAB_BANCA       = :IKPA2-BANCA                         
+GM108A             AND IKPAB_REB         = :IKPA2-REB                           
+GM108A             AND IKPAB_REB_TIPO    = :IKPA2-REB-TIPO                      
+GM108A             AND IKPAB_KEYR        = :IKPA2-KEYR                          
+GM108A            WITH UR                                                       
+GM108A     END-EXEC                                                             
+GM108A     EXEC SQL OPEN CUR04 END-EXEC.                                        
+GM108A     IF  SQLCODE = ZERO                                                   
+GM108A         SET CUR04-APERTO          TO TRUE                                
+GM108A     ELSE                                                                 
+GM108A         SET ERRORE-SQL            TO TRUE                                
+GM108A         MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+GM108A         MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+GM108A     END-IF.                                                              
+GM108A     EXIT.                                                                
+GM108A*----------------------------------------------------------------*        
+GM108A FUNZIONE-FETCH04 SECTION.                                                
+GM108A*----------------------------------------------------------------*        
+GM108A     EXEC SQL                                                             
+GM108A          FETCH CUR04                                                     
+GM108A          INTO :IKPAB-BANCA                                               
+GM108A             , :IKPAB-REB                                                 
+GM108A             , :IKPAB-REB-TIPO                                            
+GM108A             , :IKPAB-UID                                                 
+GM108A             , :IKPAB-OPE                                                 
+GM108A             , :IKPAB-OPE-TIPO                                            
+GM108A             , :IKPAB-KEYR                                                
+GM108A             , :IKPAB-CANALE                                              
+GM108A             , :IKPAB-PROG                                                
+GM108A             , :IKPAB-ABIL                                                
+GM108A             , :IKPAB-ABIL1                                               
+GM108A             , :IKPAB-ABIL2                                               
+GM108A             , :IKPAB-DATA-INS                                            
+GM108A             , :IKPAB-MATR-INS                                            
+GM108A             , :IKPAB-DATA-VAR                                            
+GM108A             , :IKPAB-MATR-VAR                                            
+GM108A             , :IKPAB-DATA-REV                                            
+GM108A             , :IKPAB-MATR-REV                                            
+GM108A             , :IKPA2-ABIL                                                
+GM108A             , :IKPA2-ABIL1                                               
+GM108A             , :IKPA2-ABIL2                                               
+GM108A     END-EXEC                                                             
+GM108A     EVALUATE TRUE                                                        
+GM108A         WHEN SQLCODE = ZERO                                              
+GM108A             STRING IKP0TABAB DELIMITED BY SIZE                           
+GM108A                    IKP0TABA2 DELIMITED BY SIZE                           
+GM108A                                 INTO 2DBOU-RIGA                          
+GM108A             END-STRING                                                   
+GM108A         WHEN SQLCODE = 100                                               
+GM108A             SET ERRORE-WARNING    TO TRUE                                
+GM108A         WHEN OTHER                                                       
+GM108A             SET ERRORE-SQL        TO TRUE                                
+GM108A             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+GM108A             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+GM108A     END-EVALUATE.                                                        
+GM108A     EXIT.                                                                
+GM108A*----------------------------------------------------------------*        
+GM108A FUNZIONE-CLOSE04 SECTION.                                                
+GM108A*----------------------------------------------------------------*        
+GM108A     IF  CUR04-APERTO                                                     
+GM108A         SET CUR04-CHIUSO          TO TRUE                                
+GM108A         EXEC SQL                                                         
+GM108A              CLOSE CUR04                                                 
+GM108A         END-EXEC                                                         
+GM108A         IF  SQLCODE NOT = ZERO                                           
+GM108A             SET ERRORE-SQL        TO TRUE                                
+GM108A             MOVE SQLCODE          TO 2DBRC-SQLCODE                       
+GM108A             MOVE SQLERRMC         TO 2DBRC-SQLERRMC                      
+GM108A         END-IF                                                           
+GM108A     END-IF.                                                              
+GM108A     EXIT.                                                                
+GM108A                                                                          
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11                 TO 2DBRC-CODICE                      
+                   MOVE 999             TO 2DBRC-SQLCODE                        
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET RC-BLOCCANTE        OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET RC-WARNING          OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   MOVE 03                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE       OF 2DBRC-RC                          
+                                           TO TRUE                              
+                   MOVE 99                 TO 2DBRC-CODICE                      
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE                TO SAVE-SQLCODE                      
+               SET CONNESSIONE-CHIUSA      TO TRUE                              
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE       TO SQLCODE                           
+               ELSE                                                             
+                   SET ERRORE-SQL          TO TRUE                              
+                   MOVE SQLCODE            TO 2DBRC-CNT-SQLCODE                 
+                   MOVE SQLERRMC           TO 2DBRC-CNT-SQLERRMC                
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :'         DELIMITED BY SIZE                          
+                  2DBRC-TABLE        DELIMITED BY SPACE                         
+                  '-'                DELIMITED BY SIZE                          
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE                    TO 2DBRC-SQLCODE.                    
+           EXIT.                                                                
+                                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

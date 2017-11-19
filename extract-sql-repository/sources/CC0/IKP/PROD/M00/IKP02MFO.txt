@@ -1,0 +1,358 @@
+      * 07.295 14:54        IKP  0000                                           
+      * CF7291 - INSERITA FUNZIONE DELETE05                                     
+      * 05.180 12:38        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 05.178 11:43        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 05.178 11:09        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 04.261 14:49        IKP  0000                                           
+      * RICOMPILATO                                                             
+      * 04.261 10:41        IKP  0000                                           
+      * RICOMPILATO                                                             
+      * 04.100 17:15        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 04.092 10:10        IKP  0000                                           
+      * ----------------------------------------------                          
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP02MFO.                                                    
+       AUTHOR.                                                                  
+      ******************************************************************        
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      *----------------------------------------------------------------*        
+      * NOTE ... OPERAZIONI DI AGGIORNAMENTO SU TABELLA IKPFUNZIONIOPZ *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .....................................03/2004 *        
+      *----------------------------------------------------------------*        
+      ******************************************************************        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       DATA DIVISION.                                                           
+       WORKING-STORAGE SECTION.                                                 
+       01  PGM                              PIC X(08) VALUE 'IKP02MFO'.         
+       01  SAVE-SQLCODE                     PIC S9(09) COMP.                    
+       01  MESSAGGIO                        PIC X(80) VALUE SPACE.              
+       01  IND-XXX                          PIC 9(05) COMP-3 VALUE ZERO.        
+       01  IND-XXX-BYP                      PIC 9(05) COMP-3 VALUE ZERO.        
+       01  IND-XXX-MAX                      PIC 9(05) COMP-3 VALUE 19.          
+       01  HV-CONTATORE                     PIC S9(09) COMP-3.                  
+                                                                                
+       01  IKP0RLOC                         PIC X(08) VALUE 'IKP0RLOC'.         
+           COPY IKP0CLOC.                                                       
+                                                                                
+       01  FILLER                           PIC 9(01) VALUE ZERO.               
+           88  NOT-ERRORE                             VALUE ZERO.               
+           88  ERRORE                                 VALUE 1 THRU 9.           
+           88  ERRORE-GENERICO                        VALUE 1.                  
+           88  ERRORE-WARNING                         VALUE 2.                  
+           88  ERRORE-SQL                             VALUE 3.                  
+       01  SEGNALATORI-DI-STATO.                                                
+           05  FILLER                       PIC 9(01) VALUE ZERO.               
+               88  CONNESSIONE-CHIUSA                 VALUE ZERO.               
+               88  CONNESSIONE-APERTA                 VALUE 1.                  
+       01  HOST-VARIALES-AREA.                                                  
+           05  HV-DATA-BASE                 PIC X(16).                          
+       01  DS-AREA.                                                             
+           05  DS-FUNZIONE-ERR              PIC X(50) VALUE                     
+               'FUNZIONE NON PREVISTA'.                                         
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE IKP0TAFO                                                
+           END-EXEC.                                                            
+                                                                                
+           EXEC SQL                                                             
+                INCLUDE SQLCA                                                   
+           END-EXEC.                                                            
+       LINKAGE SECTION.                                                         
+           COPY IKP0C2DB.                                                       
+      *================================================================*        
+       PROCEDURE DIVISION USING IKP02DB.                                        
+      *================================================================*        
+           PERFORM OPERAZIONI-INIZIALI                                          
+           IF  NOT-ERRORE                                                       
+               PERFORM GESTIONE-AGG-LOCALE                                      
+           END-IF.                                                              
+                                                                                
+                                                                                
+           PERFORM OPERAZIONI-FINALI.                                           
+           GOBACK.                                                              
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           SET NOT-ERRORE                TO TRUE                                
+           INITIALIZE 2DBRC.                                                    
+           MOVE 2DBIN-RIGA               TO IKP0TABFO.                          
+           MOVE 'IKPFUNZIONIOPZ'         TO 2DBRC-TABLE.                        
+                                                                                
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       GESTIONE-AGG-LOCALE SECTION.                                             
+      *----------------------------------------------------------------*        
+                                                                                
+           INITIALIZE IKP0LOC.                                                  
+                                                                                
+           MOVE 2DBIN-REMOTO     TO LOCIN-REMOTO                                
+           MOVE 2DBIN-AMBIENTE   TO LOCIN-AMBIENTE                              
+           MOVE 2DBIN-DEBUG      TO LOCIN-DEBUG                                 
+           MOVE 'X'              TO LOCIN-FUNZIONE                              
+           MOVE 2DBRC-TABLE      TO LOCIN-TABELLA                               
+                                                                                
+           CALL IKP0RLOC USING IKP0LOC.                                         
+           EVALUATE LOCRC-RC                                                    
+           WHEN '   '                                                           
+               IF LOCOU-CONNECT-YES                                             
+                  SET CONNESSIONE-APERTA TO TRUE                                
+               ELSE                                                             
+                  SET CONNESSIONE-CHIUSA TO TRUE                                
+               END-IF                                                           
+               PERFORM ELABORA-FUNZIONI-LOCALI                                  
+               IF LOCOU-GIRO-2-YES                                              
+               AND NOT-ERRORE                                                   
+               AND CONNESSIONE-APERTA                                           
+                   PERFORM FUNZIONE-RESET                                       
+                   PERFORM ELABORA-FUNZIONI-LOCALI                              
+               END-IF                                                           
+           WHEN 'ERR'                                                           
+                SET ERRORE-SQL TO TRUE                                          
+                MOVE LOCRC-SQLCODE   TO 2DBRC-CNT-SQLCODE                       
+                                        2DBRC-SQLCODE                           
+                MOVE LOCRC-SQLERRMC  TO  2DBRC-CNT-SQLERRMC                     
+                                         2DBRC-SQLERRMC                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       ELABORA-FUNZIONI-LOCALI SECTION.                                         
+      *----------------------------------------------------------------*        
+           EVALUATE 2DBIN-SQL-FUNZIONE                                          
+           WHEN 'DELETE01'                                                      
+                 PERFORM FUNZIONE-DELETE01                                      
+           WHEN 'DELETE02'                                                      
+                 PERFORM FUNZIONE-DELETE02                                      
+           WHEN 'DELETE03'                                                      
+                 PERFORM FUNZIONE-DELETE03                                      
+           WHEN 'DELETE04'                                                      
+                 PERFORM FUNZIONE-DELETE04                                      
+CF7291     WHEN 'DELETE05'                                                      
+CF7291           PERFORM FUNZIONE-DELETE05                                      
+           WHEN 'INSERT01'                                                      
+                 PERFORM FUNZIONE-INSERT01                                      
+           WHEN 'UPDATE01'                                                      
+                 PERFORM FUNZIONE-UPDATE01                                      
+           WHEN OTHER                                                           
+                 SET ERRORE-GENERICO TO TRUE                                    
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-DELETE01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DELETE                                                           
+               FROM   IKPFUNZIONIOPZ                                            
+               WHERE  IKPFO_BANCA       = :IKPFO-BANCA                          
+               AND    IKPFO_FT          = :IKPFO-FT                             
+               AND    IKPFO_CODICE      = :IKPFO-CODICE                         
+               AND    IKPFO_OPZIONE     = :IKPFO-OPZIONE                        
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-DELETE02 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DELETE                                                           
+               FROM   IKPFUNZIONIOPZ                                            
+               WHERE  IKPFO_BANCA       = :IKPFO-BANCA                          
+               AND    IKPFO_FT          = :IKPFO-FT                             
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-DELETE03 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DELETE                                                           
+               FROM   IKPFUNZIONIOPZ                                            
+               WHERE  IKPFO_BANCA  NOT LIKE :IKPFO-BANCA                        
+               AND    IKPFO_FT            = :IKPFO-FT                           
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-DELETE04 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               DELETE                                                           
+               FROM   IKPFUNZIONIOPZ                                            
+               WHERE  IKPFO_BANCA       = :IKPFO-BANCA                          
+               AND    IKPFO_FT          = :IKPFO-FT                             
+               AND    IKPFO_CODICE      = :IKPFO-CODICE                         
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+CF7291*----------------------------------------------------------------*        
+CF7291 FUNZIONE-DELETE05 SECTION.                                               
+CF7291*----------------------------------------------------------------*        
+CF7291     EXEC SQL                                                             
+CF7291         DELETE                                                           
+CF7291         FROM   IKPFUNZIONIOPZ                                            
+CF7291         WHERE  IKPFO_FT     = :IKPFO-FT                                  
+CF7291         AND    IKPFO_BANCA IN ('  ',:IKPFO-BANCA)                        
+CF7291     END-EXEC.                                                            
+CF7291     IF  SQLCODE NOT = ZERO                                               
+CF7291         SET ERRORE-SQL            TO TRUE                                
+CF7291         MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+CF7291         MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+CF7291     END-IF.                                                              
+CF7291     EXIT.                                                                
+CF7291                                                                          
+      *----------------------------------------------------------------*        
+       FUNZIONE-INSERT01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               INSERT INTO IKPFUNZIONIOPZ                                       
+                    (  IKPFO_BANCA                                              
+                    ,  IKPFO_FT                                                 
+                    ,  IKPFO_CODICE                                             
+                    ,  IKPFO_OPZIONE                                            
+                    ,  IKPFO_DESCRIZIONE                                        
+                    ,  IKPFO_STATO                                              
+                    ,  IKPFO_DATA_INS                                           
+                    ,  IKPFO_MATR_INS                                           
+                    ,  IKPFO_DATA_VAR                                           
+                    ,  IKPFO_MATR_VAR                                           
+                    ,  IKPFO_DATA_REV                                           
+                    ,  IKPFO_MATR_REV)                                          
+               VALUES                                                           
+                    ( :IKPFO-BANCA                                              
+                    , :IKPFO-FT                                                 
+                    , :IKPFO-CODICE                                             
+                    , :IKPFO-OPZIONE                                            
+                    , :IKPFO-DESCRIZIONE                                        
+                    , :IKPFO-STATO                                              
+                    , :IKPFO-DATA-INS                                           
+                    , :IKPFO-MATR-INS                                           
+                    , :IKPFO-DATA-VAR                                           
+                    , :IKPFO-MATR-VAR                                           
+                    , :IKPFO-DATA-REV                                           
+                    , :IKPFO-MATR-REV)                                          
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-UPDATE01 SECTION.                                               
+      *----------------------------------------------------------------*        
+           EXEC SQL                                                             
+               UPDATE IKPFUNZIONIOPZ                                            
+               SET    IKPFO_STATO        = :IKPFO-STATO                         
+                    , IKPFO_DESCRIZIONE  = :IKPFO-DESCRIZIONE                   
+                    , IKPFO_DATA_VAR     = :IKPFO-DATA-VAR                      
+                    , IKPFO_MATR_VAR     = :IKPFO-MATR-VAR                      
+                    , IKPFO_DATA_REV     = :IKPFO-DATA-REV                      
+                    , IKPFO_MATR_REV     = :IKPFO-MATR-REV                      
+               WHERE  IKPFO_BANCA        = :IKPFO-BANCA                         
+               AND    IKPFO_FT           = :IKPFO-FT                            
+               AND    IKPFO_CODICE       = :IKPFO-CODICE                        
+               AND    IKPFO_OPZIONE      = :IKPFO-OPZIONE                       
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = ZERO                                               
+               SET ERRORE-SQL            TO TRUE                                
+               MOVE SQLCODE              TO 2DBRC-SQLCODE                       
+               MOVE SQLERRMC             TO 2DBRC-SQLERRMC                      
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       FUNZIONE-RESET SECTION.                                                  
+      *----------------------------------------------------------------*        
+           IF  CONNESSIONE-APERTA                                               
+               MOVE SQLCODE              TO SAVE-SQLCODE                        
+               SET CONNESSIONE-CHIUSA    TO TRUE                                
+               EXEC SQL                                                         
+                    CONNECT RESET                                               
+               END-EXEC                                                         
+               IF  SQLCODE = ZERO                                               
+                   MOVE SAVE-SQLCODE     TO SQLCODE                             
+               ELSE                                                             
+                   SET ERRORE-SQL        TO TRUE                                
+                   MOVE SQLCODE          TO 2DBRC-CNT-SQLCODE                   
+                   MOVE SQLERRMC         TO 2DBRC-CNT-SQLERRMC                  
+               END-IF                                                           
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       TRATTAMENTO-SOSPESI SECTION.                                             
+      *----------------------------------------------------------------*        
+           PERFORM FUNZIONE-RESET.                                              
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       SEGNALAZIONI-SQL SECTION.                                                
+      *----------------------------------------------------------------*        
+           STRING 'ERRORE :' DELIMITED BY SIZE                                  
+                  2DBRC-TABLE DELIMITED BY SPACE                                
+                  '-' DELIMITED BY SIZE                                         
+                  2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                        
+             INTO MESSAGGIO                                                     
+           END-STRING.                                                          
+           MOVE SQLCODE                  TO 2DBRC-SQLCODE                       
+           EXIT.                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           IF  NOT ERRORE-SQL                                                   
+               PERFORM FUNZIONE-RESET                                           
+           END-IF                                                               
+           EVALUATE TRUE                                                        
+               WHEN ERRORE-GENERICO                                             
+                   MOVE 11               TO 2DBRC-CODICE                        
+                   MOVE 999              TO 2DBRC-SQLCODE                       
+                   STRING PGM   DELIMITED BY SIZE                               
+                          '-' DELIMITED BY SIZE                                 
+                          2DBIN-SQL-FUNZIONE DELIMITED BY SPACES                
+                     INTO 2DBRC-SQLERRMC                                        
+                   SET  RC-BLOCCANTE     TO TRUE                                
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+               WHEN ERRORE-WARNING                                              
+                   SET  RC-WARNING       TO TRUE                                
+                   PERFORM SEGNALAZIONI-SQL                                     
+               WHEN ERRORE-SQL                                                  
+                   SET  RC-BLOCCANTE     TO TRUE                                
+                   MOVE 99               TO 2DBRC-CODICE                        
+                   PERFORM SEGNALAZIONI-SQL                                     
+                   PERFORM TRATTAMENTO-SOSPESI                                  
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+      ****************************************************************          
+      *  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  FINE  *          
+      ****************************************************************          

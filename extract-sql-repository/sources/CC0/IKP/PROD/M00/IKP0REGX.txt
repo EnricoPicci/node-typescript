@@ -1,0 +1,128 @@
+      * 07.327 21:01        IKP  0000                                           
+      * AAAAAAAAAAAAAAAAAAAAAAAAA                                               
+      * 07.278 17:43        IKP  0000                                           
+      * RICOMPILAZIONE                                                          
+      * 07.071 13:51        IKP  0000                                           
+      * CF7066 - MODIFICA GESTIONE ABILITAZIONI PER CANALE                      
+      * 05.355 09:57        IKP 0000                                            
+      * PASSAGGIO IN LAVORO                                                     
+      * ---------------------------------------                                 
+       IDENTIFICATION DIVISION.                                                 
+      *----------------------------------------------------------------*        
+       PROGRAM-ID. IKP0REGX.                                                    
+      *----------------------------------------------------------------*        
+      * PROGETTO ................................................. IKP *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................... BATCH *        
+      *----------------------------------------------------------------*        
+      * ROUTINE RECUPERO TORRE PER UTILIZZO PROCEDURA ANAGRAFE NEW:    *        
+      * EGX/EGW OPPURE OLD: AFA/UAN                                    *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. DICEMBRE 2005 *        
+      * AUTORE ..........................................A CORSO - CWS *        
+      *----------------------------------------------------------------*        
+       ENVIRONMENT DIVISION.                                                    
+       CONFIGURATION SECTION.                                                   
+       SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+      *SOURCE-COMPUTER.                                                         
+       SPECIAL-NAMES. DECIMAL-POINT IS COMMA.                                   
+       INPUT-OUTPUT SECTION.                                                    
+       FILE-CONTROL.                                                            
+       DATA DIVISION.                                                           
+       FILE SECTION.                                                            
+      *----------------------------------------------------------------*        
+       WORKING-STORAGE SECTION.                                                 
+      *----------------------------------------------------------------*        
+       01  PROGRAMMA.                                                           
+           03  FILLER                      PIC  X(05) VALUE '---->'.            
+           03  PGM                         PIC  X(08) VALUE 'IKP0REGX'.         
+           03  FILLER                      PIC  X(05) VALUE '<----'.            
+                                                                                
+       77  CODICE-ERR                      PIC  9(05).                          
+       77  COMO-LEN                        PIC  9(04) VALUE ZEROES.             
+      *----------------------------------------------------------------*        
+       01  SISBRCR2                        PIC  X(08) VALUE 'SISBRCR2'.         
+           COPY SISBRCR2.                                                       
+                                                                                
+       01  IKP0RDBG                        PIC  X(08) VALUE 'IKP0RDBG'.         
+           COPY IKP0CDBG.                                                       
+      *----------------------------------------------------------------*        
+       LINKAGE SECTION.                                                         
+      *----------------------------------------------------------------*        
+       COPY IKP0CEGX.                                                           
+                                                                                
+      *----------------------------------------------------------------*        
+       PROCEDURE DIVISION USING IKP0EGX.                                        
+      *----------------------------------------------------------------*        
+       DECLARATIVES.                                                            
+       CBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+           MOVE ZEROES                     TO DBGIN-LEN.                        
+           MOVE EGXIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE ' '                        TO DBGIN-DEBUG.                      
+           MOVE EGXIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE EGXIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE PGM                        TO DBGIN-PGM.                        
+           MOVE DEBUG-NAME                 TO DBGIN-NAME.                       
+           CALL IKP0RDBG USING IKP0DBG.                                         
+           EXIT.                                                                
+       END DECLARATIVES.                                                        
+                                                                                
+      *----------------------------------------------------------------*        
+       IKP0REGX-INIZIO.                                                         
+      *----------------------------------------------------------------*        
+           PERFORM OPERAZIONI-INIZIALI.                                         
+           PERFORM LETTURA-TORRE-AG.                                            
+           PERFORM LETTURA-TORRE-TPC.                                           
+CF7066     PERFORM LETTURA-TORRE-AB.                                            
+           PERFORM OPERAZIONI-FINALI.                                           
+                                                                                
+      *----------------------------------------------------------------*        
+       IKP0REGX-FINE.                                                           
+      *----------------------------------------------------------------*        
+           GOBACK.                                                              
+                                                                                
+      *----------------------------------------------------------------*        
+       OPERAZIONI-INIZIALI SECTION.                                             
+      *----------------------------------------------------------------*        
+           INITIALIZE EGXRC EGXOU.                                              
+           CALL SISBRCR2              USING CODICI-CASSA.                       
+       EX-OPERAZIONI-INIZIALI.                                                  
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-TORRE-AG SECTION.                                                
+      *----------------------------------------------------------------*        
+           SET EGXOU-FLAG-NEW         TO TRUE.                                  
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       LETTURA-TORRE-TPC SECTION.                                               
+      *----------------------------------------------------------------*        
+           SET EGXOU-TPC-NEW          TO TRUE.                                  
+           EXIT.                                                                
+                                                                                
+CF7066*----------------------------------------------------------------*        
+CF7066 LETTURA-TORRE-AB SECTION.                                                
+CF7066*----------------------------------------------------------------*        
+CF7066     SET EGXOU-AB-NEW           TO TRUE.                                  
+CF7066     EXIT.                                                                
+CF7066                                                                          
+      *----------------------------------------------------------------*        
+       OPERAZIONI-FINALI SECTION.                                               
+      *----------------------------------------------------------------*        
+           CONTINUE.                                                            
+       EX-OPERAZIONI-FINALI.                                                    
+           EXIT.                                                                
+                                                                                
+      *----------------------------------------------------------------*        
+       CALL-IKP0RDBG SECTION.                                                   
+      *----------------------------------------------------------------*        
+           MOVE EGXIN-DEBUG                TO DBGIN-DEBUG.                      
+           MOVE EGXIN-AMBIENTE             TO DBGIN-AMBIENTE.                   
+           MOVE EGXIN-MATRICOLA            TO DBGIN-MATRICOLA.                  
+           MOVE EGXIN-CODOPER              TO DBGIN-CODOPER.                    
+           MOVE COMO-LEN                   TO DBGIN-LEN.                        
+           MOVE PGM                        TO DBGIN-PGM.                        
+           CALL IKP0RDBG USING IKP0DBG.                                         
+       EX-CALL-IKP0RDBG.                                                        
+           EXIT.                                                                

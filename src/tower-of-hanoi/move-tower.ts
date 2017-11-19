@@ -6,7 +6,8 @@ export interface Disk {
     size: number
 }
 
-export function moveTower(disk: Disk, source: Array<Disk>, dest: Array<Disk>, spare: Array<Disk>, iterations?: number) {
+export function moveTower(source: Array<Disk>, dest: Array<Disk>, spare: Array<Disk>, startingFromDisk?: Disk, iterations?: number) {
+    let disk = startingFromDisk ? startingFromDisk : source[0];
     let iter = iterations ? iterations : 0;
 
     if (disk.size == 0) {
@@ -15,10 +16,10 @@ export function moveTower(disk: Disk, source: Array<Disk>, dest: Array<Disk>, sp
     } else {
         const indexOfDisk = source.indexOf(disk);
         const diskAbove = source[indexOfDisk + 1];
-        iter = moveTower(diskAbove, source, spare, dest, iter);
+        iter = moveTower(source, spare, dest, diskAbove, iter);
         moveDiskFromSourceToDest(source, dest);
         iter++;
-        iter = moveTower(diskAbove, spare, dest, source, iter);
+        iter = moveTower(spare, dest, source, diskAbove, iter);
     }
     return iter;
 }

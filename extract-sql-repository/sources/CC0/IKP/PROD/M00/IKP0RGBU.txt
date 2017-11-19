@@ -1,0 +1,804 @@
+      * 16.068 14:15 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * xxxxxxxxxxxxxxxxxxxx                                                    
+      * 16.056 15:49 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * inserito test per busta  95956219 - ferrari claudio                     
+      * 14.267 11:50 IKP   C300014 - Graniti Giuseppe (USUPD090)                
+      * ------------------------------------------------------                  
+      * 14.267 11:34 IKP   C300014 - Graniti Giuseppe (USUPD090)                
+      * ----------------------------------------------------                    
+      * 13.140 13:44 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto matricola graniti-                                             
+      * 13.092 22:21 IKP   US01101 - Ligozzi Massimo (USUPD070)                 
+      * GESTIONE BUSTA USTWE                                                    
+      * 12.333 17:47 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM12BR - -----------------                                              
+      * 12.332 15:52 IKP   US01651 - Maldonado Pelaez Ger (USUPD090)            
+      * GM12BR - PER BUSTA FITTIZIA VALORIZZA ANCHE HRID                        
+      * 11.238 09:52 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * .................................                                       
+      * 11.164 19:39 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -----------------------------------                                     
+      * 11.094 16:48 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * ............................                                            
+      * 11.083 14:56 IKP   US01437 - Cherubini Alessandra (USUPD090)            
+      * aggiunto matricola temporanea ciampitti per 4eyes                       
+      * 11.063 22:27 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * -----------------------------------------                               
+      * 11.004 19:10 IKP   US01101 - Ligozzi Massimo (USUPD090)                 
+      * ----------------------------------------                                
+      * 10.259 22:24        IKP  0000 US01101                                   
+      * TEST PER UXXXXXXXXXXX                                                   
+      * 09.345 09:43        IKP  0000 Y994052                                   
+      * compilazione                                                            
+      * 09.345 09:21        IKP  0000 Y994052                                   
+      * compilazione                                                            
+      * 09.211 16:25        IKP  0000 US01101                                   
+      * ------------------------------------                                    
+      * 09.013 14:06        IKP  0000                                           
+      * ----------------------------------------                                
+      * 08.325 14:07        IKP  0000                                           
+      * compilazione                                                            
+      * 08.294 09:23        IKP  0000                                           
+      * -----------------------------------                                     
+      * 08.219 18:17        IKP  0000                                           
+      * ERR-GECKMBUS ______________.                                            
+      * 08.218 21:08        IKP  0000                                           
+      * MOVE 'BN'               TO CBUS-TIPO                                    
+      * 08.196 16:10        IKP  0000                                           
+      * compilazione                                                            
+      * 08.185 14:28        IKP  0000                                           
+      * sostituita int0io03 con ikp02%bu                                        
+      * 08.184 18:11        IKP  0000                                           
+      * messo copy IKP0CGBU                                                     
+      * 08.158 16:40        IKP  0000                                           
+      * versione con call routine GECKMBUS                                      
+      * 08.131 14:15        IKP  0000                                           
+      * .---------------------------------                                      
+       ID DIVISION.                                                             
+       PROGRAM-ID. IKP0RGBU.                                                    
+      ******************************************************************        
+      * PROGETTO ................................................. ELB *        
+      * SOTTOSISTEMA ............................................ HOST *        
+      * TIPO DI ELABORAZIONE ................................. ROUTINE *        
+      *----------------------------------------------------------------*        
+      * NOTE .............. VERIFICA E ALLOCA BUSTA                    *        
+      *----------------------------------------------------------------*        
+      * DATA DI CREAZIONE .............................. MAGGIO   2003 *        
+      * DA PARTE DI ....................................... USI        *        
+      * ULTIMA MODIFICA ................................ MAGGIO   2003 *        
+      * DA PARTE DI .................................... M.LIGOZZI     *        
+      ******************************************************************        
+       ENVIRONMENT  DIVISION.                                                   
+       CONFIGURATION  SECTION.                                                  
+      *SOURCE-COMPUTER. IBM-370 WITH DEBUGGING MODE.                            
+       OBJECT-COMPUTER. IBM-370.                                                
+       SPECIAL-NAMES.                                                           
+           DECIMAL-POINT IS COMMA.                                              
+       INPUT-OUTPUT SECTION.                                                    
+       DATA  DIVISION.                                                          
+                                                                                
+      *-----------------------------------------------------------------        
+       WORKING-STORAGE SECTION.                                                 
+      *-----------------------------------------------------------------        
+       77  PGM                         PIC X(11)  VALUE '*IKP0RGBU*'.           
+      *-----------------------------------------------------------------        
+       77  SKP                         PIC X(07)  VALUE '>>>>>>'.               
+       77  GECA-CONN-SAVE              PIC X(16)  VALUE SPACES.                 
+       01  GECA-CONN                   PIC X(16)  VALUE SPACES.                 
+       01  LOCATION                    PIC X(16)  VALUE SPACES.                 
+       01  CURRENT-SERVER              PIC X(16)  VALUE SPACES.                 
+       01  DATA-ODIERNA                PIC X(10)  VALUE SPACES.                 
+       01  BUSTA-8                     PIC 9(08)  VALUE 0.                      
+       01  BUSTA-7                     PIC 9(07)  VALUE 0.                      
+       01  SOMMA-BUSTE                 PIC 9(08)  VALUE 0.                      
+       01  CONTATORE                   PIC S9(05) COMP-3.                       
+       01  OK-N                        PIC X(01)  VALUE 'N'.                    
+       01  SELECT02                    PIC X(08)  VALUE 'SELECT02'.             
+       01  SELECT01                    PIC X(08)  VALUE 'SELECT01'.             
+       01  UPDATE01                    PIC X(08)  VALUE 'UPDATE01'.             
+      *------------------------------------------------------------- *          
+       01  GECKMBUS            PIC X(08)   VALUE   'GECKMBUS'.                  
+           COPY GECKCBUS.                                                       
+      *------------------------------------------------------------- *          
+       01  SISBRCR2                    PIC X(08)  VALUE 'SISBRCR2'.             
+           COPY SISBRCR2.                                                       
+       01  NUM-PAN                     PIC 9(12).                               
+       01  COM-PAN                     REDEFINES NUM-PAN.                       
+           03  COM-PAN-99999           PIC 99999.                               
+           03  COM-PAN-BUSTA           PIC 9999999.                             
+TS8185*01  AREA-PASSAGGIO.                                                      
+TS8185*    COPY IKC0CYDB.                                                       
+       01  SW-BUSTA                    PIC 9.                                   
+           88  BUSTA-NEW                     VALUE 1.                           
+           88  BUSTA-OLD                     VALUE 2.                           
+       01  BUSTA-FLAG                  PIC X VALUE 'N'.                         
+           88  BUSTA-ALLOCATA                VALUE 'A'.                         
+           88  BUSTA-VALIDA                  VALUE 'V'.                         
+           88  BUSTA-NON-VALIDA              VALUE 'N'.                         
+           88  BUSTA-NON-ALLOCATA            VALUE 'N'.                         
+           88  BUSTA-UTILIZZATA              VALUE 'U'.                         
+           88  BUSTA-TANTE-VOLTE             VALUE '9'.                         
+TS8185*01  INT0IO03                    PIC X(08)  VALUE 'INT0IO03'.             
+TS8185*    COPY INT0TA03.                                                       
+TS8185 01  IKP02IBU                    PIC X(08)  VALUE 'IKP02IBU'.             
+TS8185 01  IKP02MBU                    PIC X(08)  VALUE 'IKP02MBU'.             
+TS8185     COPY IKP0TABU.                                                       
+TS8185     COPY IKP0C2DB.                                                       
+      *-----------------------------------------------------------------        
+       77  ERR-NBUSTA   PIC X(92) VALUE                                         
+           'P BUSTA NON VALORIZZATA'.                                           
+       77  ERR-AZIONE   PIC X(92) VALUE                                         
+           'P AZIONE NON VALORIZZATA'.                                          
+       77  ERR-MATR     PIC X(92) VALUE                                         
+           'P MATR   NON VALORIZZATA'.                                          
+       77  ERR-DIP      PIC X(92) VALUE                                         
+           'P DIP    NON VALORIZZATA'.                                          
+       77  ERR-ABI      PIC X(92) VALUE                                         
+           'P ABI    NON VALORIZZATO'.                                          
+       77  ERR-TORRE    PIC X(92) VALUE                                         
+           'P TORRE  NON VALORIZZATA'.                                          
+       77  ERR-BUSTANOTOK-X-PROC  PIC X(92) VALUE                               
+           'W BUSTA NON VALIDA PER QUESTA PROCEDURA'.                           
+       77  ERR-BUSTADIALTRAMATR   PIC X(92) VALUE                               
+           'W BUSTA IN CARICO AD ALTRA MATRICOLA   '.                           
+       77  ERR-BUSTANOTOK         PIC X(92) VALUE                               
+           'W BUSTA NON VALIDA                     '.                           
+       77  ERR-DB2CONN  PIC X(92) VALUE                                         
+           'BDERRORE CONNECT                  '.                                
+TS8185*77  ERR-INT0IO03 PIC X(92) VALUE                                         
+TS8185*    'BDERRORE SU INT0UTENTIPOTEN       '.                                
+TS8185 77  ERR-IKP02MBU PIC X(92) VALUE                                         
+TS8185     'BDERRORE MODIFICA IKPBUSTE        '.                                
+TS8185 77  ERR-IKP02IBU PIC X(92) VALUE                                         
+TS8185     'BDERRORE LETTURA  IKPBUSTE        '.                                
+       77  ERR-DB2REMOTO PIC X(92) VALUE                                        
+           'BDERRORE CONNESSIONE              '.                                
+       77  ERR-DB2RESET PIC X(92) VALUE                                         
+           'BDERRORE RESET                    '.                                
+       77  ERR-DB2      PIC X(92) VALUE                                         
+           'BDERRORE DB2 GENERICO             '.                                
+       77  ERR-GECADB2  PIC X(92) VALUE                                         
+           'BDERRORE DB2 SU GECACART2000      '.                                
+       77  ERR-GECKMBUS PIC X(92) VALUE                                         
+           'BDERRORE SU GECKMBUS              '.                                
+      /-----------------------------------------------------------------        
+       01  SQLCODE-COBOL             PIC  -(06)9(03).                           
+      *-----------------------------------------------------------------        
+           EXEC SQL INCLUDE SQLCA    END-EXEC.                                  
+           EXEC SQL INCLUDE GECATA41 END-EXEC                                   
+                                                                                
+                                                                                
+      /-----------------------------------------------------------------        
+       LINKAGE SECTION.                                                         
+      *-----------------------------------------------------------------        
+           COPY IKP0CGBU.                                                       
+                                                                                
+      /-----------------------------------------------------------------        
+       PROCEDURE DIVISION USING IKP0GBU.                                        
+      *-----------------------------------------------------------------        
+      DDECLARATIVES.                                                            
+      DCBL-TRACE SECTION. USE FOR DEBUGGING ON ALL PROCEDURES.                  
+      D    DISPLAY DEBUG-LINE ' ' PGM DEBUG-NAME.                               
+      D    EXIT.                                                                
+      DEND DECLARATIVES.                                                        
+      *-----------------------------------------------------------------        
+       IKP0RGBU-INIZIO.                                                         
+      *-----------------------------------------------------------------        
+           PERFORM CONTROLLI-INIZIALI.                                          
+           DISPLAY GBUIN-NBUSTA                                                 
+           '-'     GBUIN-DIP                                                    
+           '-'     GBUIN-MATR                                                   
+           '-'     GBUIN-TORRE                                                  
+           '-'     GBUIN-ABI                                                    
+                                                                                
+TS8325     IF CURRENT-SERVER = 'LOS2D0'                                         
+              MOVE '123456789' TO GBUOU-CRID                                    
+              MOVE 'CAMPODA40' TO GBUOU-HRID                                    
+           ELSE                                                                 
+              IF                                                                
+              (   GBUIN-NBUSTA =  99999999                                      
+              OR  GBUIN-NBUSTA =  99999998                                      
+              OR  GBUIN-NBUSTA =  88888888)                                     
+              AND                                                               
+              (   GBUIN-MATR-USI = '0804PROF'                                   
+              OR  GBUIN-MATR-USI = 'US01101'                                    
+              OR  GBUIN-MATR-USI = 'US01437'                                    
+              OR  GBUIN-MATR-USI = 'US00072'                                    
+ca1083*       OR  GBUIN-MATR-USI = 'UR00823'                                    
+              OR  GBUIN-MATR-USI = 'US01651'                                    
+      *       OR  GBUIN-MATR-USI = 'TA00097'                                    
+TS9345        OR  GBUIN-MATR-USI(1:2) = 'TA'                                    
+              OR  GBUIN-MATR-USI = 'US00758'                                    
+              OR  GBUIN-FT       = 'USTWE'                                      
+GG4267        OR  CODICE-AMBITO  = 'Q0'                                         
+              OR  AMBIENTE       = 'S'      )                                   
+                  MOVE X'92279481E756331FCA2EAEB4219F7A39' TO GBUOU-HPIN        
+GM12BR            MOVE '7C222FB2927D828AF22F592134E8932480637C0D'               
+GM12BR                                                     TO GBUOU-HRID        
+GM12BR            MOVE '12345678'                          TO GBUOU-CRID        
+                  IF  TORRE = 'BA'                                              
+                      MOVE GBUIN-NBUSTA TO GBUOU-HPIN                           
+                  END-IF                                                        
+              ELSE                                                              
+                  IF  TORRE = 'BA'                                              
+                      MOVE GBUIN-NBUSTA TO GBUOU-HPIN                           
+                  END-IF                                                        
+MR1185            IF RC-OK OF IKP0GBU                                           
+                  AND TORRE NOT = 'BA'                                          
+                      EVALUATE TRUE                                             
+                       WHEN GBUIN-VERIFICA                                      
+ok                          PERFORM VERIFICA-BUSTA                              
+                            PERFORM SCRIVI-ERR-VERIFICA                         
+                       WHEN GBUIN-ALLOCA                                        
+                            PERFORM ALLOCA-BUSTA                                
+                       WHEN GBUIN-ALLOCA-GECA                                   
+                            PERFORM AGGIORNA-BUSTA-GECA                         
+                       WHEN GBUIN-TUTTO                                         
+ok                          PERFORM VERIFICA-BUSTA                              
+                            PERFORM SCRIVI-ERR-VERIFICA                         
+                            IF  RC-OK OF IKP0GBU                                
+                                PERFORM ALLOCA-BUSTA                            
+                            END-IF                                              
+                       END-EVALUATE                                             
+                   END-IF                                                       
+              END-IF                                                            
+           END-IF.                                                              
+                                                                                
+           PERFORM CONTROLLI-FINALI.                                            
+      *-----------------------------------------------------------------        
+       IKP0RGBU-FINE.                                                           
+      *-----------------------------------------------------------------        
+           GOBACK.                                                              
+      *-----------------------------------------------------------------        
+       VERIFICA-BUSTA     SECTION .                                             
+      *-----------------------------------------------------------------        
+      * stabilisco quante buste ci sono                                         
+           PERFORM CONTROLLI-GECA                                               
+      * se 0 busta non valida                                                   
+      * se 1 cerco senza torre                                                  
+      * se 2 cerco  con  torre                                                  
+      * se 3 cerco  con  torre                                                  
+           IF RC-OK OF IKP0GBU                                                  
+               EVALUATE SOMMA-BUSTE                                             
+               WHEN 2                                                           
+               WHEN 3                                                           
+                  SET BUSTA-NEW   TO TRUE                                       
+                  DISPLAY 'BUSTA NEW'                                           
+                  PERFORM CONTROLLI-INT0                                        
+               WHEN 1                                                           
+                  SET BUSTA-OLD   TO TRUE                                       
+                  DISPLAY 'BUSTA OLD'                                           
+                  PERFORM CONTROLLI-INT0                                        
+               WHEN 0                                                           
+                  SET BUSTA-NON-VALIDA TO TRUE                                  
+               END-EVALUATE                                                     
+           END-IF                                                               
+           IF RC-OK OF IKP0GBU                                                  
+TS8185*       IF INT0-UT-TOT-EPIN = SPACES                                      
+TS8185*       OR INT0-UT-TOT-EPIN = LOW-VALUE                                   
+TS8185        IF IKPBU-TOT-EPIN   = SPACES                                      
+TS8185        OR IKPBU-TOT-EPIN   = LOW-VALUE                                   
+                 SET BUSTA-NON-VALIDA TO TRUE                                   
+                 DISPLAY '************  BUSTA NON VALIDA :' GBUIN-NBUSTA        
+              END-IF                                                            
+           END-IF                                                               
+           IF RC-OK OF IKP0GBU                                                  
+               IF BUSTA-VALIDA                                                  
+                   PERFORM LEGGI-BUSTA-GECA                                     
+      *            IF TORRE = 'U3'                                              
+      *               IF GBUIN-MATR-USI = 'US01101'                             
+      *               OR GBUIN-MATR-USI = 'US00758'                             
+      *                  MOVE CBUSO-MATRICOLA  TO GBUIN-MATR                    
+      *               END-IF                                                    
+      *            END-IF                                                       
+      *            IF TORRE = 'F0'                                              
+      *               IF GBUIN-MATR-USI = 'US01101'                             
+      *               OR GBUIN-MATR-USI = 'US00758'                             
+      *                  MOVE CBUSO-MATRICOLA  TO GBUIN-MATR                    
+      *               END-IF                                                    
+      *            END-IF                                                       
+      *            IF CBUSO-RC         NOT = 0                                  
+      *            OR CBUSO-MATRICOLA  NOT = GBUIN-MATR                         
+      *                DISPLAY '* LEGGI BUSTA GECA '                            
+      *                DISPLAY '* DOPO CHIAMATA PER BUSTA '                     
+      *                GBUIN-NBUSTA                                             
+      *                DISPLAY '* HA DATO ESITO NEGATIVO '                      
+      *                CBUSO-RC-DESCR                                           
+      *                DISPLAY '* CBUSO-MATRICOLA...'CBUSO-MATRICOLA            
+      *                DISPLAY '* CBUSO-DIPENDENZA..'CBUSO-DIPENDENZA           
+      *                DISPLAY '***************************************'        
+      *                DISPLAY '* GBUIN-MATR........'GBUIN-MATR                 
+      *                DISPLAY '* GBUIN-DIP.........'GBUIN-DIP                  
+      *                SET BUSTA-NON-VALIDA TO TRUE                             
+      *                MOVE 7 TO SOMMA-BUSTE                                    
+      *                MOVE 181 TO GBURC-IKP                                    
+      *            END-IF                                                       
+               END-IF                                                           
+           END-IF.                                                              
+       END-VERIFICA-BUSTA.                                                      
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+       ALLOCA-BUSTA     SECTION.                                                
+      *-----------------------------------------------------------------        
+           PERFORM ALLOCA-INT0.                                                 
+           IF RC-OK OF IKP0GBU                                                  
+              PERFORM AGGIORNA-BUSTA-GECA                                       
+           END-IF                                                               
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+      *AGGIORNA-BUSTA-GECA SECTION.                                             
+      *-----------------------------------------------------------------        
+      *    MOVE GBUIN-NBUSTA TO CBUSI-BUSTA.                                    
+      *    MOVE 'UP'         TO CBUSI-FUNZIONE.                                 
+      *    MOVE GBUIN-DIP    TO CBUSO-DIPENDENZA                                
+      *    CALL GECARBUS USING GECACBUS                                         
+      *    IF  CBUSO-RC         NOT = 0                                         
+      *        DISPLAY '* AGGIORNAMENTO BUSTA GECA '                            
+      *        DISPLAY '* DOPO CHIAMATA PER BUSTA  ' GBUIN-NBUSTA               
+      *        DISPLAY '* HA DATO ESITO NEGATIVO   ' CBUSO-RC-DESCR             
+      *        MOVE ERR-GECARBUS TO GBUOU-RETURN-CODE                           
+      *        MOVE 182 TO GBURC-IKP                                            
+      *    END-IF                                                               
+      *    EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       ALLOCA-INT0      SECTION.                                                
+      *-----------------------------------------------------------------        
+TS8185*    INITIALIZE AREA-PASSAGGIO.                                           
+TS8185*    INITIALIZE INT0TAB03.                                                
+TS8185*    MOVE  UPDATE01                   TO DB-SQL-FUNZIONE                  
+TS8185*    EVALUATE GBUIN-ABI                                                   
+TS8185*    WHEN  02008                                                          
+TS8185*        MOVE 'LOC0D0'                TO DB-LOCATION-MI                   
+TS8185*    WHEN  03226                                                          
+TS8185*        MOVE 'SH1PROD'               TO DB-LOCATION-MI                   
+TS8185*    WHEN  03223                                                          
+TS8185*        MOVE 'SH1PROD'               TO DB-LOCATION-MI                   
+TS8185*    WHEN  OTHER                                                          
+TS8185*        MOVE CURRENT-SERVER          TO DB-LOCATION-MI                   
+TS8185*    END-EVALUATE                                                         
+TS8185*    MOVE DATA-ODIERNA                TO INT0-UT-TOT-DT-INS               
+TS8185*    MOVE GBUIN-DIP                   TO INT0-UT-TOT-DIP                  
+TS8185*    MOVE GBUIN-MATR                  TO INT0-UT-TOT-MATR                 
+TS8185*    MOVE GBUIN-ABI                   TO INT0-UT-TOT-ABI                  
+TS8185*    MOVE GBUIN-NBUSTA                TO INT0-UT-TOT-BUSTA                
+TS8185*    MOVE GBUIN-TORRE                 TO INT0-TORRE                       
+TS8185*    MOVE SPACE                       TO INT0-UT-TOT-FLAG                 
+TS8185*    MOVE INT0TAB03                   TO RECORD-IODB2                     
+TS8185*    CALL INT0IO03   USING AREA-PASSAGGIO.                                
+TS8185*    IF DB-SQLCODE EQUAL 000                                              
+TS8185*       EVALUATE SV-SQLCODE                                               
+TS8185*       WHEN 000                                                          
+TS8185*           SET BUSTA-ALLOCATA TO TRUE                                    
+TS8185*       WHEN 100                                                          
+TS8185*           MOVE ERR-BUSTANOTOK TO GBUOU-RETURN-CODE                      
+TS8185*       WHEN OTHER                                                        
+TS8185*           DISPLAY PGM ' UPDATE01 - INT0TA03 '                           
+TS8185*           DISPLAY PGM ' DB-SQLCODE......... ' DB-SQLCODE                
+TS8185*           DISPLAY PGM ' SV-SQLCODE......... ' SV-SQLCODE                
+TS8185*           MOVE ERR-INT0IO03 TO GBUOU-RETURN-CODE                        
+TS8185*           MOVE 183 TO GBURC-IKP                                         
+TS8185*       END-EVALUATE                                                      
+TS8185*    ELSE                                                                 
+TS8185*       DISPLAY PGM ' UPDATE01 - INT0TA03 '                               
+TS8185*       DISPLAY PGM ' DB-SQLCODE......... ' DB-SQLCODE                    
+TS8185*       DISPLAY PGM ' SV-SQLCODE......... ' SV-SQLCODE                    
+TS8185*       MOVE ERR-DB2REMOTO TO GBUOU-RETURN-CODE                           
+TS8185*       MOVE 183 TO GBURC-IKP                                             
+TS8185*    END-IF                                                               
+TS8185     INITIALIZE 2DBRC IKP0TABBU.                                          
+TS8185     SET 2DBIN-BU-UPDATE01           TO TRUE.                             
+TS8185     MOVE DATA-ODIERNA                TO IKPBU-TOT-DT-INS                 
+TS8185     MOVE GBUIN-DIP                   TO IKPBU-TOT-DIP                    
+TS8185     MOVE GBUIN-MATR                  TO IKPBU-TOT-MATR                   
+TS8185     MOVE GBUIN-ABI                   TO IKPBu-TOT-ABI                    
+TS8185     MOVE GBUIN-NBUSTA                TO IKPBU-TOT-BUSTA                  
+TS8185     MOVE GBUIN-TORRE                 TO IKPBU-TORRE                      
+TS8185     MOVE OK-N                        TO 2DBIN-REMOTO                     
+TS8185     MOVE SPACE                       TO IKPBU-TOT-FLAG                   
+TS8185     MOVE IKP0TABBU                   TO 2DBIN-RIGA.                      
+TS8185     CALL IKP02MBU USING IKP02DB.                                         
+TS8185     EVALUATE 2DBRC-SQLCODE                                               
+TS8185         WHEN 000                                                         
+TS8185            SET BUSTA-ALLOCATA TO TRUE                                    
+TS8185         WHEN 100                                                         
+TS8185                MOVE ERR-BUSTANOTOK TO GBUOU-RETURN-CODE                  
+TS8185         WHEN OTHER                                                       
+TS8185            DISPLAY PGM ' UPDATE01 - IKP0TABU '                           
+TS8185            DISPLAY PGM ' 2DBRC-SQLCODE...... ' 2DBRC-SQLCODE             
+TS8185            MOVE ERR-IKP02MBU TO GBUOU-RETURN-CODE                        
+TS8185            MOVE 183 TO GBURC-IKP                                         
+TS8185     END-EVALUATE.                                                        
+           EXIT.                                                                
+      *-----------------------------------------------------------------        
+       LEGGI-BUSTA-GECA SECTION.                                                
+      *-----------------------------------------------------------------        
+            INITIALIZE GECKCBUS.                                                
+            MOVE 'I'                TO CBUS-TIPOACC.                            
+            MOVE 'IB'               TO CBUS-TIPORIC.                            
+            MOVE CODICE-BANCA       TO CBUS-CODIST.                             
+            MOVE CODICE-ABI         TO CBUS-ABI.                                
+            MOVE GBUIN-NBUSTA       TO CBUS-N-BUSTA                             
+            MOVE GBUIN-MATR         TO CBUS-RIC-MATR.                           
+            MOVE GBUIN-DIP          TO CBUS-RIC-MATR-DIP.                       
+                                                                                
+            CALL GECKMBUS       USING GECKCBUS.                                 
+            EVALUATE CBUS-RC                                                    
+               WHEN ' '                                                         
+                  CONTINUE                                                      
+               WHEN OTHER                                                       
+                  SET BUSTA-NON-VALIDA TO TRUE                                  
+                  MOVE ERR-GECKMBUS TO GBUOU-RETURN-CODE                        
+                  MOVE 7 TO SOMMA-BUSTE                                         
+                  MOVE 181 TO GBURC-IKP                                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       AGGIORNA-BUSTA-GECA seCTION.                                             
+      *-----------------------------------------------------------------        
+            INITIALIZE GECKCBUS.                                                
+            MOVE 'U'                TO CBUS-TIPOACC.                            
+            MOVE 'AS'               TO CBUS-TIPORIC.                            
+            MOVE 'BN'               TO CBUS-TIPO                                
+            MOVE CODICE-BANCA       TO CBUS-CODIST.                             
+            MOVE CODICE-ABI         TO CBUS-ABI.                                
+            MOVE GBUIN-NBUSTA       TO CBUS-N-BUSTA                             
+            MOVE GBUIN-MATR         TO CBUS-RIC-MATR.                           
+            MOVE GBUIN-DIP          TO CBUS-RIC-MATR-DIP.                       
+                                                                                
+            CALL GECKMBUS       USING GECKCBUS.                                 
+            EVALUATE CBUS-RC                                                    
+               WHEN ' '                                                         
+                  CONTINUE                                                      
+               WHEN OTHER                                                       
+                  SET BUSTA-NON-VALIDA TO TRUE                                  
+                  MOVE ERR-GECKMBUS TO GBUOU-RETURN-CODE                        
+                  MOVE 7 TO SOMMA-BUSTE                                         
+                  MOVE 181 TO GBURC-IKP                                         
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-GECA SECTION.                                                  
+      *-----------------------------------------------------------------        
+           IF GBUIN-ABI = 9999                                                  
+           AND AMBIENTE = 'P'                                                   
+              MOVE ERR-GECKMBUS TO GBUOU-RETURN-CODE                            
+              MOVE 99  TO GBURC-IKP                                             
+      *       MOVE 0 TO COM-PAN-99999                                           
+      *                 COM-PAN-BUSTA                                           
+      *                 NUM-PAN                                                 
+      *                 SOMMA-BUSTE                                             
+      *       MOVE 99999 TO COM-PAN-99999                                       
+      *       MOVE GBUIN-NBUSTA TO BUSTA-8                                      
+      *       COMPUTE BUSTA-7 = BUSTA-8 / 10                                    
+      *       MOVE BUSTA-7 TO COM-PAN-BUSTA                                     
+      *       COMPUTE NUM-PAN = 999990000000 + BUSTA-7                          
+      *       DISPLAY COM-PAN-BUSTA                                             
+      * IN BANCA                                                                
+      *       PERFORM SELECT-GECA                                               
+      *       IF  RC-OK OF IKP0GBU                                              
+      *           IF CONTATORE > 0                                              
+      *              DISPLAY 'TROVATA SU ' CURRENT-SERVER                       
+      *              MOVE CURRENT-SERVER TO GECA-CONN-SAVE                      
+      *              ADD 1 TO SOMMA-BUSTE                                       
+      *           END-IF                                                        
+      *           EVALUATE CURRENT-SERVER                                       
+      *           WHEN 'S0PROD'                                                 
+      *               MOVE 'LOC0D0' TO GECA-CONN                                
+      *           WHEN 'LOC0D0'                                                 
+      *               MOVE 'S0PROD' TO GECA-CONN                                
+      *           END-EVALUATE                                                  
+      *           PERFORM SU-ALTRE                                              
+      *       END-IF                                                            
+      *       IF  RC-OK OF IKP0GBU                                              
+      *           IF SOMMA-BUSTE > 1                                            
+      *              SET BUSTA-NON-VALIDA TO TRUE                               
+      *              MOVE 184 TO GBURC-IKP                                      
+      *           END-IF                                                        
+      *       END-IF                                                            
+           ELSE                                                                 
+              MOVE 1 TO SOMMA-BUSTE                                             
+              MOVE CURRENT-SERVER TO GECA-CONN-SAVE                             
+           END-IF                                                               
+           EXIT.                                                                
+TS8158*-----------------------------------------------------------------        
+TS8158*SU-ALTRE SECTION.                                                        
+TS8158*-----------------------------------------------------------------        
+TS8158*    EXEC SQL CONNECT TO :GECA-CONN END-EXEC                              
+TS8158*    IF SQLCODE NOT = 000                                                 
+TS8158*       DISPLAY 'NN FACCIO CONNECT A ' LOCATION                           
+TS8158*       MOVE ERR-DB2CONN TO GBUOU-RETURN-CODE                             
+TS8158*       MOVE 183 TO GBURC-IKP                                             
+TS8158*    ELSE                                                                 
+TS8158*       PERFORM SELECT-GECA                                               
+TS8158*    END-IF                                                               
+TS8158*    IF  RC-OK OF IKP0GBU                                                 
+TS8158*        IF CONTATORE > 0                                                 
+TS8158*           ADD 1 TO SOMMA-BUSTE                                          
+TS8158*           MOVE GECA-CONN TO GECA-CONN-SAVE                              
+TS8158*           DISPLAY 'TROVATA SU ' GECA-CONN                               
+TS8158*        END-IF                                                           
+TS8158*        EXEC SQL CONNECT RESET END-EXEC                                  
+TS8158*        IF SQLCODE NOT = 000                                             
+TS8158*           DISPLAY 'NN FACCIO CONNECT A ' LOCATION                       
+TS8158*           MOVE ERR-DB2RESET TO GBUOU-RETURN-CODE                        
+TS8158*           MOVE 183 TO GBURC-IKP                                         
+TS8158*        END-IF                                                           
+TS8158*    END-IF                                                               
+TS8158*    EXIT.                                                                
+                                                                                
+      *-----------------------------------------------------------------        
+       CONTROLLI-INT0 SECTION.                                                  
+      *-----------------------------------------------------------------        
+TS8185*                                                                         
+TS8185*    INITIALIZE AREA-PASSAGGIO.                                           
+TS8185*    INITIALIZE INT0TAB03.                                                
+TS8185*    EVALUATE GBUIN-ABI                                                   
+TS8185*    WHEN  02008                                                          
+TS8185*        MOVE 'LOC0D0'                TO DB-LOCATION-MI                   
+TS8185*    WHEN  03226                                                          
+TS8185*        MOVE 'SH1PROD'               TO DB-LOCATION-MI                   
+TS8185*    WHEN  03223                                                          
+TS8185*        MOVE 'SH1PROD'               TO DB-LOCATION-MI                   
+TS8185*    WHEN  OTHER                                                          
+TS8185*        MOVE CURRENT-SERVER          TO DB-LOCATION-MI                   
+TS8185*    END-EVALUATE                                                         
+TS8185*    IF BUSTA-NEW                                                         
+TS8185*        MOVE SELECT02                TO DB-SQL-FUNZIONE                  
+TS8185*        MOVE GBUIN-TORRE             TO INT0-TORRE                       
+TS8185*    ELSE                                                                 
+TS8185*        MOVE SELECT01                TO DB-SQL-FUNZIONE                  
+TS8185*    END-IF                                                               
+TS8185*    IF  AMBIENTE = 'S'                                                   
+TS8185*        MOVE CURRENT-SERVER          TO DB-LOCATION-MI                   
+TS8185*    END-IF                                                               
+TS8185*    MOVE GBUIN-ABI                   TO INT0-UT-TOT-ABI                  
+TS8185*    MOVE GBUIN-NBUSTA                TO INT0-UT-TOT-BUSTA                
+TS8185*    MOVE SPACE                       TO INT0-UT-TOT-FLAG                 
+TS8185*                                                                         
+TS8185*    MOVE INT0TAB03                   TO RECORD-IODB2                     
+TS8185*                                                                         
+TS8185*    CALL INT0IO03   USING AREA-PASSAGGIO.                                
+TS8185*                                                                         
+TS8185*    IF DB-SQLCODE EQUAL 000                                              
+TS8185*       EVALUATE SV-SQLCODE                                               
+TS8185*       WHEN 000                                                          
+->8185*           MOVE RECORD-IODB2 TO INT0TAB03                                
+TS8159******      IF GBUIN-ABI = 2008                                           
+TS8159******         PERFORM VERIFICA-CARTA                                     
+TS8159******      ELSE                                                          
+TS8185*              SET BUSTA-VALIDA TO TRUE                                   
+TS8159******      END-IF                                                        
+TS8185*       WHEN 100                                                          
+TS8185*            SET BUSTA-NON-VALIDA TO TRUE                                 
+TS8185*       WHEN OTHER                                                        
+TS8185*            DISPLAY PGM ' SELECT01 - INT0TA03 '                          
+TS8185*            DISPLAY PGM ' DB-SQLCODE......... ' DB-SQLCODE               
+TS8185*            DISPLAY PGM ' SV-SQLCODE......... ' SV-SQLCODE               
+TS8185*            MOVE ERR-INT0IO03 TO GBUOU-RETURN-CODE                       
+TS8185*            MOVE 183 TO GBURC-IKP                                        
+TS8185*       END-EVALUATE                                                      
+TS8185*    ELSE                                                                 
+TS8185*       DISPLAY PGM ' SELECT01 - INT0TA03 '                               
+TS8185*       DISPLAY PGM ' DB-SQLCODE......... ' DB-SQLCODE                    
+TS8185*       DISPLAY PGM ' SV-SQLCODE......... ' SV-SQLCODE                    
+TS8185*       MOVE ERR-DB2REMOTO TO GBUOU-RETURN-CODE                           
+TS8185*       MOVE 183 TO GBURC-IKP                                             
+TS8185*    END-IF.                                                              
+TS8185*                                                                         
+           INITIALIZE 2DBRC  IKP0TABBU.                                         
+           IF BUSTA-NEW                                                         
+               SET 2DBIN-BU-SELECT02        TO TRUE                             
+               MOVE GBUIN-TORRE             TO IKPBU-TORRE                      
+           ELSE                                                                 
+               SET 2DBIN-BU-SELECT01        TO TRUE                             
+           END-IF                                                               
+           MOVE GBUIN-ABI                   TO IKPBU-TOT-ABI                    
+           MOVE GBUIN-NBUSTA                TO IKPBU-TOT-BUSTA                  
+           MOVE SPACE                       TO IKPBU-TOT-FLAG                   
+           MOVE IKP0TABBU                   TO 2DBIN-RIGA.                      
+           CALL IKP02IBU   USING IKP02DB.                                       
+                                                                                
+           EVALUATE 2DBRC-SQLCODE                                               
+               WHEN 000                                                         
+                   MOVE 2DBOU-RIGA          TO IKP0TABBU                        
+                   SET BUSTA-VALIDA         TO TRUE                             
+               WHEN 100                                                         
+                   SET BUSTA-NON-VALIDA TO TRUE                                 
+               WHEN OTHER                                                       
+                   DISPLAY PGM ' ' 2DBIN-SQL-FUNZIONE ' IKP02IBU'               
+                   MOVE ERR-IKP02iBU TO GBUOU-RETURN-CODE                       
+                   MOVE 183 TO GBURC-IKP                                        
+           END-EVALUATE.                                                        
+           EXIT.                                                                
+TS8159*-----------------------------------------------------------------        
+TS8159*VERIFICA-CARTA SECTION.                                                  
+TS8159*-----------------------------------------------------------------        
+TS8159*    IF BUSTA-OLD                                                         
+TS8159*        EXEC SQL CONNECT TO :GECA-CONN-SAVE END-EXEC                     
+TS8159*        IF SQLCODE NOT = 000                                             
+TS8159*            DISPLAY 'NN FACCIO CONNECT A ' LOCATION                      
+TS8159*            MOVE ERR-DB2CONN TO GBUOU-RETURN-CODE                        
+TS8159*            MOVE 183 TO GBURC-IKP                                        
+TS8159*        END-IF                                                           
+TS8159*    END-IF                                                               
+TS8159*    IF  RC-OK OF IKP0GBU                                                 
+TS8159*        PERFORM SELECT-CARTA                                             
+TS8159*    END-IF                                                               
+TS8159*    IF  RC-OK OF IKP0GBU                                                 
+TS8159*        IF INT0-UT-TOT-CARTA = GEC41-N-CARTA                             
+TS8159*            SET BUSTA-VALIDA TO TRUE                                     
+TS8159*        ELSE                                                             
+TS8159*            MOVE 9 TO SOMMA-BUSTE                                        
+TS8159*        END-IF                                                           
+TS8159*    END-IF                                                               
+TS8159*    IF  RC-OK OF IKP0GBU                                                 
+TS8159*        IF BUSTA-OLD                                                     
+TS8159*        EXEC SQL CONNECT RESET END-EXEC                                  
+TS8159*        IF SQLCODE NOT = 000                                             
+TS8159*            DISPLAY 'NN FACCIO CONNECT A ' LOCATION                      
+TS8159*            MOVE ERR-DB2RESET TO GBUOU-RETURN-CODE                       
+TS8159*            MOVE 183 TO GBURC-IKP                                        
+TS8159*        END-IF                                                           
+TS8159*    END-IF                                                               
+TS8159*    EXIT.                                                                
+      *-----------------------------------------------------------------        
+       SCRIVI-ERR-VERIFICA SECTION .                                            
+      *-----------------------------------------------------------------        
+           IF BUSTA-NON-VALIDA                                                  
+           OR BUSTA-UTILIZZATA                                                  
+              IF SOMMA-BUSTE > 1                                                
+                 IF SOMMA-BUSTE = 7                                             
+                    MOVE ERR-BUSTADIALTRAMATR  TO GBUOU-RETURN-CODE             
+                    MOVE 181 TO GBURC-IKP                                       
+                 ELSE                                                           
+                    MOVE ERR-BUSTANOTOK-X-PROC TO GBUOU-RETURN-CODE             
+                    MOVE 185 TO GBURC-IKP                                       
+                 END-IF                                                         
+              ELSE                                                              
+                  MOVE ERR-BUSTANOTOK        TO GBUOU-RETURN-CODE               
+                  MOVE 184 TO GBURC-IKP                                         
+              END-IF                                                            
+           ELSE                                                                 
+TS8185*       MOVE INT0-POT-SHA1-14(1:9) TO GBUOU-CRID                          
+TS8185*       MOVE INT0-POT-SHA1-40      TO GBUOU-HRID                          
+TS8185*       MOVE INT0-UT-TOT-EPIN      TO GBUOU-HPIN                          
+TS8185        MOVE IKPBU-SHA1-14(1:9)    TO GBUOU-CRID                          
+TS8185        MOVE IKPBU-SHA1-40         TO GBUOU-HRID                          
+TS8185        MOVE IKPBU-TOT-EPIN        TO GBUOU-HPIN                          
+              IF  GBUOU-CRID = SPACES                                           
+              OR  GBUOU-HRID = SPACES                                           
+                  MOVE 'BDBUSTA VECCHIA' TO GBUOU-RETURN-CODE                   
+                  MOVE 186 TO GBURC-IKP                                         
+              END-IF                                                            
+           END-IF.                                                              
+           EXIT.                                                                
+      /-----------------------------------------------------------------        
+       CONTROLLI-INIZIALI SECTION .                                             
+      *-----------------------------------------------------------------        
+           INITIALIZE GBUOU.                                                    
+      *-----------------------------------------------------------------        
+           CALL SISBRCR2      USING CODICI-CASSA                                
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-AZIONE = SPACES                                        
+                   MOVE ERR-AZIONE         TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-AZIONE NOT = 'V'                                       
+               AND GBUIN-AZIONE NOT = 'A'                                       
+               AND GBUIN-AZIONE NOT = 'T'                                       
+               AND GBUIN-AZIONE NOT = 'G'                                       
+                   MOVE ERR-AZIONE         TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-NBUSTA NOT NUMERIC                                     
+                   MOVE ERR-NBUSTA         TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-MATR   NOT NUMERIC                                     
+                   MOVE ERR-MATR           TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-DIP NOT NUMERIC                                        
+                   MOVE ERR-DIP            TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-ABI NOT NUMERIC                                        
+                   MOVE ERR-ABI            TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+      *-----------------------------------------------------------------        
+           IF  RC-OK OF IKP0GBU                                                 
+               IF  GBUIN-TORRE = SPACES                                         
+                   MOVE ERR-TORRE          TO GBUOU-RETURN-CODE                 
+                   MOVE 187 TO GBURC-IKP                                        
+               END-IF                                                           
+           END-IF                                                               
+           EXEC SQL                                                             
+               SET :CURRENT-SERVER = CURRENT SERVER                             
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = 000                                                
+               MOVE ERR-DB2                TO GBUOU-RETURN-CODE                 
+               MOVE 183 TO GBURC-IKP                                            
+           END-IF.                                                              
+           EXEC SQL                                                             
+               SET :DATA-ODIERNA   = CURRENT DATE                               
+           END-EXEC.                                                            
+           IF  SQLCODE NOT = 000                                                
+               MOVE ERR-DB2                TO GBUOU-RETURN-CODE                 
+               MOVE 183 TO GBURC-IKP                                            
+           END-IF.                                                              
+           EXIT.                                                                
+                                                                                
+      *---------------------------------------------------------*               
+TS8158*SELECT-GECA      SECTION.                                                
+TS8158*---------------------------------------------------------*               
+TS8158*    MOVE GBUIN-ABI TO GEC41-ABI                                          
+TS8158*    MOVE NUM-PAN TO GEC41-PAN-NRO                                        
+TS8158*    MOVE 0 TO CONTATORE                                                  
+TS8158*    EXEC SQL                                                             
+TS8158*        SELECT COUNT(*)                                                  
+TS8158*        INTO  :CONTATORE                                                 
+TS8158*        FROM   GECACART2000                                              
+TS8158*        WHERE  GEC41_ABI     = :GEC41-ABI                                
+TS8158*        AND    GEC41_PAN_NRO = :GEC41-PAN-NRO                            
+TS8158*        AND    GEC41_TIPO    = 7                                         
+TS8158*        WITH UR                                                          
+TS8158*    END-EXEC.                                                            
+TS8158*    IF SQLCODE NOT = 000                                                 
+TS8158*       DISPLAY 'GECA|||||' SQLCODE                                       
+TS8158*       MOVE ERR-GECADB2        TO GBUOU-RETURN-CODE                      
+TS8158*        MOVE 183 TO GBURC-IKP                                            
+TS8158*    END-IF                                                               
+TS8158*    EXIT.                                                                
+                                                                                
+TS8159*---------------------------------------------------------*               
+TS8159*SELECT-CARTA     SECTION.                                                
+TS8159*---------------------------------------------------------*               
+TS8159*    MOVE GBUIN-ABI TO GEC41-ABI                                          
+TS8159*    EXEC SQL                                                             
+TS8159*        SELECT GEC41_N_CARTA                                             
+TS8159*        INTO  :GEC41-N-CARTA                                             
+TS8159*        FROM   GECACART2000                                              
+TS8159*        WHERE  GEC41_ABI     = :GEC41-ABI                                
+TS8159*        AND    GEC41_PAN_NRO = :GEC41-PAN-NRO                            
+TS8159*        AND    GEC41_TIPO    = 7                                         
+TS8159*        WITH UR                                                          
+TS8159*    END-EXEC.                                                            
+TS8159*    IF SQLCODE NOT = 000                                                 
+TS8159*       DISPLAY 'GECA|||||' SQLCODE                                       
+TS8159*       MOVE ERR-GECADB2        TO GBUOU-RETURN-CODE                      
+TS8159*        MOVE 183 TO GBURC-IKP                                            
+TS8159*    END-IF                                                               
+TS8159*    EXIT.                                                                
+                                                                                
+      /-----------------------------------------------------------------        
+       CONTROLLI-FINALI SECTION.                                                
+      *-----------------------------------------------------------------        
+      D    IF  RC-OK OF IKP0GBU                                                 
+      D        DISPLAY SKP PGM 'RC............. OK|'                            
+      D    ELSE                                                                 
+      D        DISPLAY SKP PGM 'RC............. ' GBUOU-RC                      
+      D        DISPLAY SKP PGM 'ERRORE......... ' GBUOU-DES-ERRORE              
+      D    END-IF.                                                              
+           CONTINUE.                                                            
+           EXIT.                                                                
