@@ -8,30 +8,10 @@ import * as readline from 'readline';
 import * as dir from 'node-dir';
 import * as mkdirp from 'mkdirp';
 
-// export function extractSql() {
-//     console.log('passed through here');
-//     dir.files('./extract-sql-repository', (error, data) => {
-//         if (error) {
-//             throw error;
-//         }
-//         const files = data.filter(filePath => filePath.substr(filePath.length - 4, 4) === '.txt');
-//         console.log(files);
-//     })
-// }
-
 
 export const filesFromDir = Observable.bindNodeCallback(dir.files);
-// export function filesFromDir(dirPath: string) {
-//     return dirFiles(dirPath);
-// }
 
-// export function dirSourceFiles(dirPath: string, extensionForSourceFiles?: string) {
-//     const extensionToSearchFor = extensionForSourceFiles ? extensionForSourceFiles : '.txt';
-//     return filesFromDir(dirPath)
-//             .map(files => files.filter(filePath => filePath.substr(filePath.length - 4, 4) === extensionToSearchFor))
-// }
-
-export function findExecSql(filePath: string, callback: (filePath: string, snippets: Array<Array<string>>) => void) {
+function findExecSql(filePath: string, callback: (filePath: string, snippets: Array<Array<string>>) => void) {
     let execSqlFound = false;
     let endExecSqlFound = false;
     let lineCount = 0;
@@ -71,12 +51,14 @@ export function findExecSql(filePath: string, callback: (filePath: string, snipp
             })
 }
 const _findExecSqlObs = Observable.bindCallback(findExecSql);
+// this function is defined only to be able to set the return type to Observable<any>
+// _findExecSqlObs via inference returns Observable<string> which is wrong
 export function findExecSqlObs(filePath: string) : Observable<any> {
     return _findExecSqlObs(filePath);
 }
 
-export function writeSqlFile(filePath: string, snippets: Array<Array<string>>) {
-    const sqlFilePath = './sql' + filePath;
+export function writeSqlFile(filePath: string, snippets: Array<Array<string>>, callback: (filePath: string) => void) {
+    const sqlFilePath = './delet-sql-snippets/' + filePath;
     const lastSlash = sqlFilePath.lastIndexOf('/');
     const sqlFileDir = sqlFilePath.substr(0, lastSlash + 1);
     mkdirp(sqlFileDir, err => {
@@ -94,25 +76,18 @@ export function writeSqlFile(filePath: string, snippets: Array<Array<string>>) {
         }
         fs.writeFile(sqlFilePath + '.sq', fileContent, err => {
             if (err) throw err;
-            console.log(sqlFilePath, 'saved')
+            callback(filePath);
         })
     });
-    // mkdirp('./abc/cde', err => {
-    //         if (err) {
-    //             console.error('error in creating a directory', err);
-    //             throw err;
-    //         }
-    //     })
-    // let fileContent = '';
-    // let i = 0;
-    // for (const snippet of snippets) {
-    //     i++;
-    //     fileContent = fileContent + 'sql snippet ' + i + '\n';
-    //     fileContent = fileContent + snippet.join('\n');
-    //     fileContent = fileContent + '\n' + '\n' + '\n';
-    // }
-    // fs.writeFile(filePath + '.sql', fileContent, err => {
-    //     if (err) throw err;
-    //     console.log(sqlFilePath, 'saved')
-    // })
 }
+export const writeSqlFileObs = Observable.bindCallback(writeSqlFile);
+// // this function is defined only to be able to set the return type to Observable<any>
+// // _writeFileObs via inference returns Observable<string> which is wrong
+// export function writeSqlFileObs(filePath: string, snippets: Array<Array<string>>) : Observable<any> {
+//     return _writeFileObs(filePath, snippets);
+// }
+
+// const _mkdirpObs = Observable.bindCallback(mkdirp);
+// export function mkdirpObs(path: string) : Observable<any> {
+//     return _mkdirpObs(path);
+// }
