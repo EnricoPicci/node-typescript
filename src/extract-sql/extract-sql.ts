@@ -1,17 +1,27 @@
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/bindCallback';
 import 'rxjs/add/observable/bindNodeCallback';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
 import * as fs from 'fs';
 import * as readline from 'readline';
 import * as dir from 'node-dir';
 import * as mkdirp from 'mkdirp';
 
 
-export const filesFromDir = Observable.bindNodeCallback(dir.files);
+const _filesFromDir = Observable.bindNodeCallback(dir.files);
 
-function findExecSql(filePath: string, callback: (filePath: string, snippets: Array<Array<string>>) => void) {
+export function sourceFilesFromDir(fromDirPath: string) {
+    return _filesFromDir(fromDirPath)
+            .map(files => files.filter(filePath => filePath.substr(filePath.length - 4, 4) === '.txt'))  // <=====
+            .switchMap(files => Observable.from(files))
+}
+
+function _findExecSql(filePath: string, callback: (filePath: string, snippets: Array<Array<string>>) => void) {
     let execSqlFound = false;
     let endExecSqlFound = false;
     let lineCount = 0;
@@ -24,8 +34,8 @@ function findExecSql(filePath: string, callback: (filePath: string, snippets: Ar
     });
     rl.on('line', (line: string)  => {
         lineCount++;
-        execSqlFound = execSqlFound || line[6] !== '*' && line.indexOf('EXEC SQL') > -1;
-        endExecSqlFound = line[6] !== '*' && line.indexOf('END-EXEC') > -1;
+        execSqlFound = execSqlFound || line[6] !== '*' && line.indexOf('EXEC SQL') > -1;  // <=====
+        endExecSqlFound = line[6] !== '*' && line.indexOf('END-EXEC') > -1;  // <=====
         if (execSqlFound) {
             if (!sqlExecSnippet) {
                 sqlExecSnippet = new Array<string>();
@@ -47,18 +57,23 @@ function findExecSql(filePath: string, callback: (filePath: string, snippets: Ar
         }
     })
     rl.on('close', ()  => {
-                callback(filePath, sqlExecSnippets);
-            })
+        callback(filePath, sqlExecSnippets);
+    })
 }
-const _findExecSqlObs = Observable.bindCallback(findExecSql);
+const _findExecSqlObs = Observable.bindCallback(_findExecSql);
 // this function is defined only to be able to set the return type to Observable<any>
 // _findExecSqlObs via inference returns Observable<string> which is wrong
 export function findExecSqlObs(filePath: string) : Observable<any> {
     return _findExecSqlObs(filePath);
 }
 
-export function writeSqlFile(filePath: string, snippets: Array<Array<string>>, callback: (filePath: string) => void) {
-    const sqlFilePath = './delet-sql-snippets/' + filePath;
+function _writeFile(
+            sorceFilePath: string,
+            snippets: Array<Array<string>>,
+            toDirPath: string,
+            callback: (filePath: string) => void
+        ) {
+    const sqlFilePath = toDirPath + sorceFilePath;
     const lastSlash = sqlFilePath.lastIndexOf('/');
     const sqlFileDir = sqlFilePath.substr(0, lastSlash + 1);
     mkdirp(sqlFileDir, err => {
@@ -76,18 +91,24 @@ export function writeSqlFile(filePath: string, snippets: Array<Array<string>>, c
         }
         fs.writeFile(sqlFilePath + '.sq', fileContent, err => {
             if (err) throw err;
-            callback(filePath);
+            callback(sqlFilePath);
         })
     });
 }
-export const writeSqlFileObs = Observable.bindCallback(writeSqlFile);
-// // this function is defined only to be able to set the return type to Observable<any>
-// // _writeFileObs via inference returns Observable<string> which is wrong
-// export function writeSqlFileObs(filePath: string, snippets: Array<Array<string>>) : Observable<any> {
-//     return _writeFileObs(filePath, snippets);
-// }
+const _writeFileObs = Observable.bindCallback(_writeFile);
+// the following function is defined only to be able to set meaningful names to the parameters
+// _writeSqlFileObs has generic names for the parameters (v1 and v2)
+export function writeFileObs(filePath: string, snippets: Array<Array<string>>, toDirPath: string) {
+    return _writeFileObs(filePath, snippets, toDirPath);
+}
 
-// const _mkdirpObs = Observable.bindCallback(mkdirp);
-// export function mkdirpObs(path: string) : Observable<any> {
-//     return _mkdirpObs(path);
-// }
+
+export function extractSqlSnippets(fromDirPath: string, toDirPath: string) {
+    sourceFilesFromDir(fromDirPath)
+        .mergeMap(file => findExecSqlObs(file))
+        .filter(fileNameAndSnippets => fileNameAndSnippets[1].length > 0)
+        .mergeMap(fileNameAndSnippets => writeFileObs(fileNameAndSnippets[0], fileNameAndSnippets[1], toDirPath))
+        .subscribe(file => {
+            console.log('sql snippets saved: ', file);
+        });
+}
