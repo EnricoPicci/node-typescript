@@ -5,4 +5,8 @@
 
 import {extractSqlSnippets} from './extract-sql';
 
-extractSqlSnippets('./extract-sql-repository', './sql-snippets-to-delete/');
+// extracts the sql snippets present in the directory './extract-sql-repository'
+// and write them in files in the directory './sql-snippets-to-delete/'
+extractSqlSnippets('./extract-sql-repository', './sql-snippets-to-delete/') .subscribe(file => {
+    console.log('sql snippets saved: ', file);
+});

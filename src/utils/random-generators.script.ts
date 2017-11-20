@@ -1,6 +1,6 @@
 // ==================    TO LAUNCH   =================
 // npm run tsc  
-// node ./dist/utils/utils-script.js
+// node ./dist/utils/random-generators.script.js
 // =================================================== 
 
 // import {random_0_1} from './random-generators'; 

@@ -1,7 +1,5 @@
 
-// import { expect } from 'chai';
 import 'mocha';
-// import * as fs from 'fs';
 import * as rimraf from 'rimraf';
 
 import {filesObs, findSnippetsObs, NumberedLine, writeFileObs} from './fs-observables';
@@ -31,7 +29,7 @@ describe('findSnippetsObs function', () => {
     
     it('reads the snippets present in the files contained by the directory and its subdirectories', done => {
         const sourceDir = './src/utils/fs-observable-test-dir';
-        const snippets = new Array<any>();
+        const snippets = new Array<{filePath: string, snippets: Array<Array<NumberedLine>>}>();
         const startSnippetToken = 'Snippet start';
         const endSnippetToken = 'Snippet end';
         findSnippetsObs(sourceDir, startSnippetToken, endSnippetToken).subscribe(
@@ -43,16 +41,16 @@ describe('findSnippetsObs function', () => {
                     return done(new Error('snippets count failed'));
                 }
                 const file_1_1_1_snippets = snippets.find(fileAndSnippets => 
-                                                                fileAndSnippets[0] === 'src/utils/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
-                if (file_1_1_1_snippets[1].length !== 2) {
+                                                                fileAndSnippets.filePath === 'src/utils/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
+                if (file_1_1_1_snippets.snippets.length !== 2) {
                     console.error(file_1_1_1_snippets);
                     return done(new Error('snippets in file file-1-1-1.txt count failed'));
                 }
-                if (file_1_1_1_snippets[1][0].length !== 3) {
+                if (file_1_1_1_snippets.snippets[0].length !== 3) {
                     console.error(file_1_1_1_snippets);
                     return done(new Error('first snippet in file file-1-1-1.txt line count failed'));
                 }
-                const numberedLine: NumberedLine = file_1_1_1_snippets[1][0][0];
+                const numberedLine: NumberedLine = file_1_1_1_snippets.snippets[0][0];
                 if (numberedLine.lineNumber !== 4) {
                     console.error(numberedLine);
                     return done(new Error('first line lineCount failed'));
