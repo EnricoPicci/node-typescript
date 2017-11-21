@@ -62,6 +62,44 @@ describe('findSnippetsObs function', () => {
 
 });
 
+describe('findSnippetsObs function with skipLine', () => {
+    
+    it('reads the snippets ignoring the lines starting with a * char', done => {
+        const sourceDir = './src/utils/fs-observable-test-dir';
+        const snippets = new Array<{filePath: string, snippets: Array<Array<NumberedLine>>}>();
+        const startSnippetToken = 'Snippet start';
+        const endSnippetToken = 'Snippet end';
+        const skipLine = (line) => { return line.length > 0 && line[0] === '*'}
+        findSnippetsObs(sourceDir, startSnippetToken, endSnippetToken, skipLine).subscribe(
+            fileAndSnippets => snippets.push(fileAndSnippets),
+            error => done(error),
+            () => {
+                if (snippets.length !== 2) {
+                    console.error(snippets);
+                    return done(new Error('snippets count failed'));
+                }
+                const file_1_1_1_snippets = snippets.find(fileAndSnippets => 
+                                                                fileAndSnippets.filePath === 'src/utils/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
+                if (file_1_1_1_snippets.snippets.length !== 1) {
+                    console.error(file_1_1_1_snippets);
+                    return done(new Error('snippets in file file-1-1-1.txt count failed'));
+                }
+                if (file_1_1_1_snippets.snippets[0].length !== 4) {
+                    console.error(file_1_1_1_snippets);
+                    return done(new Error('first snippet in file file-1-1-1.txt line count failed'));
+                }
+                const numberedLine: NumberedLine = file_1_1_1_snippets.snippets[0][0];
+                if (numberedLine.lineNumber !== 9) {
+                    console.error(numberedLine);
+                    return done(new Error('first line lineCount failed'));
+                }
+                return done();
+            }
+        )
+    });
+
+});
+
 describe('writeFileObs function', () => {
     
     it('writes a file with a certain content', done => {

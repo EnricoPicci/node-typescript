@@ -1,4 +1,3 @@
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/bindCallback';
@@ -20,9 +19,7 @@ export function filesObs(fromDirPath: string) {
 }
 const _filesFromDir = Observable.bindNodeCallback(dir.files);
 
-// ======================  Find snippets in files of a directory and subdirectories =========================
-// Search in all files contained in a directory (and its subdirs) for snippets which begin with a given token
-// and end with a given token.
+
 // Returns an Observable which emits any time a file containing a snippet is found
 // The returned observable is of type Observable<[]>
 // the Array emitted by the Observable contains 2 items:
@@ -38,18 +35,19 @@ export function findSnippetsObs(
 {
     return filesObs(fromDirPath)
             .mergeMap(filePath => _findSnippetsObs(filePath, startSnippet, endSnippet, skipLine))
-            .filter((fileAndSnippet: any) => fileAndSnippet[1].length > 0)
-            .map(fileAndSnippet => {
-                const filePath: string = fileAndSnippet[0];
-                const snippets: Array<Array<NumberedLine>> = fileAndSnippet[1];
-                return {filePath, snippets};
-            });
+            .filter(fileAndSnippet => fileAndSnippet.snippets.length > 0)
 }
 export interface NumberedLine {
     lineNumber: number,
     line: string
 }
-const _findSnippetsObs = Observable.bindCallback(_findSnippets);
+        // the selector used as the second parameter in the bindCallback method is required to have 
+        // the right inference from intellisense
+        // https://stackoverflow.com/questions/47402073/inference-with-typescript-observable-and-bindcallback-method/47403711#47403711
+const _findSnippetsObs = Observable.bindCallback(
+                                        _findSnippets,
+                                        (filePath: string, snippets: Array<Array<NumberedLine>>) => ( {filePath, snippets} )
+                                    );
 function _findSnippets(
     filePath: string,
     startSnippetToken: string,
@@ -126,3 +124,4 @@ function _writeFile(
         })
     });
 }
+
