@@ -11,7 +11,7 @@ import * as readline from 'readline';
 import * as dir from 'node-dir';
 import * as mkdirp from 'mkdirp';
 
-// ======================  Reads files from directory and subdirectories ============================
+// ============  Retrieves the names of the files present in a directory and subdirectories =========
 // returns and Observable which emits for each file found in the directory and all its subdirectories
 export function filesObs(fromDirPath: string) {
     return _filesFromDir(fromDirPath)
@@ -19,7 +19,28 @@ export function filesObs(fromDirPath: string) {
 }
 const _filesFromDir = Observable.bindNodeCallback(dir.files);
 
+// =============================  Read a file line by line =========================================
+// returns and Observable which emits an array containing the lines of the file as strings
+export const readLinesObs = Observable.bindCallback(
+    _readLines
+);
+function _readLines(filePath: string, callback: (lines: Array<string>) => void) {
+    const lines = new Array<string>();
+    const rl = readline.createInterface({
+        input: fs.createReadStream(filePath),
+        crlfDelay: Infinity
+    });
+    rl.on('line', (line: string)  => {
+        lines.push(line);
+    });
+    rl.on('close', ()  => {
+        callback(lines);
+    })
+}
 
+
+
+// =============================  Select snippets contained in a file =========================================
 // Returns an Observable which emits any time a file containing a snippet is found
 // The returned observable is of type Observable<[]>
 // the Array emitted by the Observable contains 2 items:
@@ -91,10 +112,8 @@ function _findSnippets(
                 snippet = null;
             }
         }
-    })
-    rl.on('close', ()  => {
-        callback(filePath, snippets);
-    })
+    });
+    rl.on('close', ()  => callback(filePath, snippets));
 }
 
 
@@ -111,8 +130,8 @@ function _writeFile(
     callback: (filePath: string) => void
 ) {
     const lastSlash = filePath.lastIndexOf('/');
-    const sqlFileDir = filePath.substr(0, lastSlash + 1);
-    mkdirp(sqlFileDir, err => {
+    const fileDir = filePath.substr(0, lastSlash + 1);
+    mkdirp(fileDir, err => {
         if (err) {
             console.error('error in creating a directory', err);
             throw err;

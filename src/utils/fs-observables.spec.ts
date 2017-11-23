@@ -2,11 +2,11 @@
 import 'mocha';
 import * as rimraf from 'rimraf';
 
-import {filesObs, findSnippetsObs, NumberedLine, writeFileObs} from './fs-observables';
+import {filesObs, findSnippetsObs, NumberedLine, writeFileObs, readLinesObs} from './fs-observables';
 
 describe('filesObs function', () => {
     
-    it('reads all files from a directory and its subdirectories and returns an observable which emits for every file read', done => {
+    it('retrieves all files from a directory and its subdirectories and returns an observable which emits for every file retrieved', done => {
         const sourceDir = './src/utils/fs-observable-test-dir';
         const filePaths = new Array<string>();
         filesObs(sourceDir).subscribe(
@@ -133,6 +133,31 @@ describe('writeFileObs function', () => {
                     return done();
                 })
         });
+
+    });
+
+});
+
+
+describe('readLinesObs function', () => {
+    
+    it('reads all the lines of a file', done => {
+        const filePath = 'src/utils/fs-observable-test-dir/dir-2/file-2-1.txt';
+        // const filePath = './src/utils/fs-observable-test-dir/dir-1/file-1-1.txt';
+        readLinesObs(filePath).subscribe(
+            lines => {
+                console.log('lines', lines);
+                // if (lines.length !== 5) {
+                //     console.error(filePath, lines);
+                //     return done(new Error('lines count failed'));
+                // }
+                return done();
+            },
+            err => {
+                console.error('ERROR', err);
+            },
+            () => console.log('COMPLETED')
+        );
 
     });
 
