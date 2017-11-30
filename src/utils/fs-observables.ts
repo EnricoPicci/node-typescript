@@ -14,16 +14,23 @@ import * as mkdirp from 'mkdirp';
 // ============  Retrieves the names of the files present in a directory and subdirectories =========
 // returns and Observable which emits for each file found in the directory and all its subdirectories
 export function filesObs(fromDirPath: string) {
-    return _filesFromDir(fromDirPath)
-            .switchMap(files => Observable.from(files))
+    return fileListObs(fromDirPath)
+            .switchMap(files => Observable.from(files));
 }
-const _filesFromDir = Observable.bindNodeCallback(dir.files);
+// returns and Observable which emits once with the list of files found in the directory and all its subdirectories
+export function fileListObs(fromDirPath: string) {
+    return _fileListObs(fromDirPath);
+}
+const _fileListObs = Observable.bindNodeCallback(dir.files);
+
+// ============  Reads a file  =========
+// returns and Observable which emits when the content of the file is read
+export const readFileObs = Observable.bindNodeCallback(fs.readFile);
+
 
 // =============================  Read a file line by line =========================================
 // returns and Observable which emits an array containing the lines of the file as strings
-export const readLinesObs = Observable.bindCallback(
-    _readLines
-);
+export const readLinesObs = Observable.bindCallback(_readLines);
 function _readLines(filePath: string, callback: (lines: Array<string>) => void) {
     const lines = new Array<string>();
     const rl = readline.createInterface({
@@ -52,15 +59,24 @@ export function findSnippetsObs(
     fromDirPath: string,
     startSnippet: string,
     endSnippet: string,
-    skipLine?: (line: string) => boolean) : Observable<{filePath: string, snippets: Array<Array<NumberedLine>>}>
+    skipLine?: (line: string) => boolean)
 {
-    return filesObs(fromDirPath)
-            .mergeMap(filePath => _findSnippetsObs(filePath, startSnippet, endSnippet, skipLine))
+    return fileListObs(fromDirPath)
+            .switchMap(fileList => readFileSnippetsObs(fileList, startSnippet, endSnippet, skipLine))
             .filter(fileAndSnippet => fileAndSnippet.snippets.length > 0)
 }
 export interface NumberedLine {
     lineNumber: number,
     line: string
+}
+function readFileSnippetsObs(
+    fileList: Array<string>,
+    startSnippet: string,
+    endSnippet: string,
+    skipLine?: (line: string) => boolean) 
+{
+    return Observable.from(fileList)
+            .mergeMap(filePath => _findSnippetsObs(filePath, startSnippet, endSnippet, skipLine));
 }
         // the selector used as the second parameter in the bindCallback method is required to have 
         // the right inference from intellisense
@@ -143,4 +159,7 @@ function _writeFile(
         })
     });
 }
+
+
+
 

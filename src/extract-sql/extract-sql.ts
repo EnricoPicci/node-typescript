@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import {findSnippetsObs, writeFileObs} from '../utils/fs-observables';
 
-export function findExecSqlObs(fromDirPath: string) {
+function findExecSqlObs(fromDirPath: string) {
     return findSnippetsObs(fromDirPath, 'EXEC SQL', 'END-EXEC', line => line[6] === '*');
 }
 

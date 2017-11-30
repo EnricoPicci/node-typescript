@@ -1,0 +1,8 @@
+
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-1.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-2.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-1.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-2.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-1.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-2.txt./src/fs-rxjs/fs-rxjs-test-dir-output/test-2.txt
+./src/fs-rxjs/fs-rxjs-test-dir-output/test-1.txt

@@ -5,9 +5,10 @@
 
 import {readDirPromise, readLinesPromise, transform, writeFilePromise} from './read-write-files';
 
-// retrieves the file names of the files in directory './extract-sql-repository'
+
+const sourceDir = './src/fs-promises/fs-promises-test-dir/';
 const targetDir = './src/fs-promises/fs-promises-test-dir-output';
-readDirPromise('./src/fs-promises/fs-promises-test-dir/')
+readDirPromise(sourceDir)
     .then(files => {
         const promises = new Array<Promise<any>>();
         for (const file of files) {

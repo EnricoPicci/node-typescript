@@ -2,7 +2,7 @@
 import 'mocha';
 import * as rimraf from 'rimraf';
 
-import {filesObs, findSnippetsObs, NumberedLine, writeFileObs, readLinesObs} from './fs-observables';
+import {filesObs, fileListObs, findSnippetsObs, NumberedLine, writeFileObs, readLinesObs, readFileObs} from './fs-observables';
 
 describe('filesObs function', () => {
     
@@ -15,6 +15,33 @@ describe('filesObs function', () => {
             () => {
                 if (filePaths.length !== 3) {
                     console.error(filePaths);
+                    return done(new Error('file count failed'));
+                } else {
+                    return done();
+                }
+            }
+        )
+    });
+
+});
+
+describe('fileListObs function', () => {
+    
+    it('retrieves all files from a directory and its subdirectories and returns an observable which emits the list', done => {
+        const sourceDir = './src/utils/fs-observable-test-dir';
+        let fileList: Array<string>;
+        fileListObs(sourceDir).subscribe(
+            _fileList => {
+                if (fileList) {
+                    console.error(fileList);
+                    return done(new Error('fileList emitted more than once'));
+                }
+                fileList = _fileList;
+            },
+            error => console.error(error),
+            () => {
+                if (fileList.length !== 3) {
+                    console.error(fileList);
                     return done(new Error('file count failed'));
                 } else {
                     return done();
@@ -143,14 +170,39 @@ describe('readLinesObs function', () => {
     
     it('reads all the lines of a file', done => {
         const filePath = 'src/utils/fs-observable-test-dir/dir-2/file-2-1.txt';
-        // const filePath = './src/utils/fs-observable-test-dir/dir-1/file-1-1.txt';
         readLinesObs(filePath).subscribe(
             lines => {
                 console.log('lines', lines);
-                // if (lines.length !== 5) {
-                //     console.error(filePath, lines);
-                //     return done(new Error('lines count failed'));
-                // }
+                if (lines.length !== 5) {
+                    console.error(filePath, lines);
+                    return done(new Error('lines count failed'));
+                }
+                return done();
+            },
+            err => {
+                console.error('ERROR', err);
+            },
+            () => console.log('COMPLETED')
+        );
+
+    });
+
+});
+
+
+
+describe('readFileObs function', () => {
+    
+    it('reads a file', done => {
+        const filePath = 'src/utils/fs-observable-test-dir/dir-2/file-2-1.txt';
+        readFileObs(filePath).subscribe(
+            content => {
+                const contentAsString = content.toString('utf8');
+                console.log('file content', contentAsString);
+                if (contentAsString.length !== 38) {
+                    console.error(filePath, contentAsString);
+                    return done(new Error('file content length failed'));
+                }
                 return done();
             },
             err => {
