@@ -7,7 +7,7 @@ import {filesObs, fileListObs, findSnippetsObs, NumberedLine, writeFileObs, read
 describe('filesObs function', () => {
     
     it('retrieves all files from a directory and its subdirectories and returns an observable which emits for every file retrieved', done => {
-        const sourceDir = './src/utils/fs-observable-test-dir';
+        const sourceDir = './src/utils/fs-observables/fs-observable-test-dir';
         const filePaths = new Array<string>();
         filesObs(sourceDir).subscribe(
             _filePath => filePaths.push(_filePath),
@@ -28,7 +28,7 @@ describe('filesObs function', () => {
 describe('fileListObs function', () => {
     
     it('retrieves all files from a directory and its subdirectories and returns an observable which emits the list', done => {
-        const sourceDir = './src/utils/fs-observable-test-dir';
+        const sourceDir = './src/utils/fs-observables/fs-observable-test-dir';
         let fileList: Array<string>;
         fileListObs(sourceDir).subscribe(
             _fileList => {
@@ -55,7 +55,7 @@ describe('fileListObs function', () => {
 describe('findSnippetsObs function', () => {
     
     it('reads the snippets present in the files contained by the directory and its subdirectories', done => {
-        const sourceDir = './src/utils/fs-observable-test-dir';
+        const sourceDir = './src/utils/fs-observables/fs-observable-test-dir';
         const snippets = new Array<{filePath: string, snippets: Array<Array<NumberedLine>>}>();
         const startSnippetToken = 'Snippet start';
         const endSnippetToken = 'Snippet end';
@@ -68,7 +68,7 @@ describe('findSnippetsObs function', () => {
                     return done(new Error('snippets count failed'));
                 }
                 const file_1_1_1_snippets = snippets.find(fileAndSnippets => 
-                                                                fileAndSnippets.filePath === 'src/utils/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
+                                                                fileAndSnippets.filePath === 'src/utils/fs-observables/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
                 if (file_1_1_1_snippets.snippets.length !== 2) {
                     console.error(file_1_1_1_snippets);
                     return done(new Error('snippets in file file-1-1-1.txt count failed'));
@@ -92,7 +92,7 @@ describe('findSnippetsObs function', () => {
 describe('findSnippetsObs function with skipLine', () => {
     
     it('reads the snippets ignoring the lines starting with a * char', done => {
-        const sourceDir = './src/utils/fs-observable-test-dir';
+        const sourceDir = './src/utils/fs-observables/fs-observable-test-dir';
         const snippets = new Array<{filePath: string, snippets: Array<Array<NumberedLine>>}>();
         const startSnippetToken = 'Snippet start';
         const endSnippetToken = 'Snippet end';
@@ -106,7 +106,7 @@ describe('findSnippetsObs function with skipLine', () => {
                     return done(new Error('snippets count failed'));
                 }
                 const file_1_1_1_snippets = snippets.find(fileAndSnippets => 
-                                                                fileAndSnippets.filePath === 'src/utils/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
+                                                                fileAndSnippets.filePath === 'src/utils/fs-observables/fs-observable-test-dir/dir-1/dir-1-1/file-1-1-1.txt');
                 if (file_1_1_1_snippets.snippets.length !== 1) {
                     console.error(file_1_1_1_snippets);
                     return done(new Error('snippets in file file-1-1-1.txt count failed'));
@@ -130,7 +130,7 @@ describe('findSnippetsObs function with skipLine', () => {
 describe('writeFileObs function', () => {
     
     it('writes a file with a certain content', done => {
-        const filePathDir = 'src/utils/fs-observable-test-dir-output/';
+        const filePathDir = 'src/utils/fs-observables/fs-observable-test-dir-output/';
         const fileName = 'file-w.txt';
         const content = [
             'first line',
@@ -169,7 +169,7 @@ describe('writeFileObs function', () => {
 describe('readLinesObs function', () => {
     
     it('reads all the lines of a file', done => {
-        const filePath = 'src/utils/fs-observable-test-dir/dir-2/file-2-1.txt';
+        const filePath = 'src/utils/fs-observables/fs-observable-test-dir/dir-2/file-2-1.txt';
         readLinesObs(filePath).subscribe(
             lines => {
                 console.log('lines', lines);
@@ -194,7 +194,7 @@ describe('readLinesObs function', () => {
 describe('readFileObs function', () => {
     
     it('reads a file', done => {
-        const filePath = 'src/utils/fs-observable-test-dir/dir-2/file-2-1.txt';
+        const filePath = 'src/utils/fs-observables/fs-observable-test-dir/dir-2/file-2-1.txt';
         readFileObs(filePath).subscribe(
             content => {
                 const contentAsString = content.toString('utf8');

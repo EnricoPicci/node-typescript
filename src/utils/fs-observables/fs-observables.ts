@@ -69,7 +69,7 @@ export interface NumberedLine {
     lineNumber: number,
     line: string
 }
-function readFileSnippetsObs(
+export function readFileSnippetsObs(
     fileList: Array<string>,
     startSnippet: string,
     endSnippet: string,
