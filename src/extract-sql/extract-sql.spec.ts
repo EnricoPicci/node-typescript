@@ -2,7 +2,7 @@
 import 'mocha';
 import * as rimraf from 'rimraf';
 
-import {extractSqlSnippets, extractSqlSnippetsBlocks} from './extract-sql';
+import {extractSqlSnippets, extractSqlSnippetsBlocks, extractSqlSnippetsBlocks2} from './extract-sql';
 
 describe('extractSqlSnippets function', () => {
     
@@ -38,13 +38,16 @@ describe('extractSqlSnippetsBlocks function', () => {
             and writes them in a parallel structure in another directory
             EACH BLOCK IS PROCESSED SEQUENTIALLY`, done => {
         const sourceDir = './src/extract-sql/extract-sql-repository-test';
-        const targetDir = './src/extract-sql/sql-snippets-to-delete-2/';
+        const targetDir = './src/extract-sql/sql-snippets-to-delete-blocks/';
         const blockSize = 2;
         let i = 0;
         extractSqlSnippetsBlocks(sourceDir, targetDir, blockSize).subscribe(
             emitter => {
                 emitter.getObservable().subscribe(
-                    _d => i++,
+                    fileList => {
+                        i++;
+                        console.log('file list ' + i, fileList);
+                    },
                     err => console.error(err),
                     () => {
                         // there are 12 files considering the hidden ones such as .DS.store 
@@ -66,6 +69,47 @@ describe('extractSqlSnippetsBlocks function', () => {
             },
             err => console.error(err),
             () => console.log('processing launched')
+        )
+    });
+
+});
+
+
+
+describe('extractSqlSnippetsBlocks2 function', () => {
+    
+    it(`extracts sql code snippets from the files from a directory and its subdirectories 
+            and writes them in a parallel structure in another directory
+            EACH BLOCK IS PROCESSED SEQUENTIALLY`, done => {
+        const sourceDir = './src/extract-sql/extract-sql-repository-test';
+        const targetDir = './src/extract-sql/sql-snippets-to-delete-2/';
+        const blockSize = 2;
+        let i = 0;
+        extractSqlSnippetsBlocks2(sourceDir, targetDir, blockSize)
+        .subscribe(
+            file => {
+                i++;
+                console.log('file written', file, i);
+            },
+            err => {
+                console.error('err', err);
+                return done(err);
+            },
+            () => {
+                // there are 12 files considering the hidden ones such as .DS.store 
+                // but only 4 files have SQL
+                if (i !== 4) {
+                    console.error(i);
+                    return done(new Error('block count not as expected'));
+                } 
+                rimraf(targetDir, err => {
+                    if (err) {
+                        console.error('err', err);
+                        return done(err);
+                    }
+                });
+                return done();
+            }
         )
     });
 

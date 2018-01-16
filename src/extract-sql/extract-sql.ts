@@ -7,11 +7,11 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/bufferCount';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/concatMap';
 
 import {findSnippetsObs, writeFileObs} from '../utils/fs-observables/fs-observables';
 import {fileListObs, NumberedLine, readFileSnippetsObs} from '../utils/fs-observables/fs-observables';
 import {BlockEmitter} from './block-emitter';
-import {CounterEmitter} from './block-emitter';
 
 
 // toDirPath needs to end with '/' char
@@ -78,33 +78,23 @@ function createFileContent(filePathAndSnippets: {filePath: string, snippets: Arr
 
 
 
-// ************************* WORK IN PROGRESS **************************************************
-// this is an attempt to process files in sequential blocks as it is done by the function extractSqlSnippetsBlocks
-// so far not successful
-export function extractSqlSnippetsBlocks2(fromDirPath: string, toDirPath: string, emitter: CounterEmitter) {
-    let currentFileListChunk: Array<string>;
+// toDirPath needs to end with '/' char
+// divide the list of files in blocks of a certain size
+// each block is processed SEQUENTIALLY to avoid to open to many files in parallel
+let iterationB =0;
+export function extractSqlSnippetsBlocks2(fromDirPath: string, toDirPath: string, blockSize: number) {
     return fileListObs(fromDirPath)
             .switchMap(fileList => Observable.from(fileList))
-            .bufferCount(emitter.counterSize)
-            .do(fileListChunk => currentFileListChunk = fileListChunk)
-            .switchMap(() => emitter.getObservable())
-            .do(iteration => {
-                console.log('iteration', iteration);
-            })
-            .switchMap(() => extractSqlSnippetsFromFiles(currentFileListChunk, toDirPath))
-            .subscribe(
-                file => console.log('file written', file),
-                err => console.error(err),
-                () => {
-                    console.log('block written', currentFileListChunk);
-                    emitter.next();
-                }
-            )
+            .bufferCount(blockSize)
+            .concatMap(fileListChunk => extractSqlSnippetsFromFiles(fileListChunk, toDirPath))
 }
 function extractSqlSnippetsFromFiles(fileList: Array<string>, toDirPath: string) {
+    iterationB++;
+    console.log('iterationB', iterationB);
     return readFileSnippetsObs(fileList, 'EXEC SQL', 'END-EXEC', line => line[6] === '*')
+            .filter(fileAndSnippet => fileAndSnippet.snippets.length > 0)
             .map(filePathAndSnippets => createFileContent(filePathAndSnippets, toDirPath))
             .mergeMap(filePathAndContent => writeFileObs(filePathAndContent.filePath, filePathAndContent.content))
 }
-// ************************* END OF WORK IN PROGRESS **************************************************
+
 
