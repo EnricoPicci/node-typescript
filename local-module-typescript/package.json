@@ -2,10 +2,30 @@
   "name": "local-module-typescript",
   "version": "1.0.0",
   "description": "represents a local module that can be imported by other applications",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types" : "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "tsc": "tsc"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "typescript": "^2.5.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.92",
+    "@types/chai": "^4.0.4",
+    "@types/mkdirp": "^0.5.1",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.47",
+    "@types/node-dir": "0.0.32",
+    "@types/request": "^2.0.7",
+    "@types/rimraf": "^2.0.2",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0"
+  }
 }

@@ -1,0 +1,7 @@
+
+To enable unit testing via mocha and debug Typescript code running in node within VS Code use
+ts-node as suggested by the articles
+https://medium.com/@dupski/debug-typescript-in-vs-code-without-compiling-using-ts-node-9d1f4f9a94a
+https://journal.artfuldev.com/unit-testing-node-applications-with-typescript-using-mocha-and-chai-384ef05f32b2
+
+

@@ -1,0 +1,30 @@
+
+To istall the local package degine in this directory we have to run the followin command
+
+npm install --save ../local-module-typescript
+
+This command needs to be run from the directory of the module which wants to install this package, in this example
+such directory is 
+node-typescript
+
+This is a good article that explains the steps to create an npm package from typescript
+https://codeburst.io/https-chidume-nnamdi-com-npm-module-in-typescript-12b3b22f0724
+
+Key things to consider
+
+index.ts
+create an index.ts that defines what the package exports
+
+tsconfig.json
+make sure that "declaration" property is set to true, so that index.d.ts is generated automatically
+    "declaration": true,
+
+package.json
+make sure that 
+    "main": "dist/index.js",
+    "types" : "dist/index.d.ts",
+
+
+any time the package is changed, make sure you run the command
+    npm install --save ../local-module-typescript
+from within the directory containing the project that imports the local module
