@@ -1,0 +1,52 @@
+this package implements a service using serverless-framework
+
+it imports an external package (local in our case) where interfaces are defined so that they can be shared also with the clients
+Interfaces can be implemented as TypeScript Interfaces or Classes
+In the service-interface package we define also any function which may be used both by server and client (e.g. validators)
+Whoever is the owner of the service is owner and needs to define the service-interface package
+
+CREATE SERVERLESS FUNCTIONS IN TYPESCRIPT
+read first these articles
+    https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44
+    https://medium.com/the-reading-room/how-to-create-a-simple-rest-web-service-with-node-aws-lambda-and-the-serverless-framework-4730c88cd39a
+Scafold directories for a node typescript package
+- create the directory for the package
+- from the package directory run "npm init" to create a default package.json
+- run "npm i typescript --save-dev" to install the packages needed to debug and run tests on node typescript apps
+- Install Serveless Typescript Plugin in the "service-serverless" directory with the command
+    "yarn add --dev serverless-plugin-typescript"
+
+NOTE: there is no need to configure tsconfig.json since the serverless-plugin-typescript has its own default typescript configuration
+
+- The top directory "service-serverless" will hold only the packages used for development (i.e. the ones stored in "devDependencies"
+  of "package.json"). This is to avoid to put in the build distribution folder the packages used only for development, see
+  http://www.goingserverless.com/blog/keeping-dev-dependencies-out-of-your-serverless-package
+- From within the directory "service-serverless" scaffold the project with the serverless framework command
+    "serverless create --template aws-nodejs --path functions-aws"
+  this command creates the directory "functions-aws" with the initial scaffolding
+
+Operations to be performed from within the directory "functions-aws"
+- Create a directory "node_modules" - the deploy command require such a directory even if it is empty
+- Import the "service-interface" package with the command
+    "npm install --save ../../service-interface"
+- run "npm init" to create a default package.json file
+- Add in the "serverless.yml" file of the directory "functions-aws" the configuration
+plugins:
+  - serverless-plugin-typescript
+
+- In the "serverless.yml" file of the directory "functions-aws" make sure that the functions are correctly defined with their events, such as
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello/get
+          method: get
+
+- Rename handler.js to handler.ts
+- Replace in "handler.ts" the js code with valid typescript code
+
+
+- Go to directory "functions-aws" and from theere compile typescript and deploy the code with the command
+    "serverless deploy"
+

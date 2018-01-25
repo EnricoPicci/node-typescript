@@ -1,11 +1,13 @@
+This is an example of npm custom package which can be loaded from local directories
 
-To istall the local package degine in this directory we have to run the followin command
+
+To istall the local package defined in this directory we have to run the followin command
 
 npm install --save ../local-module-typescript
 
 This command needs to be run from the directory of the module which wants to install this package, in this example
 such directory is 
-node-typescript
+./node-typescript
 
 This is a good article that explains the steps to create an npm package from typescript
 https://codeburst.io/https-chidume-nnamdi-com-npm-module-in-typescript-12b3b22f0724

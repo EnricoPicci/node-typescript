@@ -1,0 +1,48 @@
+this package implements interfaces, classes, objects and functions that is convenient to share with the clients
+TypeScript Interfaces or Classes may be used to give types and behaviors to the objects that are eventually
+exchanged as Json via the rest api.
+In the service-interface package we define also any other object or function which may be used both by server and client 
+(e.g. validators).
+Whoever is the owner of the service is owner and needs to define the service-interface package
+
+PREPARE A TYPESCRIPT NODE PACKAGE
+Scafold directories
+- create the directory for the package
+- create in the directory of the package an src directory to store the code
+
+Install npm packages
+- from the package directory run "npm init" to create a default package.json
+- run "npm i typescript ts-node mocha chai --save-dev" to install the packages needed to debug and run tests on node typescript apps
+- run "npm i @types/node @types/mocha @types/chai --save-dev" to load the types
+
+Configure TS Compiler
+- create in the package directory a file tsconfig.json with the configuration to be used by the TS compiler
+
+Configure npm scripts
+- add the following scripts to package.json to be able to launch compilation and tests
+    -     "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
+    -     "tsc": "tsc"
+
+Prepare vscode
+- create a .vscode directory where you place a launch.json file that contains the commands to launch execution of functions from within vscode
+consider that these commands can be successfully launched only if VSCode is started from within the folder of this package
+
+WRITE THE CODE AND THE TESTS
+
+MAKE THE PACKAGE AN "NPM PACKAGE"
+https://codeburst.io/https-chidume-nnamdi-com-npm-module-in-typescript-12b3b22f0724
+- create in the folder src an index.ts that defines what the package exports
+- in tsconfig.json
+    - in "compilerOptions"
+        - set "declaration": true (so that index.d.ts is generated automatically)
+- in package.json
+    - set "main": "dist/index.js" (so that you declare where to look at stuff exported by the package)
+    - set "types" : "dist/index.d.ts" (so that types are exported with the package)
+- build the package (i.e. run the compiler) for instance launching the command "npm run tsc"
+
+IMPORT THE "NPM PACKAGE" from local store
+- from within the directory containing the project that wants to import the package just defined from local storage
+    - run "npm install --save ../service-interface"
+    - make sure you run the same command any time the service-interface package is changed
+
+
