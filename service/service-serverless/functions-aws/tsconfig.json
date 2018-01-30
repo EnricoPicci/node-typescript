@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "noUnusedLocals": true,  // Enrico
+        "noUnusedParameters": true   // Enrico
+    }
+}

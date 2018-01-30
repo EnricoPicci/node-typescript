@@ -1,0 +1,31 @@
+this package implements a client app which uses service-serverless service leveraging service-interface
+
+PREPARE A TYPESCRIPT NODE PACKAGE
+see the instructions defined in note.txt of service-interface
+
+
+WRITE THE CODE AND THE TESTS
+- Import the "service-interface" package with the command
+    "npm install --save ../service-interface"
+  the command needs to be launched from within the directory service-client (make sure that the directory nodu_modules has been
+  already created by previous commands - if there is no node_modules directory this command may fail)
+- write the appropriare code in the src directory
+
+
+NOTE ON TEST WITH MOCHA AND TS-NODE
+https://github.com/TypeStrong/ts-node/issues/448
+https://github.com/TypeStrong/ts-node#loading-tsconfigjson
+https://www.npmjs.com/package/tsconfig-paths
+With the default tsconfig.json configuration, when we run mocha tests we may encounter the following error
+  Error: Cannot find module 'node-typescript-utils-enrico'
+To overcome this error we need to 
+  - instal "tsconfig-paths" with the command
+      "npm install --save-dev tsconfig-paths"
+  - change the "test" script in package.json as follows
+      "test": "mocha -r ts-node/register -r tsconfig-paths/register  src/*.spec.ts",
+  - add the following configuration to "compilerOptions" of tsconfig.json
+            "baseUrl": "./",   // added for tsconfig-paths module to work
+            "paths": {
+              "node-typescript-utils-enrico": ["node_modules/node-typescript-utils-enrico/dist"] // added for tsconfig-paths module to work
+            }
+

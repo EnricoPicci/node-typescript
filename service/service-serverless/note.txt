@@ -9,14 +9,18 @@ CREATE SERVERLESS FUNCTIONS IN TYPESCRIPT
 read first these articles
     https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44
     https://medium.com/the-reading-room/how-to-create-a-simple-rest-web-service-with-node-aws-lambda-and-the-serverless-framework-4730c88cd39a
+    https://www.jamestharpe.com/serverless-typescript-getting-started/
 Scafold directories for a node typescript package
 - create the directory for the package
 - from the package directory run "npm init" to create a default package.json
 - run "npm i typescript --save-dev" to install the packages needed to debug and run tests on node typescript apps
 - Install Serveless Typescript Plugin in the "service-serverless" directory with the command
     "yarn add --dev serverless-plugin-typescript"
+- Install types for node and aws-lambda with the command
+    "npm install --save-dev @types/node @types/aws-lambda"
 
 NOTE: there is no need to configure tsconfig.json since the serverless-plugin-typescript has its own default typescript configuration
+You may still want to have a tsconfig.json to define additional rules (e.g. for checking for unused variables)
 
 - The top directory "service-serverless" will hold only the packages used for development (i.e. the ones stored in "devDependencies"
   of "package.json"). This is to avoid to put in the build distribution folder the packages used only for development, see
@@ -27,9 +31,20 @@ NOTE: there is no need to configure tsconfig.json since the serverless-plugin-ty
 
 Operations to be performed from within the directory "functions-aws"
 - Create a directory "node_modules" - the deploy command require such a directory even if it is empty
+- run "npm init" to create a default package.json file
 - Import the "service-interface" package with the command
     "npm install --save ../../service-interface"
-- run "npm init" to create a default package.json file
+  the installation from a local directory copies all files present in the directory "service-interface" into a directory again called
+  "service-interface" below the directory "node_modules" below "functions-aws"; so the directory structure is
+  - service-serviceless
+    - functions-aws
+      -node_modules
+        -service-interface
+          -node_module (this contains all the modules imported by "service-interface", including the modules used only in development)
+          if we had deployed "service-interface" on npm repository we would have not deployed the "node_modules" directory, therefore
+          we would have not imported and downloaded it
+  in order to avoid to deploy unnecessary files (the dev modules contained in the innermost "node_modules" directory) when we 
+  eventually deploy "functions-aws", we have to delete the innermost "node_modules" directory
 - Add in the "serverless.yml" file of the directory "functions-aws" the configuration
 plugins:
   - serverless-plugin-typescript
@@ -45,8 +60,16 @@ functions:
 
 - Rename handler.js to handler.ts
 - Replace in "handler.ts" the js code with valid typescript code
+- Right below the directory "functions-aws" create a directory "src" where you may keep application logic code which you may write
+  if you decide not to have all the code within handler.ts
 
 
 - Go to directory "functions-aws" and from theere compile typescript and deploy the code with the command
     "serverless deploy"
+  Make sure you have deleted the "node_modules" directory copied while installing "service-interface", i.e. looking at the dir structure
+    - service-serviceless
+      - functions-aws
+        -node_modules
+            -service-interface
+              -node_module => TO BE DELETED
 

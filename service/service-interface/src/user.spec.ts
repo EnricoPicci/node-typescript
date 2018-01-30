@@ -6,16 +6,20 @@ describe('User class', () => {
 
   it('the validation should succeed', () => {
     const user = new User('123', 'John');
-    expect(user.isValid()).to.equal(true);
+    const validationResult = user.validate();
+    expect(validationResult.isValid).to.equal(true);
+    expect(validationResult.getErrorMessage().length).to.equal(0);
   });
 
   it('the validation should NOT succeed', () => {
     const user = new User('123', 'John');
     user.name = null;
-    expect(user.isValid()).to.equal(false);
+    const validationResult = user.validate();
+    expect(validationResult.isValid).to.equal(false);
+    expect(validationResult.getErrorMessage().length).to.greaterThan(0);
   });
 
-  it('the validation should succeed', () => {
+  it('asServiceInput produces a correct json', () => {
     const user = new User('123', 'John');
     const userAsServiceInput = user.asServiceInput();
     expect(userAsServiceInput).to.not.equal(null || undefined);

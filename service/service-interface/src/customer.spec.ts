@@ -12,6 +12,7 @@ describe('validateCustomer function', () => {
     };
     const validationResult = validateCustomer(customer);
     expect(validationResult.isValid).to.equal(true);
+    expect(validationResult.errors.length).to.equal(0);
   });
 
   it('the validation should NOT succeed because the id is null', () => {
