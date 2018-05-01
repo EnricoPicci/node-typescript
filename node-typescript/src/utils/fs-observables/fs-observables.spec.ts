@@ -13,7 +13,8 @@ describe('filesObs function', () => {
             _filePath => filePaths.push(_filePath),
             error => console.error(error),
             () => {
-                if (filePaths.length !== 3) {
+                const files = removeDS_Store(filePaths);
+                if (files.length !== 3) {
                     console.error(filePaths);
                     return done(new Error('file count failed'));
                 } else {
@@ -40,7 +41,8 @@ describe('fileListObs function', () => {
             },
             error => console.error(error),
             () => {
-                if (fileList.length !== 3) {
+                const files = removeDS_Store(fileList);
+                if (files.length !== 3) {
                     console.error(fileList);
                     return done(new Error('file count failed'));
                 } else {
@@ -51,6 +53,10 @@ describe('fileListObs function', () => {
     });
 
 });
+
+function removeDS_Store(filePaths: Array<string>) {
+    return filePaths.filter(file => file.indexOf('.DS_Store') === -1);
+}
 
 describe('findSnippetsObs function', () => {
     

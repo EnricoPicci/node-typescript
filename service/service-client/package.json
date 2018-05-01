@@ -20,7 +20,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "node-typescript-utils-enrico": "^1.0.9",
+    "node-typescript-utils-enrico": "^1.0.92",
     "service-interface": "file:../service-interface"
   }
 }

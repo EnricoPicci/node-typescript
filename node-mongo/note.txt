@@ -1,0 +1,5 @@
+Install stuff
+run the commands
+    "npm install mongodb --save"
+    "npm install @types/mongodb --save-dev"
+    

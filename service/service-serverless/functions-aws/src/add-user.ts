@@ -9,13 +9,15 @@ export interface AddUserResult {
 
 export function addUserImpl(data: any) {
     let response: FunctionProcessingError | AddUserResult;
+    let user: User;
     if (!data) {
         response = new FunctionProcessingError();
         response.message = 'addUser function - No user data passed in';
     } else {
-        const user = new User(data.id, data.name);
+        user = new User(data);
         const validationResult = user.validate();
         if (!validationResult.isValid) {
+          console.log('data', data);
           const validationErrors = validationResult.errors;
           let message = 'addUser function';
           validationErrors.reduce((message, error) => message + '\n' + error);
@@ -28,7 +30,7 @@ export function addUserImpl(data: any) {
         // DO STUFF
         doAddUserStuff();
         response = {
-          userId: data.id,
+          userId: user.id,
           message: 'user added',
         };
     }

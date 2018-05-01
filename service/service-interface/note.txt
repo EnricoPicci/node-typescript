@@ -20,7 +20,7 @@ Configure TS Compiler
 
 Configure npm scripts
 - add the following scripts to package.json to be able to launch compilation and tests
-    -     "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
+    -     "test": "mocha -r ts-node/register src/*.spec.ts",
     -     "tsc": "tsc"
 
 Prepare vscode

@@ -1,9 +1,13 @@
 import {ValidationResponse} from './validation-response';
 
 export class User {
-    enabled: false;
+    id: string;
+    public name: string;
 
-    constructor(public id: string, public name: string) {}
+    constructor({id, name}) {
+        this.id = id;
+        this.name = name;
+    }
 
     // is valid if id and name are defined
     validate() {
@@ -18,10 +22,6 @@ export class User {
             response.errors.push("User name is null");
         }
         return response
-    }
-
-    asServiceInput() {
-        return JSON.stringify(this);
     }
     
 }

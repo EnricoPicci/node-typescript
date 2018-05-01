@@ -1,0 +1,9 @@
+Before installing "canvas" you need to run the following commands
+
+  xcode-select --install
+  brew update
+  brew install pkg-config cairo pango libpng jpeg giflib
+
+After successfully running the above commands, you can run
+  npm install canvas
+  

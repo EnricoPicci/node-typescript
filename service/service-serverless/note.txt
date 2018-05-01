@@ -13,7 +13,8 @@ read first these articles
 Scafold directories for a node typescript package
 - create the directory for the package
 - from the package directory run "npm init" to create a default package.json
-- run "npm i typescript --save-dev" to install the packages needed to debug and run tests on node typescript apps
+- Install Typescript in the "service-serverless" directory with the command
+    "npm i typescript --save-dev"
 - Install Serveless Typescript Plugin in the "service-serverless" directory with the command
     "yarn add --dev serverless-plugin-typescript"
 - Install types for node and aws-lambda with the command
